@@ -1,0 +1,82 @@
+/* subfooter stuff */
+
+#subfooter {
+  width: 100%;
+  height: 200px;
+  background-color: #263246;
+  font-size: 14px;
+  color: #868990;
+  line-height: 50px;
+  padding: 30px 0px 50px 0px;
+}
+#subfooter a, 
+#subfooter a:visited {
+  color: #868990;  
+}
+#subfooter .wrapper {
+  display: table;
+}
+#subfooter h1 {
+  color: #FFFFFF;
+  font-size: 32px;
+  font-weight: 600;
+  padding-bottom: 55px;
+  line-height: 40px;
+}
+#subfooter h1 a {
+  color: #FFFFFF !important;
+}
+#subfooter h3 {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+}
+#subfooter h3:after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #d83a3a;
+  margin-top: 17px;
+}
+#subfooter div {
+  display: table-cell;
+  line-height: 25px;
+}
+#subfooter #footer-desc {
+  width : 350px;
+  padding-right: 110px;
+}
+#subfooter #footer-about {
+  width: 170px;
+  padding-right: 70px;
+}
+#subfooter #footer-docs {
+  width: 170px;
+  padding-right: 90px;
+}
+#subfooter #footer-contact {
+  
+}
+#subfooter div ul {
+  margin-top: 25px;
+  list-style-type: none;
+}
+#subfooter div ul li {
+  padding-top: 5px;
+}
+
+/* footer stuff */
+
+#footer {
+  width: 100%;
+  height: 50px;
+  background-color: #1d2738;
+  font-size: 14px;
+  color: #868990;
+  line-height: 50px;
+}
+#footer a, 
+#footer a:visited {
+  color: #868990;  
+}

@@ -1,0 +1,83 @@
+/* tabs */
+
+.tabs {
+  list-style: none;
+  display: table;
+  width: 100%;
+  padding-top: 50px;
+}
+.tabs li {
+  display: table-cell;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #000000;
+}
+.tabs li.selected {
+  border: 1px solid #000000;
+  border-bottom: 1px solid transparent;    
+}
+.tabs li a {
+  display: block;
+  text-align: center;
+  font-family: FontAwesome,Verdana;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  line-height: 1.8em;
+}
+.tabs li.selected a {
+  color: #443f3f;
+}
+.tabs li:hover a,
+.tabs li.selected:hover a {
+  color: #443f3f;
+}
+
+/* downloads table */
+
+.downloads {
+  width: 100%;
+  max-width: 100%;
+  font-size: 14px;
+  border-spacing: 0px;
+  margin-bottom: 100px;
+}
+.downloads thead {
+  font-weight: 700;
+}
+.downloads thead td {
+  padding: 30px 0px 20px 20px;
+  font-family: FontAwesome,Verdana;
+  border: 0px;
+}
+.downloads tbody tr:hover {
+  background: rgba(244,237,244,1);
+}
+.downloads tbody td {
+  padding: 15px 20px;
+  font-family: FontAwesome,Verdana;
+  line-height: 25px;
+  border: 0px;
+  border-top: 1px solid #dedede;
+}
+.downloads td.left {
+  width: 150px;
+  white-space: nowrap;
+}
+.downloads td.right {
+  width: 150px;
+  white-space: nowrap;
+}
+.downloads td a.button {
+  background: #000000;
+  color: #FFFFFF;
+  height: 50px;
+  border-radius: 25px;
+  padding: 10px 20px;
+  margin-left: -5px;
+  white-space: nowrap;
+  font-weight: 700;
+}
+.downloads td p {
+  margin-left: 6em; 
+  text-indent: -6em 
+}
