@@ -1,5 +1,6 @@
-##Options -MultiViews
-##Options +FollowSymLinks
+Options -MultiViews
+Options +FollowSymLinks
+Options -Indexes
 RewriteEngine On
 
 # Discord redirects
@@ -19,10 +20,10 @@ RewriteRule ^bstats$ https://bstats.org/plugin/server-implementation/Purpur [R=3
 RewriteRule ^bstats/$ https://bstats.org/plugin/server-implementation/Purpur [R=301,L]
 
 # Docs redirects
-#RewriteRule ^doc$ https://www.github.com/pl3xgaming/Purpur/wiki [R=301,L]
-#RewriteRule ^docs$ https://www.github.com/pl3xgaming/Purpur/wiki [R=301,L]
-#RewriteRule ^wiki$ https://www.github.com/pl3xgaming/Purpur/wiki [R=301,L]
-#RewriteRule ^documentation$ https://www.github.com/pl3xgaming/Purpur/wiki [R=301,L]
+RewriteRule ^docs$ https://pl3xgaming.github.io/PurpurDocs/ [R=301,L]
+RewriteRule ^docs/$ https://pl3xgaming.github.io/PurpurDocs/ [R=301,L]
+RewriteRule ^docs_test$ /docs_test/index.html [R=301,L]
+RewriteRule ^docs_test/$ /docs_test/index.html [R=301,L]
 
 # Github redirects
 RewriteRule ^github$ https://www.github.com/pl3xgaming/Purpur [R=301,L]
@@ -47,14 +48,6 @@ RewriteRule ^css/$ / [R=301,L]
 ## Redirects js dir file to the root domain
 RewriteRule ^js$ / [R=301,L]
 RewriteRule ^js/$ / [R=301,L]
-
-## Redirects images dir file to the root domain
-##RewriteRule ^test$ /downloads [R=301,L]
-##RewriteRule ^test/(.*+)?$ /downloads [R=301,L]
-
-## Rewrite downloads directory to use downloads.php
-#RewriteCond %{REQUEST_FILENAME} downloads/$
-#RewriteRule . /index.php [NC,L]
 
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(([^/]+/)*([^/.]+))\.php[\ ?]
 RewriteRule \.php$ /%1/ [R=301,NC,L]
