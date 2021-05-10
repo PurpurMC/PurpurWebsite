@@ -1,7 +1,15 @@
+####################################################################################
+### Setup
+####################################################################################
+
 Options -MultiViews
 Options +FollowSymLinks
 Options -Indexes
 RewriteEngine On
+
+####################################################################################
+### Some basic redirects for convenience
+####################################################################################
 
 # Discord redirects
 RewriteRule ^discord$ https://discord.gg/mtAAnkk [R=301,L]
@@ -15,21 +23,28 @@ RewriteRule ^javadoc/$ /javadoc/index.html [R=301,L]
 RewriteRule ^javadocs$ /javadoc/index.html [R=301,L]
 RewriteRule ^javadocs/$ /javadoc/index.html [R=301,L]
 
-# bStats redirects
-RewriteRule ^bstats$ https://bstats.org/plugin/server-implementation/Purpur [R=301,L]
-RewriteRule ^bstats/$ https://bstats.org/plugin/server-implementation/Purpur [R=301,L]
-
-# Docs redirects
-RewriteRule ^docs$ https://pl3xgaming.github.io/PurpurDocs/ [R=301,L]
-RewriteRule ^docs/$ https://pl3xgaming.github.io/PurpurDocs/ [R=301,L]
-RewriteRule ^docs_test$ /docs_test/index.html [R=301,L]
-RewriteRule ^docs_test/$ /docs_test/index.html [R=301,L]
-
 # Github redirects
 RewriteRule ^github$ https://www.github.com/pl3xgaming/Purpur [R=301,L]
 RewriteRule ^github/$ https://www.github.com/pl3xgaming/Purpur [R=301,L]
 RewriteRule ^source$ https://www.github.com/pl3xgaming/Purpur [R=301,L]
 RewriteRule ^source/$ https://www.github.com/pl3xgaming/Purpur [R=301,L]
+
+# bStats redirects
+RewriteRule ^bstats$ https://bstats.org/plugin/server-implementation/Purpur [R=301,L]
+RewriteRule ^bstats/$ https://bstats.org/plugin/server-implementation/Purpur [R=301,L]
+
+####################################################################################
+### Temporary redirects for docs
+### Delete these lines when we move docs to website
+####################################################################################
+
+# Docs redirects
+RewriteRule ^docs$ https://pl3xgaming.github.io/PurpurDocs/ [R=301,L]
+RewriteRule ^docs/$ https://pl3xgaming.github.io/PurpurDocs/ [R=301,L]
+
+####################################################################################
+### Some more redirects for security
+####################################################################################
 
 ## Redirects certain files to the root domain
 RewriteRule ^index.php$ / [R=301,L]
@@ -48,6 +63,11 @@ RewriteRule ^css/$ / [R=301,L]
 ## Redirects js dir file to the root domain
 RewriteRule ^js$ / [R=301,L]
 RewriteRule ^js/$ / [R=301,L]
+
+####################################################################################
+### Hide the filenames in the url for prettier urls
+### No idea how any of this works. It just does :3
+####################################################################################
 
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(([^/]+/)*([^/.]+))\.php[\ ?]
 RewriteRule \.php$ /%1/ [R=301,NC,L]
