@@ -1,5 +1,10 @@
-RewriteEngine Off
-
 RewriteEngine On
+
+RewriteCond %{THE_REQUEST} /index\.html [NC]
+RewriteRule ^(.*?)index\.html$ $1 [L,R=302,NC,NE]
+
+RewriteRule ^index\.html$ - [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.html [NC,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.html [L]
