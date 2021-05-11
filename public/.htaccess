@@ -34,15 +34,6 @@ RewriteRule ^bstats$ https://bstats.org/plugin/server-implementation/Purpur [R=3
 RewriteRule ^bstats/$ https://bstats.org/plugin/server-implementation/Purpur [R=301,L]
 
 ####################################################################################
-### Temporary redirects for docs
-### Delete these lines when we move docs to website
-####################################################################################
-
-# Docs redirects
-RewriteRule ^docs$ https://pl3xgaming.github.io/PurpurDocs/ [R=301,L]
-RewriteRule ^docs/$ https://pl3xgaming.github.io/PurpurDocs/ [R=301,L]
-
-####################################################################################
 ### Some more redirects for security
 ####################################################################################
 
