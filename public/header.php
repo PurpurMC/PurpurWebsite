@@ -38,7 +38,7 @@
           </a>
         </div>
         <nav>
-          <a href="/docs" id="link_docs" target="_blank"><i class="fas fa-book-open"></i> Docs</a>
+          <a href="/docs" id="link_docs"><i class="fas fa-book-open"></i> Docs</a>
           <a href="/github" id="link_github" target="_blank"><i class="fab fa-github"></i> GitHub</a>
           <a href="/discord" id="link_discord" target="_blank"><i class="fab fa-discord"></i> Discord</a>
           <a href="/downloads" id="link_downloads"><i class="fas fa-download"></i> Downloads</a>
