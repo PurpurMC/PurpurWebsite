@@ -9,7 +9,7 @@ $now = time();
 $last = isset($json['last']) ? $json['last'] : 0;
 
 // only update from bstats once a day
-if ($now - $last > 0) {//86400) {
+if ($now - $last > 86400) {
     foreach ($json['servers'] as $server => $data) {
         $data = json_decode(file_get_contents('https://bstats.org/api/v1/plugins/' . $data['id'] . '/charts/servers/data/?maxElements=8640')); // 6 months worth
 
