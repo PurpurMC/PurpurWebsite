@@ -1,0 +1,21 @@
+{
+        "last": 0,
+        "dates": [],
+        "servers": {
+                "purpur": {
+                        "id": 5103,
+                        "color": "#ff0000",
+                        "data": []
+                },
+                "tuinity": {
+                        "id": 9505,
+                        "color": "#00ff00",
+                        "data": []
+                },
+                "yatopia": {
+                        "id": 8840,
+                        "color": "#0000ff",
+                        "data": []
+                }
+        }
+}
