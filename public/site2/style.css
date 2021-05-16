@@ -202,11 +202,12 @@ a {
 .purpur {
   display: block;
   margin: 2rem auto;
-  height: 460px;
+  width: 100%;
   padding: 1.25em 0 3.25em;
 }
 @media (min-width: 700px) {
   .purpur {
+    width: 330px;
     margin: 0 auto;
   }
 }
