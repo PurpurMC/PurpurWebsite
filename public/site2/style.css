@@ -95,7 +95,6 @@ header p {
 .row-one {
   overflow: hidden;
   background-color: rgba(36, 31, 49, 0.47);
-  padding: 6rem auto;
 }
 .row-two {
   overflow: hidden;
@@ -108,7 +107,6 @@ header p {
 }
 .group .block {
   width: 100%;
-  self-align: flex-start;
   margin: 6rem auto;
 }
 @media (min-width: 850px) {
