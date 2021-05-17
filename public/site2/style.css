@@ -125,11 +125,16 @@ footer {
   color: white;
   font-size: 0.9em;
 }
-footer a {
-  text-decoration: none;
+footer {
   font-size: 1.2em;
   font-weight: 600;
+}
+footer a {
+  text-decoration: none;
   color: white;
+}
+footer p {
+  font-size: 0.5em;
 }
 .button {
   display: block;

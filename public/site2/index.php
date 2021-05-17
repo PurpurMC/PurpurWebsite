@@ -64,7 +64,8 @@ $ogimg = "https://purpur.pl3x.net/images/og-background_smol.png"
       </div>
     </div>
     <footer>
-      <a href="https://pl3x.net">&copy; 2021 pl3x.net</a>
+      &copy; 2019-2021 <a href="https://pl3x.net">pl3x.net</a> <a href="https://github.com/pl3xgaming/Purpur/blob/ver/1.16.5/LICENSE">MIT</a>
+      <p><a href="https://gitlab.gnome.org/Teams/Releng/gnome-os-site" target="_blank">Site design CC-BY-SA</a></p>
     </footer>
   </body>
 </html>
