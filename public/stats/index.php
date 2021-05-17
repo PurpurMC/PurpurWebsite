@@ -43,9 +43,19 @@ if ($now - $last > 86400) {
     <title>Server Usage</title>
     <meta charset="UTF-8" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        color: #ffffff;
+        background-color: #212121;
+      }
+      div {
+        width: 1200px;
+        margin: 0 auto;
+      }
+    </style>
   </head>
   <body>
-    <div style="width:1200px;margin:0 auto">
+    <div>
       <canvas id="canvas"></canvas>
     </div>
     <script>
@@ -60,20 +70,34 @@ if ($now - $last > 86400) {
               },
               plugins: {
                   title: {
-                  display: true,
-                      text: 'Server Usage'
+                      display: true,
+                      text: 'Server Usage',
+                      color: '#fff'
                   },
                   tooltip: {
                       mode: 'index',
                       intersect: false
                   },
+                  legend: {
+                      display: true,
+                      labels: {
+                          color: '#fff'
+                      }
+                  }
               },
               scales: {
                   x: {
                       display: true,
                       title: {
                           display: true,
-                          text: 'Date'
+                          text: 'Date',
+                          color: '#fff'
+                      },
+                      ticks: {
+                          color: '#fff' 
+                      },
+                      grid: {
+                          color: '#444'
                       }
                   },
                   y: {
@@ -81,7 +105,14 @@ if ($now - $last > 86400) {
                       beginAtZero: true,
                       title: {
                           display: true,
-                          text: 'Servers'
+                          text: 'Servers',
+                          color: '#fff'
+                      },
+                      ticks: {
+                          color: '#fff'
+                      },
+                      grid: {
+                          color: '#444'
                       }
                   }
               }
