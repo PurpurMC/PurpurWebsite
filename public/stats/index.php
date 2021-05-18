@@ -13,26 +13,26 @@ if ($now - $last > 86400) {
     foreach ($json['servers'] as $server => $data) {
         $data = json_decode(file_get_contents('https://bstats.org/api/v1/plugins/' . $data['id'] . '/charts/servers/data/?maxElements=8640')); // 6 months worth
 
-        $counts = (array) null;
-        $dates = (array) null;
+        $map = (array) null;
 
         foreach ($data as $entry) {
-            $time = $entry[0] / 1000; // millis to seconds
+            $seconds = $entry[0] / 1000; // millis to seconds
             $count = $entry[1];
 
-            $dt = new DateTime("@$time");
-            if ($dt->format('H')  == 19 && $dt->format('i') == 0) {
-                array_push($counts, $count);
-                array_push($dates, $time);
-                $last = $time;
+            $date = (new DateTime("@$seconds", new DateTimeZone("UTC")))->format('m/d/y');
+
+            if ($count > ($map[$date] == null ? -1 : $map[$date])) {
+              $map[$date] = $count;
             }
         }
 
-        $json['servers'][$server]['data'] = $counts;
-        $json['dates'] = $dates;
+        array_pop($map); // remove last day (it's incomplete)
+
+        $json['servers'][$server]['data'] = array_values($map);
+        $json['dates'] = array_keys($map);
     }
 
-    $json['last'] = $last;
+    $json['last'] = (new DateTime("@$now", new DateTimeZone("UTC")))->setTime(0,0)->getTimestamp();
 
     file_put_contents($filename, json_encode($json));
 }
@@ -119,14 +119,9 @@ if ($now - $last > 86400) {
           }
       };
 
-      function convert(seconds) {
-          let date = new Date(seconds * 1000);
-          return (date.getMonth() + 1) + "/" +  date.getDate() + "/" +  ("" + date.getFullYear()).slice(2);
-      }
-
       function loadData(name, json) {
           json.dates.forEach(function(date) {
-              config.data.labels.push(convert(date));
+              config.data.labels.push(date);
           });
 
           Object.keys(json.servers).forEach(function(server) {
