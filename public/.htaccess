@@ -28,6 +28,8 @@ RewriteRule ^github$ https://www.github.com/pl3xgaming/Purpur [R=301,L]
 RewriteRule ^github/$ https://www.github.com/pl3xgaming/Purpur [R=301,L]
 RewriteRule ^source$ https://www.github.com/pl3xgaming/Purpur [R=301,L]
 RewriteRule ^source/$ https://www.github.com/pl3xgaming/Purpur [R=301,L]
+RewriteRule ^issues$ https://www.github.com/pl3xgaming/Purpur/issues [R=301,L]
+RewriteRule ^issues/$ https://www.github.com/pl3xgaming/Purpur/issues [R=301,L]
 
 # bStats redirects
 RewriteRule ^bstats$ https://bstats.org/plugin/server-implementation/Purpur [R=301,L]

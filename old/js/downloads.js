@@ -1,4 +1,4 @@
-const downloads = 'https://purpur.pl3x.net/api/v1/purpur/';
+const downloads = '/api/v1/purpur/';
 
 var cache = new Map();
 var current;
@@ -21,60 +21,20 @@ function createTab(ul, version, selected) {
     var li = document.createElement("li");
     li.appendChild(a);
     ul.appendChild(li);
-    var option = document.createElement("option");
-    option.value = version;
-    option.appendChild(document.createTextNode(version));
-    var dropdown = document.getElementById("dropdown");
-    dropdown.appendChild(option);
-    dropdown.onchange = changeDropdown;
     if (selected === version) {
         li.classList.add("selected");
         a.click();
     }
 }
 
-function changeDropdown(option) {
-    selectTab(getTab(option.target.value));
-    updateList(option.target.value);
-}
-
 function clickTab(li) {
-    selectTab(this.parentElement);
-    selectDropdown(this.innerHTML);
-    updateList(this.innerHTML);
-}
-
-function selectTab(tab) {
-    var tabs = tab.parentElement.children;
-    for (var i = 0; i < tabs.length; i++) {
-        tabs[i].classList.remove("selected");
-    }
-    tab.classList.add("selected");
-}
-
-function selectDropdown(version) {
-    var dropdown = document.getElementById("dropdown");
-    for (var i = 0; i < dropdown.options.length; i++) {
-        var option = dropdown.options[i];
-        option.selected = option.value == version;
-    }
-}
-
-function getTab(version) {
-    var tabs = document.getElementsByClassName("tabs")[0].children;
-    for (var i = 0; i < tabs.length; i++) {
-        if (tabs[i].children[0].innerHTML == version) {
-            return tabs[i];
-        }
-    }
-    return null;
-}
-
-function updateList(version) {
     var table = document.getElementsByClassName("downloads")[0];
     var tbody = table.getElementsByTagName("tbody")[0];
     tbody.innerHTML = "";
 
+    selectTab(this.parentElement);
+    
+    var version = this.innerHTML;
     current = version;
     
     if (cache.has(version)) {
@@ -106,6 +66,14 @@ function updateList(version) {
         });
     }
     return true;
+}
+
+function selectTab(tab) {
+    var tabs = tab.parentElement.children;
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("selected");
+    }
+    tab.classList.add("selected");
 }
 
 function populateData(version, build) {
@@ -165,17 +133,17 @@ function showData(version, build, data) {
 function createBuildElement(version, build) {
     var td = document.createElement('td');
     td.className = "left";
-
+    
     var i = document.createElement('i');
-    i.className = "fas fa-cloud-download-alt";
-
+    i.className = "fas fa-download";
+    
     var span = document.createElement('span');
     span.appendChild(i);
-    span.appendChild(document.createTextNode(" " + build));
+    span.appendChild(document.createTextNode(" #" + build));
     
     var a = document.createElement('a');
     a.href = downloads + version + "/" + build + "/download";
-    a.className = "button white-button";
+    a.className = "button";
     a.download = "purpur-" + version + "-" + build + ".jar";
     a.title = "Download build #" + build;
     a.appendChild(span);
@@ -187,7 +155,6 @@ function createBuildElement(version, build) {
 
 function createCommitElement(data) {
     var td = document.createElement('td');
-    td.className = "mid";
     
     data.forEach(function(entry, index, data) {
         var p = document.createElement('p');
