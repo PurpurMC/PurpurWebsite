@@ -1,19 +1,18 @@
 <?php
-$description = "Purpur is a fork of Paper and Tuinity with the goal of providing new and interesting configuration options, which allow for creating a unique gameplay experience not seen anywhere else";
-$ogimg = "https://purpur.pl3x.net/images/og-background_smol.png"
+require_once("opengraph.php");
 ?><!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purpur - Your Minecraft, your way</title>
-    <meta name="title" content="Purpur" />
+    <title><?=$title?></title>
+    <meta name="title" content="<?=$title?>" />
     <meta name="description" content="<?=$description?>" />
-    <meta property="twitter:title" content="Purpur" />
+    <meta property="twitter:title" content="<?=$title?>" />
     <meta property="twitter:image" content="<?=$ogimg?>" />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:description" content="<?=$description?>" />
-    <meta property="og:title" content="Purpur" />
+    <meta property="og:title" content="<?=$title?>" />
     <meta property="og:url" content="https://purpur.pl3x.net" />
     <meta property="og:description" content="<?=$description?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
