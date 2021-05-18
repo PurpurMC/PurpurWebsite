@@ -50,22 +50,22 @@ header {
   box-shadow: 0 0 10px rgb(0,0,0,0.5);
 }
 header .container {
-  padding: 2em 0;
+  padding: 1.5em 0;
 }
 header .logo {
   display: block;
   margin: 0 auto;
-  width: 100%;
-  padding: 1.75em 0 0;
+  width: 280px;
+  padding: 1em 0 0 0;
 }
 @media (min-width: 405px) {
   header .logo {
-    width: 330px;
+    width: 280px;
   }
 }
 header p {
   max-width: 30em;
-  margin: 3rem auto;
+  margin: 3em auto 2em;
 }
 header a.tiny {
   font-size: 0.8em;
@@ -115,7 +115,7 @@ footer p {
 }
 .button {
   display: block;
-  border-radius: 1000px;
+  border-radius: 100px;
   margin: 1rem auto;
   padding: 0.6rem 2rem;
   width: 50%;
@@ -131,7 +131,7 @@ footer p {
   transform: scale(0.98);
 }
 .download-button {
-  width: 12em;
+  width: 10em;
   padding: 0.9em 3em;
   font-size: 1.2em;
 }

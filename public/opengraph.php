@@ -1,6 +1,6 @@
 <?php
 $title = "Purpur - Your Minecraft, your way";
-$description = "Purpur is a drop in replacement with the goal of providing new and interesting configurations, which allow for creating a unique gameplay experience";
+$description = "Purpur is a drop in replacement for Paper servers designed for superior configuration, ultimate gameplay features, and the best blazing fast optimizations";
 $ogimg = "https://purpur.pl3x.net/card.png"
 ?>
 

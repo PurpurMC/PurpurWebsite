@@ -26,8 +26,8 @@ require_once("opengraph.php");
         <h1>Purpur</h1>
         <h4>Your Minecraft, your way</h4>
         <img class="logo" src="/images/purpur.svg" alt="Purpur Logo" />
-        <p>Purpur is a drop in replacement for any Spigot/Paper server designed to bring
-         you superior configuration, ultimate gameplay features, and the best blazing fast optimizations.</p>
+        <p>Purpur is a drop in replacement for Paper servers designed for superior configuration,
+         ultimate gameplay features, and the best blazing fast optimizations.</p>
         <a class="button download-button blue-button" href="/api/v1/purpur/1.16.5/latest/download">Download</a>
         <a class="tiny" href="/downloads">See all builds</a>
       </div>
