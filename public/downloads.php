@@ -40,6 +40,7 @@ require_once("opengraph.php");
       </div>
     </div>
     <div class="row-one">
+      <div id="oldVersionWarning"></div>
       <div class="container">
         <ul class="tabs"></ul>
         <select id="dropdown"></select>
