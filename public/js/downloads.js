@@ -37,14 +37,12 @@ function createTab(ul, version, selected) {
 function changeDropdown(option) {
     selectTab(getTab(option.target.value));
     updateList(option.target.value);
-    setTimeout(warnOldVersion, 500);
 }
 
 function clickTab(li) {
     selectTab(this.parentElement);
     selectDropdown(this.innerHTML);
     updateList(this.innerHTML);
-    setTimeout(warnOldVersion, 500);
 }
 
 function selectTab(tab) {
@@ -108,6 +106,9 @@ function updateList(version) {
             }
         });
     }
+    
+    warnOldVersion(current); // show warning message
+    
     return true;
 }
 
@@ -252,12 +253,12 @@ function formateDate(timestamp) {
     return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
 }
 
-function warnOldVersion(){
+function warnOldVersion(version){
     var warnText01 = 'You are trying to download builds for old/unsupported version of Minecraft!';
     var warnText02 = 'Keep in mind that if you download these builds, you won\'t get any support from Purpur!';
 
     var div = document.getElementById('oldVersionWarning');
-    var selected = window.location.hash ? window.location.hash.substring(1) : latestVersion;
+    var selected = version;
     if (selected != latestVersion) {
         div.innerHTML = `${warnText01}<br>${warnText02}`;
         div.classList.add('oldVersionWarning');
