@@ -1,11 +1,12 @@
 const downloads = 'https://purpur.pl3x.net/api/v1/purpur/';
+const latestVersion = '1.16.5'; // change this value whenever newer version of Minecraft releases
 
 var cache = new Map();
 var current;
 
 window.addEventListener('load', function() {
     getJSON(downloads, function(json) {
-        var selected = window.location.hash ? window.location.hash.substring(1) : "1.16.5";
+        var selected = window.location.hash ? window.location.hash.substring(1) : latestVersion;
         var ul = document.getElementsByClassName("tabs")[0];
         for (var i = 0; i < json.versions.length; i++) {
             createTab(ul, json.versions[i], selected);
@@ -105,6 +106,9 @@ function updateList(version) {
             }
         });
     }
+    
+    warnOldVersion(current); // show warning message
+    
     return true;
 }
 
@@ -247,4 +251,19 @@ function formateDate(timestamp) {
     var minutes = ('0' + date.getMinutes()).slice(-2)
     var seconds = ('0' + date.getSeconds()).slice(-2)
     return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+}
+
+function warnOldVersion(version){
+    var warnText01 = 'You are trying to download builds for old/unsupported version of Minecraft!';
+    var warnText02 = 'Keep in mind that if you download these builds, you won\'t get any support from Purpur!';
+
+    var div = document.getElementById('oldVersionWarning');
+    var selected = version;
+    if (selected != latestVersion) {
+        div.innerHTML = `${warnText01}<br>${warnText02}`;
+        div.classList.add('oldVersionWarning');
+    } else {
+        div.innerHTML = '';
+        div.classList.remove('oldVersionWarning');
+    }
 }
