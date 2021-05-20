@@ -40,8 +40,18 @@ if ($now - $last > 86400) {
 ?><!doctype html>
 <html lang="en">
   <head>
-    <title>Server Usage</title>
     <meta charset="UTF-8" />
+    <title>Server Usage</title>
+    <meta name="title" content="Server Usage" />
+    <meta name="description" content="" />
+    <meta property="twitter:title" content="Server Usage" />
+    <meta property="twitter:image" content="https://purpur.pl3x.net/stats/jpgraph.php" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:description" content="" />
+    <meta property="og:title" content="Server Usage" />
+    <meta property="og:url" content="https://purpur.pl3x.net/stats" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="https://purpur.pl3x.net/stats/jpgraph.php" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
