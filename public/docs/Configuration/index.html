@@ -3091,6 +3091,7 @@
 <ul>
 <li>gamemode<ul>
 <li>requires-specific-permission<ul>
+<li>Requires <a href="../Permissions#minecraftcommandgamemodegamemode"><code>minecraft.command.gamemode.&lt;gamemode&amp;gt;</code></a> permission</li>
 <li><strong>default</strong>: false</li>
 <li><strong>description</strong>: Set to true for each gamemode to require it's own permission</li>
 </ul>
@@ -3144,41 +3145,35 @@
 </ul>
 <h3 id="messages">messages<a class="headerlink" href="#messages" title="Permanent link">🔗</a></h3>
 <h4 id="afk-broadcast-away">afk-broadcast-away<a class="headerlink" href="#afk-broadcast-away" title="Permanent link">🔗</a></h4>
-<ul>
-<li><strong>default</strong>: §e§o%s is now AFK</li>
-<li><strong>description</strong>: This is the message that gets broadcasted when a user goes AFK (must have <code>player-idle-timeout</code> set greater than 0 &amp; <a href="#kick-if-idle">kick-if-idle</a> set as false)</li>
-</ul>
+<p>Requires the <a href="#kick-if-idle"><code>kick-if-idle</code></a> setting to be <code>false</code>
+* <strong>default</strong>: §e§o%s is now AFK
+* <strong>description</strong>: This is the message that gets broadcasted when a user goes AFK (must have <code>player-idle-timeout</code> set greater than 0 &amp; <a href="#kick-if-idle">kick-if-idle</a> set as false)</p>
 <h4 id="afk-broadcast-back">afk-broadcast-back<a class="headerlink" href="#afk-broadcast-back" title="Permanent link">🔗</a></h4>
-<ul>
-<li><strong>default</strong>: §e§o%s is no longer AFK</li>
-<li><strong>description</strong>: This is the message that gets broadcasted when a user is no longer AFK (must have <code>player-idle-timeout</code> set greater than 0 &amp; <a href="#kick-if-idle">kick-if-idle</a> set as false)</li>
-</ul>
+<p>Requires the <a href="#kick-if-idle"><code>kick-if-idle</code></a> setting to be <code>false</code>
+* <strong>default</strong>: §e§o%s is no longer AFK
+* <strong>description</strong>: This is the message that gets broadcasted when a user is no longer AFK (must have <code>player-idle-timeout</code> set greater than 0 &amp; <a href="#kick-if-idle">kick-if-idle</a> set as false)</p>
 <h4 id="afk-tab-list-prefix">afk-tab-list-prefix<a class="headerlink" href="#afk-tab-list-prefix" title="Permanent link">🔗</a></h4>
-<ul>
-<li><strong>default</strong>: "[AFK] "</li>
-<li><strong>description</strong>: The prefix that shows up on the playerlist behind someone's name when they're AFK</li>
-</ul>
+<p>Requires the <a href="#kick-if-idle"><code>kick-if-idle</code></a> setting to be <code>false</code>
+* <strong>default</strong>: "[AFK] "
+* <strong>description</strong>: The prefix that shows up on the playerlist behind someone's name when they're AFK</p>
 <h4 id="afk-tab-list-suffix">afk-tab-list-suffix<a class="headerlink" href="#afk-tab-list-suffix" title="Permanent link">🔗</a></h4>
-<ul>
-<li><strong>default</strong>: ""</li>
-<li><strong>description</strong>: The suffix that shows up on the playerlist behind someone's name when they're AFK</li>
-</ul>
+<p>Requires the <a href="#kick-if-idle"><code>kick-if-idle</code></a> setting to be <code>false</code>
+* <strong>default</strong>: ""
+* <strong>description</strong>: The suffix that shows up on the playerlist behind someone's name when they're AFK</p>
 <h4 id="ping-command-output">ping-command-output<a class="headerlink" href="#ping-command-output" title="Permanent link">🔗</a></h4>
-<ul>
-<li><strong>default</strong>: §a%s's ping is %sms</li>
-<li><strong>description</strong>: Output when <code>/ping &lt;user&gt;</code> is run.</li>
-</ul>
+<p>Requires the <a href="../Permissions#bukkitcommandping"><code>bukkit.command.ping</code></a> permission
+* <strong>default</strong>: §a%s's ping is %sms
+* <strong>description</strong>: Output when <code>/ping &lt;user&gt;</code> is run.</p>
 <h4 id="cannot-ride-mob">cannot-ride-mob<a class="headerlink" href="#cannot-ride-mob" title="Permanent link">🔗</a></h4>
-<ul>
-<li><strong>default</strong>: §cYou cannot mount that mob</li>
-<li><strong>description</strong>: Message that shows when someone tries to mount a mob they're not allowed to.</li>
-</ul>
+<p>Requires the <a href="../Permissions#allowridemob_id"><code>allow.ride.&lt;mob_id&amp;gt;</code></a> permission
+* <strong>default</strong>: §cYou cannot mount that mob
+* <strong>description</strong>: Message that shows when someone tries to mount a mob they're not allowed to.</p>
 <h4 id="demo-command-output">demo-command-output<a class="headerlink" href="#demo-command-output" title="Permanent link">🔗</a></h4>
-<p>Requires the <code>bukkit.command.demo</code> permission (<a href="Permissions">Permissions</a>)
+<p>Requires the <a href="../Permissions#bukkitcommanddemo"><code>bukkit.command.demo</code></a> permission
 * <strong>default</strong>: §a%s has been shown the demo screen
 * <strong>description</strong>: Message that shows when the demo screen is enabled for a user using the <code>/demo</code> command.</p>
 <h4 id="credits-command-output">credits-command-output<a class="headerlink" href="#credits-command-output" title="Permanent link">🔗</a></h4>
-<p>Requires the <code>bukkit.command.credits</code> permission (<a href="Permissions">Permissions</a>)
+<p>Requires the <a href="../Permissions#bukkitcommandcredits"><code>bukkit.command.credits</code></a> permission
 * <strong>default</strong>: §a%s has been shown the end credits
 * <strong>description</strong>: Message that shows when the credits screen is enabled for a user using the <code>/credits</code> command.</p>
 <h3 id="blocks">blocks<a class="headerlink" href="#blocks" title="Permanent link">🔗</a></h3>
@@ -3202,20 +3197,15 @@
 <ul>
 <li>six-rows<ul>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Ender chests should have 6 rows of inventory space</li>
+<li><strong>description</strong>: Ender chests should have six rows of inventory space</li>
 </ul>
 </li>
 <li>use-permissions-for-rows<ul>
+<li>Requires <a href="#six-rows"><code>ender_chest.six-rows</code></a> to be true</li>
+<li>Requires <a href="../Permissions#purpurenderchestrowsnumber"><code>purpur.enderchest.rows.&lt;number&amp;gt;</code></a> permission</li>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Use permission nodes to determine the number of rows. By default, with this setting enabled, all players have six rows unless otherwise specified using permissions.</li>
+<li><strong>description</strong>: Use permission nodes to determine the number of rows. By default, with this setting enabled, all players have <code>six</code> rows unless otherwise specified using permissions.</li>
 </ul>
-<details class="note" open="open"><summary>Enderchest row permissions</summary><p><code>purpur.enderchest.rows.six</code><br />
-<code>purpur.enderchest.rows.five</code><br />
-<code>purpur.enderchest.rows.four</code><br />
-<code>purpur.enderchest.rows.three</code><br />
-<code>purpur.enderchest.rows.two</code><br />
-<code>purpur.enderchest.rows.one</code></p>
-</details>
 </li>
 </ul>
 <h4 id="disable-mushroom-updates">disable-mushroom-updates<a class="headerlink" href="#disable-mushroom-updates" title="Permanent link">🔗</a></h4>
@@ -3413,11 +3403,13 @@
 <h4 id="sign">sign<a class="headerlink" href="#sign" title="Permanent link">🔗</a></h4>
 <ul>
 <li>allow-colors<ul>
+<li>Requires <a href="../Permissions#purpursigncolor"><code>purpur.sign.color</code></a>, <a href="../Permissions#purpursignstyle"><code>purpur.sign.style</code></a>, and/or <a href="../Permissions#purpursignmagic"><code>purpur.sign.magic</code></a> permission</li>
 <li><strong>default</strong>: false</li>
 <li><strong>description</strong>: Allow players to use color codes on signs</li>
 </ul>
 </li>
 <li>right-click-edit<ul>
+<li>Requires <a href="../Permissions#purpursignedit"><code>purpur.sign.edit</code></a> permission</li>
 <li><strong>default</strong>: false</li>
 <li><strong>description</strong>: Ability to edit signs by right clicking them with another sign in hand</li>
 </ul>
@@ -3545,6 +3537,7 @@
 <h4 id="anvil">anvil<a class="headerlink" href="#anvil" title="Permanent link">🔗</a></h4>
 <ul>
 <li>allow-colors<ul>
+<li>Requires <a href="../Permissions#purpuranvilcolor"><code>purpur.anvil.color</code></a> permission</li>
 <li><strong>default</strong>: false</li>
 <li><strong>description</strong>: Allows players to use color codes in anvils</li>
 </ul>
@@ -6313,7 +6306,7 @@ based on the world difficulty. <a href="https://github.com/pl3xgaming/Purpur/blo
 <li><strong>description</strong>: Disabled by default (0), Amount of ticks an entity will live before disappearing. Interacting with a player resets the timer</li>
 </ul>
 <h4 id="silk-touch">silk-touch<a class="headerlink" href="#silk-touch" title="Permanent link">🔗</a></h4>
-<p>Requires perms <code>purpur.drop.spawner</code> &amp; <code>purpur.place.spawner</code> (<a href="Permissions">Permissions</a>)</p>
+<p>Requires the <a href="../Permissions#purpurdropspawners"><code>purpur.drop.spawners</code></a> and <a href="../Permissions#purpurplacespawners"><code>purpur.place.spawners</code></a> permissions</p>
 <ul>
 <li>enabled<ul>
 <li><strong>default</strong>: false</li>
