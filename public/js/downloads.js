@@ -106,9 +106,9 @@ function updateList(version) {
             }
         });
     }
-    
+
     warnOldVersion(current); // show warning message
-    
+
     return true;
 }
 

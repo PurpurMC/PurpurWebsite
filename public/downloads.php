@@ -40,10 +40,10 @@ require_once("opengraph.php");
       </div>
     </div>
     <div class="row-one">
-      <div id="oldVersionWarning"></div>
       <div class="container">
         <ul class="tabs"></ul>
         <select id="dropdown"></select>
+        <div id="oldVersionWarning"></div>
         <table class="downloads">
           <thead><tr><td class="left">Build</td><td class="middle">Changes</td><td class="right">Date</td></tr></thead>
           <tbody></tbody>
