@@ -110,7 +110,7 @@ nav a {
   display: block;
   margin: 30px auto 0 auto;
   width: 100%;
-  border-radius: 15px;
+  border-radius: 5px;
   background: linear-gradient(0deg, #c0bfbc 0%, #f6f5f4 100%);
   color: #241f31;
   font-weight: 700;
