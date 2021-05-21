@@ -26,10 +26,6 @@ require_once("opengraph.php");
   <body>
     <div class="top-row">
       <div class="container">
-        <div id="oldVersionWarning" class="oldVersionWarning">
-          You are trying to download builds for old/unsupported version of Minecraft!<br />
-          Keep in mind that if you download these builds, you won't get any support from Purpur!
-        </div>
         <nav>
           <a href="/docs"><i class="fas fa-book-open"></i> Docs</a>
           <a href="/github" target="_blank"><i class="fab fa-github"></i> GitHub</a>
@@ -47,6 +43,10 @@ require_once("opengraph.php");
       <div class="container">
         <ul class="tabs"></ul>
         <select id="dropdown"></select>
+         <div id="oldVersionWarning" class="oldVersionWarning">
+          You are trying to download builds for old/unsupported version of Minecraft!<br />
+          Keep in mind that if you download these builds, you won't get any support from Purpur!
+        </div>
         <table class="downloads">
           <thead><tr><td class="left">Build</td><td class="middle">Changes</td><td class="right">Date</td></tr></thead>
           <tbody></tbody>
