@@ -134,6 +134,8 @@ nav a {
   border-spacing: 0px;
   margin-bottom: 100px;
   text-align: left;
+  border: 1px solid #ababab;
+  border-top: none;
 }
 .downloads thead {
   font-weight: 700;
@@ -157,7 +159,7 @@ nav a {
 .downloads td.left {
   width: 75px;
   white-space: nowrap;
-  padding: 0;
+  padding-left: 20px;
 }
 @media (min-width: 800px) {
   .downloads td.left {
