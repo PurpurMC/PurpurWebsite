@@ -110,6 +110,7 @@ nav a {
   display: block;
   margin: 30px auto 0 auto;
   width: 100%;
+  padding: 10px;
 }
 @media (min-width: 800px) {
   #dropdown {
@@ -189,8 +190,17 @@ nav a {
   max-width: 100%;
 }
 
-.oldVersionWarning {
-  padding: 10px;
-  background-color: #e53935;
+#oldVersionWarning {
+  overflow: hidden;
+  max-height: 0;
+  padding: 0;
+  font-weight: 700;
   color: white;
+  background: #e53935;
+  background: linear-gradient(45deg, rgba(125,0,0,1) 0%, rgba(255,0,0,1) 50%, rgba(125,0,0,1) 100%);
+  transition: all 500ms ease-in-out;
+}
+#oldVersionWarning.visible {
+  max-height: 150px;
+  padding: 10px;
 }

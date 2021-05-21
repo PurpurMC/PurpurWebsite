@@ -254,16 +254,11 @@ function formateDate(timestamp) {
 }
 
 function warnOldVersion(version){
-    var warnText01 = 'You are trying to download builds for old/unsupported version of Minecraft!';
-    var warnText02 = 'Keep in mind that if you download these builds, you won\'t get any support from Purpur!';
-
     var div = document.getElementById('oldVersionWarning');
     var selected = version;
     if (selected != latestVersion) {
-        div.innerHTML = `${warnText01}<br>${warnText02}`;
-        div.classList.add('oldVersionWarning');
+        div.classList.add('visible');
     } else {
-        div.innerHTML = '';
-        div.classList.remove('oldVersionWarning');
+        div.classList.remove('visible');
     }
 }
