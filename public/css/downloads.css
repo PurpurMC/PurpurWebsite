@@ -135,7 +135,6 @@ nav a {
   margin-bottom: 100px;
   text-align: left;
   border: 1px solid #ababab;
-  border-top: none;
 }
 .downloads thead {
   font-weight: 700;
@@ -203,10 +202,11 @@ nav a {
   overflow: hidden;
   max-height: 0;
   padding: 0;
+  border-right: 1px solid #ababab;
+  border-left: 1px solid #ababab;
   font-weight: 700;
   color: white;
   background: #e53935;
-  margin-top: 30px;
   background: linear-gradient(45deg, rgba(125,0,0,1) 0%, rgba(255,0,0,1) 50%, rgba(125,0,0,1) 100%);
   transition: all 500ms ease-in-out;
 }
