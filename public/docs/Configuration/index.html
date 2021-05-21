@@ -6507,21 +6507,28 @@ based on the world difficulty. <a href="https://github.com/pl3xgaming/Purpur/blo
 </ul>
 <h4 id="minecart">minecart<a class="headerlink" href="#minecart" title="Permanent link">🔗</a></h4>
 <ul>
+<li>max-speed<ul>
+<li><strong>default</strong>: 0.4</li>
+<li><strong>description</strong>: Max speed of a minecart when controlled</li>
+</ul>
+</li>
+<li>place-anywhere<ul>
+<li><strong>default</strong>: false</li>
+<li><strong>description</strong>: Whether minecarts can be placed anywhere, not just on rails</li>
+</ul>
+</li>
+<li>controllable<ul>
 <li>enabled<ul>
 <li><strong>default</strong>: false</li>
 <li><strong>description</strong>: Whether minecarts can be controlled when not on rails</li>
 </ul>
 </li>
-<li>
-<p>place-anywhere</p>
-<ul>
-<li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Whether minecarts can be placed anywhere, not just on rails</li>
+<li>fall-damage<ul>
+<li><strong>default</strong>: true</li>
+<li><strong>description</strong>: Set to true to give fall damage to the player while in a minecart</li>
 </ul>
 </li>
-<li>
-<p>step-height</p>
-<ul>
+<li>step-height<ul>
 <li><strong>default</strong>: 1.0</li>
 <li><strong>description</strong>: The step height in which a minecarts can go up to the next block without jumping</li>
 </ul>
@@ -6536,32 +6543,14 @@ based on the world difficulty. <a href="https://github.com/pl3xgaming/Purpur/blo
 <li><strong>description</strong>: Base speed of minecart when controlled</li>
 </ul>
 </li>
-<li>max-speed<ul>
-<li><strong>default</strong>: 0.4</li>
-<li><strong>description</strong>: Max speed of a minecart when controlled</li>
-</ul>
-</li>
-<li>
-<p>block-speed</p>
-<ul>
+<li>block-speed<ul>
 <li><strong>default</strong>:
     <div class="highlight"><pre><span></span><code><span class="nt">grass_block</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.3</span>
 <span class="nt">stone</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.5</span>
 </code></pre></div></li>
 <li><strong>description</strong>: List of speed overrides per block type</li>
 </ul>
-<details class="note" open="open"><summary>Note</summary><p><strong>Example of block-speed overrides:</strong>
-<div class="highlight"><pre><span></span><code><span class="nt">sand</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.1</span>
-<span class="nt">stone</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.6</span>
-<span class="nt">black_concrete</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
-</code></pre></div></p>
-</details>
 </li>
-<li>
-<p>fall-damage</p>
-<ul>
-<li><strong>default</strong>: true</li>
-<li><strong>description</strong>: Set to true to give fall damage to the player while in a minecart</li>
 </ul>
 </li>
 </ul>
