@@ -94,11 +94,15 @@ if ($now - $last > 86400) {
   </head>
   <body>
     <div id="stats_graph">
-      <canvas id="canvas"></canvas>
+      <canvas id="servers"></canvas>
+    </div>
+    <br/><br/>
+    <div id="stats_graph">
+      <canvas id="players"></canvas>
     </div>
     <script>
-      let chart;
-      let config = {
+      let serverChart;
+      let serverConfig = {
           type: 'line',
           options: {
               responsive: true,
@@ -109,7 +113,6 @@ if ($now - $last > 86400) {
               plugins: {
                   title: {
                       display: true,
-                      text: 'Server Usage',
                       color: '#fff'
                   },
                   tooltip: {
@@ -159,12 +162,12 @@ if ($now - $last > 86400) {
 
       function loadData(name, json) {
           json.dates.forEach(function(date) {
-              config.data.labels.push(date);
+              serverConfig.data.labels.push(date);
           });
 
           Object.keys(json.servers).forEach(function(server) {
               let obj = json.servers[server];
-              config.data.datasets.push({
+              serverConfig.data.datasets.push({
                   label: server,
                   backgroundColor: obj['color'],
                   borderColor: obj['color'],
@@ -172,11 +175,30 @@ if ($now - $last > 86400) {
               });
           });
 
-          chart.update();
+          serverConfig.options.plugins.title.text = "Server Usage";
+
+          serverChart.update();
+
+          serverConfig.data.datasets = [];
+
+          Object.keys(json.players).forEach(function(server) {
+              let obj = json.players[server];
+              serverConfig.data.datasets.push({
+                  label: server,
+                  backgroundColor: json.servers[server]['color'],
+                  borderColor: json.servers[server]['color'],
+                  data: obj['data']
+              });
+          });
+
+          serverConfig.options.plugins.title.text = "Player Counts";
+
+          playerChart.update();
       }
 
       window.onload = function () {
-          chart = new Chart(document.getElementById('canvas'), config);
+        serverChart = new Chart(document.getElementById('servers'), serverConfig);
+        playerChart = new Chart(document.getElementById('players'), serverConfig);
           fetch('data.json')
               .then(async res => {
                   if (res.ok) {
