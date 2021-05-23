@@ -44,15 +44,15 @@ $graph->xaxis->HideTicks();
 $graph->yaxis->SetFont(FF_DV_SANSSERIF,FS_NORMAL,8);
 $graph->yaxis->HideTicks();
 
-$l1=new LinePlot($json['servers']['yatopia']['data']);
-$l1->SetColor($json['servers']['yatopia']['color']);
-$l1->SetLegend('Yatopia');
+$l1=new LinePlot($json['servers']['purpur']['data']);
+$l1->SetColor($json['servers']['purpur']['color']);
+$l1->SetLegend('Purpur');
 $l2=new LinePlot($json['servers']['tuinity']['data']);
 $l2->SetColor($json['servers']['tuinity']['color']);
 $l2->SetLegend('Tuinity');
-$l3=new LinePlot($json['servers']['purpur']['data']);
-$l3->SetColor($json['servers']['purpur']['color']);
-$l3->SetLegend('Purpur');
+$l3=new LinePlot($json['servers']['yatopia']['data']);
+$l3->SetColor($json['servers']['yatopia']['color']);
+$l3->SetLegend('Yatopia');
 
 $graph->Add($l1);
 $graph->Add($l2);
