@@ -96,7 +96,7 @@ if ($now - $last > 86400) {
     <div id="stats_graph">
       <canvas id="servers"></canvas>
     </div>
-    <br/><br/>
+    <br/><br/>  
     <div id="stats_graph">
       <canvas id="players"></canvas>
     </div>
@@ -113,6 +113,65 @@ if ($now - $last > 86400) {
               plugins: {
                   title: {
                       display: true,
+                      text: "Server Counts",
+                      color: '#fff'
+                  },
+                  tooltip: {
+                      mode: 'index',
+                      intersect: false
+                  },
+                  legend: {
+                      display: true,
+                      labels: {
+                          color: '#fff'
+                      }
+                  }
+              },
+              scales: {
+                  x: {
+                      display: true,
+                      title: {
+                          display: true,
+                          text: 'Date',
+                          color: '#fff'
+                      },
+                      ticks: {
+                          color: '#fff' 
+                      },
+                      grid: {
+                          color: '#444'
+                      }
+                  },
+                  y: {
+                      display: true,
+                      beginAtZero: true,
+                      title: {
+                          display: true,
+                          text: 'Servers',
+                          color: '#fff'
+                      },
+                      ticks: {
+                          color: '#fff'
+                      },
+                      grid: {
+                          color: '#444'
+                      }
+                  }
+              }
+          }
+      };
+      let playerConfig = {
+          type: 'line',
+          options: {
+              responsive: true,
+              interaction: {
+                  mode: 'nearest',
+                  intersect: false
+              },
+              plugins: {
+                  title: {
+                      display: true,
+                      text: "Player Counts",
                       color: '#fff'
                   },
                   tooltip: {
@@ -163,6 +222,7 @@ if ($now - $last > 86400) {
       function loadData(name, json) {
           json.dates.forEach(function(date) {
               serverConfig.data.labels.push(date);
+              playerConfig.data.labels.push(date);
           });
 
           Object.keys(json.servers).forEach(function(server) {
@@ -175,30 +235,24 @@ if ($now - $last > 86400) {
               });
           });
 
-          serverConfig.options.plugins.title.text = "Server Usage";
-
           serverChart.update();
-
-          serverConfig.data.datasets = [];
 
           Object.keys(json.players).forEach(function(server) {
               let obj = json.players[server];
-              serverConfig.data.datasets.push({
+              playerConfig.data.datasets.push({
                   label: server,
-                  backgroundColor: json.servers[server]['color'],
+                  backgroundColor: json.servers[server]['color'], // same colors are server graph
                   borderColor: json.servers[server]['color'],
                   data: obj['data']
               });
           });
-
-          serverConfig.options.plugins.title.text = "Player Counts";
 
           playerChart.update();
       }
 
       window.onload = function () {
         serverChart = new Chart(document.getElementById('servers'), serverConfig);
-        playerChart = new Chart(document.getElementById('players'), serverConfig);
+        playerChart = new Chart(document.getElementById('players'), playerConfig);
           fetch('data.json')
               .then(async res => {
                   if (res.ok) {
