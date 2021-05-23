@@ -58,14 +58,14 @@ if ($now - $last > 86400) {
         color: #ffffff;
         background-color: #212121;
       }
-      div {
-        width: 1200px;
+      div#stats_graph {
+        max-width: 1200px;
         margin: 0 auto;
       }
     </style>
   </head>
   <body>
-    <div>
+    <div id="stats_graph">
       <canvas id="canvas"></canvas>
     </div>
     <script>
