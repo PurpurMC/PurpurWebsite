@@ -52,9 +52,11 @@
     </script>
   </head>
   <body>
+    <div class="configuration">
 <?php
   buildConfig($json, null);
 ?>
+    </div>
   </body>
 </html>
 <?php
