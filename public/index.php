@@ -54,7 +54,7 @@ require_once("opengraph.php");
           <img class="icon" src="/images/warning.svg" alt="Found a bug? File it!" />
           <h3>Found a Bug? File it!</h3>
           <p>If you run into issues or have any suggestions, let us know.</p>
-          <a class="button red-button" href="/issues" target="_blank">Tickets</a>
+          <a class="button red-button" href="/issues" target="_blank">Issue Tracker</a>
         </div>
         <div class="block">
           <img class="icon" src="/images/discord.svg" alt="Get Involved" />
