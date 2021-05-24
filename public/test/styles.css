@@ -10,6 +10,7 @@ body {
   color: #eaebfc;
   font-family: "Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
   font-size: 16px;
+  margin-top: 75px;
 }
 
 a {
@@ -18,17 +19,51 @@ a {
 }
 
 .container {
-  display: block;
+  display: flex;
   max-width: 1220px;
-  margin: 0px auto;
+  margin: 25px auto;
+}
+.left {
+  display: none;
+  width: 234px;
+  background: rgba(255,255,255,0.025);
+}
+@media (min-width: 1220px) {
+  .left {
+    display: block;
+  }
+}
+.right {
+  display: none;
+  width: 234px;
+  background: rgba(255,255,255,0.025);
+}
+@media (min-width: 960px) {
+  .right {
+    display: block;
+  }
+}
+@media (max-width: 1220px) {
+  .right {
+    
+  }
+}
+
+.anchor {
+  position: absolute;
+  margin: -75px;
 }
 
 header {
   background: rgb(75, 41, 107);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 0px, rgba(0, 0, 0, 0.2) 0px 4px 8px 0px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
 }
 header .container {
   display: flex;
+  margin: 0px auto;
 }
 header .logo {
   display: none;
@@ -109,8 +144,13 @@ header .purpurdocs .github span {
 }
 
 .configuration  {
-  max-width: 800px;
-  margin: auto;
+  flex-grow: 1;
+  width: 100%;
+}
+@media (min-width: 1220px) {
+  .configuration {
+    max-width: 800px;
+  }
 }
 .configuration div {
   margin-left: 20px;
@@ -119,6 +159,9 @@ header .purpurdocs .github span {
 .headerlink {
   font-weight: bold;
   font-size: 20px;
+}
+.headerlink::before {
+  content: "• ";
 }
 .headerlink a {
   opacity: 0;
@@ -141,6 +184,7 @@ header .purpurdocs .github span {
 
 .section {
 }
+
 .subsection {
   padding-bottom: 10px;
 }

@@ -1,9 +1,9 @@
 <?php
 
   // get the json data from file
-  $filename = 'data.json';
+  $filename = 'data.yml';
   $contents = file_get_contents($filename);
-  $json = json_decode($contents === false ? '' : $contents, true);
+  $json = yaml_parse($contents === false ? '' : $contents);
 
   $ogtitle = "Purpur Documentation";
   $ogdesc = "Read over our comprehensive feature documentation and make your server your own";
@@ -48,12 +48,14 @@
     <script>
       window.onload = (event) => {
         const params = new URLSearchParams(window.location.search);
-        document.getElementById(params.get("id")).scrollIntoView();
+        const element = document.getElementById(params.get("id"));
+        if (element != null) {
+          element.scrollIntoView();
+        }
         fetch("https://api.github.com/repos/pl3xgaming/purpurdocs")
           .then(async res => {
             if (res.ok) {
               const json = await res.json();
-              console.log(json);
               const span = document.getElementById("gh_stats");
               const forks = json['forks_count'];
               const stars = json['stargazers_count'];
@@ -67,23 +69,31 @@
     <header>
       <div class="container">
         <a class="logo" href="/test"><img src="/images/purpur.svg" alt="Purpur Documentation" /></a>
-        <a class="navbtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg></a>
+        <a class="navbtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg></a>
         <p>Purpur Documentation</p>
         <a class="purpurdocs" href="">
           <div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
           </div>
           <div class="github">
             PurpurDocs
-            <span id="gh_stats"><?=$gh_stars?> Stars · <?=$gh_forks?> Forks</span>
+            <span id="gh_stats"> Stars · Forks</span>
           </div>
         </a>
       </div>
     </header>
-    <div class="configuration">
+    <div class="container main">
+      <div class="left">
+        left
+      </div>
+      <div class="configuration">
 <?php
   buildConfig($json, null);
 ?>
+      </div>
+      <div class="right">
+        right
+      </div>
     </div>
   </body>
 </html>
@@ -97,16 +107,18 @@
           continue;
       }
 
-      echo "<div id='$path'>\n";
-      echo "<p class='headerlink'>• $k <a href='?id=$path'>🔗</a></p>\n";
+      echo "<div>\n";
+      echo "<div class='anchor' id='$path'></div>";
+      echo "<p class='headerlink'>$k <a href='?id=$path'>🔗</a></p>\n";
       buildConfig($v, $path);
       echo "</div>\n";
     }
   }
 
   function showOption($path, $key, $option) {
-    echo "<div class='section' id='$path'>\n";
-    echo "<p class='headerlink' title='$path'>• $key <a href='?id=$path' class='anchor'>🔗</a></p>\n";
+    echo "<div class='section'>\n";
+    echo "<div class='anchor' id='$path'></div>";
+    echo "<p class='headerlink' title='$path'>$key <a href='?id=$path'>🔗</a></p>\n";
     showLine($option, 'requirement');
     showLine($option, 'default');
     showLine($option, 'description');
