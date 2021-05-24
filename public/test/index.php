@@ -52,7 +52,7 @@
     <meta property="og:description" content="<?=$ogdesc?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
 
-    <link type="application/json+oembed" href="<?=$ogurl?>emded.php?<?=$oembed?>" />
+    <link type="application/json+oembed" href="<?=$url?>emded.php?<?=$oembed?>" />
 
     <link rel="icon" type="image/x-icon" href="/images/purpur.svg" />
     <link type="text/css" rel="stylesheet" href="styles.css" />
