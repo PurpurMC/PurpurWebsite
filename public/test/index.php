@@ -5,18 +5,26 @@
   $contents = file_get_contents($filename);
   $json = yaml_parse($contents === false ? '' : $contents);
 
+  // base url
+  $url = "https://purpur.pl3x.net/test/";
+
+  // open graph stuffs
   $ogtitle = "Purpur Documentation";
   $ogdesc = "Read over our comprehensive feature documentation and make your server your own";
   $ogimg = "https://i.pinimg.com/originals/0c/d8/55/0cd85593806593360a4a114550449670.gif";
-  $ogurl = "https://purpur.pl3x.net/test/";
+  $ogurl = $url;
   $ogcolor = "#7289DA";
+  $oembed = "author_name=&author_url=&provider_name=&provider_url=";
 
-  // get current option
+  // get current option for open graph
   $urlid = @$_GET['id'];
   $option = getValue($json, $urlid);
   if ($option !== null) {
     $ogdesc = "$urlid\n\n" . htmlspecialchars($option['description']) . "\n\ndefault: " . htmlspecialchars($option['default']);
     $ogurl = "$ogurl?id=" . $urlid;
+    $path = explode($urlid, '.');
+    array_pop($path);
+    $oembed = "author_name=$path&author_url=$ogurl&provider_name=$path&provider_url=$ogurl";
   }
 
 ?><!DOCTYPE html>
@@ -43,6 +51,8 @@
     <meta property="og:title" content="<?=$ogtitle?>" />
     <meta property="og:description" content="<?=$ogdesc?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
+
+    <link type="application/json+oembed" href="<?=$ogurl?>emded.json?<?=$oembed?>" />
 
     <link rel="icon" type="image/x-icon" href="/images/purpur.svg" />
     <link type="text/css" rel="stylesheet" href="styles.css" />
