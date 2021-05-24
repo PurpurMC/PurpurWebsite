@@ -14,6 +14,98 @@ body {
 
 a {
   text-decoration: none;
+  color: #eaebfc;
+}
+
+.container {
+  display: block;
+  max-width: 1220px;
+  margin: 0px auto;
+}
+
+header {
+  background: rgb(75, 41, 107);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 0px, rgba(0, 0, 0, 0.2) 0px 4px 8px 0px;
+}
+header .container {
+  display: flex;
+}
+header .logo {
+  display: none;
+  margin-right: 20px;
+  line-height: 48px;
+}
+@media (min-width: 1220px) {
+  header .logo {
+    display: block;
+  }
+}
+header .logo img {
+  vertical-align: middle;
+  width: 32px;
+  margin-left: 20px;
+}
+header .navbtn {
+  display: block;
+  margin-right: 20px;
+  line-height: 48px;
+}
+@media (min-width: 1220px) {
+  header .navbtn {
+    display: none;
+  }
+}
+header .navbtn svg {
+  vertical-align: middle;
+  width: 28px;
+  fill: #eaebfc;
+  margin-left: 20px;
+}
+header p {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 48px;
+  padding: 0px;
+  margin: 0px;
+  flex-grow: 1;
+}
+header div {
+  display: block;
+}
+
+header .purpurdocs {
+  display: none;
+  width: 234px;
+  font-size: 13px;
+  font-weight: bold;
+}
+@media (min-width: 960px) {
+  header .purpurdocs {
+    display: block;
+  }
+}
+header .purpurdocs:hover .icon,
+header .purpurdocs:hover .github {
+  color: rgba(234, 235, 252, 0.8);
+  fill: rgba(234, 235, 252, 0.8);
+}
+header .purpurdocs .icon {
+  display: inline-block;
+  fill: #eaebfc;
+  margin: 12px 10px;
+  transition: all 250ms ease-in-out;
+}
+header .purpurdocs .icon svg {
+  width: 24px;
+  height: 24px;
+}
+header .purpurdocs .github {
+  display: inline-block;
+  font-size: 11px;
+  transition: all 250ms ease-in-out;
+}
+header .purpurdocs .github span {
+  display: block;
 }
 
 .configuration  {
