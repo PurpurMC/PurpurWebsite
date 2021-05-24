@@ -7,7 +7,7 @@
 
   $ogtitle = "Purpur Documentation";
   $ogdesc = "";
-  $ogimg = "https://purpur.pl3x.net/card.png";
+  $ogimg = "https://i.pinimg.com/originals/0c/d8/55/0cd85593806593360a4a114550449670.gif";
   $ogurl = "https://purpur.pl3x.net/test/";
 
   // get current option
