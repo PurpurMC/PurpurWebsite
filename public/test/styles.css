@@ -1,0 +1,107 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+
+body {
+  background: #2e303d;
+  color: #eaebfc;
+  font-family: "Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+}
+
+div {
+  margin-left: 20px;
+}
+
+.headerlink {
+  font-weight: bold;
+  font-size: 20px;
+}
+.headerlink a {
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+.headerlink:hover a {
+  opacity: 1;
+}
+
+.optionkey {
+  font-weight: bold;
+}
+.optionkey::before {
+  content: "• ";
+}
+
+.optionvalue {
+  font-weight: normal;
+}
+
+.section {
+}
+.subsection {
+  padding-bottom: 10px;
+}
+
+div.section .requirement {
+  display: block;
+  margin: 5px 0 10px 20px;
+  font-style: italic;
+}
+
+div.section .default {
+}
+div.section .default::before {
+  content: "• default: ";
+  font-weight: bold;
+}
+
+div.section .description {
+}
+div.section .description::before {
+  content: "• description: ";
+  font-weight: bold;
+}
+
+div.section .note {
+  margin: 10px 50px 25px 0;
+  background: rgba(255, 255, 255, 0.024);
+  font-size: 14px;
+  border-left: 4px solid rgb(68, 138, 255);
+}
+div.section .note::before {
+    content: "✏️ Note";
+    display: block;
+    background: rgba(68, 138, 255, 0.1);
+    font-weight: bold;
+    padding: 10px;
+}
+div.section .note .optionvalue {
+    display: block;
+    margin: 15px 10px 5px;
+}
+  
+
+div.section .warning {
+  margin: 10px 50px 25px 0;
+  background: rgba(255, 255, 255, 0.024);
+  font-size: 14px;
+  border-left: 4px solid rgb(255, 145, 0);
+}
+div.section .warning::before {
+  content: "⚠️ Warning";
+  display: block;
+  background: rgba(255, 145, 0, 0.1);
+  font-weight: bold;
+  padding: 10px;
+}
+div.section .warning .optionvalue {
+  display: block;
+  margin: 15px 10px 5px;
+}

@@ -6,7 +6,7 @@
   $json = json_decode($contents === false ? '' : $contents, true);
 
   $ogtitle = "Purpur Documentation";
-  $ogdesc = "";
+  $ogdesc = "Read over our comprehensive feature documentation and make your server your own";
   $ogimg = "https://i.pinimg.com/originals/0c/d8/55/0cd85593806593360a4a114550449670.gif";
   $ogurl = "https://purpur.pl3x.net/test/";
 
@@ -42,6 +42,7 @@
     <meta property="og:image" content="<?=$ogimg?>" />
 
     <link rel="icon" type="image/x-icon" href="/images/purpur.svg" />
+    <link type="text/css" rel="stylesheet" href="styles.css" />
 
     <script>
       window.onload = (event) => {
@@ -59,27 +60,37 @@
 <?php
   function buildConfig($arr, $key) {
     foreach ($arr as $k => $v) {
+      $path = ($key === null ? "" : $key . ".") . $k;
+
       if (is_array($v) && !is_array($v[array_key_first($v)])) {
-          showOption($key . "." . $k, $v);
+          showOption($path, $k, $v);
           continue;
       }
-      buildConfig($v, ($key === null ? "" : $key . ".") . $k);
+
+      echo "<div id='$path'>\n";
+      echo "<p class='headerlink'>• $k <a href='?id=$path'>🔗</a></p>\n";
+      buildConfig($v, $path);
+      echo "</div>\n";
     }
   }
 
-  function showOption($key, $option) {
-    echo "<div id='$key'>\n";
-    echo "<b>full key</b>: <a href='?id=$key'>$key</a><br>\n";
+  function showOption($path, $key, $option) {
+    echo "<div class='section' id='$path'>\n";
+    echo "<p class='headerlink' title='$path'>• $key <a href='?id=$path' class='anchor'>🔗</a></p>\n";
     showLine($option, 'requirement');
     showLine($option, 'default');
     showLine($option, 'description');
     showLine($option, 'note');
     showLine($option, 'warning');
-    echo "<hr>\n</div>\n";
+    echo "</div>\n";
   }
 
   function showLine($option, $name) {
-    if (isset($option[$name])) echo "$name: " . htmlspecialchars($option[$name]) . "<br>\n";
+    if (isset($option[$name])) {
+      echo "<div class='subsection $name'>\n";
+      echo "<span class='optionvalue'>" . htmlspecialchars($option[$name]) . "</span>\n";
+      echo "</div>\n";
+    }
   }
 
   function getValue($json, $key) {
