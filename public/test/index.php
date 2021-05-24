@@ -9,6 +9,7 @@
   $ogdesc = "Read over our comprehensive feature documentation and make your server your own";
   $ogimg = "https://i.pinimg.com/originals/0c/d8/55/0cd85593806593360a4a114550449670.gif";
   $ogurl = "https://purpur.pl3x.net/test/";
+  $ogcolor = "#7289DA";
 
   // get current option
   $urlid = @$_GET['id'];
@@ -22,22 +23,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Purpur - Your Minecraft, your way</title>
 
     <meta name="title" content="Purpur - Your Minecraft, your way" />
     <meta name="description" content="<?=$ogdesc?>" />
+    <meta name="theme-color" content="<?=$ogcolor?>" />
 
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:domain" content="purpur.pl3x.net">
-    <meta property="twitter:url" content="<?=$ogurl?>">
+    <meta property="twitter:url" content="<?=$ogurl?>" />
     <meta property="twitter:title" content="<?=$ogtitle?>" />
     <meta property="twitter:description" content="<?=$ogdesc?>" />
     <meta property="twitter:image" content="<?=$ogimg?>" />
 
     <meta property="og:url" content="<?=$ogurl?>" />
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="<?=$ogtitle?>" />
     <meta property="og:description" content="<?=$ogdesc?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
