@@ -24,6 +24,7 @@
     $ogurl = "$ogurl?id=" . $urlid;
     $path = explode($urlid, '.');
     array_pop($path);
+    $path = implode('.', $path);
     $oembed = "author_name=$path&author_url=$ogurl&provider_name=$path&provider_url=$ogurl";
   }
 
@@ -52,7 +53,7 @@
     <meta property="og:description" content="<?=$ogdesc?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
 
-    <link type="application/json+oembed" href="<?=$url?>emded.php?<?=$oembed?>" />
+    <link type="application/json+oembed" href="<?=$url?>embed.php?<?=$oembed?>" />
 
     <link rel="icon" type="image/x-icon" href="/images/purpur.svg" />
     <link type="text/css" rel="stylesheet" href="styles.css" />
