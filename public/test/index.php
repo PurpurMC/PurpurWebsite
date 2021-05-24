@@ -20,12 +20,12 @@
   $urlid = @$_GET['id'];
   $option = getValue($json, $urlid);
   if ($option !== null) {
-    $ogdesc = "$urlid\n\n" . htmlspecialchars($option['description']) . "\n\ndefault: " . htmlspecialchars($option['default']);
+    $ogdesc = htmlspecialchars($option['description']) . "\n\ndefault: " . htmlspecialchars($option['default']);
     $ogurl = "$ogurl?id=" . $urlid;
-    $path = explode($urlid, '.');
-    array_pop($path);
+    $path = explode('.', $urlid);
+    $ogtitle = array_pop($path);
     $path = implode('.', $path);
-    $oembed = "author_name=$path&author_url=$ogurl&provider_name=$path&provider_url=$ogurl";
+    $oembed = "author_name=".$path."&author_url=".$ogurl."&provider_name=Purpur%20Documentation&provider_url=".$ogurl;
   }
 
 ?><!DOCTYPE html>
