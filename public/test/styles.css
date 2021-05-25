@@ -54,6 +54,22 @@ a {
   margin: -75px;
 }
 
+.codeblock {
+  background: rgb(33, 34, 44);
+  font-family: "Roboto Mono", SFMono-Regular, Consolas, Menlo, monospace;
+  font-size: 0.8rem;
+  font-style: normal;
+  text-decoration: none;
+  padding: 2px 4px 1px;
+}
+.codeblock a {
+  color: rgb(40, 181, 246);
+
+}
+.codeblock a:hover {
+  color: rgb(66, 135, 255);
+}
+
 header {
   background: rgb(75, 41, 107);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 0px, rgba(0, 0, 0, 0.2) 0px 4px 8px 0px;
@@ -163,11 +179,11 @@ header .purpurdocs .github span {
 .headerlink::before {
   content: "• ";
 }
-.headerlink a {
+.headerlink a span {
   opacity: 0;
   transition: opacity 250ms ease-in-out;
 }
-.headerlink:hover a {
+.headerlink:hover a span {
   opacity: 1;
 }
 
@@ -244,3 +260,4 @@ header .purpurdocs .github span {
   display: block;
   margin: 15px 10px 5px;
 }
+((.*?)\)

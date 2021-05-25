@@ -11,7 +11,7 @@
   // open graph stuffs
   $ogtitle = "Purpur Documentation";
   $ogdesc = "Read over our comprehensive feature documentation and make your server your own";
-  $ogimg = "https://i.pinimg.com/originals/0c/d8/55/0cd85593806593360a4a114550449670.gif";
+  $ogimg = "https://purpur.pl3x.net/card.png";
   $ogurl = $url;
   $ogcolor = "#7289DA";
   $oembed = "author_name=&author_url=&provider_name=&provider_url=";
@@ -21,6 +21,7 @@
   $option = getValue($json, $urlid);
   if ($option !== null) {
     $ogdesc = htmlspecialchars($option['description']) . "\n\ndefault: " . htmlspecialchars($option['default']);
+    $ogimg = "https://i.pinimg.com/originals/0c/d8/55/0cd85593806593360a4a114550449670.gif";
     $ogurl = "$ogurl?id=" . $urlid;
     $path = explode('.', $urlid);
     $ogtitle = array_pop($path);
@@ -81,13 +82,11 @@
   <body>
     <header>
       <div class="container">
-        <a class="logo" href="/test"><img src="/images/purpur.svg" alt="Purpur Documentation" /></a>
+        <a class="logo" href="<?=$url?>"><img src="/images/purpur.svg" alt="Purpur Documentation" /></a>
         <a class="navbtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg></a>
         <p>Purpur Documentation</p>
         <a class="purpurdocs" href="">
-          <div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
-          </div>
+          <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg></div>
           <div class="github">
             PurpurDocs
             <span id="gh_stats"> Stars · Forks</span>
@@ -121,8 +120,8 @@
       }
 
       echo "<div>\n";
-      echo "<div class='anchor' id='$path'></div>";
-      echo "<p class='headerlink'>$k <a href='?id=$path'>🔗</a></p>\n";
+      echo "<div class='anchor' id='$path'></div>\n";
+      echo "<p class='headerlink'><a href='?id=$path'>$k <span>🔗</span></a></p>\n";
       buildConfig($v, $path);
       echo "</div>\n";
     }
@@ -130,8 +129,8 @@
 
   function showOption($path, $key, $option) {
     echo "<div class='section'>\n";
-    echo "<div class='anchor' id='$path'></div>";
-    echo "<p class='headerlink' title='$path'>$key <a href='?id=$path'>🔗</a></p>\n";
+    echo "<div class='anchor' id='$path'></div>\n";
+    echo "<p class='headerlink' title='$path'><a href='?id=$path'>$key <span>🔗</span></a></p>\n";
     showLine($option, 'requirement');
     showLine($option, 'default');
     showLine($option, 'description');
@@ -143,7 +142,7 @@
   function showLine($option, $name) {
     if (isset($option[$name])) {
       echo "<div class='subsection $name'>\n";
-      echo "<span class='optionvalue'>" . htmlspecialchars($option[$name]) . "</span>\n";
+      echo "<span class='optionvalue'>" . parseMarkdown($option[$name]) . "</span>\n";
       echo "</div>\n";
     }
   }
@@ -154,6 +153,24 @@
       $k = array_shift($v);
       return getValue($json[$k], implode('.', $v));
     }
-    return $json[$key];
+    return @$json[$key];
   }
+
+  function parseMarkdown($s) {
+    // convert html
+    $s = htmlspecialchars($s);
+
+    // parse code block
+    $s = preg_replace_callback('/`(.*?)`/', function ($matches) {
+        return '<span class="codeblock">' . $matches[1] . '</span>';
+    }, $s);
+
+    // parse links https://stackoverflow.com/a/25104285
+    $s = preg_replace_callback('/\[(.*?)\]\((.*?)\)/', function ($matches) {
+        return '<a href="' . $matches[2] . '?id=' . $matches[1] . '">' . $matches[1] . '</a>';
+    }, $s);
+
+    return $s;
+  }
+
 ?>

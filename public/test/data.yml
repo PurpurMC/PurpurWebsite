@@ -2,7 +2,7 @@ settings:
   command:
     gamemode:
       requires-specific-permission:
-        requirement: Requires minecraft.command.gamemode.<gamemode> permission
+        requirement: Requires `[minecraft.command.gamemode.<gamemode>](Permissions)` permission
         default: 'false'
         description: Set to true for each gamemode to require it's own permission
     hide-hidden-players-from-entity-selector:
@@ -16,8 +16,8 @@ settings:
     default: 'false'
     description: Skips sending relative move packets for entities that didn't really
       move
-    warning: The dont-send-useless-entity-packets option is known to cause issues
-      with certain plugins installed, notably Tab and Companions
+    warning: The `dont-send-useless-entity-packets` option is known to cause issues
+      with certain plugins installed, notably `Tab` and `Companions`
   use-alternate-keepalive:
     default: 'false'
     description: Uses a different approach to keepalive ping timeouts. Enabling this
