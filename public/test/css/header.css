@@ -30,7 +30,7 @@ h1 {
   color: rgba(210, 215, 249, 0.62);
   font-size: 33px;
   font-weight: 400;
-  margin-bottom: 44px;
+  margin: 15px 0 44px 0;
 }
 
 .container {
@@ -44,7 +44,6 @@ h1 {
   width: 266px;
   min-width: 266px;
   max-width: 266px;
-  background: rgba(255,255,255,0.025);
 }
 @media (min-width: 1220px) {
   .left {
@@ -55,8 +54,6 @@ h1 {
 .middle {
   flex-grow: 1;
   max-width: 810px;
-  margin: 0 25px 0 -15px;
-  padding: 0;
 }
 @media (min-width: 1220px) {
   .middle {
