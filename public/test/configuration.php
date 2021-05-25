@@ -1,7 +1,7 @@
 <?php
   require_once("inc/common.php");
 
-  // get the json data from file
+  // get the yaml data from file
   $filename = 'data/configuration.yml';
   $contents = file_get_contents($filename);
   $json = yaml_parse($contents === false ? '' : $contents);

@@ -1,4 +1,17 @@
 <?php
+  function getContents($url) {
+    $opts = [
+      'http' => [
+        'method' => 'GET',
+        'header' => [
+          'User-Agent: PHP'
+        ]
+      ]
+    ];
+    $context = stream_context_create($opts);
+    return file_get_contents($url, false, $context);
+  }
+
   function getValue($json, $key) {
     if (strpos($key, '.') !== FALSE) {
       $v = explode(".", $key);
