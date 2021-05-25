@@ -1,6 +1,6 @@
 RewriteEngine On
 
-DirectoryIndex Home.php
+DirectoryIndex home.php
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f

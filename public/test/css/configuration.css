@@ -1,0 +1,100 @@
+.middle div {
+  margin-left: 20px;
+}
+
+.headerlink {
+  font-weight: bold;
+  font-size: 20px;
+}
+.headerlink::before {
+  content: "• ";
+}
+.headerlink a {
+  color: #eaebfc;
+}
+.headerlink a span {
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+.headerlink:hover a span {
+  opacity: 1;
+}
+
+.link {
+  font-size: 16 px;
+}
+.link::before {
+  content: "• ";
+}
+
+.optionkey {
+  font-weight: bold;
+}
+.optionkey::before {
+  content: "• ";
+}
+
+.optionvalue {
+  font-weight: normal;
+}
+
+.subsection {
+  padding-bottom: 10px;
+}
+
+.section .links {
+  line-height: 1.1em;
+  margin: 25px;
+}
+
+.section .requirement {
+  display: block;
+  margin: 5px 0 10px 20px;
+  font-style: italic;
+}
+
+.section .default::before {
+  content: "• default: ";
+  font-weight: bold;
+}
+
+.section .description::before {
+  content: "• description: ";
+  font-weight: bold;
+}
+
+.section .note {
+  margin: 10px 0 25px 0;
+  background: rgba(255, 255, 255, 0.024);
+  font-size: 14px;
+  border-left: 4px solid rgb(68, 138, 255);
+}
+.section .note::before {
+  content: "✏️ Note";
+  display: block;
+  background: rgba(68, 138, 255, 0.1);
+  font-weight: bold;
+  padding: 7px 10px;
+}
+.section .note .optionvalue {
+  display: block;
+  margin: 15px 10px 5px;
+}
+
+.section .warning {
+  margin: 10px 0 25px 0;
+  background: rgba(255, 255, 255, 0.024);
+  font-size: 14px;
+  border-left: 4px solid rgb(255, 145, 0);
+}
+.section .warning::before {
+  content: "⚠️ Warning";
+  display: block;
+  background: rgba(255, 145, 0, 0.1);
+  font-weight: bold;
+  padding: 7px 10px;
+}
+.section .warning .optionvalue {
+  display: block;
+  margin: 15px 10px 5px;
+}

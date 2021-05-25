@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+
+body {
+  background: #2e303d;
+  color: #eaebfc;
+  font-family: "Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  font-size: 18px;
+  line-height: 1.5em;
+  margin-top: 100px;
+  overflow-y: scroll;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(40, 181, 246);
+}
+a:hover,
+a:active {
+  color: rgb(66, 135, 255);
+}
+
+h1 {
+  color: rgba(210, 215, 249, 0.62);
+  font-size: 33px;
+  font-weight: 400;
+  margin-bottom: 44px;
+}
+
+.container {
+  display: flex;
+  max-width: 1342px;
+  margin: 25px auto;
+}
+
+.left {
+  display: none;
+  width: 266px;
+  min-width: 266px;
+  max-width: 266px;
+  background: rgba(255,255,255,0.025);
+}
+@media (min-width: 1220px) {
+  .left {
+    display: block;
+  }
+}
+
+.middle {
+  flex-grow: 1;
+  max-width: 810px;
+  margin: 0 25px 0 -15px;
+  padding: 0;
+}
+@media (min-width: 1220px) {
+  .middle {
+    max-width: 810px;
+  }
+}
+
+.right {
+  display: none;
+  width: 266px;
+  min-width: 266px;
+  max-width: 266px;
+  background: rgba(255,255,255,0.025);
+}
+@media (min-width: 960px) {
+  .right {
+    display: block;
+  }
+}
+
+.anchor {
+  position: absolute;
+  margin: -75px;
+}
+
+.codeblock {
+  background: rgb(33, 34, 44);
+  font-family: "Roboto Mono", SFMono-Regular, Consolas, Menlo, monospace;
+  font-size: 0.8rem;
+  font-style: normal;
+  text-decoration: none;
+  padding: 2px 4px 1px;
+}
+
+header {
+  background: rgb(75, 41, 107);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 0px, rgba(0, 0, 0, 0.2) 0px 4px 8px 0px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+}
+header .container {
+  display: flex;
+  margin: 0px auto;
+}
+header .logo {
+  display: none;
+  margin-right: 20px;
+  line-height: 52px;
+}
+@media (min-width: 1220px) {
+  header .logo {
+    display: block;
+  }
+}
+header .logo img {
+  vertical-align: middle;
+  width: 32px;
+  margin-left: 20px;
+}
+header .navbtn {
+  display: block;
+  margin-right: 20px;
+  line-height: 52px;
+}
+@media (min-width: 1220px) {
+  header .navbtn {
+    display: none;
+  }
+}
+header .navbtn svg {
+  vertical-align: middle;
+  width: 28px;
+  fill: #eaebfc;
+  margin-left: 20px;
+}
+header p {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 52px;
+  padding: 0;
+  margin: 0 0 0 10px;
+  flex-grow: 1;
+}
+header div {
+  display: block;
+}
+
+header .purpurdocs {
+  display: none;
+  width: 266px;
+  transition: all 250ms ease-in-out;
+}
+@media (min-width: 960px) {
+  header .purpurdocs {
+    display: block;
+  }
+}
+header .purpurdocs:hover,
+header .purpurdocs:active {
+  opacity: 0.7;
+}
+
+header .purpurdocs .icon {
+  display: inline-block;
+  margin: 12px 10px;
+}
+header .purpurdocs .icon svg {
+  fill: rgba(234, 235, 252, 1.0);
+  width: 26px;
+  height: 26px;
+}
+header .purpurdocs .github {
+  display: inline-block;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.1em;
+  color: rgba(234, 235, 252, 1.0);
+}
+header .purpurdocs .github span {
+  display: block;
+  font-size: 12px;
+  color: rgba(234, 235, 252, 0.7);
+}
+
+.left {
+  line-height: 0.8em;
+  margin-left: 20px;
+}
+.left p {
+  font-size: 15px;
+}
+.left p.head {
+  font-weight: bold;
+}
+.left p a {
+  color: #eaebfc;  
+}
+.left p a:hover,
+.left p a:active {
+  color: rgb(66, 135, 255);
+}
+.left p .selected {
+  color: rgb(45, 173, 248);
+}
