@@ -33,6 +33,7 @@
     <script src="js/header.js"></script>
   </head>
   <body>
+    <div class="main">
     <header>
       <div class="container">
         <a class="logo" href="<?=$url?>"><img src="/images/purpur.svg" alt="Purpur Documentation" /></a>
@@ -47,7 +48,7 @@
         </a>
       </div>
     </header>
-    <div class="container main">
+    <div class="container content">
       <div class="left">
         <p class="head">Purpur Documentation</p>
         <p><a <?=$page=="home"?"class='selected' ":""?>href="home">Home</a></p>

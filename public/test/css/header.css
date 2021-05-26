@@ -13,30 +13,32 @@ body {
   font-family: "Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
   font-size: 18px;
   line-height: 1.5em;
-  margin-top: 100px;
   overflow-y: scroll;
 }
 
-a {
-  text-decoration: none;
-  color: rgb(40, 181, 246);
-}
-a:hover,
-a:active {
-  color: rgb(66, 135, 255);
-}
-
-h1 {
-  color: rgba(210, 215, 249, 0.62);
-  font-size: 33px;
-  font-weight: 400;
-  margin: 15px 0 44px 0;
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .container {
   display: flex;
+  flex: 1;
   max-width: 1342px;
   margin: 25px auto;
+}
+
+.container.content {
+  margin-top: 100px;
+  width: 100%;
+}
+
+.middle {
+  flex-direction: row;
+  flex: 1;
+  max-width: 810px;
+  padding: 0 20px;
 }
 
 .left {
@@ -51,16 +53,6 @@ h1 {
   }
 }
 
-.middle {
-  flex-grow: 1;
-  max-width: 810px;
-}
-@media (min-width: 1220px) {
-  .middle {
-    max-width: 810px;
-  }
-}
-
 .right {
   display: none;
   width: 266px;
@@ -72,6 +64,23 @@ h1 {
   .right {
     display: block;
   }
+}
+
+a {
+  text-decoration: none;
+  color: rgb(40, 181, 246);
+  transition: all 150ms ease-in-out;
+}
+a:hover,
+a:active {
+  color: rgb(66, 135, 255);
+}
+
+h1 {
+  color: rgba(210, 215, 249, 0.62);
+  font-size: 33px;
+  font-weight: 400;
+  margin: 15px 0 44px 0;
 }
 
 .anchor {
@@ -96,7 +105,6 @@ header {
   width: 100%;
 }
 header .container {
-  display: flex;
   margin: 0px auto;
 }
 header .logo {
@@ -146,7 +154,6 @@ header div {
 header .purpurdocs {
   display: none;
   width: 266px;
-  transition: all 250ms ease-in-out;
 }
 @media (min-width: 960px) {
   header .purpurdocs {
@@ -200,4 +207,72 @@ header .purpurdocs .github span {
 }
 .left p .selected {
   color: rgb(45, 173, 248);
+}
+
+footer {
+  flex-shrink: 0;
+  background: rgba(26, 27, 35, 0.87);  
+}
+footer a {
+  color: rgba(255, 255, 255, 0.7);
+  fill: rgba(255, 255, 255, 0.7);
+}
+footer a:hover,
+footer a:active {
+  color: rgb(255, 255, 255);
+  fill: rgb(255, 255, 255);
+}
+footer a.invert {
+  color: rgb(255, 255, 255);
+  fill: rgb(255, 255, 255);
+}
+footer a.invert:hover,
+footer a.invert:active {
+  color: rgba(255, 255, 255, 0.7);
+  fill: rgba(255, 255, 255, 0.7);
+}
+footer .middle {
+  max-width: 100%;
+}
+footer .container {
+  width: 100%;
+  margin: 0 auto;
+}
+footer .top {
+  padding: 0 20px;
+}
+footer .top .prev,
+footer .top .next {
+  display: inline-block;
+}
+footer .top a {
+  height: 100px;
+}
+footer .top svg {
+  width: 26px;
+  height: 26px;
+}
+footer .title {
+  display: inline-block;
+  padding: 25px 0;
+  line-height: 20px;
+}
+footer .title span {
+  display: block;
+  font-size: 14px;
+}
+footer .bottom {
+  height: 70px;
+  background: rgb(22, 23, 29);
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 14px;
+  padding: 0 20px;
+}
+footer .bottom .container {
+  padding-top: 20px;
+}
+footer .bottom svg {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
 }

@@ -13,5 +13,7 @@
         right
       </div>
 <?php
+$prev = "Home";
+$next = "Configuration";
   require_once("inc/footer.php");
 ?>

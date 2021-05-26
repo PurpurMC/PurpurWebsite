@@ -49,5 +49,7 @@
         right
       </div>
 <?php
+  $prev = "Commands";
+  $next = "Permissions";
   require_once("inc/footer.php");
 ?>
