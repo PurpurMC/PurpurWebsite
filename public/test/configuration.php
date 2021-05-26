@@ -24,8 +24,8 @@
   require_once("inc/header.php");
 ?>
       <link type="text/css" rel="stylesheet" href="css/configuration.css" />
-      <div class="middle">
-        <div class="section">
+      <div class="middle noindent">
+        <div class="section noindent">
           <h1>Configuration</h1>
           <p>This page details the various configuration settings exposed by Purpur in the purpur.yml file.</p>
           <p>If you want information on settings in airplane.air, tuinity.yml, paper.yml, spigot.yml, bukkit.yml and server.properties you should see their respective documentation pages.</p>

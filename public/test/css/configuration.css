@@ -34,6 +34,14 @@
   font-weight: normal;
 }
 
+.middle div {
+  margin-left: 20px;
+}
+
+.noindent {
+  margin-left: -20px;
+}
+
 .subsection {
   padding-bottom: 10px;
 }
