@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+@import url('roboto.css');
 
 html,
 body {
@@ -8,7 +8,7 @@ body {
 }
 
 body {
-  background: #2e303d;
+  background: rgb(46, 48, 62);
   color: #eaebfc;
   font-family: "Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
   font-size: 18px;
@@ -43,9 +43,9 @@ body {
 
 .left {
   display: none;
-  width: 266px;
-  min-width: 266px;
-  max-width: 266px;
+  width: 255px;
+  min-width: 255px;
+  max-width: 255px;
 }
 @media (min-width: 1220px) {
   .left {
@@ -78,8 +78,8 @@ a:active {
 
 h1 {
   color: rgba(210, 215, 249, 0.62);
-  font-size: 33px;
-  font-weight: 400;
+  font-size: 35px;
+  font-weight: 300;
   margin: 15px 0 44px 0;
 }
 
@@ -140,8 +140,7 @@ header .navbtn svg {
 }
 header p {
   display: inline-block;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 20px;
   line-height: 52px;
   padding: 0;
   margin: 0 0 0 10px;
