@@ -37,43 +37,4 @@
 
     return $s;
   }
-
-  // for configuration.yml
-
-  function buildConfig($arr, $key) {
-    foreach ($arr as $k => $v) {
-      $path = ($key === null ? "" : $key . ".") . $k;
-
-      if (is_array($v) && !is_array($v[array_key_first($v)])) {
-          showOption($path, $k, $v);
-          continue;
-      }
-
-      echo "<div>\n";
-      echo "<div class='anchor' id='$path'></div>\n";
-      echo "<p class='headerlink'><a href='?id=$path'>$k <span>🔗</span></a></p>\n";
-      buildConfig($v, $path);
-      echo "</div>\n";
-    }
-  }
-
-  function showOption($path, $key, $option) {
-    echo "<div class='section'>\n";
-    echo "<div class='anchor' id='$path'></div>\n";
-    echo "<p class='headerlink' title='$path'><a href='?id=$path'>$key <span>🔗</span></a></p>\n";
-    showLine($option, 'requirement');
-    showLine($option, 'default');
-    showLine($option, 'description');
-    showLine($option, 'note');
-    showLine($option, 'warning');
-    echo "</div>\n";
-  }
-
-  function showLine($option, $name) {
-    if (isset($option[$name])) {
-      echo "<div class='subsection $name'>\n";
-      echo "<span class='optionvalue'>" . parseMarkdown($option[$name]) . "</span>\n";
-      echo "</div>\n";
-    }
-  }
 ?>

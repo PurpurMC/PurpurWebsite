@@ -16,56 +16,6 @@ body {
   overflow-y: scroll;
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.container {
-  display: flex;
-  flex: 1;
-  max-width: 1342px;
-  margin: 25px auto;
-}
-
-.container.content {
-  margin-top: 100px;
-  width: 100%;
-}
-
-.middle {
-  flex-direction: row;
-  flex: 1;
-  max-width: 810px;
-  padding: 0 20px;
-}
-
-.left {
-  display: none;
-  width: 255px;
-  min-width: 255px;
-  max-width: 255px;
-}
-@media (min-width: 1220px) {
-  .left {
-    display: block;
-  }
-}
-
-.right {
-  display: none;
-  width: 266px;
-  min-width: 266px;
-  max-width: 266px;
-  background: rgba(255,255,255,0.025);
-}
-@media (min-width: 960px) {
-  .right {
-    display: block;
-  }
-}
-
 a {
   text-decoration: none;
   color: rgb(40, 181, 246);
@@ -98,15 +48,22 @@ h1 {
 }
 
 header {
+  display: block;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2;
   background: rgb(75, 41, 107);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 0px, rgba(0, 0, 0, 0.2) 0px 4px 8px 0px;
-  position: fixed;
-  top: 0px;
-  width: 100%;
 }
-header .container {
-  margin: 0px auto;
+
+header .nav {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 1342px;
 }
+
 header .logo {
   display: none;
   margin-right: 20px;
@@ -124,8 +81,6 @@ header .logo img {
 }
 header .navbtn {
   display: block;
-  margin-right: 20px;
-  line-height: 52px;
 }
 @media (min-width: 1220px) {
   header .navbtn {
@@ -141,13 +96,8 @@ header .navbtn svg {
 header p {
   display: inline-block;
   font-size: 20px;
-  line-height: 52px;
-  padding: 0;
   margin: 0 0 0 10px;
   flex-grow: 1;
-}
-header div {
-  display: block;
 }
 
 header .purpurdocs {
@@ -187,9 +137,39 @@ header .purpurdocs .github span {
   color: rgba(234, 235, 252, 0.7);
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100vh;
+}
+.main {
+  display: block;
+  flex-grow: 1;
+  margin-top: 100px;
+  margin-bottom: 25px;
+}
+.inner {
+  display: flex;
+  flex-direction: row;
+  max-width: 1342px;
+  margin: 0 auto;
+}
+
 .left {
+  align-self: flex-start;
+  display: none;
+  flex-shrink: 0;
+  position: sticky;
+  top: 70px;
+  width: 266px;
   line-height: 0.8em;
   margin-left: 20px;
+}
+@media (min-width: 1220px) {
+  .left {
+    display: block;
+  }
 }
 .left p {
   font-size: 15px;
@@ -208,9 +188,71 @@ header .purpurdocs .github span {
   color: rgb(45, 173, 248);
 }
 
-footer {
+.right {
+  align-self: flex-start;
+  display: none;
   flex-shrink: 0;
-  background: rgba(26, 27, 35, 0.87);  
+  order: 2;
+  position: sticky;
+  top: 70px;
+  width: 266px;
+  margin: 20px 0 0 20px;
+  font-size: 15px;
+}
+@media (min-width: 960px) {
+  .right {
+    display: block;
+  }
+}
+.right ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.right ul li {
+  margin: 0;
+  padding: 0;
+}
+.right a {
+  color: #eaebfc;
+}
+.right a:hover,
+.right a:active {
+  color: rgb(66, 135, 255);
+}
+.right .selected {
+  color: rgb(45, 173, 248);
+}
+.right .above {
+  color: rgba(210, 215, 249, 0.68);
+}
+.right .scroll {
+  height: 600px; /* todo: use javascript to auto resize to fit available viewport */
+  backface-visibility: hidden;
+  touch-action: pan-y;
+  overflow-y: auto;
+}
+.right .scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.right .scroll::-webkit-scrollbar-track {
+  background: rgb(46, 48, 62);
+}
+.right .scroll::-webkit-scrollbar-thumb {
+  background: rgba(210, 215, 249, 0.5);
+}
+.right .scroll::-webkit-scrollbar-thumb:hover {
+  background: rgb(66, 135, 255);
+}
+
+.middle {
+  display: block;
+  flex-grow: 1;
+}
+
+footer {
+  display: block;
+  background: rgba(26, 27, 35, 0.87);
 }
 footer a {
   color: rgba(255, 255, 255, 0.7);
@@ -232,10 +274,6 @@ footer a.invert:active {
 }
 footer .middle {
   max-width: 100%;
-}
-footer .container {
-  width: 100%;
-  margin: 0 auto;
 }
 footer .top {
   padding: 0 20px;
@@ -267,7 +305,7 @@ footer .bottom {
   font-size: 14px;
   padding: 0 20px;
 }
-footer .bottom .container {
+footer .bottom .inner {
   padding-top: 20px;
 }
 footer .bottom svg {
