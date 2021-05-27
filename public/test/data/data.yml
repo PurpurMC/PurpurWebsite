@@ -2,7 +2,7 @@ settings:
   command:
     gamemode:
       requires-specific-permission:
-        requirement: Requires `[minecraft.command.gamemode.<gamemode>](Permissions)` permission
+        requirement: Requires `[minecraft.command.gamemode.<gamemode>](permissions)` permission
         default: 'false'
         description: Set to true for each gamemode to require it's own permission
     hide-hidden-players-from-entity-selector:
@@ -115,3 +115,6 @@ world-settings:
         ridable-in-water:
           default: 'true'
           description: Makes this mob ridable in water (it wont eject you)
+permissions:
+  'allow.ride.<mob_id>':
+    requires: Requires `[<mob_id>.ridable](configuration)` to be enabled in purpur.yml

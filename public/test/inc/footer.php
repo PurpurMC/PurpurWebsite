@@ -6,7 +6,7 @@
   foreach ($table_of_contents as $toc) {
     // a class = above, selected
 ?>
-                <li><a class="" href="<?=$toc->url?>"><?=$toc->indent . $toc->name?></a></li>
+                <li><a class="toclink" title="<?=$toc->path?>"><?=$toc->indent . $toc->name?></a></li>
 <?php
   }
 ?>

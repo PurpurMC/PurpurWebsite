@@ -2,7 +2,7 @@
   require_once("inc/common.php");
 
   // get the yaml data from file
-  $filename = 'data/configuration.yml';
+  $filename = 'data/data.yml';
   $contents = file_get_contents($filename);
   $json = yaml_parse($contents === false ? '' : $contents);
 
@@ -41,8 +41,19 @@
                 <span class='optionvalue'>Configuration values change frequently at times. It is possible for the information here to be incomplete. If you cannot find what you’re looking for or think something may be wrong, Contact us through our <a href="https://purpur.pl3x.net/discord">Discord</a> server.</span>
               </div>
             </div>
+            <div class="section noindent">
+              <br/>
+              <h1>Global Settings</h1>
+            </div>
 <?php
-  buildConfig($json, null, 0);
+  buildConfig($json["settings"], null, 0);
+?>
+            <div class="section noindent">
+              <br/>
+              <h1>World Specific Settings</h1>
+            </div>
+<?php
+  buildConfig($json["world-settings"]["default"], null, 0);
 ?>
           </div>
 <?php
@@ -56,15 +67,15 @@
       $path = ($key === null ? "" : $key . ".") . $k;
 
       if (is_array($v) && !is_array($v[array_key_first($v)])) {
-          new TOC($count, end(explode('.', $path)), '?id=' .$path);
+          new TOC($path);
           showOption($path, $k, $v);
           continue;
       }
 
-      new TOC($count, end(explode('.', $path)), '?id=' .$path);
+      new TOC($path);
       echo "<div>\n";
       echo "<div class='anchor' id='$path'></div>\n";
-      echo "<p class='headerlink'><a href='?id=$path'>$k <span>🔗</span></a></p>\n";
+      echo "<p class='headerlink' title='$path'>$k <span>🔗</span></p>\n";
       buildConfig($v, $path, $count + 1);
       echo "</div>\n";
     }
@@ -73,7 +84,7 @@
   function showOption($path, $key, $option) {
     echo "<div class='section'>\n";
     echo "<div class='anchor' id='$path'></div>\n";
-    echo "<p class='headerlink' title='$path'><a href='?id=$path'>$key <span>🔗</span></a></p>\n";
+    echo "<p class='headerlink' title='$path'>$key <span>🔗</span></p>\n";
     showLine($option, 'requirement');
     showLine($option, 'default');
     showLine($option, 'description');

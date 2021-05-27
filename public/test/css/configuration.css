@@ -1,18 +1,19 @@
 .headerlink {
   font-weight: bold;
   font-size: 20px;
+  cursor: pointer;
 }
 .headerlink::before {
   content: "• ";
 }
-.headerlink a {
+.headerlink {
   color: #eaebfc;
 }
-.headerlink a span {
+.headerlink span {
   opacity: 0;
   transition: opacity 250ms ease-in-out;
 }
-.headerlink:hover a span {
+.headerlink:hover span {
   opacity: 1;
 }
 

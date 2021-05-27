@@ -15,18 +15,17 @@
             </p>
           </div>
 <?php
-  new TOC(0, "Contact", "");
-  new TOC(0, "Downloads", "");
-  new TOC(0, "License", "");
-  new TOC(0, "bStats", "");
-  new TOC(0, "API", "");
-  new TOC(0, "Javadoc", "");
-  new TOC(0, "Dependency Information", "");
-  new TOC(0, "Building and setting up", "");
-  new TOC(0, "Initial setup", "");
-  new TOC(0, "Creating a patch", "");
-  new TOC(0, "Compiling", "");
-
+  new TOC("Contact");
+  new TOC("Downloads");
+  new TOC("License");
+  new TOC("bStats");
+  new TOC("API");
+  new TOC("Javadoc");
+  new TOC("Dependency Information");
+  new TOC("Building and setting up");
+  new TOC("Initial setup");
+  new TOC("Creating a patch");
+  new TOC("Compiling");
 
   $prev = null;
   $next = "Commands";

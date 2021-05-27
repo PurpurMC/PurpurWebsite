@@ -1,16 +1,19 @@
 <?php
 $table_of_contents = [];
 class TOC {
-  public function __construct($count, $name, $url) {
-    global $table_of_contents;
-    $indent = "";
-    for ($i = 0; $i < $count; $i++) {
-      $indent .= "&nbsp;&nbsp;";
+  public function __construct($path) {
+    $arr = explode('.', $path);
+
+    $this->path = $path;
+    $this->count = count($arr);
+    $this->name = end($arr);
+    $this->indent = "";
+
+    for ($i = 0; $i < $this->count; $i++) {
+      $this->indent .= "&nbsp;&nbsp;";
     }
-    $this->count = $count;
-    $this->indent = $indent;
-    $this->name = $name;
-    $this->url = $url;
+
+    global $table_of_contents;
     array_push($table_of_contents, $this);
   }
 }
