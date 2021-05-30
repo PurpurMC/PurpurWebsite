@@ -117,4 +117,4 @@ world-settings:
           description: Makes this mob ridable in water (it wont eject you)
 permissions:
   'allow.ride.<mob_id>':
-    requires: Requires `[<mob_id>.ridable](configuration)` to be enabled in purpur.yml
+    requires: Requires `[mobs.<mob_id>.ridable](configuration)` to be enabled in purpur.yml
