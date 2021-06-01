@@ -1,61 +1,61 @@
 <?php
 
-// get the json data from file
-$filename = 'data.json';
-$contents = file_get_contents($filename);
-$json = json_decode($contents === false ? '' : $contents, true);
+  // get the json data from file
+  $filename = 'data.json';
+  $contents = file_get_contents($filename);
+  $json = json_decode($contents === false ? '' : $contents, true);
 
-// time stuffs
-$now = time();
-$last = isset($json['last']) ? $json['last'] : 0;
+  // time stuffs
+  $now = time();
+  $last = isset($json['last']) ? $json['last'] : 0;
 
-// only update from bstats once a day
-if ($now - $last > 86400) {
+  // only update from bstats once a day
+  if ($now - $last > 86400) {
     foreach ($json['servers'] as $server => $data) {
-         // get 6 months worth of data
-        $servers = json_decode(file_get_contents('https://bstats.org/api/v1/plugins/' . $data['id'] . '/charts/servers/data/?maxElements=8640'));
-        $players = json_decode(file_get_contents('https://bstats.org/api/v1/plugins/' . $data['id'] . '/charts/players/data/?maxElements=8640'));
+      // get 6 months worth of data
+      $servers = json_decode(file_get_contents('https://bstats.org/api/v1/plugins/' . $data['id'] . '/charts/servers/data/?maxElements=8640'));
+      $players = json_decode(file_get_contents('https://bstats.org/api/v1/plugins/' . $data['id'] . '/charts/players/data/?maxElements=8640'));
 
-        // data maps
-        $servermap = (array) null;
-        $playermap = (array) null;
+      // data maps
+      $servermap = (array) null;
+      $playermap = (array) null;
 
-        // iterate server data
-        foreach ($servers as $entry) {
-            $seconds = $entry[0] / 1000; // millis to seconds
-            $count = $entry[1]; // server count
+      // iterate server data
+      foreach ($servers as $entry) {
+        $seconds = $entry[0] / 1000; // millis to seconds
+        $count = $entry[1]; // server count
 
-            // get gmt date in simplified format
-            $date = (new DateTime("@$seconds", new DateTimeZone("UTC")))->format('m/d/y');
+        // get gmt date in simplified format
+        $date = (new DateTime("@$seconds", new DateTimeZone("UTC")))->format('m/d/y');
 
-            // only store highest count for that day
-            if ($count > ($servermap[$date] == null ? -1 : $servermap[$date])) {
-              $servermap[$date] = $count;
-            }
+        // only store highest count for that day
+        if ($count > ($servermap[$date] == null ? -1 : $servermap[$date])) {
+          $servermap[$date] = $count;
         }
+      }
 
-        // iterate player data
-        foreach ($players as $entry) {
-            $seconds = $entry[0] / 1000; // millis to seconds
-            $count = $entry[1]; // player count
+      // iterate player data
+      foreach ($players as $entry) {
+        $seconds = $entry[0] / 1000; // millis to seconds
+        $count = $entry[1]; // player count
 
-            // get gmt date in simplified format
-            $date = (new DateTime("@$seconds", new DateTimeZone("UTC")))->format('m/d/y');
+        // get gmt date in simplified format
+        $date = (new DateTime("@$seconds", new DateTimeZone("UTC")))->format('m/d/y');
 
-            // only store highest count for that day
-            if ($count > ($playermap[$date] == null ? -1 : $playermap[$date])) {
-              $playermap[$date] = $count;
-            }
+        // only store highest count for that day
+        if ($count > ($playermap[$date] == null ? -1 : $playermap[$date])) {
+          $playermap[$date] = $count;
         }
+      }
 
-        // remove last day (it's incomplete)
-        array_pop($servermap);
-        array_pop($playermap);
+      // remove last day (it's incomplete)
+      array_pop($servermap);
+      array_pop($playermap);
 
-         // store data in json
-        $json['servers'][$server]['data'] = array_values($servermap);
-        $json['players'][$server]['data'] = array_values($playermap);
-        $json['dates'] = array_keys($servermap); // either map's dates are fine
+      // store data in json
+      $json['servers'][$server]['data'] = array_values($servermap);
+      $json['players'][$server]['data'] = array_values($playermap);
+      $json['dates'] = array_keys($servermap); // either map's dates are fine
     }
 
     // store last day as beginning of today (gmt)
@@ -63,7 +63,7 @@ if ($now - $last > 86400) {
 
     // write to file
     file_put_contents($filename, json_encode($json));
-}
+  }
 
 ?><!doctype html>
 <html lang="en">
@@ -73,13 +73,13 @@ if ($now - $last > 86400) {
     <meta name="title" content="Server Usage" />
     <meta name="description" content="" />
     <meta property="twitter:title" content="Server Usage" />
-    <meta property="twitter:image" content="https://purpur.pl3x.net/stats/jpgraph.php" />
+    <meta property="twitter:image" content="https://purpur.pl3x.net/stats/jpgraph.php?t=<?=$now?>" />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:description" content="" />
     <meta property="og:title" content="Server Usage" />
     <meta property="og:url" content="https://purpur.pl3x.net/stats" />
     <meta property="og:description" content="" />
-    <meta property="og:image" content="https://purpur.pl3x.net/stats/jpgraph.php" />
+    <meta property="og:image" content="https://purpur.pl3x.net/stats/jpgraph.php?t=<?=$now?>" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
