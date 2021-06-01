@@ -1,11 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
- <defs>
-  <linearGradient id="g" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-   <stop offset="15%" stop-color="#25b8ff" />
-   <stop offset="85%" stop-color="#fa02ff" />
-  </linearGradient>
- </defs>
- <g fill="none" stroke="url(#g)" stroke-linejoin="round" stroke-width="1.8">
+ <g fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="1.8">
   <path d="M72.09 13.86L53.18 24.8l18.93 10.92 18.91-10.94z"/>
   <path d="M49.87 1.05L30.95 11.99 49.88 22.9 68.8 11.97z"/>
   <path d="M27.67 13.89L8.75 24.82l18.93 10.92 18.91-10.93z"/>
