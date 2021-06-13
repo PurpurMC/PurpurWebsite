@@ -26,6 +26,10 @@
     <meta property="og:description" content="<?=$ogdesc?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
 
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
     <link type="application/json+oembed" href="<?=$url?>data/embed.php?<?=$oembed?>" />
 
     <link rel="icon" type="image/x-icon" href="/images/purpur.svg" />

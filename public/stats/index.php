@@ -80,6 +80,9 @@
     <meta property="og:url" content="https://purpur.pl3x.net/stats" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="https://purpur.pl3x.net/stats/jpgraph.php?t=<?=$now?>" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
