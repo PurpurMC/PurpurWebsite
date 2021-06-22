@@ -28,7 +28,7 @@ require_once("opengraph.php");
         <img class="logo" src="/images/purpur-pride.svg" alt="Purpur Logo - Pride Month" />
         <p>Purpur is a drop-in replacement for Paper servers designed for configurability, new fun
            &amp; exciting gameplay features, and high performance built on top of Tuinity</p>
-        <a class="button download-button blue-button" href="/api/v1/purpur/1.16.5/latest/download">Download</a>
+        <a class="button download-button blue-button" href="/api/v1/purpur/1.17/latest/download">Download</a>
         <a class="tiny" href="/downloads">See all builds</a>
       </div>
     </header>

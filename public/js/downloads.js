@@ -1,5 +1,5 @@
 const downloads = 'https://purpur.pl3x.net/api/v1/purpur/';
-const latestVersion = '1.16.5'; // change this value whenever newer version of Minecraft releases
+const latestVersion = '1.17'; // change this value whenever newer version of Minecraft releases
 
 var cache = new Map();
 var current;
