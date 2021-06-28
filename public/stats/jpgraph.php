@@ -6,11 +6,7 @@ header('Expires: 0');
 
 require_once ('../../jpgraph/jpgraph.php');
 require_once ('../../jpgraph/jpgraph_line.php');
-
-$filename = 'data.json';
-
-$contents = file_get_contents($filename);
-$json = json_decode($contents === false ? '' : $contents, true);
+require_once ("include/vars.php");
 
 $graph = new Graph(350,250);
 $graph->clearTheme();
@@ -33,7 +29,7 @@ $graph->legend->SetFont(FF_DV_SANSSERIF,FS_NORMAL,7);
 $labels = array();
 $dates = array();
 $i = 0;
-foreach($json['dates'] as $date) {
+foreach($jsonData['data']['dates'] as $date) {
   if ($i++ % 22 == 0) {
     array_push($labels, $i);
     array_push($dates, $date);
@@ -47,14 +43,14 @@ $graph->xaxis->HideTicks();
 $graph->yaxis->SetFont(FF_DV_SANSSERIF,FS_NORMAL,8);
 $graph->yaxis->HideTicks();
 
-$l1=new LinePlot($json['servers']['purpur']['data']);
-$l1->SetColor($json['servers']['purpur']['color']);
+$l1=new LinePlot($jsonData['data']['servers']['purpur']);
+$l1->SetColor($jsonServers['servers']['purpur']['color']);
 $l1->SetLegend('Purpur');
-$l2=new LinePlot($json['servers']['tuinity']['data']);
-$l2->SetColor($json['servers']['tuinity']['color']);
+$l2=new LinePlot($jsonData['data']['servers']['tuinity']);
+$l2->SetColor($jsonServers['servers']['tuinity']['color']);
 $l2->SetLegend('Tuinity');
-$l3=new LinePlot($json['servers']['yatopia']['data']);
-$l3->SetColor($json['servers']['yatopia']['color']);
+$l3=new LinePlot($jsonData['data']['servers']['yatopia']);
+$l3->SetColor($jsonServers['servers']['yatopia']['color']);
 $l3->SetLegend('Yatopia');
 
 $graph->Add($l1);
