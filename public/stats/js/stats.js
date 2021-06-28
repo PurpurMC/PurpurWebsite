@@ -36,8 +36,12 @@ function loadData(json) {
 }
 
 function init(json) {
-  document.getElementById("loading").style.opacity = 0;
   document.getElementById("graphs").style.opacity = 1;
+  let loading = document.getElementById("loading");
+  loading.style.opacity = 0;
+  loading.addEventListener("transitionend", function() {
+    loading.style.display = "none";
+  });
   Object.keys(json.servers).forEach(function(server) {
     colors[server] = json.servers[server].color;
   });
