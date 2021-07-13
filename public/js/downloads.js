@@ -211,7 +211,9 @@ function createCommitElement(data) {
             p.appendChild(span);
         }
 
-        p.appendChild(document.createTextNode(entry.get('commit')));
+        var span = document.createElement("span");
+        span.innerHTML = parseIssues(entry.get('commit'));
+        p.appendChild(span);
 
         td.appendChild(p);
     });
@@ -251,6 +253,25 @@ function formateDate(timestamp) {
     var minutes = ('0' + date.getMinutes()).slice(-2)
     var seconds = ('0' + date.getSeconds()).slice(-2)
     return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+}
+
+function parseIssues(commit){
+    var result = "";
+
+    for (var str of commit.split(" ")){
+        if (str.match(/^(#[0-9]+)$/)){
+            var link = document.createElement('a');
+            link.href = 'https://github.com/pl3xgaming/Purpur/issues/' + str.substring(1);
+            link.target = "_blank";
+            link.style.color = "#ffffff";
+            link.appendChild(document.createTextNode(str))
+            str = link.outerHTML;
+        }
+
+        result += (result.length > 0 ? " " : "") + str;
+    }
+
+    return result;
 }
 
 function warnOldVersion(version){
