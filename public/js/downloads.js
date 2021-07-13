@@ -247,11 +247,11 @@ function getJSON(url, fn) {
 function formateDate(timestamp) {
     var date = new Date(timestamp);
     var year = date.getFullYear();
-    var month = ('0' + (date.getMonth() + 1)).slice(-2)
-    var day = ('0' + date.getDate()).slice(-2)
-    var hours = ('0' + date.getHours()).slice(-2)
-    var minutes = ('0' + date.getMinutes()).slice(-2)
-    var seconds = ('0' + date.getSeconds()).slice(-2)
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var day = ('0' + date.getDate()).slice(-2);
+    var hours = ('0' + date.getHours()).slice(-2);
+    var minutes = ('0' + date.getMinutes()).slice(-2);
+    var seconds = ('0' + date.getSeconds()).slice(-2);
     return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
 }
 
@@ -264,7 +264,7 @@ function parseIssues(commit){
             link.href = 'https://github.com/pl3xgaming/Purpur/issues/' + str.substring(1);
             link.target = "_blank";
             link.style.color = "#ffffff";
-            link.appendChild(document.createTextNode(str))
+            link.appendChild(document.createTextNode(str));
             str = link.outerHTML;
         }
 
