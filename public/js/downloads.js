@@ -259,9 +259,10 @@ function parseIssues(commit){
     var result = "";
 
     for (var str of commit.split(" ")){
-        if (str.match(/^(#[0-9]+)$/)){
+        var match = str.match(/^\W?(#[0-9]+)\W?$/);
+        if (match){
             var link = document.createElement('a');
-            link.href = 'https://github.com/pl3xgaming/Purpur/issues/' + str.substring(1);
+            link.href = 'https://github.com/pl3xgaming/Purpur/issues/' + match[1].substring(1);
             link.target = "_blank";
             link.style.color = "#ffffff";
             link.appendChild(document.createTextNode(str));
