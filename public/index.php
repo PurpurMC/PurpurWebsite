@@ -24,11 +24,11 @@ require_once("opengraph.php");
     <header>
       <div class="container">
         <h1>Purpur</h1>
-        <h2>Your Minecraft, your way</h2>
+        <h4>Your Minecraft, your way</h4>
         <img class="logo" src="/images/purpur.svg" alt="Purpur Logo" />
         <p>Purpur is a drop-in replacement for Paper servers designed for configurability, new fun
            &amp; exciting gameplay features, and high performance built on top of Tuinity</p>
-        <a class="button download-button blue-button" href="https://api.pl3x.net/v2/purpur/1.17.1/latest/download">Download</a>
+        <a class="button download-button blue-button" href="/api/v1/purpur/1.17.1/latest/download">Download</a>
         <a class="tiny" href="/downloads">See all builds</a>
       </div>
     </header>
@@ -38,7 +38,7 @@ require_once("opengraph.php");
           <img class="icon" src="/images/documentation.svg" alt="Fully Documented" />
           <h3>Fully Documented</h3>
           <p>Read over our comprehensive feature documentation and make it your own.</p>
-          <a class="button white-button" href="/docs">Documentation</a>
+          <a class="button white-button" href="/docs">Learn More</a>
         </div>
         <div class="block">
           <img class="icon" src="/images/opensource.svg" alt="Free and Open Source" />
@@ -66,7 +66,7 @@ require_once("opengraph.php");
     </div>
     <footer>
       &copy; 2019-2021 <a href="https://pl3x.net">pl3x.net</a> <a href="https://github.com/pl3xgaming/Purpur/blob/ver/1.16.5/LICENSE">MIT</a>
-      <p><a href="https://gitlab.gnome.org/Teams/Releng/gnome-os-site" rel="noreferrer" target="_blank">Site design CC-BY-SA</a></p>
+      <p><a href="https://gitlab.gnome.org/Teams/Releng/gnome-os-site" target="_blank">Site design CC-BY-SA</a></p>
     </footer>
   </body>
 </html>
