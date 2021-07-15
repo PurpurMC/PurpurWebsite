@@ -178,6 +178,9 @@ nav a {
 .downloads td.mid a {
   color: #d65050;
 }
+.downloads td.mid a.issue {
+  color: #ffffff;
+}
 .downloads td.mid a:hover {
   text-decoration: underline;
 }

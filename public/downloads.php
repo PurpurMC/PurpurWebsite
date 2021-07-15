@@ -128,9 +128,26 @@
     foreach($json as $key) {
       $committer = "\n\n- " . scrub($key["author"]) . " <" . str_replace(".", "&period;", str_replace("@", "&commat;", scrub($key["email"]))) . ">";
       $hash = "<a href='https://github.com/pl3xgaming/Purpur/commit/" . $key["hash"] . "' class='hash' rel='noreferrer' target='_blank'>" . substr($key["hash"], 0, 7) . "</a>";
-      $results .= "<p title='" . scrub($key["description"]) . $committer . "'><span>[$hash]</span> " . scrub(explode("\n", $key["description"])[0]) . "</p>\n";
+      $results .= "<p title='" . scrub($key["description"]) . $committer . "'><span>[$hash]</span> " . parseIssues(scrub(explode("\n", $key["description"])[0])) . "</p>\n";
     }
     return $results;
+  }
+
+  function parseIssues($description){
+    $result = "";
+
+    foreach (explode(" ", $description) as $str){
+      if (preg_match('/^\W?(#[0-9]+)\W?$/', $str, $match)){
+        $str = "<a href='https://github.com/pl3xgaming/Purpur/issues/" . substr($match[1], 1) . "' class='issue' rel='noreferrer' target='_blank'>" . $str . "</a>";
+      }
+      else if (preg_match('/^\W?(MC\-[0-9]+)\W?$/', $str, $match)){
+        $str = "<a href='https://bugs.mojang.com/browse/" . $match[1] . "' class='issue' rel='noreferrer' target='_blank'>" . $str . "</a>";
+      }
+
+      $result .= (strlen($result) > 0 ? " " : "") . $str;
+    }
+
+    return $result;
   }
 
   function scrub($str) {
