@@ -62,6 +62,10 @@ RewriteRule ^js/$ / [R=301,L]
 ### No idea how any of this works. It just does :3
 ####################################################################################
 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^downloads/([^/]+)$ /downloads.php [L]
+
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(([^/]+/)*([^/.]+))\.php[\ ?]
 RewriteRule \.php$ /%1/ [R=301,NC,L]
 RewriteRule ^(.*)/$ /$1.php [NC,L]

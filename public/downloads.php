@@ -128,7 +128,7 @@
     foreach($json as $key) {
       $committer = "\n\n- " . scrub($key["author"]) . " <" . str_replace(".", "&period;", str_replace("@", "&commat;", scrub($key["email"]))) . ">";
       $hash = "<a href='https://github.com/pl3xgaming/Purpur/commit/" . $key["hash"] . "' class='hash' rel='noreferrer' target='_blank'>" . substr($key["hash"], 0, 7) . "</a>";
-      $results .= "<p title='" . scrub($key["description"]) . $committer . "'><span>[$hash]</span> " . parseIssues(scrub(explode("\n", $key["description"])[0])) . "</p>\n";
+       $results .= "<p title='" . scrub($key["description"]) . $committer . "'><span>[$hash]</span> " . parseIssues(scrub(explode("\n", $key["description"])[0])) . "</p>\n";
     }
     return $results;
   }
