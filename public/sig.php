@@ -1,6 +1,6 @@
 <?php
   // get the json data from file
-  $filename = 'stats/data.json';
+  $filename = 'stats/data/data.json';
   $contents = file_get_contents($filename);
   $json = json_decode($contents === false ? '' : $contents, true);
 
@@ -19,8 +19,8 @@
   }
 
   // get data
-  $servers = end($json['servers']['purpur']['data']);
-  $players = end($json['players']['purpur']['data']);
+  $servers = end($json['data']['servers']['purpur']);
+  $players = end($json['data']['players']['purpur']);
 
   // bottom row
   $bstats = "bStats - Servers: " . $servers . " Players: " . $players;
