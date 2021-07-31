@@ -16,9 +16,10 @@
   $now = time();
   $timezone = new DateTimeZone("America/Mexico_City");
   $timenow = new DateTime("now", $timezone);
-  $threePM = (new DateTime("now", $timezone))->setTime(15,0,0);
+  $threePM = (new DateTime("now", $timezone))->setTime(14,0,0);
+  $tomorrow = (new DateTime("now", $timezone))->add(new DateInterval('P1D'))->setTime(14,0,0);
 
-  // last checked date
-  $last = isset($jsonData['last']) ? $jsonData['last'] : 0;
+  // next checked date
+  $next = isset($jsonData['next']) ? $jsonData['next'] : 0;
 
 ?>

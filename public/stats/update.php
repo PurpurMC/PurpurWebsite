@@ -4,10 +4,10 @@
   require_once ("include/util.php");
 
   // only update from bstats once a day at 3PM central USA time
-  if ($timenow->getTimestamp() > $last) {
-    // write today to file quickly - this prevents subsequent page
+  if ($timenow->getTimestamp() > $next) {
+    // write next time to file quickly - this prevents subsequent page
     // loads from triggering bstats queries before first run finishes
-    $jsonData['last'] = $threePM->getTimestamp();
+    $jsonData['next'] = $tomorrow->getTimestamp();
     file_put_contents($dataFile, json_encode($jsonData));
 
     foreach ($jsonServers['servers'] as $server => $data) {
