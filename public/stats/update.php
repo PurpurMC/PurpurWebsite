@@ -3,8 +3,8 @@
   require_once ("include/vars.php");
   require_once ("include/util.php");
 
-  // only update from bstats once a day
-  if (strcmp($today, $last) !== 0) {
+  // only update from bstats once a day at 3PM central USA time
+  if ($timenow->getTimestamp() > $threePM->getTimestamp()) {
     // write today to file quickly - this prevents subsequent page
     // loads from triggering bstats queries before first run finishes
     $jsonData['last'] = $today;

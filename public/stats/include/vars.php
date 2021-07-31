@@ -15,6 +15,8 @@
   // set up time stuffs
   $now = time();
   $timezone = new DateTimeZone("America/Mexico_City");
+  $timenow = new DateTime("now", $timezone);
+  $threePM = (new DateTime("now", $timezone))->setTime(15,0,0);
   $today = (new DateTime("now", $timezone))->setTime(0,0,0)->format('m/d/y');
 
   // last checked date

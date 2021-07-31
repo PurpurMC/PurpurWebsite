@@ -37,6 +37,10 @@
       <div id="stats_graph"><canvas id="servers"></canvas></div>
       <br/><br/>  
       <div id="stats_graph"><canvas id="players"></canvas></div>
+      <p>
+        These graphs update once a day at <?=$threePM->format("H:i O")?><br>
+        Time now: <?=$timenow->format("m/d/y H:i O")?>
+      </p>
     </div>
   </body>
 </html>

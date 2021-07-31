@@ -24,6 +24,7 @@ div#loading span {
 div#graphs {
   opacity: 0;
   transition: ease-out 1000ms;
+  text-align: center;
 }
 div#stats_graph {
   max-width: 1200px;
