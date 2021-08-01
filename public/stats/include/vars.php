@@ -15,9 +15,10 @@
   // set up time stuffs
   $now = time();
   $timezone = new DateTimeZone("America/Mexico_City");
-  $timenow = new DateTime("now", $timezone);
-  $threePM = (new DateTime("now", $timezone))->setTime(15,0,0);
-  $tomorrow = (new DateTime("now", $timezone))->add(new DateInterval('P1D'))->setTime(14,0,0);
+  $timenow = new DateTime("@$now")->setTimezone($timezone);
+  $today = (new DateTime("@$now"))->setTimezone($timezone)->format('m/d/y');
+  $threePM = (new DateTime("@$now"))->setTimezone($timezone)->setTime(15,0,0);
+  $tomorrow = (new DateTime("@$now"))->setTimezone($timezone)->add(new DateInterval('P1D'))->setTime(15,0,0);
 
   // next checked date
   $next = isset($jsonData['next']) ? $jsonData['next'] : 0;
