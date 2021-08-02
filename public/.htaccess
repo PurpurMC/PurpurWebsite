@@ -11,6 +11,10 @@ RewriteEngine On
 ### Some basic redirects for convenience
 ####################################################################################
 
+# Google survey
+RewriteRule ^survey$ https://docs.google.com/forms/d/e/1FAIpQLSfqUxvV5Wb1NK3u3T51GL7f8DqYT0w9Y2xJjGetv1d_X6VkOg/viewform?entry.854363406=1.\%20\%0A2.\%20\%0A3.\%20\%0A4.\%20\%0A5.\%20&entry.1095367001=1.\%20\%0A2.\%20\%0A3.\%20\%0A4.\%20\%0A5.\%20 [R=301,L,NE,B]
+RewriteRule ^survey/$ https://docs.google.com/forms/d/e/1FAIpQLSfqUxvV5Wb1NK3u3T51GL7f8DqYT0w9Y2xJjGetv1d_X6VkOg/viewform?entry.854363406=1.\%20\%0A2.\%20\%0A3.\%20\%0A4.\%20\%0A5.\%20&entry.1095367001=1.\%20\%0A2.\%20\%0A3.\%20\%0A4.\%20\%0A5.\%20 [R=301,L,NE,B]
+
 # Discord redirects
 RewriteRule ^discord$ https://discord.gg/mtAAnkk [R=301,L]
 RewriteRule ^discord/$ https://discord.gg/mtAAnkk [R=301,L]
