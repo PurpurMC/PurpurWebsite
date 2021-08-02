@@ -3,11 +3,16 @@
   require_once ("include/vars.php");
   require_once ("include/util.php");
 
+  // lets not cache this page
+  header("Cache-Control: no-cache, no-store, must-revalidate");
+  header("Pragma: no-cache");
+  header("Expires: 0");
+
   // only update from bstats once a day at 3PM central USA time
   if ($timenow->getTimestamp() > $next) {
     // write next time to file quickly - this prevents subsequent page
     // loads from triggering bstats queries before first run finishes
-    $jsonData['next'] = $tomorrow->getTimestamp();
+    $jsonData['next'] = $tomorrowThreePM->getTimestamp();
     file_put_contents($dataFile, json_encode($jsonData));
 
     foreach ($jsonServers['servers'] as $server => $data) {

@@ -3,6 +3,10 @@ let serverChart, playerChart;
 let serverConfig = mkcfg("Server Counts", "Date", "Servers");
 let playerConfig = mkcfg("Player Counts", "Date", "Players");
 
+const noCache = new Headers();
+noCache.append('pragma', 'no-cache');
+noCache.append('cache-control', 'no-cache');
+
 function mkcfg(title, x, y) {
   let cfg = JSON.parse(JSON.stringify(config));
   cfg.options.plugins.title.text = title;
@@ -49,7 +53,10 @@ function init(json) {
 }
 
 function getJson(file, callback) {
-  fetch(file).then(async res => {
+  fetch(file, {
+    method: 'GET',
+    headers: noCache,
+  }).then(async res => {
     if (res.ok){
       callback(await res.json());
     }

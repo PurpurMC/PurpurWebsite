@@ -38,9 +38,9 @@
       <br/><br/>  
       <div id="stats_graph"><canvas id="players"></canvas></div>
       <p>
-        These graphs update once a day at <?=$threePM->format("H:i O")?><br>
+        These graphs update once a day at <?=$todayThreePM->format("H:i O")?><br>
         Time now: <?=$timenow->format("m/d/y H:i O")?><br>
-        Next update: <?=$tomorrow->format("m/d/y H:i O")?>
+        Next update: <?=$tomorrowThreePM->format("m/d/y H:i O")?>
       </p>
     </div>
   </body>

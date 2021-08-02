@@ -3,7 +3,7 @@
   // return an array from json data
   function processData($json) {
     // globals we need
-    global $timezone, $today;
+    global $timezone;
 
     // create the array
     $arr = (array) null;
@@ -18,7 +18,7 @@
       $date = (new DateTime("@$seconds"))->setTimezone($timezone)->format('m/d/y');
 
       // only store highest count for that day
-      if (strcmp($date, $today) !== 0 && $count > (@$arr[$date] == null ? -1 : $arr[$date])) {
+      if ($count > (@$arr[$date] == null ? -1 : $arr[$date])) {
         // populate the array
         $arr[$date] = $count;
       }

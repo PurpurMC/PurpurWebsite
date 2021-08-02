@@ -6,10 +6,10 @@
 
   // time stuffs
   $now = time();
-  $last = isset($json['last']) ? $json['last'] : 0;
+  $next = isset($json['next']) ? $json['next'] : 0;
 
   // check if data needs updating (only once a day)
-  if ($now - $last > 86400) {
+  if ($now > $next) {
     // hit stats page so it can update data
     file_get_contents('https://purpur.pl3x.net/stats/');
 
