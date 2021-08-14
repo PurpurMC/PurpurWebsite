@@ -3,7 +3,6 @@
   require_once("opengraph.php");
 
   $contents = file_get_contents("/home/billy/pillar/data.json");
-  //$contents = file_get_contents("/home/billy/IdeaProjects/Pillar/build/libs/data.json");
 
   $json = json_decode($contents === false ? '' : $contents, true);
 
@@ -128,19 +127,19 @@
     foreach($json as $key) {
       $committer = "\n\n- " . scrub($key["author"]) . " <" . str_replace(".", "&period;", str_replace("@", "&commat;", scrub($key["email"]))) . ">";
       $hash = "<a href='https://github.com/pl3xgaming/Purpur/commit/" . $key["hash"] . "' class='hash' rel='noreferrer' target='_blank'>" . substr($key["hash"], 0, 7) . "</a>";
-      $results .= "<p title='" . scrub($key["description"]) . $committer . "'><span>[$hash]</span> " . parseIssues(scrub(explode("\n", $key["description"])[0])) . "</p>\n";
+      $results .= "<p title='" . shortenGitHubUrls(scrub($key["description"])) . $committer . "'><span>[$hash]</span> " . parseIssues(scrub(explode("\n", $key["description"])[0])) . "</p>\n";
     }
     return $results;
   }
 
-  function parseIssues($description){
+  function parseIssues($description) {
     $result = "";
 
-    foreach (explode(" ", $description) as $str){
-      if (preg_match('/^\W?(#[0-9]+)\W?$/', $str, $match)){
+    foreach (explode(" ", $description) as $str) {
+      if (preg_match('/^\W?(#[0-9]+)\W?$/', $str, $match)) {
         $str = "<a href='https://github.com/pl3xgaming/Purpur/issues/" . substr($match[1], 1) . "' class='issue' rel='noreferrer' target='_blank'>" . $str . "</a>";
       }
-      else if (preg_match('/^\W?(MC\-[0-9]+)\W?$/', $str, $match)){
+      else if (preg_match('/^\W?(MC\-[0-9]+)\W?$/', $str, $match)) {
         $str = "<a href='https://bugs.mojang.com/browse/" . $match[1] . "' class='issue' rel='noreferrer' target='_blank'>" . $str . "</a>";
       }
 
@@ -148,6 +147,10 @@
     }
 
     return $result;
+  }
+
+  function shortenGitHubUrls($description) {
+    return preg_replace('/(https:\/\/github\.com\/.*\/.*\/commit\/([a-z0-9]{7})[a-z0-9]{33})/', "[$2] ", $description);
   }
 
   function scrub($str) {
