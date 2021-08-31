@@ -27,7 +27,7 @@ require_once("opengraph.php");
         <h2>Your Minecraft, your way</h2>
         <img class="logo" src="/images/purpur.svg" alt="Purpur Logo" />
         <p>Purpur is a drop-in replacement for Paper servers designed for configurability, new fun
-           &amp; exciting gameplay features, and high performance built on top of Tuinity</p>
+           &amp; exciting gameplay features, and performance built on top of Airplane</p>
         <a class="button download-button blue-button" href="https://api.pl3x.net/v2/purpur/1.17.1/latest/download">Download</a>
         <a class="tiny" href="/downloads">See all builds</a>
       </div>
