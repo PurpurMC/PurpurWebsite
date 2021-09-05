@@ -60,7 +60,7 @@ $total_countries = $json['countries'];
               <li><img src="/images/starlight_th.png" alt="Starlight performance comparison graph" /></li>
               <li>
                 <p>Purpur is built on top of the leading performance mods in the industry.</p>
-                <p>Things like the blazing fast chunk performance thanks to Tuinity's complete rewrite of the light engine, Starlight.</p>
+                <p>Things like the blazing fast chunk performance thanks to SpottedLeaf's complete rewrite of the light engine, Starlight.</p>
               </li>
             </ul>
           </div>
@@ -162,7 +162,6 @@ $total_countries = $json['countries'];
       <div class="wrapper">
         <ul>
           <li><img src="/images/thx_paper.png" alt="Paper" title="Paper" /></li>
-          <li><img src="/images/thx_tuinity.png" alt="Tuinity" title="Tuinity" /></li>
           <li><img src="/images/thx_github.png" alt="GitHub" title="GitHub" /></li>
           <li><img src="/images/thx_intellij.png" alt="IntelliJ IDEA" title="IntelliJ IDEA" /></li>
           <li><img src="/images/thx_yourkit.png" alt="YourKit" title="YourKit" /></li>
