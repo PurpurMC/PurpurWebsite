@@ -60,7 +60,7 @@ $total_countries = $json['countries'];
               <li><img src="/images/starlight_th.png" alt="Starlight performance comparison graph" /></li>
               <li>
                 <p>Purpur is built on top of the leading performance mods in the industry.</p>
-                <p>Things like the blazing fast chunk performance thanks to Paper's complete rewrite of the light engine, Starlight.</p>
+                <p>Things like the blazing fast chunk performance thanks to SpottedLeaf's complete rewrite of the light engine, Starlight.</p>
               </li>
             </ul>
           </div>
