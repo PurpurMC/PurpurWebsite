@@ -29,7 +29,7 @@ require_once("opengraph.php");
         <p>Purpur is a drop-in replacement for Paper servers designed for configurability, new fun
            &amp; exciting gameplay features, and performance built on top of Airplane</p>
         <a class="button download-button blue-button" href="https://api.purpurmc.org/v2/purpur/1.17.1/latest/download">Download</a>
-        <a class="tiny" href="/downloads">See all builds</a>
+        <a class="tiny" href="https://purpur.pl3x.net/downloads/">See all builds</a>
       </div>
     </header>
     <div class="row-one">
@@ -65,7 +65,7 @@ require_once("opengraph.php");
       </div>
     </div>
     <footer>
-      &copy; 2019-2021 <a href="https://purpurmc.org">purpurmc.org</a> <a href="https://github.com/PurpurMC/Purpur/blob/ver/1.18/LICENSE">MIT</a>
+      &copy; 2019-2021 <a href="https://purpurmc.org">purpurmc.org</a> <a href="https://github.com/PurpurMC/Purpur/blob/HEAD/LICENSE">MIT</a>
       <p><a href="https://gitlab.gnome.org/Teams/Releng/gnome-os-site" rel="noreferrer" target="_blank">Site design CC-BY-SA</a></p>
     </footer>
   </body>
