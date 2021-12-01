@@ -13,7 +13,7 @@ require_once("opengraph.php");
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:description" content="<?=$description?>" />
     <meta property="og:title" content="<?=$title?>" />
-    <meta property="og:url" content="https://purpur.pl3x.net" />
+    <meta property="og:url" content="https://purpurmc.org" />
     <meta property="og:description" content="<?=$description?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
     <link rel="icon" type="image/x-icon" href="/images/purpur.svg" />
@@ -28,7 +28,7 @@ require_once("opengraph.php");
         <img class="logo" src="/images/purpur.svg" alt="Purpur Logo" />
         <p>Purpur is a drop-in replacement for Paper servers designed for configurability, new fun
            &amp; exciting gameplay features, and performance built on top of Airplane</p>
-        <a class="button download-button blue-button" href="https://api.pl3x.net/v2/purpur/1.17.1/latest/download">Download</a>
+        <a class="button download-button blue-button" href="https://api.purpurmc.org/v2/purpur/1.17.1/latest/download">Download</a>
         <a class="tiny" href="/downloads">See all builds</a>
       </div>
     </header>
@@ -65,7 +65,7 @@ require_once("opengraph.php");
       </div>
     </div>
     <footer>
-      &copy; 2019-2021 <a href="https://pl3x.net">pl3x.net</a> <a href="https://github.com/pl3xgaming/Purpur/blob/ver/1.16.5/LICENSE">MIT</a>
+      &copy; 2019-2021 <a href="https://purpurmc.org">purpurmc.org</a> <a href="https://github.com/PurpurMC/Purpur/blob/ver/1.18/LICENSE">MIT</a>
       <p><a href="https://gitlab.gnome.org/Teams/Releng/gnome-os-site" rel="noreferrer" target="_blank">Site design CC-BY-SA</a></p>
     </footer>
   </body>

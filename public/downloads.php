@@ -36,7 +36,7 @@
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:description" content="<?=$description?>" />
     <meta property="og:title" content="<?=$title?>" />
-    <meta property="og:url" content="https://purpur.pl3x.net" />
+    <meta property="og:url" content="https://purpurmc.org" />
     <meta property="og:description" content="<?=$description?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
     <link rel="icon" type="image/x-icon" href="/images/purpur.svg" />
@@ -104,7 +104,7 @@
       </div>
     </div>
     <footer>
-      &copy; 2019-2021 <a href="https://pl3x.net">pl3x.net</a> <a href="https://github.com/pl3xgaming/Purpur/blob/ver/1.16.5/LICENSE">MIT</a>
+      &copy; 2019-2021 <a href="https://purpurmc.org">purpurmc.org</a> <a href="https://github.com/PurpurMC/Purpur/blob/ver/1.18/LICENSE">MIT</a>
       <p><a href="https://gitlab.gnome.org/Teams/Releng/gnome-os-site" rel="noreferrer" target="_blank">Site design CC-BY-SA</a></p>
     </footer>
   </body>
@@ -113,7 +113,7 @@
 
   function download($version, $build, $json) {
     if ($json["result"] == "SUCCESS") {
-      return "<a href='https://api.pl3x.net/v2/purpur/$version/$build/download' class='button white-button' download='purpur-$version-$build.jar' title='Download build #$build'><span><i class='fas fa-cloud-download-alt'></i> $build</span></a>";
+      return "<a href='https://api.purpurmc.org/v2/purpur/$version/$build/download' class='button white-button' download='purpur-$version-$build.jar' title='Download build #$build'><span><i class='fas fa-cloud-download-alt'></i> $build</span></a>";
     } else {
       return "<a href='#' class='button disabled-button' title='Failed build #$build'><span><i class='fas fa-times-circle'></i> $build</span></a>";
     }
@@ -126,7 +126,7 @@
     $results = "";
     foreach($json as $key) {
       $committer = "\n\n- " . scrub($key["author"]) . " <" . str_replace(".", "&period;", str_replace("@", "&commat;", scrub($key["email"]))) . ">";
-      $hash = "<a href='https://github.com/pl3xgaming/Purpur/commit/" . $key["hash"] . "' class='hash' rel='noreferrer' target='_blank'>" . substr($key["hash"], 0, 7) . "</a>";
+      $hash = "<a href='https://github.com/PurpurMC/Purpur/commit/" . $key["hash"] . "' class='hash' rel='noreferrer' target='_blank'>" . substr($key["hash"], 0, 7) . "</a>";
       $results .= "<p title='" . shortenGitHubUrls(scrub($key["description"])) . $committer . "'><span>[$hash]</span> " . parseIssues(scrub(explode("\n", $key["description"])[0])) . "</p>\n";
     }
     return $results;
@@ -137,7 +137,7 @@
 
     foreach (explode(" ", $description) as $str) {
       if (preg_match('/^\W?(#[0-9]+)\W?$/', $str, $match)) {
-        $str = "<a href='https://github.com/pl3xgaming/Purpur/issues/" . substr($match[1], 1) . "' class='issue' rel='noreferrer' target='_blank'>" . $str . "</a>";
+        $str = "<a href='https://github.com/PurpurMC/Purpur/issues/" . substr($match[1], 1) . "' class='issue' rel='noreferrer' target='_blank'>" . $str . "</a>";
       }
       else if (preg_match('/^\W?(MC\-[0-9]+)\W?$/', $str, $match)) {
         $str = "<a href='https://bugs.mojang.com/browse/" . $match[1] . "' class='issue' rel='noreferrer' target='_blank'>" . $str . "</a>";

@@ -11,7 +11,7 @@
   // check if data needs updating (only once a day)
   if ($now > $next) {
     // hit stats page so it can update data
-    file_get_contents('https://purpur.pl3x.net/stats/');
+    file_get_contents('https://purpurmc.org/stats/');
 
     // get data again  
     $contents = file_get_contents($filename);

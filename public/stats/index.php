@@ -11,13 +11,13 @@
     <meta name="title" content="Server Usage" />
     <meta name="description" content="" />
     <meta property="twitter:title" content="Server Usage" />
-    <meta property="twitter:image" content="https://purpur.pl3x.net/stats/jpgraph.php?t=<?=$now?>" />
+    <meta property="twitter:image" content="https://purpurmc.org/stats/jpgraph.php?t=<?=$now?>" />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:description" content="" />
     <meta property="og:title" content="Server Usage" />
-    <meta property="og:url" content="https://purpur.pl3x.net/stats" />
+    <meta property="og:url" content="https://purpurmc.org/stats" />
     <meta property="og:description" content="" />
-    <meta property="og:image" content="https://purpur.pl3x.net/stats/jpgraph.php?t=<?=$now?>" />
+    <meta property="og:image" content="https://purpurmc.org/stats/jpgraph.php?t=<?=$now?>" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
