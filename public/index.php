@@ -16,18 +16,17 @@ require_once("opengraph.php");
     <meta property="og:url" content="https://purpurmc.org" />
     <meta property="og:description" content="<?=$description?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
-    <link rel="icon" type="image/x-icon" href="/images/purpur.svg" />
-    <link type="text/css" rel="stylesheet" href="/css/raleway.css" />
-    <link type="text/css" rel="stylesheet" href="/css/index.css" />
+    <link rel="icon" type="image/x-icon" href="images/purpur.svg" />
+    <link type="text/css" rel="stylesheet" href="css/raleway.css" />
+    <link type="text/css" rel="stylesheet" href="css/index.css" />
   </head>
   <body>
     <header>
       <div class="container">
         <h1>Purpur</h1>
         <h2>Your Minecraft, your way</h2>
-        <img class="logo" src="/images/purpur.svg" alt="Purpur Logo" />
-        <p>Purpur is a drop-in replacement for Paper servers designed for configurability, new fun
-           &amp; exciting gameplay features, and performance built on top of Airplane</p>
+        <img class="logo" src="images/purpur.svg" alt="Purpur Logo" />
+        <p>Purpur is a drop-in replacement for Paper servers designed for configurability and new, fun, exciting gameplay features.</p>
         <a class="button download-button blue-button" href="https://api.purpurmc.org/v2/purpur/1.17.1/latest/download">Download</a>
         <a class="tiny" href="https://purpur.pl3x.net/downloads/">See all builds</a>
       </div>
@@ -35,13 +34,13 @@ require_once("opengraph.php");
     <div class="row-one">
       <div class="container group">
         <div class="block">
-          <img class="icon" src="/images/documentation.svg" alt="Fully Documented" />
+          <img class="icon" src="images/documentation.svg" alt="Fully Documented" />
           <h3>Fully Documented</h3>
           <p>Read over our comprehensive feature documentation and make it your own.</p>
           <a class="button white-button" href="/docs">Documentation</a>
         </div>
         <div class="block">
-          <img class="icon" src="/images/opensource.svg" alt="Free and Open Source" />
+          <img class="icon" src="images/opensource.svg" alt="Free and Open Source" />
           <h3>Free and Open Source</h3>
           <p>Built with love by people of all walks of life all over the globe.</p>
           <a class="button white-button" href="/github" target="_blank">GitHub</a>
@@ -51,13 +50,13 @@ require_once("opengraph.php");
     <div class="row-two">
       <div class="container group">
         <div class="block">
-          <img class="icon" src="/images/warning.svg" alt="Found a bug? File it!" />
+          <img class="icon" src="images/warning.svg" alt="Found a bug? File it!" />
           <h3>Found a Bug? File it!</h3>
           <p>If you run into issues or have any suggestions, let us know.</p>
           <a class="button red-button" href="/issues" target="_blank">Issue Tracker</a>
         </div>
         <div class="block">
-          <img class="icon" src="/images/discord.svg" alt="Get Involved" />
+          <img class="icon" src="images/discord.svg" alt="Get Involved" />
           <h3>Get Involved</h3>
           <p>Get in touch with the developers, ask questions, and join the fun.</p>
           <a class="button blue-button" href="/discord" target="_blank">Discord</a>
