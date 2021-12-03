@@ -29,7 +29,7 @@ require_once("opengraph.php");
         <p>Purpur is a drop-in replacement for Paper servers designed for configurability, new fun
            &amp; exciting gameplay features, and performance built on top of Airplane</p>
         <a class="button download-button blue-button" href="https://api.purpurmc.org/v2/purpur/1.17.1/latest/download">Download</a>
-        <a class="tiny" href="https://purpur.pl3x.net/downloads/">See all builds</a>
+        <a class="tiny" href="https://purpurmc.org/downloads/">See all builds</a>
       </div>
     </header>
     <div class="row-one">
