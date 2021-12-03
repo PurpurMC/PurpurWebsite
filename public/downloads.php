@@ -2,7 +2,7 @@
 
   require_once("opengraph.php");
 
-  $contents = file_get_contents("/home/billy/pillar/data.json");
+  $contents = file_get_contents("/srv/papyrus/data.json");
 
   $json = json_decode($contents === false ? '' : $contents, true);
 
