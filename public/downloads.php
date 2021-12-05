@@ -139,8 +139,8 @@
             <div class="versionWarning <?=(($versionName != $currentVersion) ? "visible" : "")?>">
                 <?=
                     in_array($versionName, $betaVersions) ?
-                        "You are trying to download experimental builds!<br />If you encounter issues with these builds, please report them!" :
-                        "You are trying to download builds for an unsupported version of Minecraft!<br />Keep in mind that if you download these builds, you won't get any support from Purpur!"
+                        "You are trying to download experimental builds!<br /><u>DO NOT</u> use these builds in production, as there may be many bug and corruption issues.<br />Please report any and all issues you encounter!" :
+                        "You are trying to download builds for an unsupported version of Minecraft!<br />Keep in mind that if you download these builds, you will not receive support."
                 ?>
             </div>
             <table class="downloads">
