@@ -1,6 +1,7 @@
 <?php
     require_once("opengraph.php");
 
+    $betaVersions = ["1.18"];
     $currentVersion = "1.17.1";
 
     $contents = file_get_contents("/srv/purpur/papyrus/data.json");
@@ -135,9 +136,12 @@
                     <option value="<?=$name?>" <?=$name == $versionName ? "selected" : ""?>><?=$name?></option>
                 <?php endforeach; ?>
             </select>
-            <div id="oldVersionWarning" class="oldVersionWarning <?=($versionName != $currentVersion ? "visible" : "")?>">
-                You are trying to download builds for an unsupported version of Minecraft!<br />
-                Keep in mind that if you download these builds, you won't get any support from Purpur!
+            <div class="versionWarning <?=(($versionName != $currentVersion) ? "visible" : "")?>">
+                <?=
+                    in_array($versionName, $betaVersions) ?
+                        "You are trying to download experimental builds!<br />If you encounter issues with these builds, please report them!" :
+                        "You are trying to download builds for an unsupported version of Minecraft!<br />Keep in mind that if you download these builds, you won't get any support from Purpur!"
+                ?>
             </div>
             <table class="downloads">
                 <thead><tr><td class="left">Build</td><td class="middle">Changes</td><td class="right">Date</td></tr></thead>
