@@ -20,6 +20,7 @@
     $versionName = $_GET["v"];
     if ($versionName == null) {
         $versionName = $versionNames[0];
+        $versionName = $currentVersion;
     }
 
     $version = [];
