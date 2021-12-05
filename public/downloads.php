@@ -1,7 +1,7 @@
 <?php
     require_once("opengraph.php");
 
-    $contents = file_get_contents("/srv/papyrus/data.json");
+    $contents = file_get_contents("/srv/purpur/papyrus/data.json");
     $json = json_decode($contents, true);
 
     $project = null;
@@ -17,13 +17,7 @@
     }
     rsort($versionNames);
 
-    $url = @$_SERVER[REQUEST_URI];
-    if ($url != null) {
-        $url = str_replace("/downloads/", "", $url);
-        $url = explode("/", $url)[0];
-    }
-
-    $versionName = $url;
+    $versionName = $_GET["v"];
     if ($versionName == null) {
         $versionName = $versionNames[0];
     }
@@ -131,7 +125,7 @@
         <div class="container">
             <ul class="tabs">
                 <?php foreach ($versionNames as $name): ?>
-                    <li class="<?=$name == $versionName ? "selected" : ""?>"><a href="<?=$name?>"><?=$name?></a></li>
+                    <li class="<?=$name == $versionName ? "selected" : ""?>"><a href="?v=<?=$name?>"><?=$name?></a></li>
                 <?php endforeach; ?>
             </ul>
             <select id="dropdown">

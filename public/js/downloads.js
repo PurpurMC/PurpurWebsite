@@ -3,5 +3,5 @@ window.addEventListener('load', function() {
 });
 
 function changeDropdown(option) {
-  window.location.href = "/downloads/" + option.target.value;
+  window.location.href = "/downloads?v=" + option.target.value;
 }
