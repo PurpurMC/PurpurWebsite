@@ -1,6 +1,8 @@
 <?php
     require_once("opengraph.php");
 
+    $currentVersion = "1.17.1";
+
     $contents = file_get_contents("/srv/purpur/papyrus/data.json");
     $json = json_decode($contents, true);
 
@@ -18,8 +20,7 @@
     rsort($versionNames);
 
     $versionName = $_GET["v"];
-    if ($versionName == null) {
-        $versionName = $versionNames[0];
+    if ($versionName == null || !in_array($versionName, $versionNames)) {
         $versionName = $currentVersion;
     }
 
@@ -134,8 +135,8 @@
                     <option value="<?=$name?>" <?=$name == $versionName ? "selected" : ""?>><?=$name?></option>
                 <?php endforeach; ?>
             </select>
-            <div id="oldVersionWarning" class="oldVersionWarning <?=($versionName != $versionNames[0] ? "visible" : "")?>">
-                You are trying to download builds for old/unsupported version of Minecraft!<br />
+            <div id="oldVersionWarning" class="oldVersionWarning <?=($versionName != $currentVersion ? "visible" : "")?>">
+                You are trying to download builds for an unsupported version of Minecraft!<br />
                 Keep in mind that if you download these builds, you won't get any support from Purpur!
             </div>
             <table class="downloads">
