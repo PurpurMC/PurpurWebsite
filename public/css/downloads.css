@@ -79,7 +79,7 @@ nav a {
 .tabs li a {
   display: block;
   text-align: center;
-  font-family: FontAwesome,Verdana;
+  font-family: FontAwesome,Verdana,sans-serif;
   font-size: 14px;
   font-weight: 700;
   white-space: nowrap;
@@ -140,7 +140,7 @@ nav a {
 }
 .downloads thead td {
   padding: 15px 0 15px 20px;
-  font-family: FontAwesome,Verdana;
+  font-family: FontAwesome,Verdana,sans-serif;
   line-height: 25px;
   border: 0px;
 }
@@ -149,7 +149,7 @@ nav a {
 }
 .downloads tbody td {
   padding: 15px 0 15px 20px;
-  font-family: FontAwesome,Verdana;
+  font-family: FontAwesome,Verdana,sans-serif;
   line-height: 25px;
   border: 0px;
   border-top: 1px solid #555;
