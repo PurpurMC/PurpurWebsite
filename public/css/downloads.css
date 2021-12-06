@@ -213,6 +213,6 @@ nav a {
   transition: all 500ms ease-in-out;
 }
 .versionWarning.visible {
-  min-height: min-content;
+  max-height: unset;
   padding: 10px;
 }
