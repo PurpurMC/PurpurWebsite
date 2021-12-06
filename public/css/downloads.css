@@ -215,4 +215,5 @@ nav a {
 .versionWarning.visible {
   min-height: min-content;
   padding: 10px;
+  max-height: none;
 }
