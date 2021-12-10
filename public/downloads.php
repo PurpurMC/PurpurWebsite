@@ -1,6 +1,31 @@
 <?php
     require_once("opengraph.php");
 
+    $allHotfixes = [
+        "1.17.1"=>[
+            "builds"=>[
+                "build"=>"hotfix",
+                "commits"=>[[
+                    "author"=>"Encode42",
+                    "title"=>"I hope there's no exploits in old versions- oh wait",
+                    "email"=>"me@encode42.dev",
+                    "hash"=>"8a17a52d8a8f87662afc3f1188c38db9172f2815"
+
+                ], [
+                    "author"=>"Encode42",
+                    "title"=>"Here's a free upstream with your purchase while I'm at it",
+                    "email"=>"me@encode42.dev",
+                    "hash"=>"9a7a4dcaac050cdc795dbbb29a98665d9f8debe5"
+                ], [
+                    "author"=>"Encode42",
+                    "title"=>"Updated Upstream (Paper)\n\nUpstream has released updates that appear to apply and compile correctly\n\nPaper Changes:",
+                    "email"=>"me@encode42.dev",
+                    "hash"=>"4ff0630086bb589e1e421b06333eeeb4a3a027b2"
+                ]],
+                "timestamp"=>1639113438000
+            ]
+        ]
+    ];
     $betaVersions = ["1.18"];
     $currentVersion = "1.17.1";
 
@@ -59,12 +84,22 @@
     }
     rsort($builds);
 
+    $hotfixesForVersion = $allHotfixes[$versionName];
+    foreach ($hotfixesForVersion as $build) {
+        $build["isHotfix"] = true;
+        array_unshift($builds, $build);
+    }
+
     if (in_array($versionName, $betaVersions)) {
         $disclaimer = "You are trying to download experimental builds!<br /><u>DO NOT</u> use these builds in production, as there may be many bugs and corruption issues.<br />Please report any and all issues you encounter!";
     } else if (!in_array($versionName, $finalVersionNames)) {
         $disclaimer = "You are trying to download builds for an old and non-final version of Minecraft!<br />These builds are likely to contain <u>severe exploits, vulnerabilities, and more</u>!<br />Keep in mind that if you download these builds, you will not receive support.";
     } else {
         $disclaimer = "You are trying to download builds for an old version of Minecraft!<br />Keep in mind that if you download these builds, you will not receive support.";
+    }
+
+    function getHotfix($version, $build) {
+        return "<a href='https://api.purpurmc.org/hotfixes/$version/purpur-$version-$build.jar' class='button white-button' download='purpur-$version-$build.jar' title='Download build #$build'><span><i class='fas fa-cloud-download-alt'></i> $build</span></a>";
     }
 
     function getDownloadButton($version, $build, $result) {
@@ -173,7 +208,7 @@
                 <tbody>
                     <?php foreach ($builds as $build): ?>
                         <tr>
-                            <td class="left"><?=getDownloadButton($build["version"], $build["build"], $build["result"])?></td>
+                            <td class="left"><?=$build["isHotfix"] ? getHotfix($versionName, $build["build"]) : getDownloadButton($build["version"], $build["build"], $build["result"])?></td>
                             <td class="mid"><?=getCommits($build["commits"])?></td>
                             <td class="right"><?=date("Y-m-d H:i:s", $build["timestamp"] / 1000)?></td>
                         </tr>
