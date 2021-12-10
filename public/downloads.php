@@ -97,7 +97,7 @@
     }
 
     if (!in_array($versionName, $finalVersionNames)) {
-        $disclaimers[] = "You are trying to download builds for an old and non-final version of Minecraft!<br />These builds are likely to contain <u>severe exploits, vulnerabilities, and more</u>!<br />Keep in mind that if you download these builds, you will not receive support.";
+        $disclaimers[] = "You are trying to download builds for an old and non-final version of Minecraft!<br />These builds are likely to contain <u>severe exploits, vulnerabilities, and more</u>!";
     }
 
     if ($versionName != $currentVersion && !$isExperimental) {
