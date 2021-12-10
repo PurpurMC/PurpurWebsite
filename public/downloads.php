@@ -59,6 +59,14 @@
     }
     rsort($builds);
 
+    if (in_array($versionName, $betaVersions)) {
+        $disclaimer = "You are trying to download experimental builds!<br /><u>DO NOT</u> use these builds in production, as there may be many bugs and corruption issues.<br />Please report any and all issues you encounter!";
+    } else if (!in_array($versionName, $finalVersionNames)) {
+        $disclaimer = "You are trying to download builds for an old and non-final version of Minecraft!<br />These builds are likely to contain <u>severe exploits, vulnerabilities, and more</u>!<br />Keep in mind that if you download these builds, you will not receive support.";
+    } else {
+        $disclaimer = "You are trying to download builds for an old version of Minecraft!<br />Keep in mind that if you download these builds, you will not receive support.";
+    }
+
     function getDownloadButton($version, $build, $result) {
         if ($result == "SUCCESS") {
             return "<a href='https://api.purpurmc.org/v2/purpur/$version/$build/download' class='button white-button' download='purpur-$version-$build.jar' title='Download build #$build'><span><i class='fas fa-cloud-download-alt'></i> $build</span></a>";
@@ -158,11 +166,7 @@
                 <?php endforeach; ?>
             </select>
             <div class="versionWarning <?=(($versionName != $currentVersion) ? "visible" : "")?>">
-                <?=
-                    in_array($versionName, $betaVersions) ?
-                        "You are trying to download experimental builds!<br /><u>DO NOT</u> use these builds in production, as there may be many bugs and corruption issues.<br />Please report any and all issues you encounter!" :
-                        "You are trying to download builds for an unsupported version of Minecraft!<br />Keep in mind that if you download these builds, you will not receive support."
-                ?>
+                <?= $disclaimer ?>
             </div>
             <table class="downloads">
                 <thead><tr><td class="left">Build</td><td class="middle">Changes</td><td class="right">Date</td></tr></thead>
