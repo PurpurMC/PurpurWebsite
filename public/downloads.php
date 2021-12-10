@@ -14,11 +14,32 @@
         }
     }
 
+    $rootVersionNames = [];
     $versionNames = [];
     foreach ($project["versions"] as $version) {
         $versionNames[] = $version["name"];
+
+        preg_match("/\d\.\d*/", $version["name"], $matches);
+        $rootVersionNames[] = $matches[0];
     }
     rsort($versionNames);
+
+    $rootVersionNames = array_unique($rootVersionNames);
+    rsort($rootVersionNames);
+
+    $finalVersionNames = [];
+    foreach ($rootVersionNames as $rootVersion) {
+        $subversions = [];
+
+        foreach($versionNames as $version) {
+            if (str_contains($version, $rootVersion)) {
+                $subversions[] = $version;
+            }
+        }
+
+        usort($subversions, 'version_compare');
+        $finalVersionNames[] = $subversions[count($subversions) - 1];
+    }
 
     $versionName = $_GET["v"];
     if ($versionName == null || !in_array($versionName, $versionNames)) {
@@ -127,12 +148,12 @@
     <div class="row-one">
         <div class="container">
             <ul class="tabs">
-                <?php foreach ($versionNames as $name): ?>
+                <?php foreach ($finalVersionNames as $name): ?>
                     <li class="<?=$name == $versionName ? "selected" : ""?>"><a href="?v=<?=$name?>"><?=$name?></a></li>
                 <?php endforeach; ?>
             </ul>
             <select id="dropdown">
-                <?php foreach ($versionNames as $name): ?>
+                <?php foreach ($finalVersionNames as $name): ?>
                     <option value="<?=$name?>" <?=$name == $versionName ? "selected" : ""?>><?=$name?></option>
                 <?php endforeach; ?>
             </select>
