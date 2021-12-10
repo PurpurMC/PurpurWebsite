@@ -26,7 +26,7 @@
             ]
         ]
     ];
-    $betaVersions = ["1.18"];
+    $betaVersions = ["1.18.1", "1.18"];
     $currentVersion = "1.17.1";
 
     $contents = file_get_contents("/srv/purpur/papyrus/data.json");
@@ -90,12 +90,18 @@
         array_unshift($builds, $build);
     }
 
-    if (in_array($versionName, $betaVersions)) {
-        $disclaimer = "You are trying to download experimental builds!<br /><u>DO NOT</u> use these builds in production, as there may be many bugs and corruption issues.<br />Please report any and all issues you encounter!";
-    } else if (!in_array($versionName, $finalVersionNames)) {
-        $disclaimer = "You are trying to download builds for an old and non-final version of Minecraft!<br />These builds are likely to contain <u>severe exploits, vulnerabilities, and more</u>!<br />Keep in mind that if you download these builds, you will not receive support.";
-    } else {
-        $disclaimer = "You are trying to download builds for an old version of Minecraft!<br />Keep in mind that if you download these builds, you will not receive support.";
+    $disclaimers = [];
+    $isExperimental = in_array($versionName, $betaVersions);
+    if ($isExperimental) {
+        $disclaimers[] = "You are trying to download experimental builds!<br /><u>DO NOT</u> use these builds in production, as there may be many bugs and corruption issues.<br />Please report any and all issues you encounter!";
+    }
+
+    if (!in_array($versionName, $finalVersionNames)) {
+        $disclaimers[] = "You are trying to download builds for an old and non-final version of Minecraft!<br />These builds are likely to contain <u>severe exploits, vulnerabilities, and more</u>!<br />Keep in mind that if you download these builds, you will not receive support.";
+    }
+
+    if ($versionName != $currentVersion && !$isExperimental) {
+        $disclaimers[] = "You are trying to download builds for an old version of Minecraft!<br />Keep in mind that if you download these builds, you will not receive support.";
     }
 
     function getHotfix($version, $build) {
@@ -201,7 +207,7 @@
                 <?php endforeach; ?>
             </select>
             <div class="versionWarning <?=(($versionName != $currentVersion) ? "visible" : "")?>">
-                <?= $disclaimer ?>
+                <?= join("<br /><br />", $disclaimers) ?>
             </div>
             <table class="downloads">
                 <thead><tr><td class="left">Build</td><td class="middle">Changes</td><td class="right">Date</td></tr></thead>
