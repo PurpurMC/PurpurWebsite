@@ -67,7 +67,7 @@
         $finalVersionNames[] = $subversions[count($subversions) - 1];
     }
 
-    $versionName = $_GET["v"];
+    $versionName = filter_var($_GET["v"], FILTER_SANITIZE_STRING);
     if ($versionName == null || !in_array($versionName, $versionNames)) {
         $versionName = $currentVersion;
     }
