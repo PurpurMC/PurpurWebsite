@@ -26,6 +26,7 @@
             ]
         ]
     ];
+
     $betaVersions = ["1.18.1", "1.18"];
     $currentVersion = "1.17.1";
 
@@ -91,6 +92,8 @@
     }
 
     $disclaimers = [];
+    $currentVersionIndex = array_search($currentVersion, $versionNames);
+    $selectedVersionIndex = array_search($versionName, $versionNames);
     $isExperimental = in_array($versionName, $betaVersions);
     if ($isExperimental) {
         $disclaimers[] = "You are trying to download experimental builds!<br /><u>DO NOT</u> use these builds in production, as there may be many bugs and corruption issues.<br />Please report any and all issues you encounter!";
@@ -100,7 +103,7 @@
         $disclaimers[] = "You are trying to download builds for an old and non-final version of Minecraft!<br />These builds are likely to contain <u>severe exploits, vulnerabilities, and more</u>!";
     }
 
-    if ($versionName != $currentVersion && !$isExperimental) {
+    if ($selectedVersionIndex > $currentVersionIndex) {
         $disclaimers[] = "You are trying to download builds for an old version of Minecraft!<br />Keep in mind that if you download these builds, you will not receive support.";
     }
 
