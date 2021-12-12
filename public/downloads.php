@@ -70,12 +70,16 @@
             }
         }
 
-        usort($subversions, 'version_compare');
+        usort($subversions, "version_compare");
         $finalVersionNames[] = $subversions[count($subversions) - 1];
     }
 
-    $versionName = filter_var($_GET["v"], FILTER_SANITIZE_STRING);
-    if ($versionName == null || !in_array($versionName, $versionNames)) {
+    $versionName = $currentVersion;
+    if (isset($_GET["v"])) {
+        $versionName = filter_var($_GET["v"], FILTER_SANITIZE_STRING);
+    }
+
+    if (!in_array($versionName, $versionNames)) {
         $versionName = $currentVersion;
     }
 
