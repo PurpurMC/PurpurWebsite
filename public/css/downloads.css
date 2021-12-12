@@ -212,6 +212,9 @@ nav a {
   background: linear-gradient(45deg, rgba(125,0,0,1) 0%, rgba(255,0,0,1) 50%, rgba(125,0,0,1) 100%);
   transition: all 500ms ease-in-out;
 }
+.versionWarning a {
+  text-decoration: underline;
+}
 .versionWarning.visible {
   max-height: unset;
   padding: 10px;

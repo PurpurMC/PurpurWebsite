@@ -27,6 +27,13 @@
         ]
     ];
 
+    $allKnownVulnerabilities = [
+        [
+                "affectedVersions"=>["1.17", "1.16.5", "1.16.4", "1.16.3", "1.16.2", "1.16.1", "1.16", "1.15.2", "1.15.1", "1.15", "1.14.4", "1.14.3", "1.14.2", "1.14.1"],
+                "message"=>"This version is known to contain an RCE vulnerability!<br /><a href='https://www.minecraft.net/en-us/article/important-message--security-vulnerability-java-edition'>Read about the exploit and potential mitigations here</a>"
+        ]
+    ];
+
     $betaVersions = ["1.18.1", "1.18"];
     $currentVersion = "1.17.1";
 
@@ -99,12 +106,14 @@
         $disclaimers[] = "You are trying to download experimental builds!<br /><u>DO NOT</u> use these builds in production, as there may be many bugs and corruption issues.<br />Please report any and all issues you encounter!";
     }
 
-    if (!in_array($versionName, $finalVersionNames)) {
-        $disclaimers[] = "You are trying to download builds for an old and non-final version of Minecraft!<br />These builds are likely to contain <u>severe exploits, vulnerabilities, and more</u>!";
-    }
-
     if ($selectedVersionIndex > $currentVersionIndex) {
         $disclaimers[] = "You are trying to download builds for an old version of Minecraft!<br />Keep in mind that if you download these builds, you will not receive support.";
+    }
+
+    foreach ($allKnownVulnerabilities as $vulnerability) {
+        if (in_array($versionName, $vulnerability["affectedVersions"])) {
+            $disclaimers[] = $vulnerability["message"];
+        }
     }
 
     function getHotfix($version, $build) {
