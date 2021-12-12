@@ -92,10 +92,12 @@
     }
     rsort($builds);
 
-    $hotfixesForVersion = $allHotfixes[$versionName];
-    foreach ($hotfixesForVersion as $build) {
-        $build["isHotfix"] = true;
-        array_unshift($builds, $build);
+    if (array_key_exists($versionName, $allHotfixes)) {
+        $hotfixesForVersion = $allHotfixes[$versionName];
+        foreach ($hotfixesForVersion as $build) {
+            $build["isHotfix"] = true;
+            array_unshift($builds, $build);
+        }
     }
 
     $disclaimers = [];
@@ -226,7 +228,7 @@
                 <tbody>
                     <?php foreach ($builds as $build): ?>
                         <tr>
-                            <td class="left"><?=$build["isHotfix"] ? getHotfix($versionName, $build["build"]) : getDownloadButton($build["version"], $build["build"], $build["result"])?></td>
+                            <td class="left"><?=array_key_exists("isHotfix", $build) ? getHotfix($versionName, $build["build"]) : getDownloadButton($build["version"], $build["build"], $build["result"])?></td>
                             <td class="mid"><?=getCommits($build["commits"])?></td>
                             <td class="right"><?=date("Y-m-d H:i:s", $build["timestamp"] / 1000)?></td>
                         </tr>
