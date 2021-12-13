@@ -74,11 +74,11 @@
 
         usort($subversions, "version_compare");
 
-        $firstSubversion = $subversions[count($subversions) - 1];
-        $finalVersionNames[] = $firstSubversion;
+        $finalVersion = $subversions[count($subversions) - 1];
+        $finalVersionNames[] = $finalVersion;
 
-        if (!in_array($firstSubversion, $forceInvisible)) {
-            $visibleTabs[] = $firstSubversion;
+        if (!in_array($finalVersion, $forceInvisible)) {
+            $visibleTabs[] = $finalVersion;
         }
     }
 
