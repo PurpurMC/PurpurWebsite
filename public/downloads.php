@@ -36,6 +36,7 @@
 
     $betaVersions = ["1.18.1", "1.18"];
     $currentVersion = "1.17.1";
+    $forceInvisible = ["1.15.2", "1.14.4"];
 
     $contents = file_get_contents("/srv/purpur/papyrus/data.json");
     $json = json_decode($contents, true);
@@ -61,6 +62,7 @@
     rsort($rootVersionNames);
 
     $finalVersionNames = [];
+    $visibleTabs = [];
     foreach ($rootVersionNames as $rootVersion) {
         $subversions = [];
 
@@ -71,7 +73,13 @@
         }
 
         usort($subversions, "version_compare");
-        $finalVersionNames[] = $subversions[count($subversions) - 1];
+
+        $firstSubversion = $subversions[count($subversions) - 1];
+        $finalVersionNames[] = $firstSubversion;
+
+        if (!in_array($firstSubversion, $forceInvisible)) {
+            $visibleTabs[] = $firstSubversion;
+        }
     }
 
     $versionName = $currentVersion;
@@ -215,12 +223,12 @@
     <div class="row-one">
         <div class="container">
             <ul class="tabs">
-                <?php foreach ($finalVersionNames as $name): ?>
+                <?php foreach ($visibleTabs as $name): ?>
                     <li class="<?=$name == $versionName ? "selected" : ""?>"><a href="?v=<?=$name?>"><?=$name?></a></li>
                 <?php endforeach; ?>
             </ul>
             <select id="dropdown">
-                <?php foreach ($finalVersionNames as $name): ?>
+                <?php foreach ($visibleTabs as $name): ?>
                     <option value="<?=$name?>" <?=$name == $versionName ? "selected" : ""?>><?=$name?></option>
                 <?php endforeach; ?>
             </select>
