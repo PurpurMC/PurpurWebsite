@@ -40,5 +40,5 @@ function updateTimestamps() {
 }
 
 function is24h() {
-  return window.localStorage.is24h !== "false" || false;
+  return window.localStorage.is24h === "true" || false;
 }
