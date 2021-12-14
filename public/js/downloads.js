@@ -1,12 +1,29 @@
-window.addEventListener('load', function() {
+let timestamps;
+let check24h;
+const locale = navigator.languages?.[0] || navigator.language;
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
+window.addEventListener("load", function() {
   document.getElementById("dropdown").onchange = changeDropdown;
+  timestamps = document.getElementsByClassName("timestamp");
+  check24h = document.getElementById("check-24h");
+  check24h.checked = is24h();
 
-  const locale = navigator.languages?.[0] || navigator.language;
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+  check24h.addEventListener("change", function() {
+    window.localStorage.is24h = check24h.checked;
+    updateTimestamps();
+  });
 
-  const timestamps = document.getElementsByClassName("timestamp");
+  updateTimestamps();
+});
+
+function changeDropdown(option) {
+  window.location.href = "/downloads?v=" + option.target.value;
+}
+
+function updateTimestamps() {
   for (const timestamp of timestamps) {
-    const date = new Date(Number.parseFloat(timestamp.innerHTML));
+    const date = new Date(Number.parseFloat(timestamp.dataset.timestamp));
     timestamp.innerHTML = date.toLocaleString(locale, {
       month: "2-digit",
       day: "2-digit",
@@ -14,13 +31,14 @@ window.addEventListener('load', function() {
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
-      timeZone: timezone
+      timeZone: timezone,
+      hour12: !check24h.checked
     });
 
     timestamp.classList.add("visible");
   }
-});
+}
 
-function changeDropdown(option) {
-  window.location.href = "/downloads?v=" + option.target.value;
+function is24h() {
+  return window.localStorage.is24h !== "false" || false;
 }

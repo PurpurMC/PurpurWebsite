@@ -224,3 +224,6 @@ nav a {
 .timestamp.visible {
   color: unset;
 }
+input {
+  margin: 0;
+}
