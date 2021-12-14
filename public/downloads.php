@@ -242,7 +242,7 @@
                         <tr>
                             <td class="left"><?=array_key_exists("isHotfix", $build) ? getHotfix($versionName, $build["build"]) : getDownloadButton($build["version"], $build["build"], $build["result"])?></td>
                             <td class="mid"><?=getCommits($build["commits"])?></td>
-                            <td class="right"><?=date("Y-m-d H:i:s", $build["timestamp"] / 1000)?></td>
+                            <td class="right timestamp"><?=$build["timestamp"]?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

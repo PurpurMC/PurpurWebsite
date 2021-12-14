@@ -199,7 +199,6 @@ nav a {
   margin: 0 20px 0 0;
   max-width: 100%;
 }
-
 .versionWarning {
   overflow: hidden;
   max-height: 0;
@@ -218,4 +217,10 @@ nav a {
 .versionWarning.visible {
   max-height: unset;
   padding: 10px;
+}
+.timestamp {
+  color: transparent;
+}
+.timestamp.visible {
+  color: unset;
 }
