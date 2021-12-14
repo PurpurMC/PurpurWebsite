@@ -1,7 +1,10 @@
 let timestamps;
 let check24h;
-const locale = navigator.languages?.[0] || navigator.language;
-const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
+const localeOptions = Intl.DateTimeFormat().resolvedOptions();
+
+const locale = localeOptions.locale;
+const timezone = localeOptions.timeZone;
 
 window.addEventListener("load", function() {
   document.getElementById("dropdown").onchange = changeDropdown;
@@ -40,5 +43,12 @@ function updateTimestamps() {
 }
 
 function is24h() {
-  return window.localStorage.is24h === "true" || false;
+  return window.localStorage.is24h === "true" || localeUses24HourTime(locale);
+}
+
+// https://stackoverflow.com/a/60437579
+function localeUses24HourTime(langCode) {
+  return new Intl.DateTimeFormat(langCode, {
+    hour: "numeric"
+  }).formatToParts(new Date(2020, 0, 1, 13)).find(part => part.type === "hour").value.length === 2;
 }
