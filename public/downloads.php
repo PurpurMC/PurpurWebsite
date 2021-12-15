@@ -3,8 +3,8 @@
 
     $allHotfixes = [
         "1.17.1"=>[
-            "builds"=>[
-                "build"=>"hotfix",
+            "builds"=>[[
+                "build"=>"hotfix1",
                 "commits"=>[[
                     "author"=>"Encode42",
                     "title"=>"I hope there's no exploits in old versions- oh wait",
@@ -23,7 +23,17 @@
                     "hash"=>"4ff0630086bb589e1e421b06333eeeb4a3a027b2"
                 ]],
                 "timestamp"=>1639113438000
-            ]
+            ], [
+                "build"=>"hotfix2",
+                "commits"=>[[
+                    "author"=>"Encode42",
+                    "title"=>"Updated Upstream (Paper)",
+                    "email"=>"me@encode42.dev",
+                    "hash"=>"8a17a52d8a8f87662afc3f1188c38db9172f2815"
+
+                ]],
+                "timestamp"=>1639589307000
+            ]]
         ]
     ];
 
@@ -106,7 +116,8 @@
 
     if (array_key_exists($versionName, $allHotfixes)) {
         $hotfixesForVersion = $allHotfixes[$versionName];
-        foreach ($hotfixesForVersion as $build) {
+        $hotfixBuilds = $hotfixesForVersion["builds"];
+        foreach ($hotfixBuilds as $build) {
             $build["isHotfix"] = true;
             array_unshift($builds, $build);
         }
