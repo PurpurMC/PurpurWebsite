@@ -44,8 +44,8 @@
         ]
     ];
 
-    $betaVersions = ["1.18.1", "1.18"];
-    $currentVersion = "1.17.1";
+    $betaVersions = [];
+    $currentVersion = "1.18.1";
     $forceInvisible = ["1.15.2", "1.14.4"];
 
     $contents = file_get_contents("/srv/purpur/papyrus/data.json");
