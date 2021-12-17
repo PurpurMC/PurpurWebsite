@@ -11,9 +11,7 @@ window.addEventListener("load", function() {
 
   // Create the tab URLs
   const tabs = document.getElementsByClassName("tabLink");
-  console.log(tabs);
   for (const tab of tabs) {
-    console.log(tab);
     tab.href = getTabURL(tab.innerHTML);
   }
 
