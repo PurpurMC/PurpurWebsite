@@ -212,8 +212,8 @@
         <link type="text/css" rel="stylesheet" href="/css/raleway.css" />
         <link type="text/css" rel="stylesheet" href="/css/index.css" />
         <link href="/css/downloads.css" type="text/css" rel="stylesheet" />
-        <script src=/"js/downloads.js"></script>
-        <script src=/"js/fontawesome.js" crossorigin="anonymous"></script>
+        <script src="/js/downloads.js"></script>
+        <script src="/js/fontawesome.js" crossorigin="anonymous"></script>
     </head>
     <body>
     <div class="top-row">
@@ -235,7 +235,7 @@
         <div class="container">
             <ul class="tabs">
                 <?php foreach ($visibleTabs as $name): ?>
-                    <li class="<?=$name == $versionName ? "selected" : ""?>"><a href="?v=<?=$name?>"><?=$name?></a></li>
+                    <li class="<?=$name == $versionName ? "selected" : ""?>"><a class="tabLink"><?=$name?></a></li>
                 <?php endforeach; ?>
             </ul>
             <select id="dropdown">

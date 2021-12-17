@@ -8,6 +8,16 @@ const timezone = localeOptions.timeZone;
 
 window.addEventListener("load", function() {
   document.getElementById("dropdown").onchange = changeDropdown;
+
+  // Create the tab URLs
+  const tabs = document.getElementsByClassName("tabLink");
+  console.log(tabs);
+  for (const tab of tabs) {
+    console.log(tab);
+    tab.href = getTabURL(tab.innerHTML);
+  }
+
+  // Update the timestamps
   timestamps = document.getElementsByClassName("timestamp");
   check24h = document.getElementById("check-24h");
   check24h.checked = is24h();
@@ -19,10 +29,6 @@ window.addEventListener("load", function() {
 
   updateTimestamps();
 });
-
-function changeDropdown(option) {
-  window.location.href = "/downloads?v=" + option.target.value;
-}
 
 function updateTimestamps() {
   for (const timestamp of timestamps) {
@@ -51,4 +57,14 @@ function localeUses24HourTime(langCode) {
   return new Intl.DateTimeFormat(langCode, {
     hour: "numeric"
   }).formatToParts(new Date(2020, 0, 1, 13)).find(part => part.type === "hour").value.length === 2;
+}
+
+function changeDropdown(option) {
+  window.location.href = getTabURL(option.target.innerHTML);
+}
+
+const params = new URLSearchParams(window.location.search);
+const query = params.get("v");
+function getTabURL(version) {
+  return `/downloads${(query ? "?v=" : "/") + version}`;
 }
