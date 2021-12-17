@@ -209,11 +209,11 @@
         <meta property="og:description" content="<?=$description?>" />
         <meta property="og:image" content="<?=$ogimg?>" />
         <link rel="icon" type="image/x-icon" href="images/purpur.svg" />
-        <link type="text/css" rel="stylesheet" href="css/raleway.css" />
-        <link type="text/css" rel="stylesheet" href="css/index.css" />
-        <link href="css/downloads.css" type="text/css" rel="stylesheet" />
-        <script src="js/downloads.js"></script>
-        <script src="js/fontawesome.js" crossorigin="anonymous"></script>
+        <link type="text/css" rel="stylesheet" href="/css/raleway.css" />
+        <link type="text/css" rel="stylesheet" href="/css/index.css" />
+        <link href="/css/downloads.css" type="text/css" rel="stylesheet" />
+        <script src=/"js/downloads.js"></script>
+        <script src=/"js/fontawesome.js" crossorigin="anonymous"></script>
     </head>
     <body>
     <div class="top-row">
@@ -224,7 +224,7 @@
                 <a href="/discord" target="_blank"><i class="fab fa-discord"></i> Discord</a>
                 <a href="/downloads"><i class="fas fa-cloud-download-alt"></i> Downloads</a>
             </nav>
-            <a href="/"><img src="images/purpur.svg" alt="Purpur logo" /></a>
+            <a href="/"><img src="/images/purpur.svg" alt="Purpur logo" /></a>
             <div>
                 <a href="/"><h2>Purpur</h2></a>
                 <p>Your Minecraft, your way</p>
