@@ -58,7 +58,7 @@ function localeUses24HourTime(langCode) {
 }
 
 function changeDropdown(option) {
-  window.location.href = getTabURL(option.target.innerHTML);
+  window.location.href = getTabURL(option.target.value);
 }
 
 const params = new URLSearchParams(window.location.search);
