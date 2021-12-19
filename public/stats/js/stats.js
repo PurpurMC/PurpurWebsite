@@ -17,12 +17,14 @@ function mkcfg(title, x, y) {
 
 function updateConfig(config, data) {
   Object.keys(data).forEach(function(server) {
-    config.data.datasets.push({
+	if (server !== "purpur") {
+      config.data.datasets.push({
         label: server,
         backgroundColor: colors[server],
         borderColor: colors[server],
         data: data[server]
-    });
+      });
+	}
   });
 }
 
