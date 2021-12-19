@@ -33,6 +33,16 @@
 
                 ]],
                 "timestamp"=>1639589307000
+            ], [
+                "build"=>"hotfix3",
+                "commits"=>[[
+                    "author"=>"Encode42",
+                    "title"=>"Can Log4j stop being vulnerable?",
+                    "email"=>"me@encode42.dev",
+                    "hash"=>"08dd6c78298cfef89d71c2f839878ab8d18ad899"
+
+                ]],
+                "timestamp"=>1639875236000
             ]]
         ]
     ];
