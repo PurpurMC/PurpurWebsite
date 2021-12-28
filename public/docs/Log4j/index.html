@@ -336,15 +336,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1171" class="md-nav__link">
-    1.17.1
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#117" class="md-nav__link">
-    1.17
+  <a href="#1171-and-117" class="md-nav__link">
+    1.17.1 and 1.17
   </a>
   
 </li>
@@ -393,9 +386,7 @@
 <p>Due to the way our tooling works, we cannot push fixed jars for versions older than 1.17.1. Now is a good time to get off unsupported versions and onto the latest and greatest versions of the game.</p>
 <h3 id="118-and-newer">1.18 and newer<a class="headerlink" href="#118-and-newer" title="Permanent link">🔗</a></h3>
 <p>All 1.18.1 builds and newer are patched, as this exploit was one of the reasons it was released. <a href="https://purpurmc.org/downloads">Download the latest builds here</a>. If you’re running 1.18, builds <a href="https://api.purpurmc.org/v2/purpur/1.18/1433/download">#1433</a> and newer contain the fix.</p>
-<h3 id="1171">1.17.1<a class="headerlink" href="#1171" title="Permanent link">🔗</a></h3>
-<p>For 1.17.1, the fix is as easy as updating the jar. Download the latest hotfix from <a href="https://purpurmc.org/downloads/1.17.1/">the downloads page</a>, and edit your launch script to run the updated jar.</p>
-<h3 id="117">1.17<a class="headerlink" href="#117" title="Permanent link">🔗</a></h3>
+<h3 id="1171-and-117">1.17.1 and 1.17<a class="headerlink" href="#1171-and-117" title="Permanent link">🔗</a></h3>
 <p>As stated above, Purpur does not provide a patched jar. Instead, we provide an XML file that disables what causes the exploit. To install, <a download href="../xml/purpur_log4j2_117.xml" >download this XML file</a>, place it in your server’s root directory (where the jar files are), and add <code>-Dlog4j.configurationFile=purpur_log4j2_117.xml</code> after <code>java</code> in your launch arguments.</p>
 <h3 id="1165-and-older">1.16.5 and older<a class="headerlink" href="#1165-and-older" title="Permanent link">🔗</a></h3>
 <p>The process is the same as the above, but with a different XML file. <a download href="../xml/purpur_log4j2_1141-1165.xml" >Download this XML file</a> to your server’s root directory, and add <code>-Dlog4j.configurationFile=purpur_log4j2_1141-1165.xml</code> after <code>java</code> in your launch arguments.</p>
