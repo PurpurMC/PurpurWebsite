@@ -1,51 +1,7 @@
 <?php
     require_once("opengraph.php");
 
-    $allHotfixes = [
-        "1.17.1"=>[
-            "builds"=>[[
-                "build"=>"hotfix1",
-                "commits"=>[[
-                    "author"=>"Encode42",
-                    "title"=>"I hope there's no exploits in old versions- oh wait",
-                    "email"=>"me@encode42.dev",
-                    "hash"=>"8a17a52d8a8f87662afc3f1188c38db9172f2815"
-
-                ], [
-                    "author"=>"Encode42",
-                    "title"=>"Here's a free upstream with your purchase while I'm at it",
-                    "email"=>"me@encode42.dev",
-                    "hash"=>"9a7a4dcaac050cdc795dbbb29a98665d9f8debe5"
-                ], [
-                    "author"=>"Encode42",
-                    "title"=>"Updated Upstream (Paper)\n\nUpstream has released updates that appear to apply and compile correctly\n\nPaper Changes:",
-                    "email"=>"me@encode42.dev",
-                    "hash"=>"4ff0630086bb589e1e421b06333eeeb4a3a027b2"
-                ]],
-                "timestamp"=>1639113438000
-            ], [
-                "build"=>"hotfix2",
-                "commits"=>[[
-                    "author"=>"Encode42",
-                    "title"=>"Updated Upstream (Paper)",
-                    "email"=>"me@encode42.dev",
-                    "hash"=>"8a17a52d8a8f87662afc3f1188c38db9172f2815"
-
-                ]],
-                "timestamp"=>1639589307000
-            ], [
-                "build"=>"hotfix3",
-                "commits"=>[[
-                    "author"=>"Encode42",
-                    "title"=>"Can Log4j stop being vulnerable?",
-                    "email"=>"me@encode42.dev",
-                    "hash"=>"08dd6c78298cfef89d71c2f839878ab8d18ad899"
-
-                ]],
-                "timestamp"=>1639875236000
-            ]]
-        ]
-    ];
+    $allHotfixes = [];
 
     $allKnownVulnerabilities = [
         [
