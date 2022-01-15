@@ -23,7 +23,7 @@
   $players = end($json['data']['players']['purpur']);
 
   // bottom row
-  $bstats = "bStats - Servers: " . $servers . " Players: " . $players;
+  $bstats = "Servers: " . $servers . " Players: " . $players;
 
   // create image
   $image = imagecreatetruecolor(500,100);
@@ -31,7 +31,7 @@
   // load background from png
   $sig = imagecreatefrompng('images/sig.png');
   imagecopy($image, $sig, 0, 0, 0, 0, imagesx($sig), imagesy($sig));
-  imagestring($image, 3, 180, 85, $bstats, imagecolorallocate($image, 200, 200, 200));
+  imagestring($image, 2, 300, 85, $bstats, imagecolorallocate($image, 200, 200, 200));
 
   // show image to browser
   header("Content-Type: image/png");
