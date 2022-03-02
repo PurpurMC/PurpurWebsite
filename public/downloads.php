@@ -101,7 +101,7 @@
         $disclaimers[] = "You are trying to download experimental builds!<br /><u>DO NOT</u> use these builds in production, as there may be many bugs and corruption issues.<br />Please report any and all issues you encounter!";
     }
 
-    if ($selectedVersionIndex > $currentVersionIndex || !in_array($versionName, $finalVersionNames)) {
+    if ($versionName != $currentVersion && ($selectedVersionIndex > $currentVersionIndex || !in_array($versionName, $finalVersionNames))) {
         $disclaimers[] = "You are trying to download builds for an old version of Minecraft!<br />Keep in mind that if you download these builds, you will not receive support.";
     }
 
