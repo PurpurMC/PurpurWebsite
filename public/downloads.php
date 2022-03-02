@@ -209,7 +209,7 @@
                     <option value="<?=$name?>" <?=$name == $versionName ? "selected" : ""?>><?=$name?></option>
                 <?php endforeach; ?>
             </select>
-            <div class="versionWarning <?=(($versionName != $currentVersion) ? "visible" : "")?>">
+            <div class="versionWarning <?=(!empty($disclaimers) ? "visible" : "")?>">
                 <?= join("<br /><br />", $disclaimers) ?>
             </div>
             <table class="downloads">
