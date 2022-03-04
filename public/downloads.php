@@ -161,6 +161,7 @@
     require_once('inc/header.php');
 ?>
     <body>
+    <link href="/css/downloads.css" type="text/css" rel="stylesheet" />
     <script src="/js/downloads.js"></script>
     <script src="/js/fontawesome.js" crossorigin="anonymous"></script>
 
