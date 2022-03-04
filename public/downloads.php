@@ -1,6 +1,5 @@
 <?php
-    require_once("opengraph.php");
-    require_once("versions.php");
+    require_once("inc/versions.php");
 
     $allHotfixes = [];
 
@@ -159,29 +158,8 @@
         return str_replace("'", "&apos;", str_replace('"', "&quot;", htmlspecialchars($str)));
     }
 
-?><!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><?=$title?></title>
-        <meta name="title" content="<?=$title?>" />
-        <meta name="description" content="<?=$description?>" />
-        <meta property="twitter:title" content="<?=$title?>" />
-        <meta property="twitter:image" content="<?=$ogimg?>" />
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:description" content="<?=$description?>" />
-        <meta property="og:title" content="<?=$title?>" />
-        <meta property="og:url" content="https://purpurmc.org" />
-        <meta property="og:description" content="<?=$description?>" />
-        <meta property="og:image" content="<?=$ogimg?>" />
-        <link rel="icon" type="image/x-icon" href="images/purpur.svg" />
-        <link type="text/css" rel="stylesheet" href="/css/raleway.css" />
-        <link type="text/css" rel="stylesheet" href="/css/index.css" />
-        <link href="/css/downloads.css" type="text/css" rel="stylesheet" />
-        <script src="/js/downloads.js"></script>
-        <script src="/js/fontawesome.js" crossorigin="anonymous"></script>
-    </head>
+    require_once('inc/header.php');
+?>
     <body>
     <div class="top-row">
         <div class="container">
@@ -233,5 +211,3 @@
     </footer>
     </body>
 </html>
-
-
