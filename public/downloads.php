@@ -161,6 +161,9 @@
     require_once('inc/header.php');
 ?>
     <body>
+    <script src="/js/downloads.js"></script>
+    <script src="/js/fontawesome.js" crossorigin="anonymous"></script>
+
     <div class="top-row">
         <div class="container">
             <nav>
