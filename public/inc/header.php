@@ -1,6 +1,7 @@
 <?php
-require_once("inc/opengraph.php");
+require_once("opengraph.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,7 @@ require_once("inc/opengraph.php");
     <meta property="og:url" content="https://purpurmc.org" />
     <meta property="og:description" content="<?=$description?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
-    <link rel="icon" type="image/x-icon" href="images/purpur.svg" />
-    <link type="text/css" rel="stylesheet" href="css/raleway.css" />
-    <link type="text/css" rel="stylesheet" href="css/index.css" />
+    <link rel="icon" type="image/x-icon" href="../images/purpur.svg" />
+    <link type="text/css" rel="stylesheet" href="../css/raleway.css" />
+    <link type="text/css" rel="stylesheet" href="../css/index.css" />
 </head>

@@ -1,7 +1,6 @@
 <?php
 require_once("inc/versions.php");
-
-require_once("inc/header.php")
+require_once("inc/header.php");
 ?>
   <body>
     <header>
