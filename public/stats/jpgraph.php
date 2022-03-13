@@ -46,16 +46,8 @@
   $l1=new LinePlot($jsonData['data']['servers']['purpur']);
   $l1->SetColor($jsonServers['servers']['purpur']['color']);
   $l1->SetLegend('Purpur');
-  $l2=new LinePlot($jsonData['data']['servers']['tuinity']);
-  $l2->SetColor($jsonServers['servers']['tuinity']['color']);
-  $l2->SetLegend('Tuinity');
-  $l3=new LinePlot($jsonData['data']['servers']['yatopia']);
-  $l3->SetColor($jsonServers['servers']['yatopia']['color']);
-  $l3->SetLegend('Yatopia');
 
   $graph->Add($l1);
-  $graph->Add($l2);
-  $graph->Add($l3);
 
   $graph->Stroke();
 ?>
