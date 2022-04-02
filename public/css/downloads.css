@@ -6,9 +6,8 @@
   height: 100px;
   text-align: left;
   box-shadow: 0 0 10px rgb(0,0,0,0.5);
-  position: fixed;
   width: 100%;
-  background: linear-gradient(90deg, #392955 0%, #3a6294 100%);
+  background: purple;
 }
 .top-row .container {
   padding-top: 15px;
@@ -79,7 +78,7 @@ nav a {
 .tabs li a {
   display: block;
   text-align: center;
-  font-family: FontAwesome,Verdana,sans-serif;
+  font-family: cursive;
   font-size: 14px;
   font-weight: 700;
   white-space: nowrap;
@@ -134,13 +133,14 @@ nav a {
   border-spacing: 0px;
   margin-bottom: 100px;
   text-align: left;
+  color: yellow;
 }
 .downloads thead {
   font-weight: 700;
 }
 .downloads thead td {
   padding: 15px 0 15px 20px;
-  font-family: FontAwesome,Verdana,sans-serif;
+  font-family: cursive;
   line-height: 25px;
   border: 0px;
 }
@@ -149,7 +149,7 @@ nav a {
 }
 .downloads tbody td {
   padding: 15px 0 15px 20px;
-  font-family: FontAwesome,Verdana,sans-serif;
+  font-family: cursive;
   line-height: 25px;
   border: 0px;
   border-top: 1px solid #555;

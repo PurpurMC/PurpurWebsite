@@ -1,159 +1,180 @@
-html,body {
-  margin: 0;
-  padding: 0;
-  color: #ffffff;
-  font-size: 16px;
-  font-family: "Raleway";
-  line-height: 1.6;
-}
-@media (min-width: 850px) {
-  html, body {
-    font-size: 18px;
-  }
-}
 body {
-  background: linear-gradient(90deg, #392955 0%, #3a6294 100%);
+  background: black url("/images/squid.gif");
+  background-size: 3rem;
+}
+
+h1, h3, p {
+  font-family: "Comic Neue", "Comic Sans MS", "Comic Sans", cursive;
   text-align: center;
-  min-height: 100vh; 
-  display: grid;
-  grid-template-rows: auto 1fr auto;
 }
-h1, h2, h3, h4 {
-  margin: 0 0 1rem;
-  font-weight: 700;
-  line-height: 1.25;
-}
-h1 {
-  font-size: 3rem;
-}
-h2 {
-  font-size: 1.1em;
-}
-h3 {
-  font-size: 1.4em;
-}
+
 p {
-  max-width: 18rem;
-  margin: 1rem auto;
+  font-family: cursive;
 }
-a {
-  text-decoration: none;
-  color: white;
+
+h1 {
+  color: deeppink;
+  font-size: 4rem;
 }
-.container {
-  width: 85%;
-  margin: 0 auto;
-  max-width: 900px;
+
+h3 {
+  color: rebeccapurple;
+  font-size: 2rem;
 }
-header {
-  display: flex;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 10px rgb(0,0,0,0.5);
-}
-header .container {
-  padding: 1.5em 0;
-}
-header .logo {
-  display: block;
-  margin: 0 auto;
-  width: 280px;
-  padding: 1em 0 0 0;
-}
-@media (min-width: 405px) {
-  header .logo {
-    width: 280px;
-  }
-}
-header p {
-  max-width: 30em;
-  margin: 3em auto 2em;
-}
-header a.tiny {
-  font-size: 0.8em;
-}
-header a.tiny:hover {
+
+p {
+  color: red;
+  font-size: 3rem;
+  font-style: italic;
   text-decoration: underline;
 }
-.row-one {
-  overflow: hidden;
-  background-color: rgba(36, 31, 49, 0.47);
-}
-.row-two {
-  overflow: hidden;
-  background-color: #241f31;
-}
-@media (min-width: 850px) {
-  .group {
-    display: flex;
-  }
-}
-.group .block {
-  width: 100%;
-  margin: 6rem auto;
-}
-@media (min-width: 850px) {
-  .group .block {
-    width: 30em;
-  }
-}
-.block .icon {
-  width: 128px;
-  height: 128px;
-  margin-bottom: 1rem;
-}
+
 footer {
-  background-color: #1a1622;
-  padding: 4em 0 4em;
-  color: white;
-  font-size: 0.9em;
+  margin-top: 100px;
+  text-align: center;
 }
-footer {
-  font-size: 1.2em;
-  font-weight: 600;
-}
+
 footer p {
-  font-size: 0.5em;
-}
-.button {
-  display: block;
-  border-radius: 100px;
-  margin: 1rem auto;
-  padding: 0.6rem 2rem;
-  width: 50%;
-  max-width: 14em;
-  font-weight: 700;
+  font-family: serif;
+  font-style: normal;
+  font-size: 0.8rem;
   text-decoration: none;
-  transition: all 0.35s cubic-bezier(0.17, 0.89, 0.32, 1.28);
+  color: aqua;
 }
-.button:hover {
-  transform: scale(1.05);
+
+footer a {
+  color: aqua;
+  text-decoration: none;
 }
-.button:active {
-  transform: scale(0.98);
+
+.image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
 }
-.download-button {
-  width: 10em;
-  padding: 0.9em 3em;
-  font-size: 1.2em;
+
+.img-large, .large img {
+  width: 350px !important;
 }
-.blue-button {
-  background: linear-gradient(0deg, #3584e4 0%, #62a0ea 100%);
-  color: white;
+
+.img-medium, .medium img {
+  width: 175px !important;
 }
-.white-button {
-  background: linear-gradient(0deg, #c0bfbc 0%, #f6f5f4 100%);
-  color: #241f31;
+
+.small img {
+  width: 75px;
 }
-.red-button {
-  background: linear-gradient(0deg, #c01c28 0%, #ed333b 100%);
-  color: white;
+
+.bottom {
+  margin-top: 50px;
 }
-.disabled-button {
-  background: none;
-  color: #9a9a9a;
-  border: 2px solid #c0bfbc85;
-  cursor: pointer;
+
+@font-face {
+  font-family: 'Comic Neue';
+  src: local('Comic Neue Light'), local('ComicNeue-Light'),
+  url('/fonts/ComicNeue-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Comic Neue';
+  src: local('Comic Neue Italic'), local('ComicNeue-Italic'),
+  url('/fonts/ComicNeue-Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Comic Neue';
+  src: local('Comic Neue Bold'), local('ComicNeue-Bold'),
+  url('/fonts/ComicNeue-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Comic Neue';
+  src: local('Comic Neue Bold Italic'), local('ComicNeue-BoldItalic'),
+  url('/fonts/ComicNeue-BoldItalic.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Comic Neue';
+  src: local('Comic Neue Light Italic'), local('ComicNeue-LightItalic'),
+  url('/fonts/ComicNeue-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Comic Neue';
+  src: local('Comic Neue Regular'), local('ComicNeue-Regular'),
+  url('/fonts/ComicNeue-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Comic Neue Angular';
+  src: local('Comic Neue Angular Bold'), local('ComicNeueAngular-Bold'),
+  url('/fonts/ComicNeueAngular-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Comic Neue Angular';
+  src: local('Comic Neue Angular Italic'), local('ComicNeueAngular-Italic'),
+  url('/fonts/ComicNeueAngular-Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Comic Neue Angular';
+  src: local('Comic Neue Angular Bold Italic'), local('ComicNeueAngular-BoldItalic'),
+  url('/fonts/ComicNeueAngular-BoldItalic.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Comic Neue Angular';
+  src: local('Comic Neue Angular Light Italic'), local('ComicNeueAngular-LightItalic'),
+  url('/fonts/ComicNeueAngular-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Comic Neue Angular';
+  src: local('Comic Neue Angular Regular'), local('ComicNeueAngular-Regular'),
+  url('/fonts/ComicNeueAngular-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Comic Neue Angular';
+  src: local('Comic Neue Angular Light'), local('ComicNeueAngular-Light'),
+  url('/fonts/ComicNeueAngular-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 

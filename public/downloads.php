@@ -5,8 +5,8 @@
 
     $allKnownVulnerabilities = [
         [
-                "affectedVersions"=>["1.18", "1.17.1", "1.17", "1.16.5", "1.16.4", "1.16.3", "1.16.2", "1.16.1", "1.16", "1.15.2", "1.15.1", "1.15", "1.14.4", "1.14.3", "1.14.2", "1.14.1"],
-                "message"=>"This version is known to contain an RCE vulnerability!<br /><a href='https://purpurmc.org/docs/Log4j/'>Read about the exploit and potential mitigations here</a>"
+            "affectedVersions"=>["1.18", "1.17.1", "1.17", "1.16.5", "1.16.4", "1.16.3", "1.16.2", "1.16.1", "1.16", "1.15.2", "1.15.1", "1.15", "1.14.4", "1.14.3", "1.14.2", "1.14.1"],
+            "message"=>"This version is known to contain an RCE vulnerability!<br /><a href='https://purpurmc.org/docs/Log4j/'>Read about the exploit and potential mitigations here</a>"
         ]
     ];
 
@@ -113,7 +113,7 @@
 
     function getDownloadButton($version, $build, $result) {
         if ($result == "SUCCESS") {
-            return "<a href='https://api.purpurmc.org/v2/purpur/$version/$build/download' class='button white-button' download='purpur-$version-$build.jar' title='Download build #$build'><span><i class='fas fa-cloud-download-alt'></i> $build</span></a>";
+            return "<a href='https://api.purpurmc.org/v2/purpur/$version/$build/download' class='button white-button' download='purpur-$version-$build.jar' title='Download build #$build'><span><img src='/images/download2.gif'> $build</span></a>";
         } else {
             return "<a href='#' class='button disabled-button' title='Failed build #$build'><span><i class='fas fa-times-circle'></i> $build</span></a>";
         }
@@ -165,21 +165,16 @@
     <script src="/js/downloads.js"></script>
     <script src="/js/fontawesome.js" crossorigin="anonymous"></script>
 
-    <div class="top-row">
-        <div class="container">
-            <nav>
-                <a href="/docs"><i class="fas fa-book-open"></i> Docs</a>
-                <a href="/github" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                <a href="/discord" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-                <a href="/downloads"><i class="fas fa-cloud-download-alt"></i> Downloads</a>
-            </nav>
-            <a href="/"><img src="/images/purpur.svg" alt="Purpur logo" /></a>
-            <div>
-                <a href="/"><h2>Purpur</h2></a>
-                <p>Your Minecraft, your way</p>
-            </div>
-        </div>
+    <div class="image-wrapper small">
+        <img src="/images/explosion.gif">
+        <h1>PurPurMC Downloads</h1>
+        <img src="/images/explosion.gif">
     </div>
+    <h3>YOURE MINECRAFT, YOURE WAY!</h3>
+    <div class="image-wrapper large">
+        <img src="/images/purpurmc.gif">
+    </div>
+
     <div class="row-one">
         <div class="container">
             <ul class="tabs">
@@ -209,9 +204,13 @@
             </table>
         </div>
     </div>
+    <div class="image-wrapper small bottom">
+        <img src="/images/netscape.gif" class="img-medium">
+        <img src="/images/beenz.png">
+    </div>
     <footer>
-        &copy; 2019-2022 <a href="https://purpurmc.org">purpurmc.org</a> <a href="https://github.com/PurpurMC/Purpur/blob/HEAD/LICENSE">MIT</a>
-        <p><a href="https://gitlab.gnome.org/Teams/Releng/gnome-os-site" rel="noreferrer" target="_blank">Site design CC-BY-SA</a></p>
+        <p>note: check ur calenders</p>
+        <p>bgm: <a href="https://youtu.be/WfZv-ITcOYw">lemon demon - geocities</a></p>
     </footer>
     </body>
 </html>

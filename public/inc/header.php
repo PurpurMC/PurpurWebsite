@@ -21,4 +21,5 @@ require_once("opengraph.php");
     <link rel="icon" type="image/x-icon" href="/images/purpur.svg" />
     <link type="text/css" rel="stylesheet" href="/css/raleway.css" />
     <link type="text/css" rel="stylesheet" href="/css/index.css" />
+    <script src="/js/script.js" type="module"></script>
 </head>
