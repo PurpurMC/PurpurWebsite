@@ -181,7 +181,7 @@
                 <tbody>
                     <?php foreach (array_reverse($version["builds"]["all"]) as $build): ?>
                         <tr>
-                            <td class="left"><?=array_key_exists("isHotfix", $build) ? getHotfix($versionName, $build["build"]) : getDownloadButton($build["version"], $build["build"], $build["result"])?></td>
+                            <td class="left"><?=array_key_exists("isHotfix", $build) ? getHotfix($versionName, $build["build"]) : getDownloadButton($build["versions"][0], $build["build"], $build["result"])?></td>
                             <td class="mid"><?=getCommits($build["commits"])?></td>
                             <td class="right timestamp" data-timestamp="<?=$build["createdAt"]?>"></td>
                         </tr>
