@@ -1,4 +1,4 @@
- <?php
+<?php
     require_once("inc/versions.php");
 
     $allHotfixes = [];
@@ -10,14 +10,22 @@
         ]
     ];
 
-    $project = json_decode(file_get_contents("https://api.purpurmc.org/v2/purpur"), true);
+    $contents = file_get_contents("/srv/papyrus/data.json");
+    $json = json_decode($contents, true);
+
+    $project = null;
+    foreach ($json["projects"] as $possibleProject) {
+        if ($possibleProject["name"] == "purpur") {
+            $project = $possibleProject;
+        }
+    }
 
     $rootVersionNames = [];
     $versionNames = [];
     foreach ($project["versions"] as $version) {
-        $versionNames[] = $version;
+        $versionNames[] = $version["name"];
 
-        preg_match("/\d\.\d*/", $version, $matches);
+        preg_match("/\d\.\d*/", $version["name"], $matches);
         $rootVersionNames[] = $matches[0];
     }
     rsort($versionNames);
@@ -59,7 +67,18 @@
         $versionName = $currentVersion;
     }
 
-    $version = json_decode(file_get_contents("https://api.purpurmc.org/v2/purpur/" . $versionName . "?detailed=true"), true);
+    $version = [];
+    foreach ($project["versions"] as $possibleVersion) {
+        if ($possibleVersion["name"] == $versionName) {
+            $version = $possibleVersion;
+        }
+    }
+
+    $builds = [];
+    foreach ($version["builds"] as $build) {
+        array_push($builds, $build);
+    }
+    rsort($builds);
 
     if (array_key_exists($versionName, $allHotfixes)) {
         $hotfixesForVersion = $allHotfixes[$versionName];
@@ -70,9 +89,7 @@
         }
     }
 
-    $disclaimers = [
-        "The downloads API is experiencing issues. Please check <a href='/discord'>Discord</a> for updates!"
-    ];
+    $disclaimers = [];
     $currentVersionIndex = array_search($currentVersion, $versionNames);
     $selectedVersionIndex = array_search($versionName, $versionNames);
     $isExperimental = in_array($versionName, $betaVersions);
@@ -111,7 +128,7 @@
         foreach ($commits as $commit) {
             $committer = "\n\n- " . scrub($commit["author"]) . " <" . str_replace(".", "&period;", str_replace("@", "&commat;", scrub($commit["email"]))) . ">";
             $hash = "<a href='https://github.com/PurpurMC/Purpur/commit/" . $commit["hash"] . "' class='hash' rel='noreferrer' target='_blank'>" . substr($commit["hash"], 0, 7) . "</a>";
-            $result .= "<p title='" . shortenGitHubUrls(scrub($commit["summary"])) . $committer . "'><span>[$hash]</span> " . parseIssues(scrub(explode("\n", $commit["summary"])[0])) . "</p>\n";
+            $result .= "<p title='" . shortenGitHubUrls(scrub($commit["title"])) . $committer . "'><span>[$hash]</span> " . parseIssues(scrub(explode("\n", $commit["title"])[0])) . "</p>\n";
         }
         return $result;
     }
@@ -181,11 +198,11 @@
             <table class="downloads">
                 <thead><tr><td class="left">Build</td><td class="middle">Changes</td><td class="right">Date <label>(24h <input type="checkbox" id="check-24h">)</label></td></tr></thead>
                 <tbody>
-                    <?php foreach (array_reverse($version["builds"]["all"]) as $build): ?>
+                    <?php foreach ($builds as $build): ?>
                         <tr>
-                            <td class="left"><?=array_key_exists("isHotfix", $build) ? getHotfix($versionName, $build["build"]) : getDownloadButton($build["versions"][0], $build["build"], $build["result"])?></td>
+                            <td class="left"><?=array_key_exists("isHotfix", $build) ? getHotfix($versionName, $build["build"]) : getDownloadButton($build["version"], $build["build"], $build["result"])?></td>
                             <td class="mid"><?=getCommits($build["commits"])?></td>
-                            <td class="right timestamp" data-timestamp="<?=$build["createdAt"]?>"></td>
+                            <td class="right timestamp" data-timestamp="<?=$build["timestamp"]?>"></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -198,3 +215,4 @@
     </footer>
     </body>
 </html>
+
