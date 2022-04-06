@@ -1,4 +1,4 @@
-<?php
+ <?php
     require_once("inc/versions.php");
 
     $allHotfixes = [];
@@ -10,22 +10,14 @@
         ]
     ];
 
-    $contents = file_get_contents("/srv/papyrus/data.json");
-    $json = json_decode($contents, true);
-
-    $project = null;
-    foreach ($json["projects"] as $possibleProject) {
-        if ($possibleProject["name"] == "purpur") {
-            $project = $possibleProject;
-        }
-    }
+    $project = json_decode(file_get_contents("https://api.purpurmc.org/v3/purpur"), true);
 
     $rootVersionNames = [];
     $versionNames = [];
     foreach ($project["versions"] as $version) {
-        $versionNames[] = $version["name"];
+        $versionNames[] = $version;
 
-        preg_match("/\d\.\d*/", $version["name"], $matches);
+        preg_match("/\d\.\d*/", $version, $matches);
         $rootVersionNames[] = $matches[0];
     }
     rsort($versionNames);
@@ -67,18 +59,7 @@
         $versionName = $currentVersion;
     }
 
-    $version = [];
-    foreach ($project["versions"] as $possibleVersion) {
-        if ($possibleVersion["name"] == $versionName) {
-            $version = $possibleVersion;
-        }
-    }
-
-    $builds = [];
-    foreach ($version["builds"] as $build) {
-        array_push($builds, $build);
-    }
-    rsort($builds);
+    $version = json_decode(file_get_contents("https://api.purpurmc.org/v3/purpur/" . $versionName . "?detailed=true"), true);
 
     if (array_key_exists($versionName, $allHotfixes)) {
         $hotfixesForVersion = $allHotfixes[$versionName];
@@ -113,7 +94,7 @@
 
     function getDownloadButton($version, $build, $result) {
         if ($result == "SUCCESS") {
-            return "<a href='https://api.purpurmc.org/v2/purpur/$version/$build/download' class='button white-button' download='purpur-$version-$build.jar' title='Download build #$build'><span><i class='fas fa-cloud-download-alt'></i> $build</span></a>";
+            return "<a href='https://api.purpurmc.org/v3/purpur/$version/$build/purpurclip.jar' class='button white-button' download='purpur-$version-$build.jar' title='Download build #$build'><span><i class='fas fa-cloud-download-alt'></i> $build</span></a>";
         } else {
             return "<a href='#' class='button disabled-button' title='Failed build #$build'><span><i class='fas fa-times-circle'></i> $build</span></a>";
         }
@@ -128,7 +109,7 @@
         foreach ($commits as $commit) {
             $committer = "\n\n- " . scrub($commit["author"]) . " <" . str_replace(".", "&period;", str_replace("@", "&commat;", scrub($commit["email"]))) . ">";
             $hash = "<a href='https://github.com/PurpurMC/Purpur/commit/" . $commit["hash"] . "' class='hash' rel='noreferrer' target='_blank'>" . substr($commit["hash"], 0, 7) . "</a>";
-            $result .= "<p title='" . shortenGitHubUrls(scrub($commit["title"])) . $committer . "'><span>[$hash]</span> " . parseIssues(scrub(explode("\n", $commit["title"])[0])) . "</p>\n";
+            $result .= "<p title='" . shortenGitHubUrls(scrub($commit["summary"])) . $committer . "'><span>[$hash]</span> " . parseIssues(scrub(explode("\n", $commit["summary"])[0])) . "</p>\n";
         }
         return $result;
     }
@@ -201,11 +182,11 @@
             <table class="downloads">
                 <thead><tr><td class="left">Build</td><td class="middle">Changes</td><td class="right">Date <label>(24h <input type="checkbox" id="check-24h">)</label></td></tr></thead>
                 <tbody>
-                    <?php foreach ($builds as $build): ?>
+                    <?php foreach (array_reverse($version["builds"]["all"]) as $build): ?>
                         <tr>
                             <td class="left"><?=array_key_exists("isHotfix", $build) ? getHotfix($versionName, $build["build"]) : getDownloadButton($build["versions"][0], $build["build"], $build["result"])?></td>
                             <td class="mid"><?=getCommits($build["commits"])?></td>
-                            <td class="right timestamp" data-timestamp="<?=$build["timestamp"]?>"></td>
+                            <td class="right timestamp" data-timestamp="<?=$build["createdAt"]?>"></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
