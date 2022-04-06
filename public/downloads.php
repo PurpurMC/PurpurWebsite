@@ -10,7 +10,7 @@
         ]
     ];
 
-    $project = json_decode(file_get_contents("https://api.purpurmc.org/v3/purpur"), true);
+    $project = json_decode(file_get_contents("https://api.purpurmc.org/v2/purpur"), true);
 
     $rootVersionNames = [];
     $versionNames = [];
@@ -59,7 +59,7 @@
         $versionName = $currentVersion;
     }
 
-    $version = json_decode(file_get_contents("https://api.purpurmc.org/v3/purpur/" . $versionName . "?detailed=true"), true);
+    $version = json_decode(file_get_contents("https://api.purpurmc.org/v2/purpur/" . $versionName . "?detailed=true"), true);
 
     if (array_key_exists($versionName, $allHotfixes)) {
         $hotfixesForVersion = $allHotfixes[$versionName];
@@ -70,7 +70,9 @@
         }
     }
 
-    $disclaimers = [];
+    $disclaimers = [
+        "The downloads API is experiencing issues. Please check <a href='/discord'>Discord</a> for updates!"
+    ];
     $currentVersionIndex = array_search($currentVersion, $versionNames);
     $selectedVersionIndex = array_search($versionName, $versionNames);
     $isExperimental = in_array($versionName, $betaVersions);
@@ -94,7 +96,7 @@
 
     function getDownloadButton($version, $build, $result) {
         if ($result == "SUCCESS") {
-            return "<a href='https://api.purpurmc.org/v3/purpur/$version/$build/purpurclip.jar' class='button white-button' download='purpur-$version-$build.jar' title='Download build #$build'><span><i class='fas fa-cloud-download-alt'></i> $build</span></a>";
+            return "<a href='https://api.purpurmc.org/v2/purpur/$version/$build/download' class='button white-button' download='purpur-$version-$build.jar' title='Download build #$build'><span><i class='fas fa-cloud-download-alt'></i> $build</span></a>";
         } else {
             return "<a href='#' class='button disabled-button' title='Failed build #$build'><span><i class='fas fa-times-circle'></i> $build</span></a>";
         }
