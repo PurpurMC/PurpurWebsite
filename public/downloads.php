@@ -192,6 +192,9 @@
                     <option value="<?=$name?>" <?=$name == $versionName ? "selected" : ""?>><?=$name?></option>
                 <?php endforeach; ?>
             </select>
+            <div class="versionWarning visible">
+                The downloads API is experiencing issues. Please check <a href="/discord">Discord</a> for updates!
+            </div>
             <div class="versionWarning <?=(!empty($disclaimers) ? "visible" : "")?>">
                 <?= join("<br /><br />", $disclaimers) ?>
             </div>
