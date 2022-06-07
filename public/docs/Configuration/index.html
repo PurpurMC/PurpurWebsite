@@ -1159,6 +1159,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#clamp-levels" class="md-nav__link">
+    clamp-levels
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1380,6 +1387,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#dripstone-water" class="md-nav__link">
+    dripstone-water
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dripstone-lava" class="md-nav__link">
+    dripstone-lava
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1429,6 +1450,13 @@
           <li class="md-nav__item">
   <a href="#random-tick-crack-chance" class="md-nav__link">
     random-tick-crack-chance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feather-fall-distance-affects-trampling" class="md-nav__link">
+    feather-fall-distance-affects-trampling
   </a>
   
 </li>
@@ -2048,7 +2076,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#feather-fall-distance-affects-trampling" class="md-nav__link">
+  <a href="#feather-fall-distance-affects-trampling_1" class="md-nav__link">
     feather-fall-distance-affects-trampling
   </a>
   
@@ -2070,13 +2098,6 @@
           <li class="md-nav__item">
   <a href="#deactivate-by-redstone" class="md-nav__link">
     deactivate-by-redstone
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix-mc-50647" class="md-nav__link">
-    fix-MC-50647
   </a>
   
 </li>
@@ -5952,6 +5973,13 @@
           <li class="md-nav__item">
   <a href="#stand-with-rider" class="md-nav__link">
     stand-with-rider
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stand-when-hurt" class="md-nav__link">
+    stand-when-hurt
   </a>
   
 </li>
@@ -11435,6 +11463,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#clamp-levels" class="md-nav__link">
+    clamp-levels
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -11656,6 +11691,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#dripstone-water" class="md-nav__link">
+    dripstone-water
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dripstone-lava" class="md-nav__link">
+    dripstone-lava
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -11705,6 +11754,13 @@
           <li class="md-nav__item">
   <a href="#random-tick-crack-chance" class="md-nav__link">
     random-tick-crack-chance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feather-fall-distance-affects-trampling" class="md-nav__link">
+    feather-fall-distance-affects-trampling
   </a>
   
 </li>
@@ -12324,7 +12380,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#feather-fall-distance-affects-trampling" class="md-nav__link">
+  <a href="#feather-fall-distance-affects-trampling_1" class="md-nav__link">
     feather-fall-distance-affects-trampling
   </a>
   
@@ -12346,13 +12402,6 @@
           <li class="md-nav__item">
   <a href="#deactivate-by-redstone" class="md-nav__link">
     deactivate-by-redstone
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fix-mc-50647" class="md-nav__link">
-    fix-MC-50647
   </a>
   
 </li>
@@ -16228,6 +16277,13 @@
           <li class="md-nav__item">
   <a href="#stand-with-rider" class="md-nav__link">
     stand-with-rider
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stand-when-hurt" class="md-nav__link">
+    stand-when-hurt
   </a>
   
 </li>
@@ -21371,7 +21427,16 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <li><strong>description</strong>: allows the ability to increase enchantments passed their max level through the command</li>
 </ul>
 </li>
+<li>
+<h5 id="clamp-levels">clamp-levels<a class="headerlink" href="#clamp-levels" title="Permanent link">🔗</a></h5>
+<ul>
+<li><strong>default</strong>: true</li>
+<li><strong>description</strong>: Setting this to <code>false</code> allows levels to go up to <code>32767</code> by storing them as shorts instead of bytes.</li>
 </ul>
+</li>
+</ul>
+<details class="note" open="open"><summary>Note</summary><p>Clients will not display levels higher than <code>255</code></p>
+</details>
 <h2 id="world-settings">World Settings<a class="headerlink" href="#world-settings" title="Permanent link">🔗</a></h2>
 <p>World settings are on a per-world basis. The child-node <code>default</code> is used for all worlds that do not have their own specific settings.</p>
 <p>For a more clear explanation of the world settings section of the config, feel free to read through Paper's explanation here: <a href="https://docs.papermc.io/paper/per-world-configuration">https://docs.papermc.io/paper/per-world-configuration</a></p>
@@ -21471,6 +21536,20 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <li><strong>description</strong>: The speed in which a cauldron fills with powdered snow (depends on random tick)</li>
 </ul>
 </li>
+<li>
+<h6 id="dripstone-water">dripstone-water<a class="headerlink" href="#dripstone-water" title="Permanent link">🔗</a></h6>
+<ul>
+<li><strong>default</strong>: 0.17578125</li>
+<li><strong>description</strong>: The speed in which a cauldron below a down-facing pointed dripstone that has water placed a block above it fills with water (depends on random tick)</li>
+</ul>
+</li>
+<li>
+<h6 id="dripstone-lava">dripstone-lava<a class="headerlink" href="#dripstone-lava" title="Permanent link">🔗</a></h6>
+<ul>
+<li><strong>default</strong>: 0.05859375</li>
+<li><strong>description</strong>: The speed in which a cauldron below a down-facing pointed dripstone that has lava placed a block above it fills with lava (depends on random tick)</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -21509,6 +21588,13 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <ul>
 <li><strong>default</strong>: 500</li>
 <li><strong>description</strong>: The chance a turtle egg will crack</li>
+</ul>
+</li>
+<li>
+<h5 id="feather-fall-distance-affects-trampling">feather-fall-distance-affects-trampling<a class="headerlink" href="#feather-fall-distance-affects-trampling" title="Permanent link">🔗</a></h5>
+<ul>
+<li><strong>default</strong>: false</li>
+<li><strong>description</strong>: Set to true to stop trampling if entities fall a distance equal to their feather falling level, plus the extra block necessary to trample in the first place. Feather Falling 1 requires you to fall over 3+ blocks to trample. FF 2 requires 4+, etc.</li>
 </ul>
 </li>
 </ul>
@@ -21928,10 +22014,10 @@ Value set -&gt; Actual fall distance needed to trample
 </details>
 <ul>
 <li>
-<h5 id="feather-fall-distance-affects-trampling">feather-fall-distance-affects-trampling<a class="headerlink" href="#feather-fall-distance-affects-trampling" title="Permanent link">🔗</a></h5>
+<h5 id="feather-fall-distance-affects-trampling_1">feather-fall-distance-affects-trampling<a class="headerlink" href="#feather-fall-distance-affects-trampling_1" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Set to true if entities can stop trampling if they fall a distance equal to their feather falling level, plus the extra block necessary to trample in the first place. Feather Falling 1 requires you to fall over 3+ blocks to trample. FF 2 requires 4+, etc.</li>
+<li><strong>description</strong>: Set to true to stop trampling if entities fall a distance equal to their feather falling level, plus the extra block necessary to trample in the first place. Feather Falling 1 requires you to fall over 3+ blocks to trample. FF 2 requires 4+, etc.</li>
 </ul>
 </li>
 </ul>
@@ -21942,13 +22028,6 @@ Value set -&gt; Actual fall distance needed to trample
 <ul>
 <li><strong>default</strong>: false</li>
 <li><strong>description</strong>: Allow spawners to be deactivated by redstone</li>
-</ul>
-</li>
-<li>
-<h5 id="fix-mc-50647">fix-<a href="https://bugs.mojang.com/projects/MC/issues/MC-50647">MC-50647</a><a class="headerlink" href="#fix-mc-50647" title="Permanent link">🔗</a></h5>
-<ul>
-<li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Fix spawners not spawning slimes correctly; <a href="https://bugs.mojang.com/projects/MC/issues/MC-50647">MC-50647</a></li>
 </ul>
 </li>
 <li>
@@ -25050,6 +25129,13 @@ If <code>min-shoot-interval-ticks</code> and <code>max-shoot-interval-ticks</cod
 <ul>
 <li><strong>default</strong>: true</li>
 <li><strong>description</strong>: Should a horse (with a rider) stand when it's ambient noise is played</li>
+</ul>
+</li>
+<li>
+<h5 id="stand-when-hurt">stand-when-hurt<a class="headerlink" href="#stand-when-hurt" title="Permanent link">🔗</a></h5>
+<ul>
+<li><strong>default</strong>: true</li>
+<li><strong>description</strong>: Should a horse stand when it's being hurt</li>
 </ul>
 </li>
 <li>
