@@ -17,56 +17,86 @@ require_once("opengraph.php");
     <meta property="og:description" content="<?=$description?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
     <link rel="icon" type="image/x-icon" href="images/purpur.svg" />
-    <link type="text/css" rel="stylesheet" href="css/raleway.css" />
-    <link type="text/css" rel="stylesheet" href="css/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
   </head>
-  <body>
-    <header>
-      <div class="container">
-        <h1>Purpur</h1>
-        <h2>Your Minecraft, your way</h2>
-        <img class="logo" src="images/purpur.svg" alt="Purpur Logo" />
-        <p>Purpur is a drop-in replacement for Paper servers designed for configurability and new, fun, exciting gameplay features.</p>
-        <a class="button download-button blue-button" href="https://api.purpurmc.org/v2/purpur/1.18.1/latest/download">Download</a>
-        <a class="tiny" href="https://purpurmc.org/downloads">See all builds</a>
+  <body class="flex-col">
+  <header class="flex-col">
+      <h1>Purpur</h1>
+      <h2>Your Minecraft, your way</h2>
+      <div class="logo">
+          <img src="images/purpur.svg" alt="Purpur logo">
       </div>
-    </header>
-    <div class="row-one">
-      <div class="container group">
-        <div class="block">
-          <img class="icon" src="images/documentation.svg" alt="Fully Documented" />
-          <h3>Fully Documented</h3>
-          <p>Read over our comprehensive feature documentation and make it your own.</p>
-          <a class="button white-button" href="/docs">Documentation</a>
-        </div>
-        <div class="block">
-          <img class="icon" src="images/opensource.svg" alt="Free and Open Source" />
-          <h3>Free and Open Source</h3>
-          <p>Built with love by people of all walks of life all over the globe.</p>
-          <a class="button white-button" href="/github" target="_blank">GitHub</a>
-        </div>
+      <p class="text-center">
+          Purpur is a drop-in replacement for Paper servers designed for configurability and new, fun, exciting gameplay
+          features.
+      </p>
+      <div class="downloads">
+          <a href="https://api.purpurmc.org/v2/purpur/1.19/latest/download" class="button text-center">Download latest</a>
+          <a href="https://purpurmc.org/downloads" class="button text-center">See all builds</a>
       </div>
-    </div>
-    <div class="row-two">
-      <div class="container group">
-        <div class="block">
-          <img class="icon" src="images/warning.svg" alt="Found a bug? File it!" />
-          <h3>Found a Bug? File it!</h3>
-          <p>If you run into issues or have any suggestions, let us know.</p>
-          <a class="button red-button" href="/issues" target="_blank">Issue Tracker</a>
-        </div>
-        <div class="block">
-          <img class="icon" src="images/discord.svg" alt="Get Involved" />
-          <h3>Get Involved</h3>
-          <p>Get in touch with the developers, ask questions, and join the fun.</p>
-          <a class="button blue-button" href="/discord" target="_blank">Discord</a>
-        </div>
+  </header>
+  <section class="basic-links">
+      <a href="/docs" class="card" id="documentation">
+          <div class="icon">
+              <img src="images/documentation.svg" alt="documentation" loading="lazy">
+          </div>
+          <h2>Fully documented</h2>
+          <p class="text-center">
+              Read over our comprehensive feature documentation and make it your own.
+          </p>
+      </a>
+      <a href="/github" class="card" id="open-source">
+          <div class="icon">
+              <img src="images/opensource.svg" alt="open source" loading="lazy">
+          </div>
+          <h2>Free and open source</h2>
+          <p class="text-center">
+              Built with love by people of all walks of life all over the globe.
+          </p>
+      </a>
+      <a href="/issues" class="card" id="found-a-bug">
+          <div class="icon">
+              <img src="images/warning.svg" alt="issues" loading="lazy">
+          </div>
+          <h2>Found a bug? File it!</h2>
+          <p class="text-center">
+              If you run into issues or have any suggestions, let us know.
+          </p>
+      </a>
+      <a href="/discord" class="card" id="discord">
+          <div class="icon">
+              <img src="images/discord.svg" alt="discord" loading="lazy">
+          </div>
+          <h2>Get involved</h2>
+          <p class="text-center">
+              Get in touch with the developers, ask questions, and join the fun.
+          </p>
+      </a>
+  </section>
+  <section class="support">
+      <h1 class="text-center">Support the project</h1>
+      <div class="wrapper">
+          <a href="https://opencollective.com/purpurmc" class="card" id="open-collective">
+              <div class="icon">
+                  <img src="images/opencollective.svg" alt="open collective" loading="lazy">
+              </div>
+              <h2>Open Collective</h2>
+              <p class="text-center">Support Purpur on Open Collective</p>
+          </a>
+          <a href="https://github.com/sponsors/PurpurMC" class="card" id="github-sponsors">
+              <div class="icon">
+                  <img src="images/github.svg" alt="github sponsors" loading="lazy">
+              </div>
+              <h2>GitHub Sponsors</h2>
+              <p class="text-center">Support Purpur via GitHub Sponsors</p>
+          </a>
       </div>
-    </div>
-    <footer>
-      &copy; 2019-2022 <a href="https://purpurmc.org">purpurmc.org</a> <a href="https://github.com/PurpurMC/Purpur/blob/HEAD/LICENSE">MIT</a>
-      <p><a href="https://gitlab.gnome.org/Teams/Releng/gnome-os-site" rel="noreferrer" target="_blank">Site design CC-BY-SA</a></p>
-    </footer>
+  </section>
+  <footer>
+      <p class="text-center">&copy; 2019-2022 <a href="https://purpurmc.org/">purpurmc.org</a> <a href="https://github.com/PurpurMC/Purpur/blob/HEAD/LICENSE">MIT</a></p>
+  </footer>
   </body>
 </html>
-
