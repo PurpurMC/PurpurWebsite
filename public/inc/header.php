@@ -20,5 +20,11 @@ require_once("opengraph.php");
     <meta property="og:image" content="<?=$ogimg?>" />
     <link rel="icon" type="image/x-icon" href="/images/purpur.svg" />
     <link type="text/css" rel="stylesheet" href="/css/raleway.css" />
-    <link type="text/css" rel="stylesheet" href="/css/index.css" />
+    <?php
+        if (basename($_SERVER['PHP_SELF']) == "index.php") {
+            echo '<link type="text/css" rel="stylesheet" href="/css/index1.css" />'
+        } else {
+            echo '<link type="text/css" rel="stylesheet" href="/css/index.css" />'
+        }
+    ?>
 </head>
