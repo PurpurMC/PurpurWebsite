@@ -10,6 +10,7 @@ require_once("opengraph.php");
     <title><?=$title?></title>
     <meta name="title" content="<?=$title?>" />
     <meta name="description" content="<?=$description?>" />
+    <meta name="theme-color" content="#392955" />
     <meta property="twitter:title" content="<?=$title?>" />
     <meta property="twitter:image" content="<?=$ogimg?>" />
     <meta property="twitter:card" content="summary_large_image" />
