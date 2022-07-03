@@ -22,9 +22,9 @@ require_once("opengraph.php");
     <link type="text/css" rel="stylesheet" href="/css/raleway.css" />
     <?php
         if (basename($_SERVER['PHP_SELF']) == "index.php") {
-            echo '<link type="text/css" rel="stylesheet" href="/css/index1.css" />'
+            echo '<link type="text/css" rel="stylesheet" href="/css/index1.css" />';
         } else {
-            echo '<link type="text/css" rel="stylesheet" href="/css/index.css" />'
+            echo '<link type="text/css" rel="stylesheet" href="/css/index.css" />';
         }
     ?>
 </head>
