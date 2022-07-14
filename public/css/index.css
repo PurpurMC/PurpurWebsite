@@ -154,5 +154,5 @@ footer p {
   background: none;
   color: #9a9a9a;
   border: 2px solid #c0bfbc85;
-  cursor: pointer;
+  pointer-events: none;
 }
