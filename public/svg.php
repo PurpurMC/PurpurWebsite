@@ -1,8 +1,8 @@
 <?php
 
-$type = isset($_GET["type"]) ? $_GET["type"] : "sponsors";
+$type = isset($_GET["type"]) ? $_GET["type"] : "contributors";
 
-if ($type != "sponsors" && $type != "contributors") {
+if ($type != "contributors" && $type != "sponsors" && $type != "opencollective") {
     die();
 }
 
@@ -30,40 +30,70 @@ if (@$json["data"]) {
 // ###############
 
 function updateData($file, $json) {
-    global $now, $type;
+    global $now, $type, $avatarSize;
 
-    // save now to prevent concurrent updates
+    // save time now to prevent concurrent updates
     $json["timestamp"] = $now;
     file_put_contents($file, json_encode($json));
 
     // get updated contributors list from github
+    $arr = (array)null;
+    $arr["timestamp"] = $now;
+    $dup = (array)null;
+    $i = 0;
     switch ($type) {
         case "contributors":
-            $contents = getFromGitHubRestAPI("repos/PurpurMC/Purpur/contributors");
+            $contents = getFromRestAPI("https://api.github.com/repos/PurpurMC/Purpur/contributors");
             $newJson = json_decode($contents === false ? '' : $contents, true);
+            foreach ($newJson as $entry) {
+                $arr["data"][$i]["id"] = $entry["login"];
+                $arr["data"][$i]["name"] = $entry["login"];
+                $arr["data"][$i]["profile"] = "https://github.com/" . $entry["login"];
+                $arr["data"][$i]["avatar"] = getAvatar($entry["avatar_url"]);
+                $i++;
+            }
             break;
         case "sponsors":
             $query = 'query Sponsors($org:String!){organization(login:$org){... on Sponsorable{sponsors(first:100){nodes{... on Actor{login,avatarUrl}}}}}}';
             $variables = ['org' => 'PurpurMC'];
-            $contents = getFromGitHubGraphQL($query, $variables);
+            $contents = getFromGraphQL("https://api.github.com/graphql", $query, $variables);
             $newJson = json_decode($contents === false ? '' : $contents, true);
-            $newJson = $newJson["data"]["organization"]["sponsors"]["nodes"];
+            foreach ($newJson["data"]["organization"]["sponsors"]["nodes"] as $entry) {
+                $arr["data"][$i]["id"] = $entry["login"];
+                $arr["data"][$i]["name"] = $entry["login"];
+                $arr["data"][$i]["profile"] = "https://github.com/" . $entry["login"];
+                $arr["data"][$i]["avatar"] = getAvatar($entry["avatarUrl"]);
+                $i++;
+            }
+            break;
+        case "opencollective":
+            $contents = getFromRestAPI("https://opencollective.com/PurpurMC/members/all.json");
+            $newJson = json_decode($contents === false ? '' : $contents, true);
+            foreach ($newJson as $entry) {
+                if ($entry["role"] != "BACKER") {
+                    continue; // only count backers
+                }
+                if ($entry["name"] == "GitHub Sponsors" || $entry["name"] == "Guest") {
+                    continue; // skip gh sponsors and guest
+                }
+                if (in_array($entry["name"], $dup)) {
+                    continue; // skip duplicate entries
+                }
+                $dup[$i] = $entry["name"];
+                $arr["data"][$i]["id"] = $entry["MemberId"];
+                $arr["data"][$i]["name"] = $entry["name"];
+                $arr["data"][$i]["profile"] = $entry["profile"];
+                $arr["data"][$i]["avatar"] = getAvatar("https://images.opencollective.com/" . substr($entry["profile"], 27) . "/avatar/" . $avatarSize . ".png");
+                $i++;
+            }
             break;
         default:
             die();
     }
 
-    // grab only what we need
-    $arr = (array)null;
-    $i = 0;
-    foreach ($newJson as $entry) {
-        $arr["data"][$i]["name"] = $entry["login"];
-        $arr["data"][$i]["avatar"] = getAvatar(@$entry["avatarUrl"] ?: $entry["avatar_url"]);
-        $i++;
-    }
+    //var_dump($arr);
 
     // store updated data
-    $arr["timestamp"] = $now;
     $data = json_encode($arr);
     file_put_contents($file, $data);
 
@@ -80,6 +110,7 @@ function getAvatar($url) {
     $type = $info[2];
 
     // create image resource
+    $image = null;
     if ($type == IMAGETYPE_JPEG) {
         $image = imagecreatefromjpeg($url);
     } else if ($type == IMAGETYPE_GIF) {
@@ -106,7 +137,7 @@ function drawSvg($data) {
 
     // image sizes
     $count = count($data);
-    $width = ($avatarSize + $avatarGap) * ($count > $avatarCols ? $avatarCols : $count) - $avatarGap;
+    $width = ($avatarSize + $avatarGap) * (min($count, $avatarCols)) - $avatarGap;
     $height = ($avatarSize + $avatarGap) * ceil($count / $avatarCols) - $avatarGap;
 
     header("Cache-Control: no-cache, no-store, must-revalidate");
@@ -123,9 +154,9 @@ function drawSvg($data) {
     // write the pattern definitions
     echo '<defs>' . "\n";
     foreach ($data as $entry) {
-        $name = $entry["name"];
+        $id = $entry["id"];
         $avatar = $entry["avatar"];
-        echo '<pattern id="' . $name . '" patternUnits="userSpaceOnUse" width="' . $avatarSize . '" height="' . $avatarSize . '"><image href="' . $avatar . '" x="0" y="0" width="' . $avatarSize . '" height="' . $avatarSize . '" /></pattern>' . "\n";
+        echo '<pattern id="' . $id . '" patternUnits="userSpaceOnUse" width="' . $avatarSize . '" height="' . $avatarSize . '"><image href="' . $avatar . '" /></pattern>' . "\n";
     }
     echo '</defs>' . "\n";
 
@@ -133,8 +164,10 @@ function drawSvg($data) {
     $col = 0;
     $row = 0;
     foreach ($data as $entry) {
+        $id = $entry["id"];
         $name = $entry["name"];
-        echo '<svg x="' . $col . '" y="' . $row . '"><title>' . $name . '</title><a href="https://github.com/' . $name . '" target="_blank"><circle cx="' . ($avatarSize / 2) . '" cy="' . ($avatarSize / 2) . '" r="' . ($avatarSize / 2 - 1) . '" stroke="#000" stroke-width="1" fill="url(#' . $name . ')"/></a></svg>' . "\n";
+        $profile = $entry["profile"];
+        echo '<svg x="' . $col . '" y="' . $row . '"><title>' . $name . '</title><a href="' . $profile . '" target="_blank"><circle cx="' . ($avatarSize / 2) . '" cy="' . ($avatarSize / 2) . '" r="' . ($avatarSize / 2 - 1) . '" stroke="#000" stroke-width="1" fill="url(#' . $id . ')"/></a></svg>' . "\n";
         $col += $avatarSize + $avatarGap;
         if ($col > $avatarSize * $avatarCols) {
             $col = 0;
@@ -146,10 +179,9 @@ function drawSvg($data) {
     echo '</svg>';
 }
 
-function getFromGitHubRestAPI($endpoint) {
+function getFromRestAPI($url) {
     return file_get_contents(
-        "https://api.github.com/" . $endpoint,
-        false, stream_context_create([
+        $url, false, stream_context_create([
             'http' => [
                 'method' => 'GET',
                 'header' => [
@@ -160,11 +192,10 @@ function getFromGitHubRestAPI($endpoint) {
     );
 }
 
-function getFromGitHubGraphQL($query, $variables) {
+function getFromGraphQL($url, $query, $variables) {
     global $token;
     return file_get_contents(
-        "https://api.github.com/graphql",
-        false, stream_context_create([
+        $url, false, stream_context_create([
             'http' => [
                 'method' => 'POST',
                 'header' => [
@@ -177,5 +208,3 @@ function getFromGitHubGraphQL($query, $variables) {
         ])
     );
 }
-
-?>
