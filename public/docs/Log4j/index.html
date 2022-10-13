@@ -379,7 +379,7 @@
                 
                 
                 <h1 id="log4j-security-vulnerability">Log4j security vulnerability<a class="headerlink" href="#log4j-security-vulnerability" title="Permanent link">🔗</a></h1>
-<p>A remote code execution (RCE) vulnerability was found within the logger library utilized in Minecraft and many other Java-based applications. This vulnerability allows anybody to execute commands and run code on your server with minimal effort, and grab your backend server’s public IP address.</p>
+<p>Several researchers found a remote code execution (RCE) vulnerability within the logger library utilized in Minecraft and many other Java-based applications. This vulnerability allows anybody to execute commands and run code on your server with minimal effort, and grab your backend server’s public IP address.</p>
 <p>It exists for all vanilla Minecraft versions newer than 1.7.10, and affects every application that utilizes the library. Notably the vanilla client, all vanilla-based servers such as Paper and Purpur, Velocity, and Waterfall. If you run any other Java-based applications, such as Jenkins or UniFi, ensure they are up-to-date as well.</p>
 <p>Mojang has pushed a fix for all client versions 1.8 and newer. 1.7.10 and older are not vulnerable. Purpur has pushed a JAR containing a fix for 1.18.1, and published XML files for 1.18 and older. Plugins that shade or depend on older versions of the library will also require updates.</p>
 <h2 id="updating-purpur">Updating Purpur<a class="headerlink" href="#updating-purpur" title="Permanent link">🔗</a></h2>

@@ -21584,7 +21584,7 @@
 </ul>
 <h3 id="config-version">config-version<a class="headerlink" href="#config-version" title="Permanent link">🔗</a></h3>
 <ul>
-<li><strong>Do not change this for any reason!</strong> This is used internally to help automatically update your config</li>
+<li><strong>Do not change this for any reason!</strong> Purpur uses this internally to help automatically update your config</li>
 </ul>
 <h3 id="command">command<a class="headerlink" href="#command" title="Permanent link">🔗</a></h3>
 <ul>
@@ -21595,7 +21595,7 @@
 <h5 id="format">format<a class="headerlink" href="#format" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: "&lt;days&gt;&lt;hours&gt;&lt;minutes&gt;&lt;seconds&gt;"</li>
-<li><strong>description</strong>: The format used in the <code>&lt;uptime&gt;</code> placeholder for <a href="#uptime-command-output"><code>uptime-command-output</code></a></li>
+<li><strong>description</strong>: The format the <code>&lt;uptime&gt;</code> placeholder uses for <a href="#uptime-command-output"><code>uptime-command-output</code></a></li>
 </ul>
 </li>
 <li>
@@ -21664,7 +21664,7 @@
 <ul>
 <li>Requires <a href="../Permissions#minecraftcommandgamemodegamemode"><code>minecraft.command.gamemode.&lt;gamemode&gt;</code></a> permission</li>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Set to true for each gamemode to require it's own permission</li>
+<li><strong>description</strong>: Set to true for each gamemode to require its own permission</li>
 </ul>
 </li>
 </ul>
@@ -21692,7 +21692,7 @@
 <ul>
 <li><strong>default</strong>: &lt;gray&gt;TPS&lt;yellow&gt;:&lt;/yellow&gt; &lt;tps&gt; MSPT&lt;yellow&gt;:&lt;/yellow&gt;
       &lt;mspt&gt; Ping&lt;yellow&gt;:&lt;/yellow&gt; &lt;ping&gt;ms</li>
-<li><strong>description</strong>: The format of the bossbar when the <code>/tpsbar</code> command is ran</li>
+<li><strong>description</strong>: The format of the bossbar when the server runs the <code>/tpsbar</code> command</li>
 </ul>
 </li>
 <li>
@@ -21787,7 +21787,7 @@
 <p><strong>default</strong>: '"&lt;gray&gt;Ram<yellow>:</yellow> <used>/<xmx> (&lt;percent&gt;)"'</p>
 </li>
 <li>
-<p><strong>description</strong>: The format of the bossbar when the <code>/rambar</code> command is ran</p>
+<p><strong>description</strong>: The format of the bossbar when the server runs the <code>/rambar</code> command</p>
 </li>
 <li>
 <h5 id="overlay_1">overlay<a class="headerlink" href="#overlay_1" title="Permanent link">🔗</a></h5>
@@ -21865,7 +21865,7 @@
 <ul>
 <li><strong>default</strong>: "S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈  ·  ◈  ·  ◈  ·  NW  ·  ◈  ·  ◈  ·  ◈  ·  N  ·  ◈  ·  ◈  ·  ◈  ·  NE  ·  ◈  ·  ◈  ·  ◈  ·  E  ·  ◈  ·  ◈  ·  ◈  ·  SE  ·  ◈  ·  ◈  ·  ◈  ·<br />
 S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈  ·  ◈  ·  ◈  ·  NW  ·  ◈  ·  ◈  ·  ◈  ·  N  ·  ◈  ·  ◈  ·  ◈  ·  NE  ·  ◈  ·  ◈  ·  ◈  ·  E  ·  ◈  ·  ◈  ·  ◈  ·  SE  ·  ◈  ·  ◈  ·  ◈  ·  "</li>
-<li><strong>description</strong>: The format of the bossbar when the <a href="../Commands#compass"><code>/compass</code></a> command is ran</li>
+<li><strong>description</strong>: The format of the bossbar when the server runs the <a href="../Commands#compass"><code>/compass</code></a> command</li>
 </ul>
 </li>
 <li>
@@ -21915,7 +21915,7 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <h3 id="use-alternate-keepalive">use-alternate-keepalive<a class="headerlink" href="#use-alternate-keepalive" title="Permanent link">🔗</a></h3>
 <ul>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Uses a different approach to keepalive ping timeouts. Enabling this sends a keepalive packet once per second to a player, and only kicks for timeout if none of them were responded to in 30 seconds. Responding to any of them in any order will keep the player connected. AKA, it won't kick your players because 1 packet gets dropped somewhere along the lines</li>
+<li><strong>description</strong>: Uses a different approach to keepalive ping timeouts. Enabling this sends a keepalive packet once per second to a player, and only kicks for timeout if none of them were responded to in 30 seconds. Responding to any of them in any order will keep the player connected. AKA, it won't kick your players because one packet gets dropped somewhere along the lines</li>
 </ul>
 <h3 id="tps-catchup">tps-catchup<a class="headerlink" href="#tps-catchup" title="Permanent link">🔗</a></h3>
 <ul>

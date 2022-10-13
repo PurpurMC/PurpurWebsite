@@ -729,9 +729,9 @@
                   <h1>Permissions</h1>
                 
                 <p>Purpur adds a few new permission nodes for some of its added features.</p>
-<p>By default <strong>all</strong> of these permissions are disabled, no matter if a user has OP. Users will need to be granted permissions using a permissions plugin such as <a href="https://luckperms.net/">LuckPerms</a>.</p>
+<p>By default, Purpur disables <strong>all</strong> of these permissions, no matter if a user has OP. Servers will need a permissions plugin such as <a href="https://luckperms.net/">LuckPerms</a> to grant permissions to users.</p>
 <h2 id="allowridemob_id">allow.ride.&lt;mob_id&gt;<a class="headerlink" href="#allowridemob_id" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#mobs"><code>&lt;mob_id&gt;.ridable</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#mobs"><code>&lt;mob_id&gt;.ridable</code></a> in purpur.yml</p>
 <ul>
 <li>
 <p>This permission gives the ability to ride a certain mob by shift
@@ -747,7 +747,7 @@ right-clicking it. Once mounted you can use WASD to move around, and spacebar to
 </li>
 </ul>
 <h2 id="allowspecialmob_id">allow.special.&lt;mob_id&gt;<a class="headerlink" href="#allowspecialmob_id" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#mobs"><code>&lt;mob_id&gt;.ridable</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#mobs"><code>&lt;mob_id&gt;.ridable</code></a> in purpur.yml</p>
 <ul>
 <li>
 <p>This permission gives the ability to activate a ridable mob's
@@ -777,7 +777,7 @@ the mob's Entity ID.</p>
 </li>
 </ul>
 <h2 id="allowpoweredcreeper">allow.powered.creeper<a class="headerlink" href="#allowpoweredcreeper" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#creeper"><code>creeper.ridable</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#creeper"><code>creeper.ridable</code></a> in purpur.yml</p>
 <ul>
 <li>This permission gives the ability to toggle a creeper's powered state while riding.
 Hold the spacebar while not moving to charge the toggle. Instead of blowing up the powered
@@ -808,7 +808,7 @@ state will toggle on or off.</li>
 <li>Allows the use of the <a href="../Commands#compass"><code>/compass</code></a> command.</li>
 </ul>
 <h2 id="minecraftcommandgamemodegamemode">minecraft.command.gamemode.&lt;gamemode&gt;<a class="headerlink" href="#minecraftcommandgamemodegamemode" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#command"><code>gamemode.requires-specific-permission</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#command"><code>gamemode.requires-specific-permission</code></a> in purpur.yml</p>
 <ul>
 <li>Allows the user to set their own gamemode to &lt;gamemode&gt;</li>
 <li>Available gamemodes<ul>
@@ -817,7 +817,7 @@ state will toggle on or off.</li>
 </li>
 </ul>
 <h2 id="minecraftcommandgamemodegamemodeother">minecraft.command.gamemode.&lt;gamemode&gt;.other;<a class="headerlink" href="#minecraftcommandgamemodegamemodeother" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#command"><code>gamemode.requires-specific-permission</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#command"><code>gamemode.requires-specific-permission</code></a> in purpur.yml</p>
 <ul>
 <li>Allows the user to set their own and other players' gamemode to &lt;gamemode&gt;</li>
 <li>Available gamemodes<ul>
@@ -831,14 +831,14 @@ state will toggle on or off.</li>
 Player must have this perm <em>and</em> the gamemode perm for it to work.</li>
 </ul>
 <h2 id="purpurdropspawners">purpur.drop.spawners<a class="headerlink" href="#purpurdropspawners" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#silk-touch_1"><code>gameplay-mechanics.silk-touch</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#silk-touch_1"><code>gameplay-mechanics.silk-touch</code></a> in purpur.yml</p>
 <ul>
 <li>Players with this permission can use a configured tool with silk
 touch enchantment to mine up any spawner cage instead of disappearing.</li>
 </ul>
 <h2 id="purpurjoinfullserver">purpur.joinfullserver<a class="headerlink" href="#purpurjoinfullserver" title="Permanent link">🔗</a></h2>
 <ul>
-<li>Allows players to join when server is full</li>
+<li>Allows players to join when the server is full</li>
 </ul>
 <h2 id="purpurbypassidlekick">purpur.bypassIdleKick<a class="headerlink" href="#purpurbypassidlekick" title="Permanent link">🔗</a></h2>
 <ul>
@@ -849,28 +849,28 @@ touch enchantment to mine up any spawner cage instead of disappearing.</li>
 <li>Allows players to instantly teleport through portals when stepping through them</li>
 </ul>
 <h2 id="purpurplacespawners">purpur.place.spawners<a class="headerlink" href="#purpurplacespawners" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#silk-touch_1"><code>gameplay-mechanics.silk-touch</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#silk-touch_1"><code>gameplay-mechanics.silk-touch</code></a> in purpur.yml</p>
 <ul>
 <li>Players with this permission can place down a spawner cage and
-have the mob type restored to what it was when it was mined using silk touch.</li>
+restore the mob type to what it was when it was mined using silk touch.</li>
 </ul>
 <h2 id="purpursignedit">purpur.sign.edit<a class="headerlink" href="#purpursignedit" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#sign"><code>sign.right-click-edit</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#sign"><code>sign.right-click-edit</code></a> in purpur.yml</p>
 <ul>
 <li>Allows players to open the sign editor when right clicking a sign while holding a sign.</li>
 </ul>
 <h2 id="purpursigncolor">purpur.sign.color<a class="headerlink" href="#purpursigncolor" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#sign"><code>sign.allow-colors</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#sign"><code>sign.allow-colors</code></a> in purpur.yml</p>
 <ul>
 <li>Allows players to use color codes on signs</li>
 </ul>
 <h2 id="purpursignstyle">purpur.sign.style<a class="headerlink" href="#purpursignstyle" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#sign"><code>sign.allow-colors</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#sign"><code>sign.allow-colors</code></a> in purpur.yml</p>
 <ul>
 <li>Allows players to use style codes on signs (except the magic/obfuscated code)</li>
 </ul>
 <h2 id="purpursignmagic">purpur.sign.magic<a class="headerlink" href="#purpursignmagic" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#sign"><code>sign.allow-colors</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#sign"><code>sign.allow-colors</code></a> in purpur.yml</p>
 <ul>
 <li>Allows players to use the magic/obfuscated style code on signs</li>
 </ul>
@@ -880,22 +880,22 @@ have the mob type restored to what it was when it was mined using silk touch.</l
 <li>Allows players to use the legacy and hex color codes in books which update after the book is signed</li>
 </ul>
 <h2 id="purpuranvilminimessage">purpur.anvil.minimessage<a class="headerlink" href="#purpuranvilminimessage" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#use-mini-message"><code>anvil.allow-minimessage</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#use-mini-message"><code>anvil.allow-minimessage</code></a> in purpur.yml</p>
 <ul>
 <li>This allows players to use MiniMessage tags in an anvil.</li>
 </ul>
 <h2 id="purpuranvilcolor">purpur.anvil.color<a class="headerlink" href="#purpuranvilcolor" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#allow-colors_1"><code>anvil.allow-colors</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#allow-colors_1"><code>anvil.allow-colors</code></a> in purpur.yml</p>
 <ul>
 <li>Allows players to use legacy color codes in anvil. <a href="**https://minecraft.fandom.com/wiki/Formatting_codes**"><code>There is more information about colour codes on the Minecraft website.</code></a></li>
 </ul>
 <h2 id="purpuranvilremove_italics">purpur.anvil.remove_italics<a class="headerlink" href="#purpuranvilremove_italics" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#anvil"><code>anvil.allow-colors</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#anvil"><code>anvil.allow-colors</code></a> in purpur.yml</p>
 <ul>
-<li>Allows players to remove the italics from items renamed in the anvil by starting the text with '&amp;r'. The permission <a href="../Permissions#purpuranvilcolor"><code>purpur.anvil-colors</code></a> is required for this permission to work.</li>
+<li>Allows players to remove the italics from items renamed in the anvil by starting the text with '&amp;r'. The permission requires <a href="../Permissions#purpuranvilcolor"><code>purpur.anvil-colors</code></a> for this permission to work.</li>
 </ul>
 <h2 id="purpurenderchestrowsnumber">purpur.enderchest.rows.&lt;number&gt;<a class="headerlink" href="#purpurenderchestrowsnumber" title="Permanent link">🔗</a></h2>
-<p>Requires <a href="../Configuration#ender_chest"><code>ender_chest.six-rows</code></a> and <a href="../Configuration#ender_chest"><code>ender_chest.use-permissions-for-rows</code></a> to be enabled in purpur.yml</p>
+<p>Requires enabling <a href="../Configuration#ender_chest"><code>ender_chest.six-rows</code></a> and <a href="../Configuration#ender_chest"><code>ender_chest.use-permissions-for-rows</code></a> in purpur.yml</p>
 <ul>
 <li>Controls how many rows a player's enderchest has</li>
 <li>Available sizes<ul>
