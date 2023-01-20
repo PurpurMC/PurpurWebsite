@@ -76,7 +76,7 @@ require_once("inc/header.php");
     </div>
 </section>
 <footer>
-    <p class="text-center">&copy; 2019-2022 <a href="https://purpurmc.org/">purpurmc.org</a> <a href="https://github.com/PurpurMC/Purpur/blob/HEAD/LICENSE">MIT</a></p>
+    <p class="text-center">&copy; 2019-2023 <a href="https://purpurmc.org/">purpurmc.org</a> <a href="https://github.com/PurpurMC/Purpur/blob/HEAD/LICENSE">MIT</a></p>
 </footer>
 </body>
 </html>
