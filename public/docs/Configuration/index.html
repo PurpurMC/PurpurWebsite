@@ -1350,6 +1350,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#food-properties" class="md-nav__link">
+    food-properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#seed" class="md-nav__link">
     seed
   </a>
@@ -12078,6 +12085,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#food-properties" class="md-nav__link">
+    food-properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#seed" class="md-nav__link">
     seed
   </a>
@@ -22420,6 +22434,26 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <ul>
 <li><strong>default</strong>: false</li>
 <li><strong>description</strong>: Suppress logs related to the library loader</li>
+</ul>
+<h3 id="food-properties">food-properties<a class="headerlink" href="#food-properties" title="Permanent link">🔗</a></h3>
+<ul>
+<li><strong>default</strong>: {}</li>
+<li><strong>description:</strong> Modify to change food properties. An example using all settings with explanations:
+<div class="highlight"><pre><span></span><code><span class="nt">spider_eye</span><span class="p">:</span><span class="w">                </span><span class="c1"># The food to edit</span><span class="w"></span>
+<span class="w">  </span><span class="nt">nutrition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">              </span><span class="c1"># The amount of hunger points restored</span><span class="w"></span>
+<span class="w">  </span><span class="nt">saturation-modifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span><span class="w">  </span><span class="c1"># The amount of saturation restored. Equation used is &quot;nutrition * saturation-modifier * 2&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">is-meat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">            </span><span class="c1"># Marks a food as edible for wolfs</span><span class="w"></span>
+<span class="w">  </span><span class="nt">can-always-eat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">     </span><span class="c1"># Marks if this food can be eaten even at full hunger</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fast-food</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">          </span><span class="c1"># How long it takes to eat food (false: 32 ticks, true: 16 ticks)</span><span class="w"></span>
+<span class="w">  </span><span class="nt">effects</span><span class="p">:</span><span class="w">                  </span><span class="c1"># List of all the effects to be applied when eaten (can have multiple effects)</span><span class="w"></span>
+<span class="w">    </span><span class="nt">poison</span><span class="p">:</span><span class="w">                 </span><span class="c1"># Effect to apply</span><span class="w"></span>
+<span class="w">      </span><span class="nt">duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">         </span><span class="c1"># Duration of effect (in ticks)</span><span class="w"></span>
+<span class="w">      </span><span class="nt">chance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w">           </span><span class="c1"># Chance for effect to be applied (0.0 - 1.0)</span><span class="w"></span>
+<span class="w">      </span><span class="nt">visible</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">         </span><span class="c1"># Shows particles</span><span class="w"></span>
+<span class="w">      </span><span class="nt">amplifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">          </span><span class="c1"># Amplification of effect</span><span class="w"></span>
+<span class="w">      </span><span class="nt">ambient</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">        </span><span class="c1"># Set to true to make particles less obtrusive on screen (like beacon effects)</span><span class="w"></span>
+<span class="w">      </span><span class="nt">show-icon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">       </span><span class="c1"># Show effect icon on HUD</span><span class="w"></span>
+</code></pre></div></li>
 </ul>
 <h3 id="seed">seed<a class="headerlink" href="#seed" title="Permanent link">🔗</a></h3>
 <h4 id="structure">structure<a class="headerlink" href="#structure" title="Permanent link">🔗</a></h4>
