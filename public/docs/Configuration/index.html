@@ -746,6 +746,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#clamp-attributes" class="md-nav__link">
+    clamp-attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limit-armor" class="md-nav__link">
+    limit-armor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#username-valid-characters" class="md-nav__link">
     username-valid-characters
   </a>
@@ -1922,6 +1936,13 @@
   
     <nav class="md-nav" aria-label="beacon">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#allow-effects-with-tinted-glass" class="md-nav__link">
+    allow-effects-with-tinted-glass
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#effect-range" class="md-nav__link">
@@ -11453,6 +11474,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#clamp-attributes" class="md-nav__link">
+    clamp-attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limit-armor" class="md-nav__link">
+    limit-armor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#username-valid-characters" class="md-nav__link">
     username-valid-characters
   </a>
@@ -12629,6 +12664,13 @@
   
     <nav class="md-nav" aria-label="beacon">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#allow-effects-with-tinted-glass" class="md-nav__link">
+    allow-effects-with-tinted-glass
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#effect-range" class="md-nav__link">
@@ -21987,7 +22029,7 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <h5 id="percent">percent<a class="headerlink" href="#percent" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: 1.0</li>
-<li><strong>description</strong>: How filled the bossbar is rangin from 0.0 to 1.0</li>
+<li><strong>description</strong>: How filled the bossbar is ranging from 0.0 to 1.0</li>
 </ul>
 </li>
 <li>
@@ -22020,7 +22062,7 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <li><strong>default</strong>: true</li>
 <li><strong>description</strong>: Control tps catch-up</li>
 </ul>
-<details class="note" open="open"><summary>Note</summary><p>TPS catchup makes your server tick faster than 20 TPS after any period of time that below 20. This is an attempt at keeping the average TPS as close to 20 as possible, but does come with its own set of side effects</p>
+<details class="note" open="open"><summary>Note</summary><p>TPS catchup makes your server tick faster than 20 TPS after any period of time that is below 20. This is an attempt at keeping the average TPS as close to 20 as possible, but does come with its own set of side effects, an example being when players get insta-killed by mobs during a lag spike</p>
 </details>
 <h3 id="server-mod-name">server-mod-name<a class="headerlink" href="#server-mod-name" title="Permanent link">🔗</a></h3>
 <ul>
@@ -22031,6 +22073,16 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <ul>
 <li><strong>default</strong>: false</li>
 <li><strong>description</strong>: Addresses <a href="https://bugs.mojang.com/browse/[MC-3304](https://bugs.mojang.com/browse/MC-3304)"><code>[MC-3304](https://bugs.mojang.com/browse/MC-3304)</code></a> by preventing looting from being applied to deaths caused by a projectile, unless if a plugin changed the looting modifier.</li>
+</ul>
+<h3 id="clamp-attributes">clamp-attributes<a class="headerlink" href="#clamp-attributes" title="Permanent link">🔗</a></h3>
+<ul>
+<li><strong>default</strong>: true</li>
+<li><strong>description</strong>: Controls if attributes should have their values clamped.</li>
+</ul>
+<h3 id="limit-armor">limit-armor<a class="headerlink" href="#limit-armor" title="Permanent link">🔗</a></h3>
+<ul>
+<li><strong>default</strong>: true</li>
+<li><strong>description</strong>: Controls if armor should limit how much damage they can reduce.</li>
 </ul>
 <h3 id="username-valid-characters">username-valid-characters<a class="headerlink" href="#username-valid-characters" title="Permanent link">🔗</a></h3>
 <ul>
@@ -22203,7 +22255,7 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
     <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minecraft:binding_curse</span><span class="w"></span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minecraft:vanishing_curse</span><span class="w"></span>
 </code></pre></div></li>
-<li><strong>description</strong>: The enchantments to ignore from being removed on a grindstone</li>
+<li><strong>description</strong>: The enchantments that aren't removed from grindstones</li>
 </ul>
 </li>
 <li>
@@ -22227,7 +22279,7 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <h5 id="six-rows">six-rows<a class="headerlink" href="#six-rows" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Ender chests should have six rows of inventory space</li>
+<li><strong>description</strong>: When enabled, ender chests should have six rows of inventory space</li>
 </ul>
 </li>
 <li>
@@ -22406,14 +22458,14 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <h5 id="allow-infinity-on-crossbow">allow-infinity-on-crossbow<a class="headerlink" href="#allow-infinity-on-crossbow" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Allows the infinity enchantment on a crossbow</li>
+<li><strong>description</strong>: Allows the infinity enchantment on crossbows</li>
 </ul>
 </li>
 <li>
 <h5 id="allow-looting-on-shears">allow-looting-on-shears<a class="headerlink" href="#allow-looting-on-shears" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Allows the looting enchantment on a shears</li>
+<li><strong>description</strong>: Allows the looting enchantment on shears</li>
 </ul>
 </li>
 <li>
@@ -22528,7 +22580,7 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <h5 id="disable-clock">disable-clock<a class="headerlink" href="#disable-clock" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: disable observer clocks</li>
+<li><strong>description</strong>: Set to true to disable observer clocks</li>
 </ul>
 </li>
 </ul>
@@ -22706,6 +22758,13 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 </ul>
 <h4 id="beacon">beacon<a class="headerlink" href="#beacon" title="Permanent link">🔗</a></h4>
 <ul>
+<li>
+<h5 id="allow-effects-with-tinted-glass">allow-effects-with-tinted-glass<a class="headerlink" href="#allow-effects-with-tinted-glass" title="Permanent link">🔗</a></h5>
+<ul>
+<li><strong>default</strong>: false</li>
+<li><strong>description</strong>: Whether to allow beacon effects to activate when it's covered by tinted glass</li>
+</ul>
+</li>
 <li>
 <h5 id="effect-range">effect-range<a class="headerlink" href="#effect-range" title="Permanent link">🔗</a></h5>
 <ul>
@@ -23149,7 +23208,7 @@ Value set -&gt; Actual fall distance needed to trample
 <h5 id="range">range<a class="headerlink" href="#range" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: 128</li>
-<li><strong>description</strong>: Change the range in which the lightning rod redirect lightning</li>
+<li><strong>description</strong>: Change the range in which the lightning rod redirects lightning</li>
 </ul>
 </li>
 </ul>
@@ -23209,7 +23268,7 @@ Value set -&gt; Actual fall distance needed to trample
 <h5 id="requires-redstone">requires-redstone<a class="headerlink" href="#requires-redstone" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: []</li>
-<li><strong>description</strong>: Allows you to set the doors that require redstone to be operated</li>
+<li><strong>description</strong>: Allows you to set the doors that require redstone to be operated (oak, spruce, etc)</li>
 </ul>
 </li>
 </ul>
@@ -25708,7 +25767,7 @@ If <code>min-shoot-interval-ticks</code> and <code>max-shoot-interval-ticks</cod
 <h5 id="immune-to-ear">immune-to-EAR<a class="headerlink" href="#immune-to-ear" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: true</li>
-<li><strong>description</strong>: Makes this mob immune to EAR (Entity Activation Range)</li>
+<li><strong>description</strong>: Makes this mob immune to EAR (Entity Activation Range - See spigot.yml)</li>
 </ul>
 </li>
 <li>
@@ -25779,7 +25838,7 @@ If <code>min-shoot-interval-ticks</code> and <code>max-shoot-interval-ticks</cod
 <h5 id="brain-ticks">brain-ticks<a class="headerlink" href="#brain-ticks" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: 1</li>
-<li><strong>description</strong>: How often (in ticks) should villager's tick their brain logic. Vanilla value is to tick every tick (1). Higher amounts makes them tick less often to reduce lag, but setting it too high could result is unresponsive villagers</li>
+<li><strong>description</strong>: How often (in ticks) should villager's tick their brain logic. Vanilla value is to tick every tick (1). Higher amounts makes them tick less often to reduce lag, but setting it too high could result is unresponsive villagers (It's suggested to use paper-world-defaults.yml and their villager settings instead)</li>
 </ul>
 </li>
 <li>
@@ -27310,7 +27369,7 @@ based on the world difficulty. <a href="https://github.com/PurpurMC/Purpur/blob/
 <h5 id="aggressive-towards-villager-when-lagging">aggressive-towards-villager-when-lagging<a class="headerlink" href="#aggressive-towards-villager-when-lagging" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: true</li>
-<li><strong>description</strong>: disable to stop zombie aggressiveness towards villagers when lagging</li>
+<li><strong>description</strong>: Set to false to stop zombie aggressiveness towards villagers when lagging</li>
 </ul>
 </li>
 <li>
@@ -28770,7 +28829,7 @@ based on the world difficulty. <a href="https://github.com/PurpurMC/Purpur/blob/
 <h4 id="mob-last-hurt-by-player-time">mob-last-hurt-by-player-time<a class="headerlink" href="#mob-last-hurt-by-player-time" title="Permanent link">🔗</a></h4>
 <ul>
 <li><strong>default</strong>: 100</li>
-<li><strong>description</strong>: Allows you to expand the amount of ticks required for a mob's death to count as a player kill after being hurt by the player (projectile or directly)</li>
+<li><strong>description</strong>: Allows you to change the amount of ticks required for a mob's death to count as a player kill after being hurt by the player (projectile or directly)</li>
 </ul>
 <h4 id="halloween">halloween<a class="headerlink" href="#halloween" title="Permanent link">🔗</a></h4>
 <ul>
@@ -28859,14 +28918,14 @@ based on the world difficulty. <a href="https://github.com/PurpurMC/Purpur/blob/
 <h5 id="egg">egg<a class="headerlink" href="#egg" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: 1.0</li>
-<li><strong>description</strong>: The projectile offset of a egg</li>
+<li><strong>description</strong>: The projectile offset of an egg</li>
 </ul>
 </li>
 <li>
 <h5 id="ender-pearl">ender-pearl<a class="headerlink" href="#ender-pearl" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: 1.0</li>
-<li><strong>description</strong>: The projectile offset of a ender-pearl</li>
+<li><strong>description</strong>: The projectile offset of an ender-pearl</li>
 </ul>
 </li>
 <li>
@@ -29022,7 +29081,7 @@ based on the world difficulty. <a href="https://github.com/PurpurMC/Purpur/blob/
 <h5 id="eject-players-on-land">eject-players-on-land<a class="headerlink" href="#eject-players-on-land" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Boats should eject players when on land</li>
+<li><strong>description</strong>: Set to true for boats to eject players when on land</li>
 </ul>
 </li>
 <li>
@@ -29133,7 +29192,7 @@ based on the world difficulty. <a href="https://github.com/PurpurMC/Purpur/blob/
 <h5 id="totem-of-undying-works-in-inventory">totem-of-undying-works-in-inventory<a class="headerlink" href="#totem-of-undying-works-in-inventory" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Allows the totem of undying to work in your inventory, not just your offhand</li>
+<li><strong>description</strong>: Allows the totem of undying to work anywhere in your inventory, not just your offhand</li>
 </ul>
 </li>
 <li>
@@ -29571,7 +29630,7 @@ based on the world difficulty. <a href="https://github.com/PurpurMC/Purpur/blob/
 <h5 id="damage-per-second">damage-per-second<a class="headerlink" href="#damage-per-second" title="Permanent link">🔗</a></h5>
 <ul>
 <li><strong>default</strong>: 1</li>
-<li><strong>description</strong>: How much damage an elytra takes during flight each second</li>
+<li><strong>description</strong>: How much damage an elytra's durability takes during flight each second</li>
 </ul>
 </li>
 <li>
