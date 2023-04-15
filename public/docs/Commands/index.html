@@ -520,10 +520,10 @@
 <h2 id="ping">/ping<a class="headerlink" href="#ping" title="Permanent link">🔗</a></h2>
 <ul>
 <li>
-<p>This command shows the ping of players. If you do not specify a player name or player entity selector (<code>@a</code>, <code>@r</code>, etc) it will show you your own ping.</p>
+<p>This command shows the ping of players if you have the <code>bukkit.command.ping.other</code> permission. If you do not specify a player name or player entity selector (<code>@a</code>, <code>@r</code>, etc) it will show you your own ping.</p>
 </li>
 <li>
-<p><strong>examples</strong></p>
+<p><strong>examples</strong>:</p>
 <ul>
 <li><code>/ping</code> shows you your own ping</li>
 <li><code>/ping BillyGalbreath</code> shows you the ping of BillyGalbreath</li>
@@ -535,9 +535,12 @@
 <p><strong>permission</strong>:</p>
 <ul>
 <li><code>bukkit.command.ping</code></li>
+<li><code>bukkit.command.ping.other</code></li>
 </ul>
 </li>
 </ul>
+<details class="note" open="open"><summary>Note</summary></details>
+<p>Player Entity Selectors will NOT work unless you have the <code>minecraft.command.selector</code> permission.</p>
 <h2 id="uptime">/uptime<a class="headerlink" href="#uptime" title="Permanent link">🔗</a></h2>
 <ul>
 <li>
@@ -555,10 +558,10 @@
 </details>
 <ul>
 <li>
-<p>This command shows the demo screen to players. If you do not specify a player name or player entity selector (<code>@a</code>, <code>@r</code>, etc) it will show the demo screen to yourself.</p>
+<p>This command shows the demo screen to players if you have the <code>bukkit.command.demo.other</code> permission. If you do not specify a player name or player entity selector (<code>@a</code>, <code>@r</code>, etc) it will show the demo screen to yourself.</p>
 </li>
 <li>
-<p><strong>examples</strong></p>
+<p><strong>examples</strong>:</p>
 <ul>
 <li><code>/demo</code> shows you the demo screen</li>
 <li><code>/demo BillyGalbreath</code> shows BillyGalbreath the demo screen</li>
@@ -570,18 +573,21 @@
 <p><strong>permission</strong>:</p>
 <ul>
 <li><code>bukkit.command.demo</code></li>
+<li><code>bukkit.command.demo.other</code></li>
 </ul>
 </li>
 </ul>
+<details class="note" open="open"><summary>Note</summary></details>
+<p>Player Entity Selectors will NOT work unless you have the <code>minecraft.command.selector</code> permission.</p>
 <h2 id="credits">/credits<a class="headerlink" href="#credits" title="Permanent link">🔗</a></h2>
 <details class="info"><summary>Image of the Credits screen 📷</summary><p><img alt="Credits screen" src="../images/credits.png" /></p>
 </details>
 <ul>
 <li>
-<p>This command shows the credits screen to players. If you do not specify a player name or player entity selector (<code>@a</code>, <code>@r</code>, etc) it will show the credits screen to yourself.</p>
+<p>This command shows the credits screen to players if you have the <code>bukkit.command.credits.other</code> permission. If you do not specify a player name or player entity selector (<code>@a</code>, <code>@r</code>, etc) it will show the credits screen to yourself.</p>
 </li>
 <li>
-<p><strong>examples</strong></p>
+<p><strong>examples</strong>:</p>
 <ul>
 <li><code>/credits</code> shows you the credits screen</li>
 <li><code>/credits BillyGalbreath</code> shows BillyGalbreath the credits screen</li>
@@ -593,18 +599,21 @@
 <p><strong>permission</strong>:</p>
 <ul>
 <li><code>bukkit.command.credits</code></li>
+<li><code>bukkit.command.credits.other</code></li>
 </ul>
 </li>
 </ul>
+<details class="note" open="open"><summary>Note</summary></details>
+<p>Player Entity Selectors will NOT work unless you have the <code>minecraft.command.selector</code> permission.</p>
 <h2 id="tpsbar">/tpsbar<a class="headerlink" href="#tpsbar" title="Permanent link">🔗</a></h2>
 <details class="info"><summary>Image of the tpsbar in action 📷</summary><p><img alt="TPSBar in action" src="../images/bossbar.gif" /></p>
 </details>
 <ul>
 <li>
-<p>This command shows a bossbar showcasing your current TPS/MSPT to players. If you do not specify a player name or player entity selector (<code>@a</code>, <code>@r</code>, etc) it will show the tpsbar to yourself.</p>
+<p>This command shows a bossbar showcasing your current TPS/MSPT to players if you have the <code>bukkit.command.tpsbar.other</code> permission. If you do not specify a player name or player entity selector (<code>@a</code>, <code>@r</code>, etc) it will show the tpsbar to yourself.</p>
 </li>
 <li>
-<p><strong>examples</strong></p>
+<p><strong>examples</strong>:</p>
 <ul>
 <li><code>/tpsbar</code> shows you the tpsbar</li>
 <li><code>/tpsbar BillyGalbreath</code> shows BillyGalbreath the tpsbar</li>
@@ -616,23 +625,23 @@
 <p><strong>permission</strong>:</p>
 <ul>
 <li><code>bukkit.command.tpsbar</code></li>
+<li><code>bukkit.command.tpsbar.other</code></li>
 </ul>
 </li>
 </ul>
+<details class="note" open="open"><summary>Note</summary></details>
+<p>Player Entity Selectors will NOT work unless you have the <code>minecraft.command.selector</code> permission.</p>
 <h2 id="compass">/compass<a class="headerlink" href="#compass" title="Permanent link">🔗</a></h2>
 <details class="info"><summary>Image of the compass in action 📷</summary><p><img alt="Compass in action" src="../images/bossbar.gif" /></p>
 </details>
 <ul>
 <li>
-<p>This command shows a bossbar showcasing the current direction faced to players. If you do not specify a player name or player entity selector (<code>@a</code>, <code>@r</code>, etc) it will show the compass to yourself.</p>
+<p>This command shows a bossbar showcasing your current facing direction.</p>
 </li>
 <li>
 <p><strong>examples</strong></p>
 <ul>
 <li><code>/compass</code> shows you the compass</li>
-<li><code>/compass BillyGalbreath</code> shows BillyGalbreath the compass</li>
-<li><code>/compass @a</code> shows the compass to all players</li>
-<li><code>/compass @r</code> shows the compass to a random player</li>
 </ul>
 </li>
 <li>
