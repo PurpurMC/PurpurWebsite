@@ -1,7 +1,7 @@
 <?php
     require_once("inc/versions.php");
 
-    $url = "http://localhost:8081/v2/purpur";
+    $url = "https://api.purpurmc.org/v2/purpur";
 
     $contents = file_get_contents("/srv/papyrus/data.json");
     $json = json_decode($contents, true);
