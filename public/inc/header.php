@@ -19,7 +19,7 @@ require_once("opengraph.php");
     <meta property="og:url" content="https://purpurmc.org" />
     <meta property="og:description" content="<?=$description?>" />
     <meta property="og:image" content="<?=$ogimg?>" />
-    <link rel="icon" type="image/x-icon" href="/images/purpur.svg" />
+    <link rel="icon" type="image/x-icon" href="/images/purpur-pride.svg" />
     <link type="text/css" rel="stylesheet" href="/css/raleway.css" />
     <?php
         if (basename($_SERVER['PHP_SELF']) == "index.php") {
