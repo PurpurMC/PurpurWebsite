@@ -53,17 +53,17 @@
         $disclaimers[] = "You are trying to download experimental builds!<br /><u>DO NOT</u> use these builds in production, as there may be many bugs and corruption issues.<br />Please report any and all issues you encounter!";
     }
 
-    if (($usingVersion != $currentVersion && $usingVersion != $listVersions[0]) && !in_array($currentVersion, $betaVersions)) {
+    if (($usingVersion != $currentVersion && $usingVersion != $listVersions[0]) && !in_array($usingVersion, $betaVersions)) {
         $disclaimers[] = "You are trying to download builds for an old version of Minecraft!<br />Keep in mind that if you download these builds, you will not receive support.";
     }
 
     foreach ($knownVulnerabilities as $vulnerability) {
-        if (in_array($currentVersion, $vulnerability["affectedVersions"])) {
+        if (in_array($usingVersion, $vulnerability["affectedVersions"])) {
             $disclaimers[] = $vulnerability["message"];
         }
     }
 
-    $version = json_decode(file_get_contents($url . "/" . $currentVersion . "?detailed"), true);
+    $version = json_decode(file_get_contents($url . "/" . $usingVersion . "?detailed"), true);
     $builds = (array) $version["builds"]["all"];
     rsort($builds);
 
@@ -140,12 +140,12 @@
         <div class="container">
             <ul class="tabs">
                 <?php foreach ($listVersions as $version): ?>
-                    <li class="<?=$version == $currentVersion ? "selected" : ""?>"><a class="tabLink"><?=$version?></a></li>
+                    <li class="<?=$version == $usingVersion ? "selected" : ""?>"><a class="tabLink"><?=$version?></a></li>
                 <?php endforeach; ?>
             </ul>
             <select id="dropdown">
                 <?php foreach ($listVersions as $version): ?>
-                    <option value="<?=$version?>" <?=$version == $currentVersion ? "selected" : ""?>><?=$version?></option>
+                    <option value="<?=$version?>" <?=$version == $usingVersion ? "selected" : ""?>><?=$version?></option>
                 <?php endforeach; ?>
             </select>
             <div class="versionWarning <?=(!empty($disclaimers) ? "visible" : "")?>">
