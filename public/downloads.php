@@ -43,7 +43,14 @@
         }
     }
 
-    $currentVersion = $listVersions[0];
+    $currentVersion = null;
+    foreach ($listVersions as $version) {
+        if (!in_array($version, $betaVersions)) {
+            $currentVersion = $version;
+            break;
+        }
+    }
+
     if (isset($_GET["v"])) {
         $setVersion = filter_var($_GET["v"], FILTER_SANITIZE_STRING);
         if (in_array($setVersion, $versions)) {
