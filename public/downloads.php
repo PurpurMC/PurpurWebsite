@@ -3,9 +3,6 @@
 
     $url = "https://api.purpurmc.org/v2/purpur";
 
-    $contents = file_get_contents("/srv/papyrus/data.json");
-    $json = json_decode($contents, true);
-
     $project = file_get_contents($url);
     $project = json_decode($project, true);
 
@@ -43,27 +40,20 @@
         }
     }
 
-    $currentVersion = null;
-    foreach ($listVersions as $version) {
-        if (!in_array($version, $betaVersions)) {
-            $currentVersion = $version;
-            break;
-        }
-    }
-
+    $usingVersion = $currentVersion;
     if (isset($_GET["v"])) {
         $setVersion = filter_var($_GET["v"], FILTER_SANITIZE_STRING);
         if (in_array($setVersion, $versions)) {
-            $currentVersion = $setVersion;
+            $usingVersion = $setVersion;
         }
     }
 
     $disclaimers = [];
-    if (in_array($currentVersion, $betaVersions)) {
+    if (in_array($usingVersion, $betaVersions)) {
         $disclaimers[] = "You are trying to download experimental builds!<br /><u>DO NOT</u> use these builds in production, as there may be many bugs and corruption issues.<br />Please report any and all issues you encounter!";
     }
 
-    if ($currentVersion != $listVersions[0] && !in_array($currentVersion, $betaVersions)) {
+    if (($usingVersion != $currentVersion && $usingVersion != $listVersions[0]) && !in_array($currentVersion, $betaVersions)) {
         $disclaimers[] = "You are trying to download builds for an old version of Minecraft!<br />Keep in mind that if you download these builds, you will not receive support.";
     }
 
