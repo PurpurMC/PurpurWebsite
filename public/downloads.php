@@ -41,17 +41,12 @@
         }
     }
 
-    $usingVersion = null;
+    $usingVersion = $currentVersion;
     if (isset($_GET["v"])) {
         $setVersion = filter_var($_GET["v"], FILTER_SANITIZE_STRING);
         if (in_array($setVersion, $versions)) {
             $usingVersion = $setVersion;
         }
-    }
-
-    if ($usingVersion == null) {
-        header('Location: ' . '../');
-        die();
     }
 
     $disclaimers = [];
