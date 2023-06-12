@@ -1,9 +1,10 @@
 <?php
     require_once("inc/versions.php");
 
-    $url = "http://localhost:8084/v2/purpur";
+    $local_url = "http://localhost:8084/v2/purpur";
+    $url = "https://api.purpurmc.org/v2/purpur";
 
-    $project = file_get_contents($url);
+    $project = file_get_contents($local_url);
     $project = json_decode($project, true);
 
     $versions = [];
