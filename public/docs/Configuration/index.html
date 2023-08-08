@@ -23075,8 +23075,18 @@ Requires <a href="#afk-broadcast-away"><code>afk-broadcast-away</code></a> or <a
 <li>
 <h5 id="explosion-effect">explosion-effect<a class="headerlink" href="#explosion-effect" title="Permanent link">🔗</a></h5>
 <ul>
-<li><strong>default</strong>: DESTROY</li>
-<li><strong>description</strong>: What to do with the blocks that are effected by the explosion. <code>DESTROY</code> will destroy the blocks (no item drops). <code>BREAK</code> will naturally break the blocks (items will drop). <code>NONE</code> will not break any blocks</li>
+<li><strong>default</strong>: BLOCK</li>
+<li>
+<p><strong>description</strong>: What to do with the blocks that are effected by the explosion.</p>
+<details class="note" open="open"><summary>Available Values</summary><p>All values will break blocks</p>
+<ul>
+<li><code>TNT</code> - all items will drop unless the <code>tntExplosionDropDecay</code> gamerule is set to <code>true</code></li>
+<li><code>MOB</code> - some items will drop unless the <code>mobExplosionDropDecay</code> gamerule is set to <code>false</code></li>
+<li><code>BLOCK</code> - some items will drop unless the <code>blockExplosionDropDecay</code> gamerule is set to <code>false</code></li>
+<li><code>NONE</code> - all items will drop</li>
+</ul>
+</details>
+</li>
 </ul>
 </li>
 </ul>
@@ -23198,11 +23208,17 @@ Requires <a href="#afk-broadcast-away"><code>afk-broadcast-away</code></a> or <a
 <li>
 <h5 id="explosion-effect_1">explosion-effect<a class="headerlink" href="#explosion-effect_1" title="Permanent link">🔗</a></h5>
 <ul>
-<li><strong>default</strong>: DESTROY</li>
-<li><strong>description</strong>: What to do with the blocks that are effected by the explosion. <code>DESTROY</code> will destroy the blocks (no item drops). <code>BREAK</code> will naturally break the blocks (items will drop). <code>NONE</code> will not break any blocks</li>
+<li><strong>default</strong>: BLOCK</li>
+<li>
+<p><strong>description</strong>: What to do with the blocks that are effected by the explosion.</p>
+<details class="note" open="open"><summary>Available Values</summary><p>All values will break blocks</p>
+<ul>
+<li><code>TNT</code> - all items will drop unless the <code>tntExplosionDropDecay</code> gamerule is set to <code>true</code></li>
+<li><code>MOB</code> - some items will drop unless the <code>mobExplosionDropDecay</code> gamerule is set to <code>false</code></li>
+<li><code>BLOCK</code> - some items will drop unless the <code>blockExplosionDropDecay</code> gamerule is set to <code>false</code></li>
+<li><code>NONE</code> - all items will drop</li>
 </ul>
-</li>
-</ul>
+</details>
 <h4 id="farmland">farmland<a class="headerlink" href="#farmland" title="Permanent link">🔗</a></h4>
 <ul>
 <li>
@@ -23245,6 +23261,10 @@ Requires <a href="#afk-broadcast-away"><code>afk-broadcast-away</code></a> or <a
 <ul>
 <li><strong>default</strong>: -1.0</li>
 <li><strong>description</strong>: Set the height a player/entity needs to fall before it tramples farmland</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -23448,12 +23468,18 @@ Value set -&gt; Actual fall distance needed to trample
 <li>
 <h6 id="explosion-effect_2">explosion-effect<a class="headerlink" href="#explosion-effect_2" title="Permanent link">🔗</a></h6>
 <ul>
-<li><strong>default</strong>: DESTROY</li>
-<li><strong>description</strong>: The type of explosion effect. Available values are <code>NONE</code>, <code>BREAK</code>, and <code>DESTROY</code>.</li>
+<li><strong>default</strong>: BLOCK</li>
+<li>
+<p><strong>description</strong>: What to do with the blocks that are effected by the explosion.</p>
+<details class="note" open="open"><summary>Available Values</summary><p>All values will break blocks</p>
+<ul>
+<li><code>TNT</code> - all items will drop unless the <code>tntExplosionDropDecay</code> gamerule is set to <code>true</code></li>
+<li><code>MOB</code> - some items will drop unless the <code>mobExplosionDropDecay</code> gamerule is set to <code>false</code></li>
+<li><code>BLOCK</code> - some items will drop unless the <code>blockExplosionDropDecay</code> gamerule is set to <code>false</code></li>
+<li><code>NONE</code> - all items will drop</li>
 </ul>
-</li>
-</ul>
-</li>
+</details>
+<ul>
 <li>
 <h5 id="base">base<a class="headerlink" href="#base" title="Permanent link">🔗</a></h5>
 <ul>
@@ -23488,8 +23514,22 @@ Value set -&gt; Actual fall distance needed to trample
 <li>
 <h6 id="explosion-effect_3">explosion-effect<a class="headerlink" href="#explosion-effect_3" title="Permanent link">🔗</a></h6>
 <ul>
-<li><strong>default</strong>: DESTROY</li>
-<li><strong>description</strong>: The type of explosion effect. Available values are <code>NONE</code>, <code>BREAK</code>, and <code>DESTROY</code>.</li>
+<li><strong>default</strong>: BLOCK</li>
+<li><strong>description</strong>: What to do with the blocks that are effected by the explosion.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<details class="note" open="open"><summary>Available Values</summary><p>All values will break blocks</p>
+<ul>
+<li><code>TNT</code> - all items will drop unless the <code>tntExplosionDropDecay</code> gamerule is set to <code>true</code></li>
+<li><code>MOB</code> - some items will drop unless the <code>mobExplosionDropDecay</code> gamerule is set to <code>false</code></li>
+<li><code>BLOCK</code> - some items will drop unless the <code>blockExplosionDropDecay</code> gamerule is set to <code>false</code></li>
+<li><code>NONE</code> - all items will drop</li>
+</ul>
+</details>
+</li>
 </ul>
 </li>
 </ul>
