@@ -906,6 +906,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#register-minecraft-debug-commands" class="md-nav__link">
+    register-minecraft-debug-commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bee-count-payload" class="md-nav__link">
     bee-count-payload
   </a>
@@ -11953,6 +11960,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#register-minecraft-debug-commands" class="md-nav__link">
+    register-minecraft-debug-commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bee-count-payload" class="md-nav__link">
     bee-count-payload
   </a>
@@ -22642,7 +22656,7 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <h3 id="fix-projectile-looting-transfer">fix-projectile-looting-transfer<a class="headerlink" href="#fix-projectile-looting-transfer" title="Permanent link">🔗</a></h3>
 <ul>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Addresses <a href="https://bugs.mojang.com/browse/[MC-3304](https://bugs.mojang.com/browse/MC-3304)"><code>[MC-3304](https://bugs.mojang.com/browse/MC-3304)</code></a> by preventing looting from being applied to deaths caused by a projectile, unless if a plugin changed the looting modifier.</li>
+<li><strong>description</strong>: Addresses <a href="https://bugs.mojang.com/browse/MC-3304">MC-3304</a> by preventing looting from being applied to deaths caused by a projectile, unless if a plugin changed the looting modifier.</li>
 </ul>
 <h3 id="blast-resistance-overrides">blast-resistance-overrides<a class="headerlink" href="#blast-resistance-overrides" title="Permanent link">🔗</a></h3>
 <ul>
@@ -22687,6 +22701,11 @@ S  ·  ◈  ·  ◈  ·  ◈  ·  SW  ·  ◈  ·  ◈  ·  ◈  ·  W  ·  ◈ 
 <ul>
 <li><strong>default</strong>: false</li>
 <li><strong>description</strong>: Set to true to always show the item used to kill the player in player death messages.</li>
+</ul>
+<h3 id="register-minecraft-debug-commands">register-minecraft-debug-commands<a class="headerlink" href="#register-minecraft-debug-commands" title="Permanent link">🔗</a></h3>
+<ul>
+<li><strong>default</strong>: false</li>
+<li><strong>description</strong>: Set to true to register unused/hidden minecraft commands. The following commands become available (along with their <code>minecraft.command.&lt;command_name&gt;</code> permission counterpart): <code>debugconfig</code>, <code>serverpack</code>, <code>spawn_armor_trims</code>, <code>warden_spawn_tracker</code>, <code>debugmobspawning</code>, <code>debugpath</code>, <code>raid</code>, <code>resetchunks</code>, <code>test</code>. This list may or may not be incomplete depending on if they get removed or new ones get added in newer minecraft versions.</li>
 </ul>
 <h3 id="bee-count-payload">bee-count-payload<a class="headerlink" href="#bee-count-payload" title="Permanent link">🔗</a></h3>
 <ul>
