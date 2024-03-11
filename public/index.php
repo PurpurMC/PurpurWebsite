@@ -7,7 +7,7 @@ require_once("inc/header.php");
     <h1>Purpur</h1>
     <h2>Your Minecraft, your way</h2>
     <div class="logo">
-        <img src="images/purpur-pride<?= $detect->isAndroidOS() ? '-no-animation' : '' ?>.svg" alt="Purpur logo">
+        <!-- <img src="images/purpur.svg" alt="Purpur logo"> -->
     </div>
     <p class="text-center">
         Purpur is a drop-in replacement for Paper servers designed for configurability and new, fun, exciting gameplay
