@@ -7531,6 +7531,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#avoid-rabbits" class="md-nav__link">
+    avoid-rabbits
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -10335,20 +10342,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#portal-wait-time" class="md-nav__link">
-    portal-wait-time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#creative-portal-wait-time" class="md-nav__link">
-    creative-portal-wait-time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#curse-of-binding" class="md-nav__link">
     curse-of-binding
   </a>
@@ -11000,8 +10993,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#persistent-tileentity-display-names-and-lore" class="md-nav__link">
-    persistent-tileentity-display-names-and-lore
+  <a href="#persistent-tileentity-display-name" class="md-nav__link">
+    persistent-tileentity-display-name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#persistent-tileentity-lore" class="md-nav__link">
+    persistent-tileentity-lore
   </a>
   
 </li>
@@ -18572,6 +18572,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#avoid-rabbits" class="md-nav__link">
+    avoid-rabbits
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -21376,20 +21383,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#portal-wait-time" class="md-nav__link">
-    portal-wait-time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#creative-portal-wait-time" class="md-nav__link">
-    creative-portal-wait-time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#curse-of-binding" class="md-nav__link">
     curse-of-binding
   </a>
@@ -22041,8 +22034,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#persistent-tileentity-display-names-and-lore" class="md-nav__link">
-    persistent-tileentity-display-names-and-lore
+  <a href="#persistent-tileentity-display-name" class="md-nav__link">
+    persistent-tileentity-display-name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#persistent-tileentity-lore" class="md-nav__link">
+    persistent-tileentity-lore
   </a>
   
 </li>
@@ -27731,6 +27731,13 @@ based on the world difficulty. <a href="https://github.com/PurpurMC/Purpur/blob/
 <li><strong>description</strong>: Set to true if this mob should always drop experience</li>
 </ul>
 </li>
+<li>
+<h5 id="avoid-rabbits">avoid-rabbits<a class="headerlink" href="#avoid-rabbits" title="Permanent link">🔗</a></h5>
+<ul>
+<li><strong>default</strong>: false</li>
+<li><strong>description</strong>: Set to true if this mob should avoid rabbits, similar to how creepers avoid cats</li>
+</ul>
+</li>
 </ul>
 <h4 id="pig">pig<a class="headerlink" href="#pig" title="Permanent link">🔗</a></h4>
 <ul>
@@ -29963,20 +29970,6 @@ based on the world difficulty. <a href="https://github.com/PurpurMC/Purpur/blob/
 </ul>
 </li>
 <li>
-<h5 id="portal-wait-time">portal-wait-time<a class="headerlink" href="#portal-wait-time" title="Permanent link">🔗</a></h5>
-<ul>
-<li><strong>default</strong>: 80</li>
-<li><strong>description</strong>: Amount of ticks to wait before letting the player teleport through the portal</li>
-</ul>
-</li>
-<li>
-<h5 id="creative-portal-wait-time">creative-portal-wait-time<a class="headerlink" href="#creative-portal-wait-time" title="Permanent link">🔗</a></h5>
-<ul>
-<li><strong>default</strong>: 1</li>
-<li><strong>description</strong>: Amount of ticks to wait before letting the creative player teleport through the portal</li>
-</ul>
-</li>
-<li>
 <h5 id="curse-of-binding">curse-of-binding<a class="headerlink" href="#curse-of-binding" title="Permanent link">🔗</a></h5>
 <ul>
 <li>
@@ -30468,10 +30461,15 @@ based on the world difficulty. <a href="https://github.com/PurpurMC/Purpur/blob/
 <li><strong>default</strong>: true</li>
 <li><strong>description</strong>: Set to false to stop entities from being able to use portals</li>
 </ul>
-<h4 id="persistent-tileentity-display-names-and-lore">persistent-tileentity-display-names-and-lore<a class="headerlink" href="#persistent-tileentity-display-names-and-lore" title="Permanent link">🔗</a></h4>
+<h4 id="persistent-tileentity-display-name">persistent-tileentity-display-name<a class="headerlink" href="#persistent-tileentity-display-name" title="Permanent link">🔗</a></h4>
+<ul>
+<li><strong>default</strong>: true</li>
+<li><strong>description</strong>: Set to false to disable TE's display names being persistant after breaking (ex. named custom player heads stop retaining their name)</li>
+</ul>
+<h4 id="persistent-tileentity-lore">persistent-tileentity-lore<a class="headerlink" href="#persistent-tileentity-lore" title="Permanent link">🔗</a></h4>
 <ul>
 <li><strong>default</strong>: false</li>
-<li><strong>description</strong>: Set to true to make TE's display names and lores persist after breaking (ex. named custom player heads retain their name)</li>
+<li><strong>description</strong>: Set to true to make TE's lores persist after breaking (ex. custom player heads with lore will retain their lore)</li>
 </ul>
 <h4 id="persistent-droppable-entity-display-names">persistent-droppable-entity-display-names<a class="headerlink" href="#persistent-droppable-entity-display-names" title="Permanent link">🔗</a></h4>
 <ul>
