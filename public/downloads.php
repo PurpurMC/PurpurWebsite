@@ -130,7 +130,7 @@
                 <a href="/discord" target="_blank"><i class="fab fa-discord"></i> Discord</a>
                 <a href="/downloads"><i class="fas fa-cloud-download-alt"></i> Downloads</a>
             </nav>
-            <a href="/"><img src="/images/purpur.svg" alt="Purpur logo" /></a>
+            <a href="/"><img src="/images/purpur-pride.svg" alt="Purpur logo" /></a>
             <div>
                 <a href="/"><h2>Purpur</h2></a>
                 <p>Your Minecraft, your way</p>
