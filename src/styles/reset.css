@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  font-weight: 400;
+  vertical-align: baseline;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased
+}
+
+body {
+  line-height: 1.5
+}
+
+ol, ul {
+  list-style: none
+}
+
+blockquote, q {
+  quotes: none
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+
+button {
+  border: none;
+  background: 0 0;
+  outline: none;
+  font-size: inherit;
+  display: flex;
+  flex-direction: row;
+  img {
+    height: 1rem;
+  }
+}
+
+button:focus-visible {
+  outline: 2px solid #000
+}
+
+input {
+  border: none;
+  outline: none
+}
+
+input:focus-visible {
+  outline: 2px solid #000
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%
+}

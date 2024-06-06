@@ -1,0 +1,47 @@
+---
+import BaseHead from "./BaseHead.astro";
+import Nav from "./Nav.astro";
+export interface Props {
+	title: string;
+	description: string;
+	permalink: string;
+	current?: string;
+}
+const { title, description, permalink, current } = Astro.props;
+---
+
+<html lang="en">
+<head>
+	<BaseHead title={title} description={description} permalink={permalink} />
+</head>
+<body>
+
+<div class="layout">
+	<Nav current={current} />
+	<main>
+		<slot />
+	</main>
+</div>
+</body>
+</html>
+
+<style>
+	.layout {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+
+	main {
+		flex: 1;
+		position: relative;
+		margin: 0 auto;
+		max-width: var(--max-site-width);
+		padding: 1em 2em;
+		box-sizing: border-box;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+	}
+</style>

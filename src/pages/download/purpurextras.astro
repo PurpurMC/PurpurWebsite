@@ -1,0 +1,156 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const title = 'Download - Your minecraft, your way';
+const description = 'Download - Your minecraft - your way.';
+const permalink = Astro.site.href;
+const current = 'download';
+
+---
+<Base title={title} description={description} permalink={permalink} current={current}>
+  <div>
+    <h1>PurpurExtras</h1>
+    <h2>Downloads</h2>
+  </div>
+
+  <section class="downloads">
+    <div class="version-list latest">
+      <h3>Latest version</h3>
+      <div id="latest" class="version-list">
+        <p>Loading...</p>
+      </div>
+    </div>
+    <div class="version-list">
+      <h3>Previous versions</h3>
+      <div id="previous" class="version-list">
+        <p>Loading...</p>
+      </div>
+    </div>
+  </section>
+  <template id="entry">
+    <article class="entry">
+      <div class="key">
+        <a data-download><button><img src="/images/download.svg" alt="" aria-hidden="true"><span data-version></span></button></a>
+        <span class="date" data-date></span>
+      </div>
+      <div data-changelog aria-label="changelog"></div>
+    </article>
+  </template>
+</Base>
+
+<script>
+  import {marked} from "marked";
+
+  const entryTemplate = document.querySelector("#entry");
+  const dateFormat = new Intl.DateTimeFormat(navigator.language, {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
+  document.addEventListener('astro:page-load', (e) => {
+    // don't try to re-fetch versions on any other page
+    if (e.target.location.pathname !== "/download/purpurextras") return;
+    getPurpurExtrasVersions();
+  });
+
+  async function getPurpurExtrasVersions() {
+    const latestVersionList = document.querySelector("#latest");
+    const versionList = document.querySelector("#previous");
+    const result = await fetch("https://api.modrinth.com/v2/project/purpurextras/version")
+      .catch(() => {
+          console.error("Failed to fetch PurpurExtras versions");
+          return null;
+      });
+    if (result === null) {
+      const error = "Failed to fetch PurpurExtras versions";
+      latestVersionList.textContent = error;
+      versionList.textContent = error;
+      return;
+    }
+    const versions = await result.json();
+
+    latestVersionList.innerHTML = "";
+    versionList.innerHTML = "";
+
+    let first = true;
+    for (const version of versions) {
+      if (first) {
+        addVersion(version, latestVersionList);
+        first = false;
+        continue;
+      }
+      addVersion(version, versionList)
+    }
+  }
+
+  function addVersion(version, list: Element) {
+    const entry = entryTemplate.content.cloneNode(true);
+    entry.querySelector("[data-version]").textContent = version.name.replace("v", "");
+    entry.querySelector("[data-date]").textContent = dateFormat.format(new Date(version.date_published));
+    entry.querySelector("[data-changelog]").innerHTML = marked.parse(version.changelog);
+    entry.querySelector("[data-download]").href = version.files[0].url;
+    list.appendChild(entry);
+  }
+
+</script>
+
+<style lang="scss">
+  h1, h2 {
+    text-align: center;
+  }
+  .downloads {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: start;
+    min-height: 30rem;
+    gap: 3rem;
+  }
+  .version-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &.latest {
+      h3 {
+        font-size: 2rem;
+      }
+    }
+  }
+  .entry {
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
+    margin: 0.5rem;
+    gap: 2rem;
+    width: 100%;
+    .key {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .date {
+        font-size: 0.7rem;
+      }
+    }
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(255,255,255, 0.3);
+    }
+    a {
+      text-decoration: none;
+    }
+    [data-changelog] {
+      display: flex;
+      flex: 1;
+      min-width: min(20rem, 100%);
+    }
+
+  }
+
+</style>
