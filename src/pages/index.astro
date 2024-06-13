@@ -43,7 +43,7 @@ const logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 
           </p>
         </div>
         <div class="buttons">
-          <a href="https://purpurmc.org/download" target="_blank">
+          <a href="download/purpur">
             <button><img src="/images/download.svg" alt="" aria-hidden="true" loading="lazy">Download</button>
           </a>
           <a href="https://purpurmc.org/docs/purpur/" target="_blank">
@@ -115,7 +115,7 @@ const logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 
   updateLogo();
 
   function updateLogo() {
-    const logo = document.querySelector('#logo');
+    const logo: HTMLImageElement = document.querySelector('#logo');
     const now = new Date();
     // pride month
     if (now.getMonth() === 5) {

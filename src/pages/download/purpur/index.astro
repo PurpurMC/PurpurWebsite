@@ -1,0 +1,204 @@
+---
+import Base from "../../../layouts/Base.astro";
+
+const title = 'Download - Your minecraft, your way';
+const description = 'Download - Your minecraft - your way.';
+const version = Astro.url.searchParams.get('version');
+const permalink = Astro.site.href;
+const current = 'download';
+
+---
+<Base title={title} description={description} permalink={permalink} current={current}>
+  <div>
+    <h1>Purpur</h1>
+    <h2>Downloads</h2>
+    <p style="text-align: center;" id="versionDisplay" data-version={version}></p>
+  </div>
+
+  <section class="downloads">
+    <div class="version-list latest">
+      <h3>Latest build</h3>
+      <div id="latest" class="version-list">
+        <p>Loading...</p>
+      </div>
+    </div>
+    <div class="version-list">
+      <h3>Previous builds</h3>
+      <div id="previous" class="version-list">
+        <p>Loading...</p>
+      </div>
+    </div>
+  </section>
+  <template id="entry">
+    <article class="entry">
+      <div class="key">
+        <a data-download><button><img src="/images/download.svg" alt="" aria-hidden="true"><span data-version></span></button></a>
+        <span class="date" data-date></span>
+      </div>
+      <div data-changelog aria-label="changelog"></div>
+    </article>
+  </template>
+</Base>
+
+<script>
+  let versionData = null;
+  let versionString = "";
+  let isLatest: boolean | null = null;
+  const entryTemplate = document.querySelector("#entry");
+  const dateFormat = new Intl.DateTimeFormat(navigator.language, {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
+  document.addEventListener('astro:page-load', async (e) => {
+    // don't try to re-fetch data on any other page
+    if (e.target.location.pathname !== "/download/purpur") return;
+    versionData = await getVersionInfo();
+    if (versionData === null) return;
+    const versionDisplay = document.querySelector("#versionDisplay");
+    versionString = versionDisplay?.getAttribute("data-version");
+    if (versionString === undefined || !versionData.versions.includes(versionString)) {
+      versionString = versionData.latest;
+      clearVersionParam();
+    }
+    isLatest = versionString === versionData.latest;
+    versionDisplay.textContent = versionString;
+    await getBuildsForVersion(versionString);
+  });
+
+  function clearVersionParam() {
+    let url = new URL(window.location.href);
+    url.searchParams.delete("version");
+    window.history.replaceState({}, document.title, url);
+  }
+
+  async function getVersionInfo() {
+
+    const result = await fetch("https://api.purpurmc.org/v2/purpur")
+      .catch(() => {
+        console.error("Failed to fetch Purpur versions");
+        return null;
+      });
+    if (result === null) return null;
+    try {
+      const versions = await result.json();
+      return {
+        lastUpdated: new Date().getTime(),
+        latest: versions.versions[versions.versions.length - 1],
+        versions: versions.versions,
+      };
+    } catch (e) {
+      console.error("Failed to parse Purpur versions", e);
+      return null;
+    }
+
+  }
+
+  async function getBuildsForVersion(version: string) {
+    if (versionData.versions === null || !versionData.versions.includes(version)) {
+      console.error("Invalid version requested");
+      return null;
+    }
+    const result = await fetch(`https://api.purpurmc.org/v2/purpur/${version}?detailed=true`)
+      .catch(() => {
+        return null;
+      });
+    if (result === null) return null;
+    const json = await result.json();
+    const builds = json.builds.all.reverse();
+    const latestList = document.getElementById("latest");
+    const previousList = document.getElementById("previous");
+    latestList.innerHTML = "";
+    previousList.innerHTML = "";
+    for (const build of builds) {
+      if (build.build === json.builds.latest.build) {
+        addBuild(build, latestList);
+      } else {
+        addBuild(build, previousList);
+      }
+    }
+  }
+
+
+  function addBuild(version, list: Element) {
+    const entry = entryTemplate.content.cloneNode(true);
+    entry.querySelector("[data-version]").textContent = version.build;
+    entry.querySelector("[data-date]").textContent = dateFormat.format(new Date(version.timestamp));
+    let changelogList = document.createElement("ul");
+    for (const commit of version.commits) {
+      const entry = document.createElement("li");
+      entry.innerText = commit.description;
+      changelogList.appendChild(entry);
+    }
+    if (changelogList.children.length === 0) {
+      const entry = document.createElement("li");
+      entry.textContent = "No changes"
+      changelogList.appendChild(entry);
+    }
+    entry.querySelector("[data-changelog]").appendChild(changelogList);
+    entry.querySelector("[data-download]").href = `https://api.purpurmc.org/v2/purpur/${versionString}/${version.build}/download`;
+    list.appendChild(entry);
+  }
+
+</script>
+
+<style lang="scss">
+  h1, h2 {
+    text-align: center;
+  }
+  .downloads {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: start;
+    min-height: 30rem;
+    gap: 3rem;
+  }
+  .version-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &.latest {
+      h3 {
+        font-size: 2rem;
+      }
+    }
+  }
+  .entry {
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: start;
+    padding: 1rem;
+    margin: 0.5rem;
+    gap: 2rem;
+    width: 100%;
+    .key {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .date {
+        font-size: 0.7rem;
+      }
+    }
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(255,255,255, 0.3);
+    }
+    a {
+      text-decoration: none;
+    }
+    [data-changelog] {
+      display: flex;
+      flex: 1;
+      min-width: min(20rem, 100%);
+    }
+
+  }
+
+</style>
