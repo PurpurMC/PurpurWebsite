@@ -22,10 +22,15 @@ const { title, description, permalink, current } = Astro.props;
 		<slot />
 	</main>
 </div>
+<footer>
+	<p>
+		<a href="/">© 2019-{new Date().getUTCFullYear()} Purpur</a> <a href="https://github.com/PurpurMC/PurpurWebsite/blob/HEAD/LICENSE">MIT</a>
+	</p>
+</footer>
 </body>
 </html>
 
-<style>
+<style lang="scss">
 	.layout {
 		display: flex;
 		flex-direction: column;
@@ -43,5 +48,15 @@ const { title, description, permalink, current } = Astro.props;
 		display: flex;
 		flex-direction: column;
 		gap: 2.5rem;
+	}
+
+	footer {
+		padding-block: 2.5rem;
+		p {
+			text-align: center;
+			a {
+				text-decoration: none;
+			}
+		}
 	}
 </style>
