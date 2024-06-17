@@ -59,6 +59,11 @@ select {
   }
 }
 
+ol, ul {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 li {
   list-style-type: disc;
 }

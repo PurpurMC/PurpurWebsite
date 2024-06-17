@@ -1,10 +1,13 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import PurpurBuild from "../../../util/PurpurBuild";
+import {Astro} from "astro/env";
+import {marked} from "marked";
 
 const title = 'Download - Your minecraft, your way';
 const description = 'Download - Your minecraft - your way.';
 const permalink = Astro.site.href;
+const version = Astro.params.version;
 const current = 'download';
 
 let latestVersion = null;
@@ -12,8 +15,11 @@ const allVersions: string[] = [];
 let latestBuild = null;
 const builds: PurpurBuild[] = [];
 
+let knownRCEVersion = false;
+
 const versionRequestResult = await fetch("https://api.purpurmc.org/v2/purpur")
   .catch(() => {
+    console.error("Failed to fetch Purpur versions");
     return null;
   });
 if (versionRequestResult === null) {
@@ -34,9 +40,23 @@ if (versions === null || Array.isArray(versions.versions) === false) {
 for (const version of versions.versions) {
   allVersions.push(version);
 }
+
+if (!allVersions.includes(version)) {
+  return new Response(`There are no Purpur builds for version ${version}`, {status: 404});
+}
+
 latestVersion = allVersions[allVersions.length - 1];
 
-const result = await fetch(`https://api.purpurmc.org/v2/purpur/${latestVersion}?detailed=true`)
+if (version === latestVersion) {
+  return Astro.redirect("/download/purpur/");
+}
+
+const versionSplit = version.split(".");
+if (versionSplit.length >2 && versionSplit[0] === "1" && Number.parseInt(versionSplit[1]) <= 17 ) {
+  knownRCEVersion = true;
+}
+
+const result = await fetch(`https://api.purpurmc.org/v2/purpur/${version}?detailed=true`)
   .catch(() => {
     return null;
   });
@@ -50,7 +70,6 @@ if (result !== null) {
       console.error("Failed to parse build", e);
     }
   }
-  builds.pop(); // remove latest build, because it's already determined
   builds.reverse();
 }
 ---
@@ -58,33 +77,26 @@ if (result !== null) {
   <div>
     <h1>Purpur</h1>
     <h2>Downloads</h2>
-    <p style="text-align: center;" id="versionDisplay">{latestVersion}</p>
+    <p style="text-align: center;" id="versionDisplay">{version}</p>
   </div>
 
   <section class="downloads">
-    <div class="version-list latest">
-      <h3>Latest build</h3>
-      <div id="latest" class="version-list">
-        <article class="entry">
-          <div class="key">
-            <a href={`https://api.purpurmc.org/v2/purpur/${latestBuild?.version}/${latestBuild?.build}/download`}>
-              <button><img src="/images/download.svg" alt aria-hidden="true"><span>{latestBuild?.build}</span></button>
-            </a>
-            <span class="date" data-timestamp={latestBuild?.timestamp}></span>
-          </div>
-          <ul aria-label="changelog">
-            {
-              latestBuild?.commits.length > 0
-                ? latestBuild.commits.map(commit =>
-                      <li>{commit.description}</li>)
-                : <p>No changes</p>
-            }
-          </ul>
-        </article>
-      </div>
+    <div class="warning">
+      <p>
+        You are trying to download outdated builds. You will NOT receive support for them. To get the latest build click
+        <a href="/download/purpur/">here</a>.
+      </p>
+      {
+        knownRCEVersion
+          ? <p>
+              This version is known to contain an RCE vulnerability!<br>
+              <a href="https://purpurmc.org/docs/Log4j/">Read about the exploit and potential mitigations here</a>
+          </p>
+          : null
+      }
     </div>
     <div class="version-list">
-      <h3>Previous builds</h3>
+      <h3>Legacy builds</h3>
       <div id="previous" class="version-list">
         {
           builds.map(build => (
@@ -98,9 +110,7 @@ if (result !== null) {
                 <ul aria-label="changelog">
                   {
                     build.commits.length > 0
-                      ? build.commits.map(commit => <li>{commit.description}</li>)
-                      :
-                        <li>No changes</li>
+                      ? build.commits.map(commit => <li>{commit.description}</li>) : <li>No changes</li>
                   }
                 </ul>
               </article>
@@ -134,7 +144,7 @@ if (result !== null) {
 
   document.addEventListener('astro:page-load', async (e) => {
     // don't try to re-fetch data on any other page
-    if (e.target.location.pathname !== "/download/purpur") return;
+    if (!e.target.location.pathname.startsWith("/download/purpur/")) return;
     const times = document.querySelectorAll('[data-timestamp]');
     for (const time of times) {
       const dataTimestamp = time.getAttribute('data-timestamp');
@@ -160,6 +170,20 @@ if (result !== null) {
     align-items: start;
     min-height: 30rem;
     gap: 3rem;
+    .warning {
+      font-size: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      background-color: rgba(255, 0, 0, 0.45);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      color: white;
+      margin: 0 auto;
+      gap: 2rem;
+    }
   }
 
   .version-list {
@@ -190,6 +214,7 @@ if (result !== null) {
       justify-content: center;
       align-items: center;
       min-height: 3.5rem;
+      min-width: 6rem;
 
       .date {
         font-size: 0.7rem;
@@ -214,7 +239,8 @@ if (result !== null) {
 
   @media (max-width: 940px) {
     .entry {
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 0.2rem;
     }
   }
 
