@@ -39,7 +39,7 @@ if (versions.length <= 0) {
   return new Response("Couldn't parse versions", { status: 502 });
 }
 latestVersion = versions[0];
-versions = versions.slice(1, versions.length-1);
+versions = versions.slice(1, versions.length);
 
 
 
