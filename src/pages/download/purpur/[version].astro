@@ -1,8 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import PurpurBuild from "../../../util/PurpurBuild";
-import {Astro} from "astro/env";
-import {marked} from "marked";
 
 const title = 'Download - Your minecraft, your way';
 const description = 'Download - Your minecraft - your way.';
@@ -24,7 +22,7 @@ const versionRequestResult = await fetch("https://api.purpurmc.org/v2/purpur")
   });
 if (versionRequestResult === null) {
   console.error("Failed to fetch Purpur versions");
-  return new Response("Failed to fetch Purpur versions", {status: 502});
+  return Astro.redirect("/502");
 }
 
 const versions = await versionRequestResult.json().catch(() => {
@@ -34,7 +32,7 @@ const versions = await versionRequestResult.json().catch(() => {
 
 if (versions === null || Array.isArray(versions.versions) === false) {
   console.error("Failed to parse Purpur versions");
-  return new Response("Failed to parse Purpur versions", {status: 502});
+  return Astro.redirect("/500");
 }
 
 for (const version of versions.versions) {
@@ -42,7 +40,7 @@ for (const version of versions.versions) {
 }
 
 if (!allVersions.includes(version)) {
-  return new Response(`There are no Purpur builds for version ${version}`, {status: 404});
+  return Astro.redirect("/404");
 }
 
 latestVersion = allVersions[allVersions.length - 1];

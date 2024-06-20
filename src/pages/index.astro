@@ -1,49 +1,16 @@
 ---
 import Base from "../layouts/Base.astro";
+import PurpurLogo from "../components/PurpurLogo.astro";
 
 const title = 'Your minecraft, your way';
 const description = 'Your minecraft - your way.';
 const permalink = Astro.site.href;
 const current = 'home';
-
-let logoSrc = "/images/purpur.svg";
-let logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
-  "transition in color from light blue to purple on a transparent background.";
-
-updateLogo();
-
-function updateLogo() {
-  const now = new Date();
-  // pride month
-  if (now.getUTCMonth() === 5) {
-    logoSrc = "/images/purpur-pride.svg"
-    logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
-      "transition in color between all colors of rainbow on a transparent background."
-    return;
-  }
-  // Christmas
-  if (now.getUTCMonth() === 11) {
-    logoSrc = "/images/purpur-christmas.svg"
-    logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
-      "transition in color between green and red on a transparent background."
-    return;
-  }
-  // Halloween
-  if (now.getUTCMonth() === 9) {
-    logoSrc = "/images/purpur-halloween.svg"
-    logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
-      "transition in color between orange and yellow on a transparent background."
-    return;
-  }
-}
-
 ---
 
 <Base title={title} description={description} permalink={permalink} current={current}>
   <section class="hero">
-    <div class="logo">
-      <img id="logo" src={logoSrc} alt={logoAlt} />
-    </div>
+    <PurpurLogo/>
     <div>
       <h1>Purpur</h1>
       <h2>Your minecraft, your way</h2>
@@ -60,7 +27,12 @@ function updateLogo() {
   <section id="projects" class="projects">
     <article class="entry">
       <div class="logo">
-        <img src="/images/purpur.svg" loading="eager" alt={logoAlt} />
+        <img
+            src="/images/purpur.svg"
+            loading="eager"
+            alt="Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines transition
+             in color from light blue to purple on a transparent background."
+        />
       </div>
       <div class="content">
         <div>
@@ -256,10 +228,7 @@ function updateLogo() {
 
   @media (max-width: 940px) {
     .hero {
-      padding-block: 6rem;
-      .logo {
-        width: 8rem;
-      }
+      padding-block: 4rem;
     }
     .projects {
       justify-content: center;
