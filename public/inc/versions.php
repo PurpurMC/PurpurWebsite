@@ -1,6 +1,6 @@
 <?php
 $betaVersions = [];
-$currentVersion = "1.21";
+$currentVersion = "1.21.1";
 $forceInvisible = ["1.15.2", "1.14.4"];
 $knownVulnerabilities = [
     [
