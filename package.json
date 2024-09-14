@@ -10,9 +10,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/node": "^8.3.0",
-    "astro": "^4.10.2",
-    "marked": "^12.0.2",
-    "sass": "^1.77.2"
+    "@astrojs/node": "^8.3.3",
+    "astro": "^4.15.6",
+    "marked": "^14.1.2",
+    "sass": "^1.78.0"
   }
 }
