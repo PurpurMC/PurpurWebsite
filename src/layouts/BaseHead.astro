@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from 'astro:transitions'
 import '../styles/reset.css'
 import '../styles/global.scss'
 
@@ -37,4 +36,8 @@ const socialUrl = Astro.site.href + 'images/purpur.svg'
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={socialUrl} />
 
-<ViewTransitions />
+<style>
+  @view-transition {
+    navigation: auto;
+  }
+</style>
