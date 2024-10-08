@@ -1,7 +1,8 @@
 ---
+import PurpurDownloads from "../../../components/PurpurDownloads.astro";
+export const prerender = false
+
 import Base from "../../../layouts/Base.astro";
-import PurpurBuild from "../../../util/PurpurBuild";
-import {Astro} from "astro/env";
 
 const title = 'Download - Your minecraft, your way';
 const description = 'Download - Your minecraft - your way.';
@@ -10,8 +11,6 @@ const current = 'download';
 
 let latestVersion = null;
 const allVersions: string[] = [];
-let latestBuild = null;
-const builds: PurpurBuild[] = [];
 
 const versionRequestResult = await fetch("https://api.purpurmc.org/v2/purpur")
   .catch(() => {
@@ -35,25 +34,9 @@ if (versions === null || Array.isArray(versions.versions) === false) {
 for (const version of versions.versions) {
   allVersions.push(version);
 }
-latestVersion = allVersions[allVersions.length - 1];
 
-const result = await fetch(`https://api.purpurmc.org/v2/purpur/${latestVersion}?detailed=true`)
-  .catch(() => {
-    return null;
-  });
-if (result !== null) {
-  const json = await result.json();
-  latestBuild = new PurpurBuild(json.builds.latest);
-  for (const build of json.builds.all) {
-    try {
-      builds.push(new PurpurBuild(build));
-    } catch (e) {
-      console.error("Failed to parse build", e);
-    }
-  }
-  builds.pop(); // remove latest build, because it's already determined
-  builds.reverse();
-}
+latestVersion = versions?.metadata?.current ?? allVersions[allVersions.length - 1];
+
 ---
 <Base title={title} description={description} permalink={permalink} current={current}>
   <div>
@@ -62,92 +45,8 @@ if (result !== null) {
     <p style="text-align: center;" id="versionDisplay">{latestVersion}</p>
   </div>
 
-  <section class="downloads">
-    <div class="version-list latest">
-      <h3>Latest build</h3>
-      <div id="latest" class="version-list">
-        <article class="entry">
-          <div class="key">
-            <a href={`https://api.purpurmc.org/v2/purpur/${latestBuild?.version}/${latestBuild?.build}/download`}>
-              <button><img src="/images/download.svg" alt aria-hidden="true"><span>{latestBuild?.build}</span></button>
-            </a>
-            <span class="date" data-timestamp={latestBuild?.timestamp}></span>
-          </div>
-          <ul aria-label="changelog">
-            {
-              latestBuild?.commits.length > 0
-                ? latestBuild.commits.map(commit =>
-                      <li>{commit.description}</li>)
-                : <p>No changes</p>
-            }
-          </ul>
-        </article>
-      </div>
-    </div>
-    <div class="version-list">
-      <h3>Previous builds</h3>
-      <div id="previous" class="version-list">
-        {
-          builds.map(build => (
-              <article class="entry">
-                <div class="key">
-                  <a href={`https://api.purpurmc.org/v2/purpur/${build.version}/${build.build}/download`}>
-                    <button><img src="/images/download.svg" alt aria-hidden="true"><span>{build.build}</span></button>
-                  </a>
-                  <span class="date" data-timestamp={build.timestamp}></span>
-                </div>
-                <ul aria-label="changelog">
-                  {
-                    build.commits.length > 0
-                      ? build.commits.map(commit => <li>{commit.description}</li>)
-                      :
-                        <li>No changes</li>
-                  }
-                </ul>
-              </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-  <template id="entry">
-    <article class="entry">
-      <div class="key">
-        <a data-download>
-          <button><img src="/images/download.svg" alt="" aria-hidden="true"><span data-version></span></button>
-        </a>
-        <span class="date" data-date></span>
-      </div>
-      <div data-changelog aria-label="changelog"></div>
-    </article>
-  </template>
+  <PurpurDownloads version={latestVersion} latestVersion={latestVersion}/>
 </Base>
-
-<script>
-  const dateFormat = new Intl.DateTimeFormat(navigator.language, {
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-
-  document.addEventListener('astro:page-load', async (e) => {
-    // don't try to re-fetch data on any other page
-    if (e.target.location.pathname !== "/download/purpur") return;
-    const times = document.querySelectorAll('[data-timestamp]');
-    for (const time of times) {
-      const dataTimestamp = time.getAttribute('data-timestamp');
-      const timestamp = parseInt(dataTimestamp);
-      if (isNaN(timestamp)) continue;
-      const date = new Date(timestamp);
-      time.textContent = dateFormat.format(date);
-    }
-  });
-
-
-</script>
 
 <style lang="scss">
   h1, h2 {

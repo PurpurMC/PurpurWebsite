@@ -9,6 +9,7 @@ export default class PurpurBuild {
   readonly duration: number;
   readonly md5: string;
   readonly commits: Commit[] = [];
+  readonly metadata: {[key: string]: unknown} = {};
 
   constructor(data: {[key: string]: unknown}) {
     this.project = this.getString(data, "project");
@@ -21,6 +22,7 @@ export default class PurpurBuild {
     for (const commit of data["commits"] as {[key: string]: unknown}[]) {
       this.commits.push(new Commit(commit));
     }
+    this.metadata = data["metadata"] as {[key: string]: unknown};
   }
 
   private getString(data: {[key: string]: unknown}, key: string): string {

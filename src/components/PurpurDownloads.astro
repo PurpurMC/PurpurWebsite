@@ -1,0 +1,299 @@
+---
+interface Props {
+  version: string,
+  latestVersion: string,
+}
+
+import PurpurBuild from "../util/PurpurBuild";
+
+const {version, latestVersion} = Astro.props;
+let latestBuild = null;
+let showWarning = false;
+
+if (version !== latestVersion) {
+  showWarning = true;
+}
+
+const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${version}?detailed=true`)
+  .then((result) => {
+    return result.json();
+  }).then((json) => {
+    latestBuild = new PurpurBuild(json.builds.latest);
+    const builds: PurpurBuild[] = [];
+    for (const build of json.builds.all) {
+      try {
+        const purpurBuild = new PurpurBuild(build);
+        builds.push(purpurBuild);
+      } catch (error) {
+        console.error("Failed to parse build:", error);
+      }
+    }
+    return builds;
+  })
+  .then((builds) => {
+    builds.pop(); // remove latest build, because it's already determined
+    builds.reverse();
+    return builds;
+  })
+  .catch((error) => {
+    console.error(error);
+    return [];
+  });
+---
+<section class="downloads">
+  {
+    showWarning
+      ? (
+            <div class="warning">
+              {
+                version !== latestVersion
+                  ? <p>
+                      <span>You are trying to download builds for outdated or experimental version. You will NOT receive support for them. To get the latest build click</span>
+                      <a href="/download/purpur/">here</a>.
+                    </p>
+                  : null
+              }
+            </div>
+      )
+      : null
+  }
+  <div class="version-list">
+    {
+      latestVersion === version && (
+            <div class="version-list latest">
+              <h3>Latest build</h3>
+              <div id="latest" class="version-list">
+                <article class="entry">
+                  <div class="key">
+                    <a href={`https://api.purpurmc.org/v2/purpur/${latestBuild?.version}/${latestBuild?.build}/download`}>
+                      <button><img src="/images/download.svg" alt="" aria-hidden="true"
+                                   loading="eager"><span>{latestBuild?.build}</span></button>
+                    </a>
+                    <span class="date" data-timestamp={latestBuild?.timestamp}></span>
+                  </div>
+                  <ul aria-label="changelog" class="changelog">
+                    {
+                      latestBuild?.commits.length > 0
+                        ? latestBuild.commits.map(commit =>
+                              <li class="commit">{commit.description} <span class="commit-author">~{commit.author}</span></li>)
+                        : <p>No changes</p>
+                    }
+                  </ul>
+                </article>
+              </div>
+            </div>
+      )
+    }
+    <h3>{latestVersion === version ? 'Previous builds' : 'Builds'}</h3>
+    <div id="previous" class="version-list">
+      {
+        builds.map(build => (
+            <article class="entry">
+              <div class="key">
+                <a href={`https://api.purpurmc.org/v2/purpur/${build.version}/${build.build}/download`}>
+                  <button><img src="/images/download.svg" alt="" aria-hidden="true"><span>{build.build}</span></button>
+                </a>
+                <span class="date" data-timestamp={build.timestamp}></span>
+              </div>
+              <ul aria-label="changelog" class="changelog">
+                {
+                  build.metadata !== null && Object.keys(build.metadata).length !== 0 && (
+                        <li class="metadata">
+                          {
+                            build.metadata.type === "experimental" && (
+                                  <div class="build-flag warn"><span>Experimental build</span></div>
+                            )
+                          }
+                        </li>
+                  )
+                }
+                {
+                  build.commits.length > 0
+                    ? build.commits.map(commit =>
+                          <li class="commit">{commit.description} <span class="commit-author">~{commit.author}</span>
+                          </li>) :
+                      <li>No changes</li>
+                }
+              </ul>
+            </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const dateFormat = new Intl.DateTimeFormat(navigator.language, {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
+  const times = document.querySelectorAll('[data-timestamp]');
+  for (const time of times) {
+    const dataTimestamp = time.getAttribute('data-timestamp');
+    const timestamp = parseInt(dataTimestamp);
+    if (isNaN(timestamp)) continue;
+    const date = new Date(timestamp);
+    time.textContent = dateFormat.format(date);
+  }
+
+
+</script>
+
+<style lang="scss">
+
+  .downloads {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: start;
+    min-height: 30rem;
+    gap: 3rem;
+
+    .warning {
+      font-size: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      background-color: rgba(255, 0, 0, 0.45);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      color: white;
+      margin: 0 auto;
+      gap: 2rem;
+
+      &:empty {
+        display: none;
+      }
+    }
+  }
+
+  .version-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &.latest {
+      h3 {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .entry {
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    align-items: start;
+    padding: 1rem;
+    margin: 0.5rem;
+    gap: 2rem;
+    width: 100%;
+
+    .key {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      min-height: 3.5rem;
+      min-width: 6rem;
+
+      .date {
+        font-size: 0.7rem;
+      }
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .changelog {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: min(20rem, 100%);
+      gap: 0.25rem;
+
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .commit {
+        outline-offset: 0.2rem;
+        border-radius: 0.25rem;
+        padding: 0.2rem;
+        transition: padding-left 0.2s;
+
+        &:hover {
+          padding-left: 0.5rem;
+        }
+
+        .commit-author {
+          display: block;
+          font-size: 0.8rem;
+          color: #b6b6b6;
+        }
+      }
+
+      .build-flag {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        max-width: fit-content;
+        padding-inline: .5rem;
+        padding-block: 0.1rem;
+        border-radius: 0.25rem;
+        line-height: 1;
+        gap: 0.5rem;
+
+        &.warn {
+          background-color: #c44601;
+
+          span {
+            color: inherit;
+          }
+
+          &::before {
+            content: '⚐';
+            color: inherit;
+            font-weight: bold;
+            font-size: 1.5rem;
+            transform: translateY(0.1rem);
+          }
+        }
+
+        &.danger {
+          background-color: #930d0d;
+
+          &::before {
+            content: '⚠';
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 940px) {
+    .entry {
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+  }
+</style>

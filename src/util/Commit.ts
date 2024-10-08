@@ -5,22 +5,22 @@ export default class Commit {
   hash: string;
   timestamp: number;
 
-  constructor(data: {[key: string]: unknown}) {
-    this.author = this.getString(data, "author");
-    this.email = this.getString(data, "email");
-    this.description = this.getString(data, "description");
-    this.hash = this.getString(data, "hash");
+  constructor(data: { [key: string]: unknown }) {
+    this.author = this.getString(data, "author").trim();
+    this.email = this.getString(data, "email").trim();
+    this.description = this.getString(data, "description").trim();
+    this.hash = this.getString(data, "hash").trim();
     this.timestamp = this.getNumber(data, "timestamp");
   }
 
-  private getString(data: {[key: string]: unknown}, key: string): string {
+  private getString(data: { [key: string]: unknown }, key: string): string {
     if (typeof data[key] !== "string") {
       throw `Field expected to be a string: ${key}`
     }
     return data[key] as string;
   }
 
-  private getNumber(data: {[key: string]: unknown}, key: string): number {
+  private getNumber(data: { [key: string]: unknown }, key: string): number {
     if (typeof data[key] !== "number") {
       throw `Field expected to be a number: ${key}`
     }
