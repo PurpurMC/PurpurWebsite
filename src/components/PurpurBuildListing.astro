@@ -51,7 +51,7 @@ const { build } = Astro.props;
                               <span class="commit-author">~{commit.author}</span>
                               <span>
                                 <span>(</span>
-                                <a href=`https://github.com/PurpurMC/Purpur/commit/${commit.hash}`>{commit.hash?.substring(0, 8)}</a>
+                                <a target="_blank" rel="noreferrer" href=`https://github.com/PurpurMC/Purpur/commit/${commit.hash}`>{commit.hash?.substring(0, 8)}</a>
                                 <span>)</span>
                               </span>
                             </span>
