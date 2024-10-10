@@ -1,4 +1,5 @@
 ---
+import PurpurBuildListing from "./PurpurBuildListing.astro";
 interface Props {
   version: string,
   latestVersion: string,
@@ -63,23 +64,7 @@ const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${
             <div class="version-list latest">
               <h3>Latest build</h3>
               <div id="latest" class="version-list">
-                <article class="entry">
-                  <div class="key">
-                    <a href={`https://api.purpurmc.org/v2/purpur/${latestBuild?.version}/${latestBuild?.build}/download`}>
-                      <button><img src="/images/download.svg" alt="" aria-hidden="true"
-                                   loading="eager"><span>{latestBuild?.build}</span></button>
-                    </a>
-                    <span class="date" data-timestamp={latestBuild?.timestamp}></span>
-                  </div>
-                  <ul aria-label="changelog" class="changelog">
-                    {
-                      latestBuild?.commits.length > 0
-                        ? latestBuild.commits.map(commit =>
-                              <li class="commit">{commit.description} <span class="commit-author">~{commit.author}</span></li>)
-                        : <p>No changes</p>
-                    }
-                  </ul>
-                </article>
+                <PurpurBuildListing build={latestBuild}/>
               </div>
             </div>
       )
@@ -88,34 +73,7 @@ const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${
     <div id="previous" class="version-list">
       {
         builds.map(build => (
-            <article class="entry">
-              <div class="key">
-                <a href={`https://api.purpurmc.org/v2/purpur/${build.version}/${build.build}/download`}>
-                  <button><img src="/images/download.svg" alt="" aria-hidden="true"><span>{build.build}</span></button>
-                </a>
-                <span class="date" data-timestamp={build.timestamp}></span>
-              </div>
-              <ul aria-label="changelog" class="changelog">
-                {
-                  build.metadata !== null && Object.keys(build.metadata).length !== 0 && (
-                        <li class="metadata">
-                          {
-                            build.metadata.type === "experimental" && (
-                                  <div class="build-flag warn"><span>Experimental build</span></div>
-                            )
-                          }
-                        </li>
-                  )
-                }
-                {
-                  build.commits.length > 0
-                    ? build.commits.map(commit =>
-                          <li class="commit">{commit.description} <span class="commit-author">~{commit.author}</span>
-                          </li>) :
-                      <li>No changes</li>
-                }
-              </ul>
-            </article>
+            <PurpurBuildListing build={build}/>
         ))
       }
     </div>
@@ -186,109 +144,7 @@ const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${
     }
   }
 
-  .entry {
-    display: flex;
-    position: relative;
-    justify-content: flex-start;
-    align-items: start;
-    padding: 1rem;
-    margin: 0.5rem;
-    gap: 2rem;
-    width: 100%;
 
-    .key {
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
-      align-items: center;
-      min-height: 3.5rem;
-      min-width: 6rem;
-
-      .date {
-        font-size: 0.7rem;
-      }
-    }
-
-    &:not(:last-child) {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    .changelog {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      min-width: min(20rem, 100%);
-      gap: 0.25rem;
-
-      li {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-      }
-
-      .commit {
-        outline-offset: 0.2rem;
-        border-radius: 0.25rem;
-        padding: 0.2rem;
-        transition: padding-left 0.2s;
-
-        &:hover {
-          padding-left: 0.5rem;
-        }
-
-        .commit-author {
-          display: block;
-          font-size: 0.8rem;
-          color: #b6b6b6;
-        }
-      }
-
-      .build-flag {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        max-width: fit-content;
-        padding-inline: .5rem;
-        padding-block: 0.1rem;
-        border-radius: 0.25rem;
-        line-height: 1;
-        gap: 0.5rem;
-
-        &.warn {
-          background-color: #c44601;
-
-          span {
-            color: inherit;
-          }
-
-          &::before {
-            content: '⚐';
-            color: inherit;
-            font-weight: bold;
-            font-size: 1.5rem;
-            transform: translateY(0.1rem);
-          }
-        }
-
-        &.danger {
-          background-color: #930d0d;
-
-          &::before {
-            content: '⚠';
-            color: white;
-            font-weight: bold;
-            font-size: 1.5rem;
-
-          }
-        }
-      }
-    }
-  }
 
   @media (max-width: 940px) {
     .entry {

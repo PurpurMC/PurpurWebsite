@@ -33,16 +33,21 @@ body {
 }
 
 button {
-  background: #3a6294;
+  background: #674839;
   color: var(--text-primary);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-  cursor: pointer;
+  cursor: not-allowed;
   transition: background 0.3s;
   align-items: center;
-  &:hover {
-    background: #4a82c4;
+
+  &:not(:disabled) {
+    cursor: pointer;
+    background: #3a6294;
+    &:hover {
+      background: #4a82c4;
+    }
   }
 }
 
