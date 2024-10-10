@@ -2,7 +2,6 @@
 import PurpurDownloads from "../../../components/PurpurDownloads.astro";
 export const prerender = false
 import Base from "../../../layouts/Base.astro";
-import PurpurBuild from "../../../util/PurpurBuild";
 
 const title = 'Download - Your minecraft, your way';
 const description = 'Download - Your minecraft - your way.';
@@ -12,12 +11,7 @@ const current = 'download';
 
 let latestVersion = null;
 const allVersions: string[] = [];
-let latestBuild = null;
-const builds: PurpurBuild[] = [];
 
-let shouldShowWarning = false;
-
-let knownRCEVersion = false;
 
 const versionRequestResult = await fetch("https://api.purpurmc.org/v2/purpur")
   .catch(() => {
