@@ -7,7 +7,7 @@ export default class PurpurBuild {
   readonly result: string;
   readonly timestamp: number;
   readonly duration: number;
-  readonly md5: string;
+  readonly md5: string | undefined;
   readonly commits: Commit[] = [];
   readonly metadata: {[key: string]: unknown} = {};
 
@@ -18,7 +18,7 @@ export default class PurpurBuild {
     this.result = this.getString(data, "result");
     this.timestamp = this.getNumber(data, "timestamp");
     this.duration = this.getNumber(data, "duration");
-    this.md5 = this.getString(data, "md5");
+    this.md5 = data["md5"] as string | undefined;
     for (const commit of data["commits"] as {[key: string]: unknown}[]) {
       this.commits.push(new Commit(commit));
     }
@@ -37,6 +37,13 @@ export default class PurpurBuild {
       throw `Field expected to be a number: ${key}`
     }
     return data[key] as number;
+  }
+
+  public getDownloadUrl(): string | undefined {
+    if (this.result !== "SUCCESS") {
+      return undefined;
+    }
+    return `https://api.purpurmc.org/v2/purpur/${this.version}/${this.build}/download`;
   }
 
 }
