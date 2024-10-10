@@ -32,7 +32,9 @@ const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${
     return builds;
   })
   .then((builds) => {
-    builds.pop(); // remove latest build, because it's already determined
+    if (version === latestVersion) {
+      builds.pop(); // remove latest build, because it's already determined
+    }
     builds.reverse();
     return builds;
   })

@@ -46,7 +46,7 @@ const { build } = Astro.props;
       build?.commits.length > 0
         ? build.commits.map(commit =>
               <li class="commit">
-                <span>{commit.description}</span>
+                <span set:html={commit.description}></span>
                 <span class="signature">
                               <span class="commit-author">~{commit.author}</span>
                               <span>
@@ -62,7 +62,7 @@ const { build } = Astro.props;
   </ul>
 </article>
 
-<style lang="scss">
+<style lang="scss" is:global>
   .entry {
     display: flex;
     position: relative;
@@ -113,6 +113,27 @@ const { build } = Astro.props;
         padding: 0.2rem;
         transition: padding-left 0.2s;
 
+        a {
+          color: var(--link);
+          position: relative;
+
+          &::after {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            content: '';
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            transition: border-color 0.1s linear;
+            width: 100%;
+          }
+
+          &:hover {
+            &::after {
+              border-bottom: 1px solid rgba(255, 255, 255, 1);
+            }
+          }
+        }
+
         &:hover {
           padding-left: 0.5rem;
         }
@@ -122,26 +143,7 @@ const { build } = Astro.props;
           font-size: 0.8rem;
           gap: 0.15rem;
 
-          a {
-            color: var(--link);
-            position: relative;
 
-            &::after {
-              bottom: 0;
-              left: 0;
-              position: absolute;
-              content: '';
-              border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-              transition: border-color 0.1s linear;
-              width: 100%;
-            }
-
-            &:hover {
-              &::after {
-                border-bottom: 1px solid rgba(255, 255, 255, 1);
-              }
-            }
-          }
 
           .commit-author {
             color: #b6b6b6;
