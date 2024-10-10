@@ -3,6 +3,7 @@ import PurpurDownloads from "../../../components/PurpurDownloads.astro";
 export const prerender = false
 
 import Base from "../../../layouts/Base.astro";
+import PurpurVersionSelector from "../../../components/PurpurVersionSelector.astro";
 
 const title = 'Download - Your minecraft, your way';
 const description = 'Download - Your minecraft - your way.';
@@ -39,10 +40,10 @@ latestVersion = versions?.metadata?.current ?? allVersions[allVersions.length - 
 
 ---
 <Base title={title} description={description} permalink={permalink} current={current}>
-  <div>
+  <div class="purpur-downloads">
     <h1>Purpur</h1>
     <h2>Downloads</h2>
-    <p style="text-align: center;" id="versionDisplay">{latestVersion}</p>
+    <PurpurVersionSelector versions={allVersions} currentVersion={latestVersion} latestVersion={latestVersion}/>
   </div>
 
   <PurpurDownloads version={latestVersion} latestVersion={latestVersion}/>
@@ -53,70 +54,10 @@ latestVersion = versions?.metadata?.current ?? allVersions[allVersions.length - 
     text-align: center;
   }
 
-  .downloads {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: start;
-    min-height: 30rem;
-    gap: 3rem;
-  }
-
-  .version-list {
+  .purpur-downloads {
     display: flex;
     flex-direction: column;
-    width: 100%;
-
-    &.latest {
-      h3 {
-        font-size: 2rem;
-      }
-    }
-  }
-
-  .entry {
-    display: flex;
-    position: relative;
-    justify-content: flex-start;
-    align-items: start;
-    padding: 1rem;
-    margin: 0.5rem;
-    gap: 2rem;
-    width: 100%;
-
-    .key {
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
-      align-items: center;
-      min-height: 3.5rem;
-      min-width: 6rem;
-
-      .date {
-        font-size: 0.7rem;
-      }
-    }
-
-    &:not(:last-child) {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    [data-changelog] {
-      display: flex;
-      flex: 1;
-      min-width: min(20rem, 100%);
-    }
-
-  }
-
-  @media (max-width: 940px) {
-    .entry {
-      flex-wrap: wrap;
-    }
+    align-items: center;
   }
 
 </style>

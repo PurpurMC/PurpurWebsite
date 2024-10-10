@@ -2,6 +2,7 @@
 import PurpurDownloads from "../../../components/PurpurDownloads.astro";
 export const prerender = false
 import Base from "../../../layouts/Base.astro";
+import PurpurVersionSelector from "../../../components/PurpurVersionSelector.astro";
 
 const title = 'Download - Your minecraft, your way';
 const description = 'Download - Your minecraft - your way.';
@@ -48,10 +49,10 @@ if (version === latestVersion) {
 }
 ---
 <Base title={title} description={description} permalink={permalink} current={current}>
-  <div>
+  <div class="purpur-downloads">
     <h1>Purpur</h1>
     <h2>Downloads</h2>
-    <p style="text-align: center;" id="versionDisplay">{version}</p>
+    <PurpurVersionSelector versions={allVersions} currentVersion={version} latestVersion={latestVersion}/>
   </div>
 
   <section class="downloads">
@@ -63,4 +64,11 @@ if (version === latestVersion) {
   h1, h2 {
     text-align: center;
   }
+
+  .purpur-downloads {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
 </style>

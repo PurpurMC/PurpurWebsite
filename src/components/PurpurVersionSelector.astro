@@ -1,0 +1,45 @@
+---
+export interface Props {
+  versions: string[];
+  currentVersion: string;
+  latestVersion: string;
+}
+
+const { versions, currentVersion, latestVersion } = Astro.props;
+---
+<label>
+  <select aria-label="Version changer" style="text-align: center;" id="versionDisplay">
+    {
+      versions.reverse().map(version =>
+          <option value={version} selected={version === currentVersion}>{version}</option>
+      )
+    }
+  </select>
+</label>
+
+<script>
+const versionDisplay = document.querySelector("#versionDisplay");
+versionDisplay.addEventListener("change", () => {
+  if (!(versionDisplay instanceof HTMLSelectElement)) return;
+  window.location.href = `/download/purpur/${versionDisplay.value}`;
+});
+</script>
+
+<style lang="scss">
+  select {
+    cursor: default;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    background-color: transparent;
+    border: transparent;
+    padding: 0 .5rem;
+    font-size: 1.2rem;
+    text-align: center;
+    transition: none;
+    &:focus {
+      background-color: #3a6294;
+    }
+  }
+</style>
