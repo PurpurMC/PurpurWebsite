@@ -1,0 +1,200 @@
+---
+import sharp from "sharp";
+export const prerender = false;
+
+const url = new URL(Astro.request.url);
+const type = url.searchParams.get("type") ?? "contributors";
+
+const now = Math.floor(new Date().getTime() / 1000);
+
+// TODO: move elsewhere
+const toNumber = (value) => {
+    if (value == null) {
+        return null;
+    }
+    return Number(value);
+};
+
+const avatarSize = toNumber(url.searchParams.get("size")) ?? 66;
+const avatarGap = toNumber(url.searchParams.get("gap")) ?? 4;
+const avatarCols = toNumber(url.searchParams.get("cols")) ?? 10;
+
+// TODO: stop using hardcoded data
+import contributorJson from "./../../public/data/contributors.json";
+import sponsorsJson from "./../../public/data/sponsors.json";
+import opencollectiveJson from "./../../public/data/opencollective.json";
+
+let jsonFile = null;
+switch (type) {
+    case "contributors":
+        jsonFile = contributorJson;
+        break;
+    case "sponsors":
+        jsonFile = sponsorsJson;
+        break;
+    case "opencollective":
+        jsonFile = opencollectiveJson;
+}
+
+// update data only once every hour
+if (jsonFile == null || jsonFile["timestamp"] < now - 2400) {
+    // TODO: update data
+    jsonFile = await updateData(`data/${type}.json`);
+}
+
+if (jsonFile != null && jsonFile["data"] != null) {
+    return drawSvg(jsonFile["data"]);
+}
+
+async function updateData(fileName) {
+    const newData = {};
+
+    newData["timestamp"] = now;
+    const dup = [];
+    switch (type) {
+        case "contributors":
+            const tempContributorData = await getFromRestAPI("https://api.github.com/repos/PurpurMC/Purpur/contributors");
+            newData["data"] = [];
+            for (let entry of tempContributorData) {
+                newData["data"].push({
+                    "id": entry["login"],
+                    "name": entry["login"],
+                    "profile": `https://github.com/${entry["login"]}`,
+                    "avatar": await getAvatar(entry["avatar_url"]),
+                });
+            }
+            break;
+        case "sponsors":
+            const query = `query Sponsors($org:String!){organization(login:$org){... on Sponsorable{sponsors(first:100){nodes{... on Actor{login,avatarUrl}}}}}}`;
+            const tempSponsorsData = await getFromGraphQL("https://api.github.com/graphql", query, {"org": "PurpurMC"});
+            newData["data"] = [];
+            for (let entry of tempSponsorsData["data"]["organization"]["sponsors"]["nodes"]) {
+                newData["data"].push({
+                    "id": entry["login"],
+                    "name": entry["login"],
+                    "profile": `https://github.com/${entry["login"]}`,
+                    "avatar": await getAvatar(entry["avatarUrl"])
+                });
+            }
+            break;
+        case "opencollective":
+            const tempOpenCollectiveData = await getFromRestAPI("https://opencollective.com/PurpurMC/members/all.json");
+            newData["data"] = [];
+            for (let entry of tempOpenCollectiveData) {
+                if (entry["role"] != "BACKER") {
+                    continue; // only count backers
+                }
+                if (entry["name"] === "GitHub Sponsors" || entry["name"] === "Guest") {
+                    continue; // skip gh sponsors and guest
+                }
+                if (dup.includes(entry["name"])) {
+                    continue; // skip duplicate entries
+                }
+                dup.push(entry["name"]);
+                newData["data"].push({
+                    "id": entry["MemberId"],
+                    "name": entry["name"],
+                    "profile": entry["profile"],
+                    "avatar": await getAvatar(`https://images.opencollective.com/${entry["profile"].substring(27)}/avatar/${avatarSize}.png`)
+                });
+            }
+            break;
+    }
+    // console.log(newData);
+
+    // TODO: store data
+
+    return newData;
+}
+
+async function getAvatar(avatarUrl) {
+    const avatarResponse = await fetch(avatarUrl)
+        .catch(() => {
+            return null;
+        });
+
+    const avatarImage = sharp(await avatarResponse.arrayBuffer()).resize(avatarSize);
+    const avatarMetadata = await avatarImage.metadata();
+    const avatarBuffer = await avatarImage.toBuffer();
+
+    return `data:image/${avatarMetadata.format};base64,${avatarBuffer.toString('base64')}`;
+}
+
+async function getFromRestAPI(url) {
+    return (await fetch(url, {
+        headers: {
+            'User-Agent': 'PurpurWebsite/1.0',
+        }
+    }).catch(() => null)).json();
+}
+
+async function getFromGraphQL(url, query, variables) {
+    // TODO: hide token somewhere
+    const token = "";
+
+    return (await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': `bearer ${token}`,
+            'User-Agent': 'PurpurWebsite/1.0',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            'query': query,
+            'variables': variables,
+        })
+    }).catch(() => null)).json();
+}
+
+function drawSvg(personArray) {
+    const width = (avatarSize + avatarGap) * (Math.min(personArray.length, avatarCols)) - avatarGap;
+    const height = (avatarSize + avatarGap) * Math.ceil(personArray.length / avatarCols) - avatarGap;
+
+    let svgText: string[] = [];
+
+    svgText.push(`<?xml version="1.0" standalone="no"?>`);
+    svgText.push(`<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">`);
+    svgText.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`);
+    svgText.push(`<style>circle:hover {stroke-width: 2;}</style>`);
+
+    // write the pattern definitions
+    svgText.push(`<defs>`);
+    for (let entry of personArray) {
+        const id = entry["id"];
+        const avatar = entry["avatar"];
+        svgText.push(`<pattern id="${id}" patternUnits="userSpaceOnUse" width="${avatarSize}" height="${avatarSize}"><image href="${avatar}" /></pattern>`);
+    }
+    svgText.push(`</defs>`);
+
+    // write each contributor
+    let col = 0;
+    let row = 0;
+
+    for (let entry of personArray) {
+        const id = entry["id"];
+        const name = entry["name"];
+        const profile = entry["profile"];
+
+        svgText.push(`<svg x="${col}" y="${row}"><title>${name}</title><a href="${profile}" target="_blank"><circle cx="${avatarSize / 2}" cy="${avatarSize / 2}" r="${avatarSize / 2 - 1}" stroke="#000" stroke-width="1" fill="url(#${id})"/></a></svg>`);
+        col += avatarSize + avatarGap;
+        if (col > avatarSize * avatarCols) {
+            col = 0;
+            row += avatarSize + avatarGap;
+        }
+    }
+
+    svgText.push(`</svg>`);
+
+    // console.log(svgText);
+
+    return new Response(svgText.join("\n"), {
+        headers: {
+            'Cache-Control': "no-cache, no-store, must-revalidate",
+            'Pragma': "no-cache",
+            'Expires': "",
+            'Content-type': 'image/svg+xml',
+        }
+    });
+}
+
+---
