@@ -1,6 +1,7 @@
 ---
-import sharp from "sharp";
 export const prerender = false;
+
+import sharp from "sharp";
 
 const url = new URL(Astro.request.url);
 const type = url.searchParams.get("type") ?? "contributors";
