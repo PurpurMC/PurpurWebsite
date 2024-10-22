@@ -8,12 +8,29 @@ const sigImageResponse = await fetch("https://purpurmc.org/images/sig.png")
     });
 
 // TODO: use data locally instead of fetching
-const statsDataResponse = await fetch("https://purpurmc.org/stats/data/data.json")
+const statsHit = async () => await fetch("https://purpurmc.org/stats/data/data.json")
     .catch(() => {
         return null;
     });
 
-const dataJson = await statsDataResponse.json();
+let statsDataResponse = await statsHit();
+let dataJson = await statsDataResponse.json();
+
+const now = Math.floor(new Date().getTime() / 1000);
+const next = dataJson['next'];
+
+// check if data needs updating (only once a day)
+if (now > next) {
+    // hit stats page so it can update data
+    await fetch("https://purpurmc.org/stats/")
+        .catch(() => {
+            return null;
+        });
+
+    // get data again
+    statsDataResponse = await statsHit();
+    dataJson = await statsDataResponse.json();
+}
 
 const servers = dataJson['data']['servers']['purpur'];
 const players = dataJson['data']['players']['purpur'];
