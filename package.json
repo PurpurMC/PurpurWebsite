@@ -12,11 +12,14 @@
   "dependencies": {
     "@astrojs/node": "^8.3.4",
     "astro": "^4.15.12",
+    "chart.js": "^4.4.5",
+    "fs": "^0.0.1-security",
     "marked": "^14.1.2",
     "sanitize-html": "^2.13.1",
     "sass": "^1.79.4"
   },
   "devDependencies": {
+    "@types/node": "^22.8.1",
     "@types/sanitize-html": "^2.13.0"
   }
 }

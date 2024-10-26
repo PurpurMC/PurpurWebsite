@@ -1,0 +1,99 @@
+---
+import fs from 'fs';
+import Base from "../../layouts/Base.astro";
+
+const consts = fs.readFileSync('./public/data/servers.json');
+const data = fs.readFileSync('./public/data/stats.json');
+
+const servers = JSON.parse(consts.toString());
+const stats = JSON.parse(data.toString());
+
+if (servers === null) {
+  console.error("Failed to parse stats");
+  return Astro.redirect("/500");
+}
+
+// Fetch new data if the last update is older than 5 minutes
+if (stats.updatedAt + (1000 * 60 * 5) < new Date().getTime()) {
+  const serversData = await fetch(`https://bstats.org/api/v1/plugins/${servers.servers.purpur.id}/charts/servers/data/?maxElements=8640`)
+    .then((result) => {
+      return result.json();
+    }).then((json) => {
+      stats.data.servers = json;
+      stats.updatedAt = new Date().getTime();
+      fs.writeFileSync('./public/data/stats.json', JSON.stringify(stats));
+      return json;
+    })
+    .catch((error) => {
+      console.error(error);
+      return null;
+    });
+
+  if (serversData !== null) {
+    console.log(serversData);
+  }
+}
+---
+
+<Base title="Stats" description="Statistics" permalink={Astro.site.href} current="stats">
+  <div
+      class="chart"
+      data-servers-graph
+      data-timestamps={stats.data.servers.map(array => {
+        return array[0]
+      })}
+      data-count={stats.data.servers.map(array => {
+        return array[1]
+      })}
+  >
+    <canvas></canvas>
+  </div>
+</Base>
+
+<style lang="scss">
+  .chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+</style>
+
+<script>
+  import Chart from "chart.js/auto";
+
+  const serverGraphElement: HTMLCanvasElement = document.querySelector('[data-servers-graph]');
+
+  const serverTimestamps = serverGraphElement.dataset.timestamps.split(',').map(rawTime => {
+    return Number.parseInt(rawTime)
+  });
+  const serverCount = serverGraphElement.dataset.count.split(',').map(rawCount => {
+    return Number.parseInt(rawCount)
+  });
+
+  const serverChart = new Chart(serverGraphElement.querySelector("canvas"), {
+    type: 'bar',
+    data: {
+      labels: serverTimestamps.map((data) => {
+        return new Date(data).toLocaleDateString();
+      }),
+      datasets: [{
+        label: 'Servers',
+        data: serverCount.map((data) => {
+          return data;
+        }),
+      }],
+    },
+    options: {
+      plugins: {
+        customCanvasBackgroundColor: {
+          color: 'lightGreen',
+        }
+      }
+    }
+  });
+
+
+</script>
