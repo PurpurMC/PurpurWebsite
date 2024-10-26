@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# data cache
+public/data/stats.json
+
 # dependencies
 node_modules/
 
