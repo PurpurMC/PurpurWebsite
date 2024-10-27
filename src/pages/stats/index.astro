@@ -16,15 +16,26 @@ if (servers === null) {
 const currentTimestamp = new Date().getTime();
 
 let serversData = null;
+let playersData = null;
+
+let currentlyUpdating: boolean;
+const lockFilePath = './public/data/update.lock';
+try {
+  fs.readFileSync(lockFilePath);
+  currentlyUpdating = true;
+} catch (error) {
+  currentlyUpdating = false;
+}
+
 // Fetch new data if the last update is older than 5 minutes
-if (stats.servers.updatedAt + (1000 * 60 * 5) < currentTimestamp) {
+if (!currentlyUpdating && stats.servers.updatedAt + (1000 * 60 * 5) < currentTimestamp) {
+  fs.writeFileSync(lockFilePath, '☃️');
   serversData = fetch(`https://bstats.org/api/v1/plugins/${servers.servers.purpur.id}/charts/servers/data/?maxElements=8640`)
     .then((result) => {
       return result.json();
     }).then((json) => {
       stats.servers.data = json;
       stats.servers.updatedAt = currentTimestamp;
-      fs.writeFileSync('./public/data/stats.json', JSON.stringify(stats));
       return json;
     })
     .catch((error) => {
@@ -33,27 +44,37 @@ if (stats.servers.updatedAt + (1000 * 60 * 5) < currentTimestamp) {
     });
 }
 
-if (stats.players.updatedAt + (1000 * 60 * 5) < currentTimestamp) {
-  fetch(`https://bstats.org/api/v1/plugins/${servers.servers.purpur.id}/charts/players/data/?maxElements=8640`)
+if (!currentlyUpdating && stats.players.updatedAt + (1000 * 60 * 5) < currentTimestamp) {
+  fs.writeFileSync(lockFilePath, '☃️');
+  playersData = fetch(`https://bstats.org/api/v1/plugins/${servers.servers.purpur.id}/charts/players/data/?maxElements=8640`)
     .then((result) => {
       return result.json();
     }).then((json) => {
       stats.players.data = json;
       stats.players.updatedAt = currentTimestamp;
-      fs.writeFileSync('./public/data/stats.json', JSON.stringify(stats));
     })
     .catch((error) => {
       console.error(error);
     });
 }
 
-await Promise.all([serversData]);
+await Promise.all([serversData, playersData]);
+if (serversData !== null || playersData !== null) {
+  fs.writeFileSync('./public/data/stats.json', JSON.stringify(stats));
+}
+try {
+  fs.unlinkSync('./public/data/update.lock');
+} catch (error) {
+}
 ---
 
 <Base title="Stats" description="Statistics" permalink={Astro.site.href} current="stats">
+  <h1>Stats</h1>
+  <p>Provided by <a href="https://bstats.org">BStats</a>. Dates on the scales are in UTC time.</p>
   <div
       class="chart"
       data-servers-graph
+      data-updated-at={stats.servers.updatedAt}
       data-timestamps={stats.servers.data.map(array => {
         return array[0]
       })}
@@ -61,7 +82,24 @@ await Promise.all([serversData]);
         return array[1]
       })}
   >
-    <canvas></canvas>
+    <canvas>
+      <p>Graph displaying average and peak amounts of servers using Purpur by date</p>
+    </canvas>
+  </div>
+  <div
+      class="chart"
+      data-players-graph
+      data-updated-at={stats.players.updatedAt}
+      data-timestamps={stats.players.data.map(array => {
+        return array[0]
+      })}
+      data-count={stats.players.data.map(array => {
+        return array[1]
+      })}
+  >
+    <canvas>
+      <p>Graph displaying average and peak amounts of players on servers using Purpur by date</p>
+    </canvas>
   </div>
 </Base>
 
@@ -70,9 +108,10 @@ await Promise.all([serversData]);
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(0, 0, 0, 1);
+    background-color: rgba(0, 0, 0, 0.8);
     border-radius: 0.5rem;
     padding: 1rem;
+    min-height: 30rem;
   }
 </style>
 
@@ -80,35 +119,140 @@ await Promise.all([serversData]);
   import Chart from "chart.js/auto";
 
   const serverGraphElement: HTMLCanvasElement = document.querySelector('[data-servers-graph]');
+  const playerGraphElement: HTMLCanvasElement = document.querySelector('[data-players-graph]');
 
-  const serverTimestamps = serverGraphElement.dataset.timestamps.split(',').map(rawTime => {
-    return Number.parseInt(rawTime)
-  });
-  const serverCount = serverGraphElement.dataset.count.split(',').map(rawCount => {
-    return Number.parseInt(rawCount)
-  });
+  const serverDataUpdatedAt = serverGraphElement.dataset.updatedAt;
+  const playerDataUpdatedAt = playerGraphElement.dataset.updatedAt;
+
+  const serverCountSplit = serverGraphElement.dataset.count.split(',');
+  const playerCountSplit = playerGraphElement.dataset.count.split(',');
+
+  const timeSplit = serverGraphElement.dataset.timestamps.split(',');
+
+  if (timeSplit.length !== serverCountSplit.length) {
+    console.error("Data length mismatch");
+  }
+  const averageServerData: Map<string, number> = new Map();
+  const peakServerData: Map<string, number> = new Map();
+
+  const averagePlayerData: Map<string, number> = new Map();
+  const peakPlayerData: Map<string, number> = new Map();
+
+  let index = 0;
+  for (const timeString of timeSplit) {
+    const timestamp = Number.parseInt(timeString);
+    const date = new Date(timestamp);
+    const dateString = getUtcDate(date);
+    // push to data only if we're on the last entry of the day
+
+    if (averageServerData.has(dateString)) {
+      averageServerData.set(dateString, Math.round((averageServerData.get(dateString) + Number.parseInt(serverCountSplit[index])) / 2));
+    } else {
+      averageServerData.set(dateString, Number.parseInt(serverCountSplit[index]));
+    }
+
+    if (averagePlayerData.has(dateString)) {
+      averagePlayerData.set(dateString, Math.round((averagePlayerData.get(dateString) + Number.parseInt(playerCountSplit[index])) / 2));
+    } else {
+      averagePlayerData.set(dateString, Number.parseInt(playerCountSplit[index]));
+    }
+
+    if (peakServerData.has(dateString)) {
+      peakServerData.set(dateString, Math.max(peakServerData.get(dateString), Number.parseInt(serverCountSplit[index])));
+    } else {
+      peakServerData.set(dateString, Number.parseInt(serverCountSplit[index]));
+    }
+
+    if (peakPlayerData.has(dateString)) {
+      peakPlayerData.set(dateString, Math.max(peakPlayerData.get(dateString), Number.parseInt(playerCountSplit[index])));
+    } else {
+      peakPlayerData.set(dateString, Number.parseInt(playerCountSplit[index]));
+    }
+
+    index++;
+  }
+
+  const timestamps = Array.from(averageServerData.keys());
 
   const serverChart = new Chart(serverGraphElement.querySelector("canvas"), {
-    type: 'bar',
+    type: 'line',
     data: {
-      labels: serverTimestamps.map((data) => {
-        return new Date(data).toLocaleDateString();
-      }),
-      datasets: [{
-        label: 'Servers',
-        data: serverCount.map((data) => {
-          return data;
-        }),
-      }],
+      labels: timestamps,
+      datasets: [
+        {
+          label: 'Peak',
+          data: Array.from(peakServerData.values()),
+        },
+        {
+          label: 'Average',
+          data: Array.from(averageServerData.values()),
+        },
+      ],
     },
     options: {
+      normalized: true,
+      maintainAspectRatio: false,
+      color: 'white',
+      interaction: {
+        mode: 'index',
+        intersect: false,
+      },
       plugins: {
-        customCanvasBackgroundColor: {
-          color: 'lightGreen',
-        }
+        title: {
+          display: true,
+          text: 'Server count',
+          color: 'white',
+        },
+        subtitle: {
+          display: true,
+          text: `Last updated at ${new Date(Number.parseInt(serverDataUpdatedAt)).toLocaleString()}`,
+          color: 'white',
+        },
       }
     }
   });
+
+  const playerChart = new Chart(playerGraphElement.querySelector("canvas"), {
+    type: 'line',
+    data: {
+      labels: timestamps,
+      datasets: [
+        {
+          label: 'Peak',
+          data: Array.from(peakPlayerData.values()),
+        },
+        {
+          label: 'Average',
+          data: Array.from(averagePlayerData.values()),
+        },
+      ],
+    },
+    options: {
+      normalized: true,
+      maintainAspectRatio: false,
+      color: 'white',
+      interaction: {
+        mode: 'index',
+        intersect: false,
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Player count',
+          color: 'white',
+        },
+        subtitle: {
+          display: true,
+          text: `Last updated at ${new Date(Number.parseInt(playerDataUpdatedAt)).toLocaleString()}`,
+          color: 'white',
+        },
+      }
+    }
+  });
+
+  function getUtcDate(date: Date): string {
+    return `${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}`;
+  }
 
 
 </script>
