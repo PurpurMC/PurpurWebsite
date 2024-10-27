@@ -1,7 +1,10 @@
 {
-  "updatedAt": 0,
-  "data": {
-    "servers": [],
-    "players": []
+  "servers": {
+    "updatedAt": 1730019928726,
+    "data": []
+  },
+  "players": {
+    "updatedAt": 1730019928726,
+    "data": []
   }
 }

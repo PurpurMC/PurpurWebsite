@@ -13,14 +13,17 @@ if (servers === null) {
   return Astro.redirect("/500");
 }
 
+const currentTimestamp = new Date().getTime();
+
+let serversData = null;
 // Fetch new data if the last update is older than 5 minutes
-if (stats.updatedAt + (1000 * 60 * 5) < new Date().getTime()) {
-  const serversData = await fetch(`https://bstats.org/api/v1/plugins/${servers.servers.purpur.id}/charts/servers/data/?maxElements=8640`)
+if (stats.servers.updatedAt + (1000 * 60 * 5) < currentTimestamp) {
+  serversData = fetch(`https://bstats.org/api/v1/plugins/${servers.servers.purpur.id}/charts/servers/data/?maxElements=8640`)
     .then((result) => {
       return result.json();
     }).then((json) => {
-      stats.data.servers = json;
-      stats.updatedAt = new Date().getTime();
+      stats.servers.data = json;
+      stats.servers.updatedAt = currentTimestamp;
       fs.writeFileSync('./public/data/stats.json', JSON.stringify(stats));
       return json;
     })
@@ -28,21 +31,33 @@ if (stats.updatedAt + (1000 * 60 * 5) < new Date().getTime()) {
       console.error(error);
       return null;
     });
-
-  if (serversData !== null) {
-    console.log(serversData);
-  }
 }
+
+if (stats.players.updatedAt + (1000 * 60 * 5) < currentTimestamp) {
+  fetch(`https://bstats.org/api/v1/plugins/${servers.servers.purpur.id}/charts/players/data/?maxElements=8640`)
+    .then((result) => {
+      return result.json();
+    }).then((json) => {
+      stats.players.data = json;
+      stats.players.updatedAt = currentTimestamp;
+      fs.writeFileSync('./public/data/stats.json', JSON.stringify(stats));
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+await Promise.all([serversData]);
 ---
 
 <Base title="Stats" description="Statistics" permalink={Astro.site.href} current="stats">
   <div
       class="chart"
       data-servers-graph
-      data-timestamps={stats.data.servers.map(array => {
+      data-timestamps={stats.servers.data.map(array => {
         return array[0]
       })}
-      data-count={stats.data.servers.map(array => {
+      data-count={stats.servers.data.map(array => {
         return array[1]
       })}
   >
