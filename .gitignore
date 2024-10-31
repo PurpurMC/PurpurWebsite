@@ -4,7 +4,7 @@ dist/
 .astro/
 
 # data cache
-public/data/stats.json
+src/data/stats.json
 
 # dependencies
 node_modules/

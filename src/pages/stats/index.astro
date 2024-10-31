@@ -2,8 +2,8 @@
 import fs from 'fs';
 import Base from "../../layouts/Base.astro";
 
-const consts = fs.readFileSync('./public/data/servers.json');
-const data = fs.readFileSync('./public/data/stats.json');
+const consts = fs.readFileSync('../../data/servers.json');
+const data = fs.readFileSync('../../data/stats.json');
 
 const servers = JSON.parse(consts.toString());
 const stats = JSON.parse(data.toString());
@@ -19,7 +19,7 @@ let serversData = null;
 let playersData = null;
 
 let currentlyUpdating: boolean;
-const lockFilePath = './public/data/update.lock';
+const lockFilePath = '../../data/update.lock';
 try {
   fs.readFileSync(lockFilePath);
   currentlyUpdating = true;
@@ -60,10 +60,10 @@ if (!currentlyUpdating && stats.players.updatedAt + (1000 * 60 * 5) < currentTim
 
 await Promise.all([serversData, playersData]);
 if (serversData !== null || playersData !== null) {
-  fs.writeFileSync('./public/data/stats.json', JSON.stringify(stats));
+  fs.writeFileSync('../../data/stats.json', JSON.stringify(stats));
 }
 try {
-  fs.unlinkSync('./public/data/update.lock');
+  fs.unlinkSync('../../data/update.lock');
 } catch (error) {
 }
 ---

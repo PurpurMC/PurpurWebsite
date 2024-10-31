@@ -21,9 +21,9 @@ const avatarGap = toNumber(url.searchParams.get("gap")) ?? 4;
 const avatarCols = toNumber(url.searchParams.get("cols")) ?? 10;
 
 // TODO: stop using hardcoded data
-import contributorJson from "./../../public/data/contributors.json";
-import sponsorsJson from "./../../public/data/sponsors.json";
-import opencollectiveJson from "./../../public/data/opencollective.json";
+import contributorJson from "../data/contributors.json";
+import sponsorsJson from "../data/sponsors.json";
+import opencollectiveJson from "../data/opencollective.json";
 
 let jsonFile = null;
 switch (type) {
