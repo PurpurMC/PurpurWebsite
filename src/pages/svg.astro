@@ -1,6 +1,7 @@
 ---
 export const prerender = false;
 
+import fs from 'fs';
 import sharp from "sharp";
 
 const url = new URL(Astro.request.url);
@@ -20,34 +21,47 @@ const avatarSize = toNumber(url.searchParams.get("size")) ?? 66;
 const avatarGap = toNumber(url.searchParams.get("gap")) ?? 4;
 const avatarCols = toNumber(url.searchParams.get("cols")) ?? 10;
 
-// TODO: stop using hardcoded data
-import contributorJson from "../data/contributors.json";
-import sponsorsJson from "../data/sponsors.json";
-import opencollectiveJson from "../data/opencollective.json";
-
 let jsonFile = null;
 switch (type) {
     case "contributors":
-        jsonFile = contributorJson;
+        const contributorJsonBuffer = fs.readFileSync('../data/contributors.json');
+        jsonFile = JSON.parse(contributorJsonBuffer.toString());
         break;
     case "sponsors":
-        jsonFile = sponsorsJson;
+        const sponsorsJsonBuffer = fs.readFileSync('../data/sponsors.json');
+        jsonFile = JSON.parse(sponsorsJsonBuffer.toString());
         break;
     case "opencollective":
-        jsonFile = opencollectiveJson;
+        const opencollectiveJsonBuffer = fs.readFileSync('../data/opencollective.json');
+        jsonFile = JSON.parse(opencollectiveJsonBuffer.toString());
+}
+
+
+let currentlyUpdating: boolean;
+const lockFilePath = '../data/update-svg.lock';
+try {
+    fs.readFileSync(lockFilePath);
+    currentlyUpdating = true;
+} catch (error) {
+    currentlyUpdating = false;
 }
 
 // update data only once every hour
-if (jsonFile == null || jsonFile["timestamp"] < now - 2400) {
-    // TODO: update data
-    jsonFile = await updateData(`data/${type}.json`);
+if (!currentlyUpdating && jsonFile == null || jsonFile["timestamp"] < now - 2400) {
+    fs.writeFileSync(lockFilePath, '☃️');
+    jsonFile = await updateData(`../data/${type}.json`);
 }
 
 if (jsonFile != null && jsonFile["data"] != null) {
     return drawSvg(jsonFile["data"]);
 }
 
-async function updateData(fileName) {
+try {
+    fs.unlinkSync(lockFilePath);
+} catch (error) {
+}
+
+async function updateData(filePath: string) {
     const newData = {};
 
     newData["timestamp"] = now;
@@ -101,10 +115,8 @@ async function updateData(fileName) {
             }
             break;
     }
-    // console.log(newData);
 
-    // TODO: store data
-
+    fs.writeFileSync(filePath, JSON.stringify(newData));
     return newData;
 }
 
