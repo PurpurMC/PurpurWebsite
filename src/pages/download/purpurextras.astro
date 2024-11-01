@@ -1,7 +1,7 @@
 ---
-import Base from "../../layouts/Base.astro";
-import PurpurExtrasVersion from "../../util/PurpurExtrasVersion";
-import {marked} from "marked";
+import Base from "@layouts/Base.astro";
+import PurpurExtrasVersion from "@util/PurpurExtrasVersion";
+import { marked } from "marked";
 
 const title = 'Download - Your minecraft, your way';
 const description = 'Download - Your minecraft - your way.';
@@ -40,10 +40,8 @@ if (versions.length <= 0) {
 }
 latestVersion = versions[0];
 versions = versions.slice(1, versions.length);
-
-
-
 ---
+
 <Base title={title} description={description} permalink={permalink} current={current}>
   <div>
     <h1>PurpurExtras</h1>
@@ -185,7 +183,6 @@ versions = versions.slice(1, versions.length);
       flex: 1;
       min-width: min(20rem, 100%);
     }
-
   }
 
   @media (max-width: 940px) {
@@ -193,5 +190,4 @@ versions = versions.slice(1, versions.length);
       flex-wrap: wrap;
     }
   }
-
 </style>

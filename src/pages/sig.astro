@@ -1,16 +1,16 @@
 ---
 export const prerender = false;
 
-import sharp from "sharp";
+import sharp from 'sharp';
 
 // TODO: use image found locally at `images/sig.png` instead of fetching
-const sigImageResponse = await fetch("https://purpurmc.org/images/sig.png")
+const sigImageResponse = await fetch('https://purpurmc.org/images/sig.png')
     .catch(() => {
         return null;
     });
 
 // TODO: use data locally instead of fetching
-const statsHit = async () => await fetch("https://purpurmc.org/stats/data/data.json")
+const statsHit = async () => await fetch('https://purpurmc.org/stats/data/data.json')
     .catch(() => {
         return null;
     });
@@ -24,7 +24,7 @@ const next = dataJson['next'];
 // check if data needs updating (only once a day)
 if (now > next) {
     // hit stats page so it can update data
-    await fetch("https://purpurmc.org/stats/")
+    await fetch('https://purpurmc.org/stats/')
         .catch(() => {
             return null;
         });
@@ -61,7 +61,7 @@ const textImage = sharp({
     left: topLeftX,
     top: topLeftY,
     bottom: bottomGap,
-    background: "#00000000"
+    background: '#00000000'
 });
 
 modifiedImage.composite([{
@@ -73,5 +73,4 @@ return new Response(await modifiedImage.toBuffer(), {
         'Content-Type': 'image/png',
     }
 });
-
 ---

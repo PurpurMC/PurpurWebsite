@@ -1,8 +1,9 @@
 ---
-import PurpurDownloads from "../../../components/PurpurDownloads.astro";
-export const prerender = false
-import Base from "../../../layouts/Base.astro";
-import PurpurVersionSelector from "../../../components/PurpurVersionSelector.astro";
+export const prerender = false;
+
+import PurpurDownloads from "@components/PurpurDownloads.astro";
+import Base from "@layouts/Base.astro";
+import PurpurVersionSelector from "@components/PurpurVersionSelector.astro";
 
 const title = 'Download - Your minecraft, your way';
 const description = 'Download - Your minecraft - your way.';
@@ -48,6 +49,7 @@ if (version === latestVersion) {
   return Astro.redirect("/download/purpur/");
 }
 ---
+
 <Base title={title} description={description} permalink={permalink} current={current}>
   <div class="purpur-downloads">
     <h1>Purpur</h1>
@@ -70,5 +72,4 @@ if (version === latestVersion) {
     flex-direction: column;
     align-items: center;
   }
-
 </style>

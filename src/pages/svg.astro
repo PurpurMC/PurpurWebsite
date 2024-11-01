@@ -1,44 +1,50 @@
 ---
 export const prerender = false;
 
-import fs from 'fs';
+import fs from "fs";
 import sharp from "sharp";
 
+const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
+
 const url = new URL(Astro.request.url);
-const type = url.searchParams.get("type") ?? "contributors";
+const type = url.searchParams.get('type') ?? 'contributors';
 
 const now = Math.floor(new Date().getTime() / 1000);
 
-// TODO: move elsewhere
-const toNumber = (value) => {
+// TODO: move helper method elsewhere
+const toNumber = (value: string | null): number | null => {
     if (value == null) {
         return null;
     }
     return Number(value);
 };
 
-const avatarSize = toNumber(url.searchParams.get("size")) ?? 66;
-const avatarGap = toNumber(url.searchParams.get("gap")) ?? 4;
-const avatarCols = toNumber(url.searchParams.get("cols")) ?? 10;
+const avatarSize = toNumber(url.searchParams.get('size')) ?? 66;
+const avatarGap = toNumber(url.searchParams.get('gap')) ?? 4;
+const avatarCols = toNumber(url.searchParams.get('cols')) ?? 10;
+
+const rootPath = process.cwd() + '/client/';
+const contributorPath = rootPath + 'data/contributors.json';
+const sponsorPath = rootPath + 'data/sponsors.json';
+const opencollectivePath = rootPath + 'data/opencollective.json';
 
 let jsonFile = null;
 switch (type) {
-    case "contributors":
-        const contributorJsonBuffer = fs.readFileSync('../data/contributors.json');
+    case 'contributors':
+        const contributorJsonBuffer = fs.readFileSync(contributorPath);
         jsonFile = JSON.parse(contributorJsonBuffer.toString());
         break;
-    case "sponsors":
-        const sponsorsJsonBuffer = fs.readFileSync('../data/sponsors.json');
+    case 'sponsors':
+        const sponsorsJsonBuffer = fs.readFileSync(sponsorPath);
         jsonFile = JSON.parse(sponsorsJsonBuffer.toString());
         break;
-    case "opencollective":
-        const opencollectiveJsonBuffer = fs.readFileSync('../data/opencollective.json');
+    case 'opencollective':
+        const opencollectiveJsonBuffer = fs.readFileSync(opencollectivePath);
         jsonFile = JSON.parse(opencollectiveJsonBuffer.toString());
 }
 
-
 let currentlyUpdating: boolean;
-const lockFilePath = '../data/update-svg.lock';
+const lockFilePath = rootPath + 'data/update-svg.lock';
 try {
     fs.readFileSync(lockFilePath);
     currentlyUpdating = true;
@@ -47,13 +53,13 @@ try {
 }
 
 // update data only once every hour
-if (!currentlyUpdating && jsonFile == null || jsonFile["timestamp"] < now - 2400) {
+if (!currentlyUpdating && jsonFile == null || jsonFile['timestamp'] < now - 2400) {
     fs.writeFileSync(lockFilePath, '☃️');
-    jsonFile = await updateData(`../data/${type}.json`);
+    jsonFile = await updateData(`${rootPath}data/${type}.json`);
 }
 
-if (jsonFile != null && jsonFile["data"] != null) {
-    return drawSvg(jsonFile["data"]);
+if (jsonFile != null && jsonFile['data'] != null) {
+    return drawSvg(jsonFile['data']);
 }
 
 try {
@@ -64,53 +70,53 @@ try {
 async function updateData(filePath: string) {
     const newData = {};
 
-    newData["timestamp"] = now;
+    newData['timestamp'] = now;
     const dup = [];
     switch (type) {
-        case "contributors":
-            const tempContributorData = await getFromRestAPI("https://api.github.com/repos/PurpurMC/Purpur/contributors");
-            newData["data"] = [];
+        case 'contributors':
+            const tempContributorData = await getFromRestAPI('https://api.github.com/repos/PurpurMC/Purpur/contributors');
+            newData['data'] = [];
             for (let entry of tempContributorData) {
-                newData["data"].push({
-                    "id": entry["login"],
-                    "name": entry["login"],
-                    "profile": `https://github.com/${entry["login"]}`,
-                    "avatar": await getAvatar(entry["avatar_url"]),
+                newData['data'].push({
+                    'id': entry['login'],
+                    'name': entry['login'],
+                    'profile': `https://github.com/${entry['login']}`,
+                    'avatar': await getAvatar(entry['avatar_url']),
                 });
             }
             break;
-        case "sponsors":
+        case 'sponsors':
             const query = `query Sponsors($org:String!){organization(login:$org){... on Sponsorable{sponsors(first:100){nodes{... on Actor{login,avatarUrl}}}}}}`;
-            const tempSponsorsData = await getFromGraphQL("https://api.github.com/graphql", query, {"org": "PurpurMC"});
-            newData["data"] = [];
-            for (let entry of tempSponsorsData["data"]["organization"]["sponsors"]["nodes"]) {
-                newData["data"].push({
-                    "id": entry["login"],
-                    "name": entry["login"],
-                    "profile": `https://github.com/${entry["login"]}`,
-                    "avatar": await getAvatar(entry["avatarUrl"])
+            const tempSponsorsData = await getFromGraphQL('https://api.github.com/graphql', query, {'org': 'PurpurMC'});
+            newData['data'] = [];
+            for (let entry of tempSponsorsData['data']['organization']['sponsors']['nodes']) {
+                newData['data'].push({
+                    'id': entry['login'],
+                    'name': entry['login'],
+                    'profile': `https://github.com/${entry['login']}`,
+                    'avatar': await getAvatar(entry['avatarUrl'])
                 });
             }
             break;
-        case "opencollective":
-            const tempOpenCollectiveData = await getFromRestAPI("https://opencollective.com/PurpurMC/members/all.json");
-            newData["data"] = [];
+        case 'opencollective':
+            const tempOpenCollectiveData = await getFromRestAPI('https://opencollective.com/PurpurMC/members/all.json');
+            newData['data'] = [];
             for (let entry of tempOpenCollectiveData) {
-                if (entry["role"] != "BACKER") {
+                if (entry['role'] != 'BACKER') {
                     continue; // only count backers
                 }
-                if (entry["name"] === "GitHub Sponsors" || entry["name"] === "Guest") {
+                if (entry['name'] === 'GitHub Sponsors' || entry['name'] === 'Guest') {
                     continue; // skip gh sponsors and guest
                 }
-                if (dup.includes(entry["name"])) {
+                if (dup.includes(entry['name'])) {
                     continue; // skip duplicate entries
                 }
-                dup.push(entry["name"]);
-                newData["data"].push({
-                    "id": entry["MemberId"],
-                    "name": entry["name"],
-                    "profile": entry["profile"],
-                    "avatar": await getAvatar(`https://images.opencollective.com/${entry["profile"].substring(27)}/avatar/${avatarSize}.png`)
+                dup.push(entry['name']);
+                newData['data'].push({
+                    'id': entry['MemberId'],
+                    'name': entry['name'],
+                    'profile': entry['profile'],
+                    'avatar': await getAvatar(`https://images.opencollective.com/${entry['profile'].substring(27)}/avatar/${avatarSize}.png`)
                 });
             }
             break;
@@ -120,7 +126,7 @@ async function updateData(filePath: string) {
     return newData;
 }
 
-async function getAvatar(avatarUrl) {
+async function getAvatar(avatarUrl: string) {
     const avatarResponse = await fetch(avatarUrl)
         .catch(() => {
             return null;
@@ -133,7 +139,7 @@ async function getAvatar(avatarUrl) {
     return `data:image/${avatarMetadata.format};base64,${avatarBuffer.toString('base64')}`;
 }
 
-async function getFromRestAPI(url) {
+async function getFromRestAPI(url: string) {
     return (await fetch(url, {
         headers: {
             'User-Agent': 'PurpurWebsite/1.0',
@@ -141,25 +147,26 @@ async function getFromRestAPI(url) {
     }).catch(() => null)).json();
 }
 
-async function getFromGraphQL(url, query, variables) {
-    // TODO: hide token somewhere
-    const token = "";
+async function getFromGraphQL(url: string, query: string, variables: any) {
+    if (GITHUB_TOKEN == null || GITHUB_TOKEN === '') {
+        return null;
+    }
 
     return (await fetch(url, {
         method: 'POST',
         headers: {
-            'Authorization': `bearer ${token}`,
-            'User-Agent': 'PurpurWebsite/1.0',
+            'Authorization': `bearer ${GITHUB_TOKEN}`,
+            'User-Agent': 'PurpurWebsite/2.0',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             'query': query,
             'variables': variables,
         })
-    }).catch(() => null)).json();
+    }).catch(() => null))?.json();
 }
 
-function drawSvg(personArray) {
+function drawSvg(personArray: any[]) {
     const width = (avatarSize + avatarGap) * (Math.min(personArray.length, avatarCols)) - avatarGap;
     const height = (avatarSize + avatarGap) * Math.ceil(personArray.length / avatarCols) - avatarGap;
 
@@ -173,8 +180,8 @@ function drawSvg(personArray) {
     // write the pattern definitions
     svgText.push(`<defs>`);
     for (let entry of personArray) {
-        const id = entry["id"];
-        const avatar = entry["avatar"];
+        const id = entry['id'];
+        const avatar = entry['avatar'];
         svgText.push(`<pattern id="${id}" patternUnits="userSpaceOnUse" width="${avatarSize}" height="${avatarSize}"><image href="${avatar}" /></pattern>`);
     }
     svgText.push(`</defs>`);
@@ -184,9 +191,9 @@ function drawSvg(personArray) {
     let row = 0;
 
     for (let entry of personArray) {
-        const id = entry["id"];
-        const name = entry["name"];
-        const profile = entry["profile"];
+        const id = entry['id'];
+        const name = entry['name'];
+        const profile = entry['profile'];
 
         svgText.push(`<svg x="${col}" y="${row}"><title>${name}</title><a href="${profile}" target="_blank"><circle cx="${avatarSize / 2}" cy="${avatarSize / 2}" r="${avatarSize / 2 - 1}" stroke="#000" stroke-width="1" fill="url(#${id})"/></a></svg>`);
         col += avatarSize + avatarGap;
@@ -198,16 +205,13 @@ function drawSvg(personArray) {
 
     svgText.push(`</svg>`);
 
-    // console.log(svgText);
-
-    return new Response(svgText.join("\n"), {
+    return new Response(svgText.join('\n'), {
         headers: {
-            'Cache-Control': "no-cache, no-store, must-revalidate",
-            'Pragma': "no-cache",
-            'Expires': "",
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '',
             'Content-type': 'image/svg+xml',
         }
     });
 }
-
 ---

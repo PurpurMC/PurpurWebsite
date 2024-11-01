@@ -1,4 +1,4 @@
-import Commit from "./Commit.ts";
+import Commit from "@util/Commit.ts";
 
 export default class PurpurBuild {
   readonly project: string;

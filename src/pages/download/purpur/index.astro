@@ -1,9 +1,9 @@
 ---
-import PurpurDownloads from "../../../components/PurpurDownloads.astro";
 export const prerender = false
 
-import Base from "../../../layouts/Base.astro";
-import PurpurVersionSelector from "../../../components/PurpurVersionSelector.astro";
+import PurpurDownloads from "@components/PurpurDownloads.astro";
+import Base from "@layouts/Base.astro";
+import PurpurVersionSelector from "@components/PurpurVersionSelector.astro";
 
 const title = 'Download - Your minecraft, your way';
 const description = 'Download - Your minecraft - your way.';
@@ -37,8 +37,8 @@ for (const version of versions.versions) {
 }
 
 latestVersion = versions?.metadata?.current ?? allVersions[allVersions.length - 1];
-
 ---
+
 <Base title={title} description={description} permalink={permalink} current={current}>
   <div class="purpur-downloads">
     <h1>Purpur</h1>
@@ -59,5 +59,4 @@ latestVersion = versions?.metadata?.current ?? allVersions[allVersions.length - 
     flex-direction: column;
     align-items: center;
   }
-
 </style>

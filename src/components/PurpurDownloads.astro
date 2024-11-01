@@ -1,11 +1,11 @@
 ---
-import PurpurBuildListing from "./PurpurBuildListing.astro";
+import PurpurBuildListing from "@components/PurpurBuildListing.astro";
 interface Props {
   version: string,
   latestVersion: string,
 }
 
-import PurpurBuild from "../util/PurpurBuild";
+import PurpurBuild from "@util/PurpurBuild";
 
 const {version, latestVersion} = Astro.props;
 let latestBuild = null;
