@@ -20,6 +20,9 @@ if (servers === null) {
 
 const currentTimestamp = new Date().getTime();
 
+// TODO: stop using leftover php file
+const previewUrl = `https://purpurmc.org/stats/jpgraph.php?t=${currentTimestamp}`
+
 let serversData = null;
 let playersData = null;
 
@@ -73,7 +76,7 @@ try {
 }
 ---
 
-<Base title="Stats" description="Statistics" permalink={Astro.site.href} current="stats">
+<Base title="Stats" description="Statistics" permalink={Astro.site.href} current="stats" previewUrl={previewUrl}>
   <h1>Stats</h1>
   <p>Provided by <a href="https://bstats.org">BStats</a>. Dates on the scales are in UTC time.</p>
   <div
