@@ -21,9 +21,9 @@ export default class Commit {
     this.description = this.getString(data, "description").trim();
     this.description = sanitizeHtml(this.description, {});
 
-    const isUpstreamDescription = this.description.startsWith("Updated Upstream");
+    const isUpstreamDescription = this.description.startsWith("Updated Upstream") || this.description.includes("Upstream (");
     if (isUpstreamDescription) {
-      this.description = this.hyperlinkUpstream(this.description)
+      this.description = this.hyperlinkUpstream(this.description);
     } else {
       this.description = this.hyperlinkGitHubIssue(this.description);
     }
