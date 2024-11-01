@@ -1,45 +1,39 @@
 ---
 export const prerender = false;
 
-import sharp from 'sharp';
+import fs from "fs";
+import sharp from "sharp";
 
 // TODO: use image found locally at `images/sig.png` instead of fetching
 const sigImageResponse = await fetch('https://purpurmc.org/images/sig.png')
-    .catch(() => {
-        return null;
-    });
+    .catch(() => null);
+
+const rootPath = process.cwd() + '/client/';
+const dataPath = rootPath + 'data/stats.json';
+const statsBuffer = fs.readFileSync(dataPath);
+let statsJson = JSON.parse(statsBuffer.toString());
 
 // TODO: use data locally instead of fetching
-const statsHit = async () => await fetch('https://purpurmc.org/stats/data/data.json')
-    .catch(() => {
-        return null;
-    });
-
-let statsDataResponse = await statsHit();
-let dataJson = await statsDataResponse.json();
-
-const now = Math.floor(new Date().getTime() / 1000);
-const next = dataJson['next'];
+const now = new Date().getTime();
+const updatedAt = statsJson['servers']['updatedAt'];
 
 // check if data needs updating (only once a day)
-if (now > next) {
+if (updatedAt + (1000 * 60 * 60 * 24) > now) {
     // hit stats page so it can update data
-    await fetch('https://purpurmc.org/stats/')
-        .catch(() => {
-            return null;
-        });
+    await fetch( `${Astro.url.protocol}//${Astro.url.host}/stats/`)
+        .catch(() => null);
 
     // get data again
-    statsDataResponse = await statsHit();
-    dataJson = await statsDataResponse.json();
+    const statsBuffer = fs.readFileSync(dataPath);
+    statsJson = JSON.parse(statsBuffer.toString());
 }
 
-const servers = dataJson['data']['servers']['purpur'];
-const players = dataJson['data']['players']['purpur'];
+const servers = statsJson['servers']['data'];
+const players = statsJson['players']['data'];
 
 // TODO: early return if no data
 
-const text = `Servers: ${servers[servers.length - 1]} Players: ${players[players.length - 1]}`;
+const text = `Servers: ${servers[servers.length - 1][1]} Players: ${players[players.length - 1][1]}`;
 
 const modifiedImage = sharp(await sigImageResponse.arrayBuffer())
 const metadata = await modifiedImage.metadata();
