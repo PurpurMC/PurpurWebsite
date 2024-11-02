@@ -1,0 +1,157 @@
+---
+import PurpurBuildListing from "@components/PurpurBuildListing.astro";
+interface Props {
+  version: string,
+  latestVersion: string,
+}
+
+import PurpurBuild from "@util/PurpurBuild";
+
+const {version, latestVersion} = Astro.props;
+let latestBuild = null;
+let showWarning = false;
+
+if (version !== latestVersion) {
+  showWarning = true;
+}
+
+const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${version}?detailed=true`)
+  .then((result) => {
+    return result.json();
+  }).then((json) => {
+    latestBuild = new PurpurBuild(json.builds.latest);
+    const builds: PurpurBuild[] = [];
+    for (const build of json.builds.all) {
+      try {
+        const purpurBuild = new PurpurBuild(build);
+        builds.push(purpurBuild);
+      } catch (error) {
+        console.error("Failed to parse build:", error);
+      }
+    }
+    return builds;
+  })
+  .then((builds) => {
+    if (version === latestVersion) {
+      builds.pop(); // remove latest build, because it's already determined
+    }
+    builds.reverse();
+    return builds;
+  })
+  .catch((error) => {
+    console.error(error);
+    return [];
+  });
+---
+<section class="downloads">
+  {
+    showWarning
+      ? (
+            <div class="warning">
+              {
+                version !== latestVersion
+                  ? <p>
+                      <span>You are trying to download builds for outdated or experimental version. You will NOT receive support for them. To get the latest build click</span>
+                      <a href="/download/purpur/">here</a>.
+                    </p>
+                  : null
+              }
+            </div>
+      )
+      : null
+  }
+  <div class="version-list">
+    {
+      latestVersion === version && (
+            <div class="version-list latest">
+              <h3>Latest build</h3>
+              <div id="latest" class="version-list">
+                <PurpurBuildListing build={latestBuild}/>
+              </div>
+            </div>
+      )
+    }
+    <h3>{latestVersion === version ? 'Previous builds' : 'Builds'}</h3>
+    <div id="previous" class="version-list">
+      {
+        builds.map(build => (
+            <PurpurBuildListing build={build}/>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const dateFormat = new Intl.DateTimeFormat(navigator.language, {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
+  const times = document.querySelectorAll('[data-timestamp]');
+  for (const time of times) {
+    const dataTimestamp = time.getAttribute('data-timestamp');
+    const timestamp = parseInt(dataTimestamp);
+    if (isNaN(timestamp)) continue;
+    const date = new Date(timestamp);
+    time.textContent = dateFormat.format(date);
+  }
+
+
+</script>
+
+<style lang="scss">
+
+  .downloads {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: start;
+    min-height: 30rem;
+    gap: 3rem;
+
+    .warning {
+      font-size: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      background-color: rgba(255, 0, 0, 0.45);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      color: white;
+      margin: 0 auto;
+      gap: 2rem;
+
+      &:empty {
+        display: none;
+      }
+    }
+  }
+
+  .version-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &.latest {
+      h3 {
+        font-size: 2rem;
+      }
+    }
+  }
+
+
+
+  @media (max-width: 940px) {
+    .entry {
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+  }
+</style>

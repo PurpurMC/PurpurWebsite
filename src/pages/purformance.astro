@@ -1,0 +1,322 @@
+---
+
+let logoSrc = "/images/purpur.svg";
+let logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
+    "transition in color from light blue to purple on a transparent background.";
+
+import BaseHead from "@layouts/BaseHead.astro";
+
+const title = 'Purformance';
+const description = 'The fastestest minecraft server software ever!';
+const permalink = Astro.site.href;;
+
+---
+<html lang="en">
+<head>
+    <BaseHead title={title} description={description} permalink={permalink} />
+</head>
+<body>
+    <section id="hero" tabindex="1">
+        <h1>Purformance</h1>
+        <p>The fastestest minecraft server software ever!</p>
+        <a href="#about" class="more">Learn more</a>
+    </section>
+    <section id="about" tabindex="2">
+        <h2>About</h2>
+        <p>Purformance is a minecraft server software that:</p>
+        <div class="better">
+            <ul>
+                <li>Is faster than any other server software</li>
+                <li>Is more secure than any other server software</li>
+                <li>Is more stable than any other server software</li>
+                <li>Is more customizable than any other server software</li>
+                <li>Is more multithreaded than any other software</li>
+                <li>Is overall just better than any other software</li>
+                <li>Why are you still reading? GET IT NOW GET IT</li>
+            </ul>
+        </div>
+        <div class="purpur">
+            <img src={logoSrc} alt={logoAlt}>
+        </div>
+        <a href="#download" class="more">GET IT</a>
+    </section>
+    <section id="download" tabindex="3">
+        <a href="#" target="_blank" tabindex="4">
+            <h2>Download</h2>
+            <p>Download Purformance now!</p>
+        </a>
+        <div data-arrow="1"></div>
+        <div data-arrow="2"></div>
+        <div data-arrow="3"></div>
+        <div data-arrow="4"></div>
+        <div data-arrow="5"></div>
+    </section>
+</body>
+</html>
+
+<style>
+    * {
+        font-family: system-ui;
+        font-weight: normal;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        min-height: 100svh;
+        max-width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        background: #000;
+        scroll-snap-align: start center;
+        scroll-snap-type: both mandatory;
+        scroll-snap-stop: always;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        height: auto;
+        width: 100%;
+        scroll-snap-align: start center;
+        scroll-snap-type: both mandatory;
+        scroll-snap-stop: always;
+    }
+
+    #hero {
+        background-color: black;
+        background-image: linear-gradient(0deg, #000, rgba(255,255,255, 0.2));
+        position: relative;
+    }
+
+    #hero p {
+        text-align: center;
+        font-size: 1.2rem;
+        color: white;
+    }
+
+    #hero h1 {
+        background-color: rgba(166, 89, 252, 1);
+        background-image: linear-gradient(90deg, rgba(166, 89, 252, 1) 0%, rgb(76, 149, 204) 50%, rgba(166, 89, 252, 1) 100%);
+        background-clip: text;
+        color: rgba(255,255,255, 0);
+        background-size: 200%;
+        background-attachment: fixed;
+        background-repeat: repeat-x;
+        animation: logo 15s infinite;
+    }
+
+    #hero .more {
+        animation: fadein 1.5s linear 0.5s forwards;
+    }
+
+    .more {
+        opacity: 0;
+        transition: opacity 0.5s linear;
+        position: absolute;
+        bottom: 3rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    section:target .more {
+        opacity: 1;
+        z-index: auto;
+    }
+
+    .more::after {
+        content: '▼';
+        animation: arrow-bop 2s ease-out infinite;
+    }
+
+    h1 {
+        font-weight: 600;
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-weight: 600;
+        font-size: 2rem;
+    }
+
+    section {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        white-space: normal;
+        text-align: center;
+        padding-inline: 0.25rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    section:focus {
+        outline: none;
+    }
+
+    #about .purpur {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(40rem, 90%);
+        aspect-ratio: 1/1;
+        z-index: -1;
+        opacity: 0.05;
+    }
+
+    #about .purpur img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #about .better {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: min(30rem, 100%);
+        overflow-x: hidden;
+        border-inline: 2px solid #fff;
+    }
+
+    #about .better ul {
+        display: flex;
+        flex-direction: row;
+        white-space: nowrap;
+        justify-content: start;
+        align-items: start;
+        text-align: start;
+        animation: scrollText 60s linear infinite;
+        gap: 1rem;
+        width: fit-content;
+        padding-block: 0.25rem;
+    }
+
+    #about .better ul li {
+        width: 100%;
+    }
+
+    #download a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    #download a h2 {
+        transition: transform 0.5s ease;
+    }
+
+    #download a:hover h2 {
+        transform: scale(1.2);
+    }
+
+    #download [data-arrow]:after {
+        content: '⇧';
+        display: block;
+    }
+
+    #download [data-arrow] {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 1rem;
+    }
+
+    #download [data-arrow="1"] {
+        font-size: 4rem;
+        translate: 2rem 5rem;
+        rotate: -12deg;
+        animation: arrow-bop 2.1s ease-out 0.4s infinite;
+    }
+
+    #download [data-arrow="2"] {
+        font-size: 3.2rem;
+        translate: 10rem -4rem;
+        rotate: -110deg;
+        animation: arrow-bop 1.8s ease-out 0.1s infinite;
+    }
+
+    #download [data-arrow="3"] {
+        font-size: 3.7rem;
+        translate: -2rem -8.5rem;
+        rotate: 170deg;
+        animation: arrow-bop 1.9s ease-out 0.6s infinite;
+    }
+
+    #download [data-arrow="4"] {
+        font-size: 5rem;
+        translate: -7rem -7.5rem;
+        rotate: 140deg;
+        animation: arrow-bop 1.75s ease-out 0.3s infinite;
+    }
+
+    #download [data-arrow="5"] {
+        font-size: 4.5rem;
+        translate: -7rem 5rem;
+        rotate: 30deg;
+        animation: arrow-bop 1.85s ease-out 0.25s infinite;
+    }
+
+    @keyframes fadein {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes arrow-bop {
+        0% {
+            transform: translateY(-0.25rem);
+        }
+        50% {
+            transform: translateY(0.25rem);
+        }
+        100% {
+            transform: translateY(-0.25rem);
+        }
+    }
+
+    @keyframes logo {
+        0% {
+            background-position-x: 0;
+        }
+        33% {
+            background-position-x: 0;
+        }
+        50% {
+            background-position-x: 100%;
+        }
+        66% {
+            background-position-x: 0;
+        }
+        100% {
+            background-position-x: 0;
+        }
+    }
+
+    @keyframes scrollText {
+        0% {
+            transform: translateX(60%)
+        }
+        100% {
+            transform: translateX(-60%)
+        }
+    }
+</style>

@@ -1,0 +1,62 @@
+---
+export const prerender = false
+
+import PurpurDownloads from "@components/PurpurDownloads.astro";
+import Base from "@layouts/Base.astro";
+import PurpurVersionSelector from "@components/PurpurVersionSelector.astro";
+
+const title = 'Download - Your minecraft, your way';
+const description = 'Download - Your minecraft - your way.';
+const permalink = Astro.site.href;
+const current = 'download';
+
+let latestVersion = null;
+const allVersions: string[] = [];
+
+const versionRequestResult = await fetch("https://api.purpurmc.org/v2/purpur")
+  .catch(() => {
+    return null;
+  });
+if (versionRequestResult === null) {
+  console.error("Failed to fetch Purpur versions");
+  return Astro.redirect("/502");
+}
+
+const versions = await versionRequestResult.json().catch(() => {
+  console.error("Failed to parse Purpur versions");
+  return null;
+});
+
+if (versions === null || Array.isArray(versions.versions) === false) {
+  console.error("Failed to parse Purpur versions");
+  return Astro.redirect("/500");
+}
+
+for (const version of versions.versions) {
+  allVersions.push(version);
+}
+
+latestVersion = versions?.metadata?.current ?? allVersions[allVersions.length - 1];
+---
+
+<Base title={title} description={description} permalink={permalink} current={current}>
+  <div class="purpur-downloads">
+    <h1>Purpur</h1>
+    <h2>Downloads</h2>
+    <PurpurVersionSelector versions={allVersions} currentVersion={latestVersion} latestVersion={latestVersion}/>
+  </div>
+
+  <PurpurDownloads version={latestVersion} latestVersion={latestVersion}/>
+</Base>
+
+<style lang="scss">
+  h1, h2 {
+    text-align: center;
+  }
+
+  .purpur-downloads {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>

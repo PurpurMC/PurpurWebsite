@@ -1,0 +1,70 @@
+---
+export const prerender = false;
+
+import fs from "fs";
+import sharp from "sharp";
+
+// TODO: use image found locally at `images/sig.png` instead of fetching
+const sigImageResponse = await fetch('https://purpurmc.org/images/sig.png')
+    .catch(() => null);
+
+const rootPath = process.cwd() + '/client/';
+const dataPath = rootPath + 'data/stats.json';
+const statsBuffer = fs.readFileSync(dataPath);
+let statsJson = JSON.parse(statsBuffer.toString());
+
+// TODO: use data locally instead of fetching
+const now = new Date().getTime();
+const updatedAt = statsJson['servers']['updatedAt'];
+
+// check if data needs updating (only once a day)
+if (updatedAt + (1000 * 60 * 60 * 24) > now) {
+    // hit stats page so it can update data
+    await fetch( `${Astro.url.protocol}//${Astro.url.host}/stats/`)
+        .catch(() => null);
+
+    // get data again
+    const statsBuffer = fs.readFileSync(dataPath);
+    statsJson = JSON.parse(statsBuffer.toString());
+}
+
+const servers = statsJson['servers']['data'];
+const players = statsJson['players']['data'];
+
+// TODO: early return if no data
+
+const text = `Servers: ${servers[servers.length - 1][1]} Players: ${players[players.length - 1][1]}`;
+
+const modifiedImage = sharp(await sigImageResponse.arrayBuffer())
+const metadata = await modifiedImage.metadata();
+
+const topLeftX = 270;
+const topLeftY = 88;
+const bottomGap = 2;
+
+const textImage = sharp({
+    text: {
+        text: `<span foreground="white">${text}</span>`,
+        // TODO: figure out a good font to use
+        // font: 'Arial',
+        width: metadata.width - topLeftX,
+        height: metadata.height - topLeftY - bottomGap,
+        rgba: true,
+    }
+}).extend({
+    left: topLeftX,
+    top: topLeftY,
+    bottom: bottomGap,
+    background: '#00000000'
+});
+
+modifiedImage.composite([{
+    input: await textImage.png().toBuffer(),
+}]);
+
+return new Response(await modifiedImage.toBuffer(), {
+    headers: {
+        'Content-Type': 'image/png',
+    }
+});
+---

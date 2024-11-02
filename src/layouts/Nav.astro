@@ -1,0 +1,87 @@
+---
+const { current = '' } = Astro.props;
+---
+
+<style>
+
+  @media (orientation: portrait) {
+    nav {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-buttons {
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+  }
+
+  nav {
+    align-items: center;
+    display: flex;
+    font-weight: 700;
+    justify-content: center;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 1em;
+    background: linear-gradient(#00000055, #00000000);
+    backdrop-filter: blur(3px);
+  }
+
+  .nav-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    overflow-x: hidden;
+    max-width: var(--max-site-width);
+    width: 100%;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    padding: 10px 5px;
+    display: block;
+    position: relative;
+    margin-left: 20px;
+    min-width: 70px;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  a:not(.selected) {
+    opacity: 0.7;
+  }
+
+  a::before {
+    content: '';
+    position: absolute;
+    transition: transform .3s ease;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--text-secondary);
+    transform: scaleX(0);
+  }
+
+  a:hover::before,
+  .selected::before {
+    transform: scaleX(1);
+  }
+
+  .selected::before {
+    background: var(--text-secondary);
+  }
+
+  .theme-toggle-container {
+    width: 75px;
+  }
+</style>
+
+<nav>
+  <div class="nav-buttons">
+    <a class={current === "home" ? "selected" : ""} href='/'>home</a>
+    <a class={current === "download" ? "selected" : ""} href='/#projects'>download</a>
+  </div>
+</nav>

@@ -1,0 +1,255 @@
+---
+import Base from "@layouts/Base.astro";
+import PurpurLogo from "@components/PurpurLogo.astro";
+
+const title = 'Your minecraft, your way';
+const description = 'Your minecraft - your way.';
+const permalink = Astro.site.href;
+const current = 'home';
+---
+
+<Base title={title} description={description} permalink={permalink} current={current}>
+  <section class="hero">
+    <PurpurLogo/>
+    <div>
+      <h1>Purpur</h1>
+      <h2>Your minecraft, your way</h2>
+    </div>
+  </section>
+  <section class="full-width-intermission">
+    <h2>About PurpurMC</h2>
+    <p>
+      PurpurMC is an open source organization that focuses on the development of Purpur, a configurable minecraft
+      server software with fun and exciting gameplay features. We also develop other software that revolves around the
+      Minecraft modding/plugin ecosystem.
+    </p>
+  </section>
+  <section id="projects" class="projects">
+    <article class="entry">
+      <div class="logo">
+        <img
+            src="/images/purpur.svg"
+            loading="eager"
+            alt="Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines transition
+             in color from light blue to purple on a transparent background."
+        />
+      </div>
+      <div class="content">
+        <div>
+          <h2>Purpur</h2>
+          <p>
+            Purpur is minecraft server software based on Paper. It supports plugins designed for bukkit, spigot and
+            paper APIs. Purpur focuses on providing as much configurability as possible, to allow server owners to
+            customise their server to their liking.
+          </p>
+        </div>
+        <div class="buttons">
+          <a href="download/purpur">
+            <button><img src="/images/download.svg" alt="" draggable="false" aria-hidden="true" loading="lazy">Download</button>
+          </a>
+          <a href="https://purpurmc.org/docs/purpur/" target="_blank">
+            <button><img src="/images/documentation.svg" alt="" draggable="false" aria-hidden="true" loading="lazy">Read the docs</button>
+          </a>
+          <a href="https://github.com/PurpurMC/Purpur" target="_blank">
+            <button><img src="/images/opensource.svg" alt="" draggable="false" aria-hidden="true" loading="lazy">See source code</button>
+          </a>
+        </div>
+      </div>
+    </article>
+    <article class="entry">
+      <div class="logo">
+        <img src="/images/purpur.svg" loading="lazy" alt="" aria-hidden="true" />
+      </div>
+      <div class="content">
+        <div>
+          <h2>PurpurExtras</h2>
+          <p>
+            PurpurExtras is a plugin for Purpur and Paper servers that offers additional features that were deemed
+            easier to implement and maintain as a separate plugin.
+          </p>
+        </div>
+        <div class="buttons">
+          <a href="download/purpurextras">
+            <button><img src="/images/download.svg" alt="" draggable="false" aria-hidden="true" loading="lazy">Download</button>
+          </a>
+          <a href="https://purpurmc.org/docs/purpurextras/" target="_blank">
+            <button><img src="/images/documentation.svg" alt="" draggable="false" aria-hidden="true" loading="lazy">Read the docs</button>
+          </a>
+          <a href="https://github.com/PurpurMC/PurpurExtras" target="_blank">
+            <button><img src="/images/opensource.svg" alt="" draggable="false" aria-hidden="true" loading="lazy">See source code</button>
+          </a>
+        </div>
+      </div>
+    </article>
+    <article class="entry">
+      <div class="logo">
+        <img src="/images/purpur.svg" loading="lazy" alt="" />
+      </div>
+      <div class="content">
+        <div>
+          <h2>PurpurPacks</h2>
+          <p>
+            PurpurPacks is a set of datapacks that add additional features to your minecraft world.
+          </p>
+        </div>
+        <div class="buttons">
+          <a href="https://modrinth.com/organization/purpurmc/datapacks" target="_blank">
+            <button><img src="/images/download.svg" alt="" draggable="false" aria-hidden="true" loading="lazy">Download</button>
+          </a>
+          <a href="https://purpurmc.org/docs/purpurpacks/" target="_blank">
+            <button><img src="/images/documentation.svg" alt="" draggable="false" aria-hidden="true" loading="lazy">Read the docs</button>
+          </a>
+          <a href="https://github.com/PurpurMC/PurpurPacks" target="_blank">
+            <button><img src="/images/opensource.svg" alt="" draggable="false" aria-hidden="true" loading="lazy">See source code</button>
+          </a>
+        </div>
+      </div>
+    </article>
+  </section>
+  <section id="support" class="full-width-intermission">
+    <h2>Support the development</h2>
+    <p>Purpur is driven by free time and passion. If you like what we do, consider throwing some money our way for keeping
+      up the development, our API and build servers online.</p>
+    <div class="buttons">
+      <a href="https://opencollective.com/purpurmc" target="_blank">
+        <button><img src="/images/opencollective.svg" alt="" aria-hidden="true" /> Support on OpenCollective</button>
+      </a>
+      <a href="https://github.com/sponsors/PurpurMC" target="_blank">
+        <button><img src="/images/github.svg" alt="" aria-hidden="true" /> Support on Github Sponsors</button>
+      </a>
+    </div>
+  </section>
+
+</Base>
+
+<style lang="scss">
+  .hero {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 12rem;
+  }
+
+  .logo {
+    width: 12rem;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .full-width-intermission {
+    width: 100%;
+    position: relative;
+    padding-block: 2rem;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #00000044;
+      width: 100vw;
+      height: 100%;
+      z-index: -2;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    button {
+      max-width: fit-content;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      img {
+        height: 1.5rem;
+      }
+    }
+  }
+
+
+  .projects {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5rem;
+    padding-block: 4rem;
+    max-width: 800px;
+    margin: 0 auto;
+    .entry {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 1.5rem;
+      flex: 1;
+      a {
+        max-width: fit-content;
+        text-decoration: none;
+      }
+      .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        max-width: 65%;
+        .buttons {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          gap: .5rem;
+        }
+      }
+    }
+  }
+
+  #support {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    h2 {
+      text-align: center;
+    }
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 940px) {
+    .hero {
+      padding-block: 4rem;
+    }
+    .projects {
+      justify-content: center;
+      align-items: center;
+      .entry {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        .content {
+          justify-content: flex-start;
+          align-items: center;
+          width: 100%;
+          text-align: center;
+          max-width: unset;
+          .buttons {
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+</style>

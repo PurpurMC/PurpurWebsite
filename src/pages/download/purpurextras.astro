@@ -1,0 +1,193 @@
+---
+import Base from "@layouts/Base.astro";
+import PurpurExtrasVersion from "@util/PurpurExtrasVersion";
+import { marked } from "marked";
+
+const title = 'Download - Your minecraft, your way';
+const description = 'Download - Your minecraft - your way.';
+const permalink = Astro.site.href;
+const current = 'download';
+
+let latestVersion: PurpurExtrasVersion | null = null;
+let versions = [];
+
+const result = await fetch("https://api.modrinth.com/v2/project/purpurextras/version")
+  .catch(() => {
+    return null;
+  });
+if (result === null) {
+  new Response("Failed to fetch PurpurExtras versions", { status: 502 });
+  return;
+}
+const versionsJson: {[key: string]: unknown} = await result.json();
+
+for (const versionData of versionsJson) {
+  const published = new Date(versionData.date_published);
+  let changelog = "No changelog provided.";
+  if (versionData?.changelog) {
+    changelog = marked.parse(versionData.changelog) as string;
+  }
+  const version = new PurpurExtrasVersion(
+    versionData.version_number ?? "Unknown version",
+    changelog,
+    !Number.isNaN(published?.getTime()) ? published.getTime() : new Date().getTime(),
+    versionData.files[0].url
+  );
+  versions.push(version);
+}
+if (versions.length <= 0) {
+  return new Response("Couldn't parse versions", { status: 502 });
+}
+latestVersion = versions[0];
+versions = versions.slice(1, versions.length);
+---
+
+<Base title={title} description={description} permalink={permalink} current={current}>
+  <div>
+    <h1>PurpurExtras</h1>
+    <h2>Downloads</h2>
+  </div>
+
+  <section class="downloads">
+    <div class="version-list latest">
+      <h3>Latest version</h3>
+      <div id="latest" class="version-list">
+        <article class="entry">
+          <div class="key">
+            <a href={latestVersion.downloadUrl}>
+              <button><img src="/images/download.svg" alt="" aria-hidden="true"><span>{latestVersion.version}</span></button>
+            </a>
+            <span class="date" data-timestamp={latestVersion?.timestamp}></span>
+          </div>
+          <div aria-label="changelog" set:html={latestVersion.changelog}></div>
+        </article>
+      </div>
+    </div>
+    <div class="version-list">
+      <h3>Previous versions</h3>
+      <div id="previous" class="version-list">
+        {
+          versions.map(version => (
+              <article class="entry">
+                <div class="key">
+                  <a href={latestVersion.downloadUrl}>
+                    <button><img src="/images/download.svg" alt="" aria-hidden="true"><span>{version.version}</span></button>
+                  </a>
+                  <span class="date" data-timestamp={version.timestamp}></span>
+                </div>
+                <div aria-label="changelog" set:html={version.changelog}></div>
+              </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+  <template id="entry">
+    <article class="entry">
+      <div class="key">
+        <a data-download><button><img src="/images/download.svg" alt="" aria-hidden="true"><span data-version></span></button></a>
+        <span class="date" data-date></span>
+      </div>
+      <div data-changelog aria-label="changelog"></div>
+    </article>
+  </template>
+</Base>
+
+<script>
+  import {marked} from "marked";
+
+  const entryTemplate = document.querySelector("#entry");
+  const dateFormat = new Intl.DateTimeFormat(navigator.language, {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
+  document.addEventListener('astro:page-load', (e) => {
+    // don't try to re-fetch versions on any other page
+    if (e.target.location.pathname !== "/download/purpurextras") return;
+    const times = document.querySelectorAll('[data-timestamp]');
+    for (const time of times) {
+      const dataTimestamp = time.getAttribute('data-timestamp');
+      const timestamp = parseInt(dataTimestamp);
+      if (isNaN(timestamp)) continue;
+      const date = new Date(timestamp);
+      time.textContent = dateFormat.format(date);
+    }
+  });
+
+</script>
+
+<style lang="scss">
+  h1, h2 {
+    text-align: center;
+  }
+
+  .downloads {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: start;
+    min-height: 30rem;
+    gap: 3rem;
+  }
+
+  .version-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &.latest {
+      h3 {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .entry {
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    align-items: start;
+    padding: 1rem;
+    margin: 0.5rem;
+    gap: 2rem;
+    width: 100%;
+
+    .key {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      min-height: 3.5rem;
+      min-width: 6rem;
+
+      .date {
+        font-size: 0.7rem;
+      }
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .changelog {
+      display: flex;
+      flex: 1;
+      min-width: min(20rem, 100%);
+    }
+  }
+
+  @media (max-width: 940px) {
+    .entry {
+      flex-wrap: wrap;
+    }
+  }
+</style>

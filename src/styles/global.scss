@@ -1,0 +1,76 @@
+:root {
+  --text-primary: #f5f5f5;
+  --text-secondary: #a4a4a4;
+  --link-hover-color: #ffffff;
+  --max-site-width: 1200px;
+}
+
+* {
+  font-family: system-ui, sans-serif;
+  font-weight: normal;
+  color: var(--text-primary);
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+body {
+  background: linear-gradient(90deg, #392955 0%, #3a6294 100%) fixed;
+  overflow-x: hidden;
+
+}
+
+button {
+  background: #674839;
+  color: var(--text-primary);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: not-allowed;
+  transition: background 0.3s;
+  align-items: center;
+
+  &:not(:disabled) {
+    cursor: pointer;
+    background: #3a6294;
+    &:hover {
+      background: #4a82c4;
+    }
+  }
+}
+
+select {
+  background: #3a6294;
+  color: var(--text-primary);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  &:hover {
+    background: #4a82c4;
+  }
+}
+
+ol, ul {
+  white-space: pre-wrap;
+  word-break: break-word;
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  list-style-type: disc;
+}

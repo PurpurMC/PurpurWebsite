@@ -1,0 +1,40 @@
+---
+import Base from "@layouts/Base.astro";
+import PurpurLogo from "@components/PurpurLogo.astro";
+
+const title = '500';
+const description = 'We kinda broke this way.';
+const permalink = Astro.site.href;
+const current = '500';
+
+Astro.response.status = 500;
+---
+
+<Base title={title} description={description} permalink={permalink} current={current}>
+  <section class="hero">
+    <PurpurLogo/>
+    <div>
+      <h1>502</h1>
+      <h2>{description}</h2>
+      <a href="/">Hey look, it's a homepage!</a>
+    </div>
+  </section>
+</Base>
+
+<style lang="scss">
+  .hero {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 12rem;
+  }
+
+  @media (max-width: 940px) {
+    .hero {
+      padding-block: 2rem;
+    }
+  }
+</style>
