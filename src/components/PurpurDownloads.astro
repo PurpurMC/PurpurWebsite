@@ -51,7 +51,7 @@ const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${
               {
                 version !== latestVersion
                   ? <p>
-                      <span>You are trying to download builds for outdated or experimental version. You will NOT receive support for them. To get the latest build click</span>
+                      <span>You are trying to download builds from an outdated or experimental version. You will NOT receive support for outdated versions. To get the latest build click</span>
                       <a href="/download/purpur/">here</a>.
                     </p>
                   : null
