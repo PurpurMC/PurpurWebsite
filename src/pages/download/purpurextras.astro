@@ -54,7 +54,7 @@ versions = versions.slice(1, versions.length);
       <div id="latest" class="version-list">
         <article class="entry">
           <div class="key">
-            <a href={latestVersion.downloadUrl}>
+            <a href={`https://modrinth.com/plugin/purpurextras/version/${latestVersion.version}`} target="_blank">
               <button><img src="/images/download.svg" alt="" aria-hidden="true"><span>{latestVersion.version}</span></button>
             </a>
             <span class="date" data-timestamp={latestVersion?.timestamp}></span>
@@ -70,7 +70,7 @@ versions = versions.slice(1, versions.length);
           versions.map(version => (
               <article class="entry">
                 <div class="key">
-                  <a href={latestVersion.downloadUrl}>
+                  <a href={`https://modrinth.com/plugin/purpurextras/version/${version.version}`}>
                     <button><img src="/images/download.svg" alt="" aria-hidden="true"><span>{version.version}</span></button>
                   </a>
                   <span class="date" data-timestamp={version.timestamp}></span>
