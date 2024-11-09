@@ -18,7 +18,7 @@ const now = new Date().getTime();
 const updatedAt = statsJson['servers']['updatedAt'];
 
 // check if data needs updating (only once a day)
-if (updatedAt + (1000 * 60 * 60 * 24) > now) {
+if (updatedAt + (1000 * 60 * 60 * 24) < now) {
     // hit stats page so it can update data
     await fetch( `${Astro.url.protocol}//${Astro.url.host}/stats/`)
         .catch(() => null);
