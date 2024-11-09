@@ -8,7 +8,7 @@ import sharp from "sharp";
 const sigImageResponse = await fetch('https://purpurmc.org/images/sig.png')
     .catch(() => null);
 
-const rootPath = process.cwd() + '/client/';
+const rootPath = import.meta.env.PROD ? process.cwd() + '/client/' : 'public/';
 const dataPath = rootPath + 'data/stats.json';
 const statsBuffer = fs.readFileSync(dataPath);
 let statsJson = JSON.parse(statsBuffer.toString());

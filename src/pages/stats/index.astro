@@ -4,8 +4,10 @@ export const prerender = false;
 import fs from "fs";
 import Base from "@layouts/Base.astro";
 
-const serversPath = process.cwd() + '/client/data/servers.json';
-const statsPath = process.cwd() + '/client/data/stats.json';
+const rootPath = import.meta.env.PROD ? process.cwd() + '/client/' : 'public/';
+
+const serversPath = rootPath + 'data/servers.json';
+const statsPath = rootPath + 'data/stats.json';
 
 const consts = fs.readFileSync(serversPath);
 const data = fs.readFileSync(statsPath);
@@ -27,7 +29,7 @@ let serversData = null;
 let playersData = null;
 
 let currentlyUpdating: boolean;
-const lockFilePath = process.cwd() + '/client/data/update.lock';
+const lockFilePath = rootPath + 'data/update.lock';
 try {
   fs.readFileSync(lockFilePath);
   currentlyUpdating = true;

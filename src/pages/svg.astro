@@ -23,7 +23,7 @@ const avatarSize = toNumber(url.searchParams.get('size')) ?? 66;
 const avatarGap = toNumber(url.searchParams.get('gap')) ?? 4;
 const avatarCols = toNumber(url.searchParams.get('cols')) ?? 10;
 
-const rootPath = process.cwd() + '/client/';
+const rootPath = import.meta.env.PROD ? process.cwd() + '/client/' : 'public/';
 const contributorPath = rootPath + 'data/contributors.json';
 const sponsorPath = rootPath + 'data/sponsors.json';
 const opencollectivePath = rootPath + 'data/opencollective.json';
