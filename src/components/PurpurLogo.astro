@@ -2,50 +2,66 @@
 let logoSrc = "/images/purpur.svg";
 let logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
   "transition in color from light blue to purple on a transparent background.";
-
-updateLogo();
-
-function updateLogo() {
-  const now = new Date();
-  // pride month
-  if (now.getUTCMonth() === 5) {
-    logoSrc = "/images/purpur-pride.svg"
-    logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
-      "transition in color between all colors of rainbow on a transparent background."
-    return;
-  }
-  // Christmas
-  if (now.getUTCMonth() === 11) {
-    logoSrc = "/images/purpur-christmas.svg"
-    logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
-      "transition in color between green and red on a transparent background."
-    return;
-  }
-  // Halloween
-  if (now.getUTCMonth() === 9) {
-    logoSrc = "/images/purpur-halloween.svg"
-    logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
-      "transition in color between orange and yellow on a transparent background."
-    return;
-  }
-}
 ---
 
-<div class="logo">
-  <img id="logo" src={logoSrc} alt={logoAlt} />
+<div class="purpur-logo">
+  <img
+      src={logoSrc}
+      alt={logoAlt}
+  />
 </div>
 
 <style lang="scss">
-  .logo {
+  .purpur-logo {
     width: 12rem;
+
     img {
       width: 100%;
       height: 100%;
     }
   }
+
   @media (max-width: 940px) {
     .logo {
       width: 8rem;
     }
   }
 </style>
+
+<script>
+  let logoSrc = null;
+  let logoAlt = null;
+
+  updateLogo();
+
+  function updateLogo() {
+    const now = new Date();
+
+    switch (now.getUTCMonth()) {
+      case 5:
+        // pride month
+        logoSrc = "/images/purpur-pride.svg"
+        logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
+          "transition in color between all colors of rainbow on a transparent background."
+        break;
+      case 9:
+        // Halloween
+        logoSrc = "/images/purpur-halloween.svg"
+        logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
+          "transition in color between orange and yellow on a transparent background."
+        break;
+      case 11:
+        // Christmas
+        logoSrc = "/images/purpur-christmas.svg"
+        logoAlt = "Isometric cube that's divided into sections similarly to a 2x2 rubik's cube. The outlines " +
+          "transition in color between green and red on a transparent background."
+        break;
+    }
+
+    const purpurLogo: HTMLImageElement = document.querySelector('.purpur-logo img');
+    if (purpurLogo && logoSrc && logoAlt) {
+      purpurLogo.src = logoSrc;
+      purpurLogo.alt = logoAlt;
+    }
+  }
+</script>
