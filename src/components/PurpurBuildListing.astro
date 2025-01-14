@@ -1,5 +1,6 @@
 ---
 import PurpurBuild from "@util/PurpurBuild";
+import Commit from "@util/Commit";
 
 export interface Props {
   build: PurpurBuild;
@@ -8,7 +9,7 @@ export interface Props {
 const displayedCommits: number = 3;
 
 const { build } = Astro.props;
-const commits = [];
+const commits: Commit[] = [];
 for (let i = 0; i < Math.min(displayedCommits, build.commits.length); i++) {
   commits.push(build.commits[i]);
 }
@@ -70,7 +71,9 @@ const moreCommitsCount = build.commits.length - displayedCommits;
     {
       moreCommitsCount > 0 ? (
               <span class="more-commits">
-                And {moreCommitsCount} {(moreCommitsCount === 1 ? "more commit" : "more commits")}
+                <a target="_blank" rel="noreferrer" href=`https://github.com/PurpurMC/Purpur/${moreCommitsCount === 1 ? "commit/" : "compare/" + commits[commits.length - 1].hash + "..."}${build.commits[build.commits.length - 1].hash}`>
+                  And {moreCommitsCount} {(moreCommitsCount === 1 ? "more commit" : "more commits")}
+                </a>
               </span>
       ) : null
     }
@@ -78,6 +81,28 @@ const moreCommitsCount = build.commits.length - displayedCommits;
 </article>
 
 <style lang="scss" is:global>
+
+  %anchor {
+    color: var(--link);
+    position: relative;
+
+    &::after {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      content: '';
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      transition: border-color 0.1s linear;
+      width: 100%;
+    }
+
+    &:hover {
+      &::after {
+        border-bottom: 1px solid rgba(255, 255, 255, 1);
+      }
+    }
+  }
+
   .entry {
     display: flex;
     position: relative;
@@ -122,6 +147,12 @@ const moreCommitsCount = build.commits.length - displayedCommits;
         gap: 0.25rem;
       }
 
+      .more-commits {
+        a {
+          @extend %anchor;
+        }
+      }
+
       .commit {
         outline-offset: 0.2rem;
         border-radius: 0.25rem;
@@ -129,24 +160,7 @@ const moreCommitsCount = build.commits.length - displayedCommits;
         transition: padding-left 0.2s;
 
         a {
-          color: var(--link);
-          position: relative;
-
-          &::after {
-            bottom: 0;
-            left: 0;
-            position: absolute;
-            content: '';
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-            transition: border-color 0.1s linear;
-            width: 100%;
-          }
-
-          &:hover {
-            &::after {
-              border-bottom: 1px solid rgba(255, 255, 255, 1);
-            }
-          }
+          @extend %anchor;
         }
 
         &:hover {
