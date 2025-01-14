@@ -72,8 +72,7 @@ const moreCommitsCount = build.commits.length - displayedCommits;
       moreCommitsCount > 0 ? (
               <span class="more-commits">
                 <a target="_blank" rel="noreferrer" href=`https://github.com/PurpurMC/Purpur/${moreCommitsCount === 1 ? "commit/" : "compare/" + commits[commits.length - 1].hash + "..."}${build.commits[build.commits.length - 1].hash}`>
-                  And {moreCommitsCount} {(moreCommitsCount === 1 ? "more commit" : "more commits")}
-                </a>
+                  And {moreCommitsCount} {(moreCommitsCount === 1 ? "more commit" : "more commits")}</a>
               </span>
       ) : null
     }
@@ -149,6 +148,8 @@ const moreCommitsCount = build.commits.length - displayedCommits;
 
       .more-commits {
         a {
+          display: inline-block;
+          line-height: 1;
           @extend %anchor;
         }
       }
