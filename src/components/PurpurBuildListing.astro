@@ -5,14 +5,7 @@ export interface Props {
   build: PurpurBuild;
 }
 
-const displayedCommits: number = 3;
-
 const { build } = Astro.props;
-const commits = [];
-for (let i = 0; i < Math.min(displayedCommits, build.commits.length); i++) {
-  commits.push(build.commits[i]);
-}
-const moreCommitsCount = build.commits.length - displayedCommits;
 ---
 
 <article class="entry">
@@ -51,8 +44,8 @@ const moreCommitsCount = build.commits.length - displayedCommits;
       )
     }
     {
-      commits.length > 0
-        ? commits.map(commit =>
+      build?.commits.length > 0
+        ? build.commits.map(commit =>
               <li class="commit">
                 <span set:html={commit.description}></span>
                 <span class="signature">
@@ -66,13 +59,6 @@ const moreCommitsCount = build.commits.length - displayedCommits;
               </li>
         )
         : <p>No changes</p>
-    }
-    {
-      moreCommitsCount > 0 ? (
-              <span class="more-commits">
-                And {moreCommitsCount} {(moreCommitsCount === 1 ? "more commit" : "more commits")}
-              </span>
-      ) : null
     }
   </ul>
 </article>
