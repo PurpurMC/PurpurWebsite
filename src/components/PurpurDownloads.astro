@@ -3,15 +3,16 @@ import PurpurBuildListing from "@components/PurpurBuildListing.astro";
 interface Props {
   version: string,
   latestVersion: string,
+  bleedingEdgeVersion: string,
 }
 
 import PurpurBuild from "@util/PurpurBuild";
 
-const {version, latestVersion} = Astro.props;
+const {version, latestVersion, bleedingEdgeVersion} = Astro.props;
 let latestBuild = null;
 let showWarning = false;
 
-if (version !== latestVersion) {
+if (version !== latestVersion && version !== bleedingEdgeVersion) {
   showWarning = true;
 }
 
@@ -58,7 +59,13 @@ const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${
               }
             </div>
       )
-      : null
+      : version !== bleedingEdgeVersion && (
+        <div class="info">
+          <p>
+            Looking for bleeding-edge builds? They're <a href={`/download/purpur/${bleedingEdgeVersion}`}>here!</a>
+          </p>
+        </div>
+    )
   }
   <div class="version-list">
     {
