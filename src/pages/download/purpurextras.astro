@@ -93,34 +93,6 @@ versions = versions.slice(1, versions.length);
   </template>
 </Base>
 
-<script>
-  import {marked} from "marked";
-
-  const entryTemplate = document.querySelector("#entry");
-  const dateFormat = new Intl.DateTimeFormat(navigator.language, {
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-
-  document.addEventListener('astro:page-load', (e) => {
-    // don't try to re-fetch versions on any other page
-    if (e.target.location.pathname !== "/download/purpurextras") return;
-    const times = document.querySelectorAll('[data-timestamp]');
-    for (const time of times) {
-      const dataTimestamp = time.getAttribute('data-timestamp');
-      const timestamp = parseInt(dataTimestamp);
-      if (isNaN(timestamp)) continue;
-      const date = new Date(timestamp);
-      time.textContent = dateFormat.format(date);
-    }
-  });
-
-</script>
-
 <style lang="scss">
   h1, h2 {
     text-align: center;
@@ -191,3 +163,28 @@ versions = versions.slice(1, versions.length);
     }
   }
 </style>
+
+<script>
+  const dateFormat = new Intl.DateTimeFormat(navigator.language, {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
+  document.addEventListener('astro:page-load', (e: any) => {
+    // don't try to re-fetch versions on any other page
+    if (e.target.location.pathname !== "/download/purpurextras") return;
+    const times = document.querySelectorAll('[data-timestamp]');
+    for (const time of times) {
+      const dataTimestamp = time.getAttribute('data-timestamp');
+      const timestamp = parseInt(dataTimestamp);
+      if (isNaN(timestamp)) continue;
+      const date = new Date(timestamp);
+      time.textContent = dateFormat.format(date);
+    }
+  });
+
+</script>

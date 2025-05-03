@@ -17,14 +17,6 @@ const { versions, currentVersion, latestVersion } = Astro.props;
   </select>
 </label>
 
-<script>
-const versionDisplay = document.querySelector("#versionDisplay");
-versionDisplay.addEventListener("change", () => {
-  if (!(versionDisplay instanceof HTMLSelectElement)) return;
-  window.location.href = `/download/purpur/${versionDisplay.value}`;
-});
-</script>
-
 <style lang="scss">
   select {
     cursor: default;
@@ -42,3 +34,11 @@ versionDisplay.addEventListener("change", () => {
     }
   }
 </style>
+
+<script>
+const versionDisplay = document.querySelector("#versionDisplay");
+versionDisplay.addEventListener("change", () => {
+  if (!(versionDisplay instanceof HTMLSelectElement)) return;
+  window.location.href = `/download/purpur/${versionDisplay.value}`;
+});
+</script>

@@ -14,7 +14,6 @@ const current = 'download';
 let latestVersion = null;
 const allVersions: string[] = [];
 
-
 const versionRequestResult = await fetch("https://api.purpurmc.org/v2/purpur")
   .catch(() => {
     console.error("Failed to fetch Purpur versions");
@@ -43,7 +42,6 @@ if (!allVersions.includes(version)) {
   return Astro.redirect("/404");
 }
 
-latestVersion = versions?.metadata?.current ?? allVersions[allVersions.length - 1];
 
 if (version === latestVersion) {
   return Astro.redirect("/download/purpur/");

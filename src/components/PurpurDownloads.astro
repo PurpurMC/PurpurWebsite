@@ -82,28 +82,6 @@ const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${
   </div>
 </section>
 
-<script>
-  const dateFormat = new Intl.DateTimeFormat(navigator.language, {
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-
-  const times = document.querySelectorAll('[data-timestamp]');
-  for (const time of times) {
-    const dataTimestamp = time.getAttribute('data-timestamp');
-    const timestamp = parseInt(dataTimestamp);
-    if (isNaN(timestamp)) continue;
-    const date = new Date(timestamp);
-    time.textContent = dateFormat.format(date);
-  }
-
-
-</script>
-
 <style lang="scss">
 
   .downloads {
@@ -132,6 +110,25 @@ const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${
         display: none;
       }
     }
+
+    .info {
+      font-size: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      background-color: #3a6294;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      color: white;
+      margin: 0 auto;
+      gap: 2rem;
+
+      &:empty {
+        display: none;
+      }
+    }
   }
 
   .version-list {
@@ -147,3 +144,25 @@ const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${
   }
 
 </style>
+
+<script>
+  const dateFormat = new Intl.DateTimeFormat(navigator.language, {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
+  const times = document.querySelectorAll('[data-timestamp]');
+  for (const time of times) {
+    const dataTimestamp = time.getAttribute('data-timestamp');
+    const timestamp = parseInt(dataTimestamp);
+    if (isNaN(timestamp)) continue;
+    const date = new Date(timestamp);
+    time.textContent = dateFormat.format(date);
+  }
+
+
+</script>
