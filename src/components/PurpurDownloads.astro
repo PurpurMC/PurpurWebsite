@@ -12,7 +12,7 @@ const {version, latestVersion, bleedingEdgeVersion} = Astro.props;
 let latestBuild = null;
 let showWarning = false;
 
-if (version !== latestVersion && version !== bleedingEdgeVersion) {
+if (version !== latestVersion) {
   showWarning = true;
 }
 
@@ -50,12 +50,14 @@ const builds: PurpurBuild[] = await fetch(`https://api.purpurmc.org/v2/purpur/${
       ? (
             <div class="warning">
               {
-                version !== latestVersion
+                version !== bleedingEdgeVersion
                   ? <p>
-                      <span>You are trying to download builds from an outdated or experimental version. You will NOT receive support for outdated versions. To get the latest build click</span>
+                      You are trying to download builds from an outdated version. You will NOT receive support. To get the latest build click
                       <a href="/download/purpur/">here</a>.
                     </p>
-                  : null
+                  : <p>
+                      Experimental builds are not ready for production servers. Proceed at your own risk!
+                    </p>
               }
             </div>
       )
